@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public InputAction LeftStick;
-    public InputAction Sprint;
+    Movements MovementsControls;
 
     public CharacterController controller;
     public float speed;
@@ -15,32 +14,85 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothVelocity;
     public float turnSmoothTime;
     public Transform cam;
+    public float distToGround;
 
     public StaminaManager SM;
 
     public float SprintStaminaCost;
-    public bool isSprinting;
+    private bool isSprinting;
+
+    public float GravityPower;
+    private float GravityPowerStable;
+    public float GravityPullForce;
+
+    public float JumpingPower;
+    private bool DoubleJumpAvailable;
+    private float lastTimeOnGround;
+    public float CoyoteTime;
+    public float JumpCD;
+    private float lastTimeJump;
+
+    private void Start()
+    {
+        GravityPowerStable = GravityPower;
+    }
 
     void Awake()
     {
-        Sprint.performed += ctx => isSprinting = true;
+        MovementsControls = new Movements();
+        MovementsControls.Player.Jump.performed += ctx => TryJump();
+        MovementsControls.Player.Sprint.performed += ctx => TrySprint();
+        
     }
 
     void OnEnable()
     {
-        LeftStick.Enable();
-        Sprint.Enable();
+        MovementsControls.Player.Move.Enable();
+        MovementsControls.Player.Sprint.Enable();
+        MovementsControls.Player.Jump.Enable();
     }
 
     void OnDisable()
     {
-        LeftStick.Disable();
-        Sprint.Disable();
+        MovementsControls.Player.Move.Disable();
+        MovementsControls.Player.Sprint.Disable();
+        MovementsControls.Player.Jump.Disable();
     }
 
     void Update()
     {
-        Vector2 inputVector = LeftStick.ReadValue<Vector2>();
+        //Gravity
+        if (IsGrounded())
+        {
+            lastTimeOnGround = Time.time;
+            DoubleJumpAvailable = true;
+
+            if (GravityPower > 0)
+            {
+                Vector3 graviDir = new Vector3(0, GravityPower, 0);
+                controller.Move(graviDir * Time.deltaTime);
+            }
+        }
+        else
+        {
+            Vector3 graviDir = new Vector3(0, GravityPower, 0);
+            controller.Move(graviDir * Time.deltaTime);
+
+            if (GravityPower > GravityPowerStable)
+            {
+                GravityPower = GravityPower - (GravityPullForce*Time.deltaTime);
+            }
+            else
+            {
+                GravityPower = GravityPowerStable;
+            }
+        }
+
+       
+
+
+        //Movements
+        Vector2 inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
         Vector3 Direction = new Vector3(inputVector.x,0, inputVector.y);
 
         if(Direction.magnitude >= 0.1f)
@@ -52,22 +104,74 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir =new Vector3(moveDir.x, 0, moveDir.z);
 
-            //bool isSprinting = Sprint.ReadValue<ButtonControl>();
-            if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
+            if (IsGrounded())
             {
-                controller.Move(moveDir * speedSprint * Time.deltaTime);
+                if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
+                {
+                    controller.Move(moveDir * speedSprint * Time.deltaTime);
+                }
+                else
+                {
+                    controller.Move(moveDir * speed * Time.deltaTime);
+                    isSprinting = false;
+                }
             }
             else
             {
-                controller.Move(moveDir * speed * Time.deltaTime);
-                isSprinting = false;
+                if (isSprinting)
+                {
+                    controller.Move(moveDir * speedSprint * Time.deltaTime);
+                }
+                else
+                {
+                    controller.Move(moveDir * speed * Time.deltaTime);
+                    isSprinting = false;
+                }
             }
             
+
+
         }
         else
         {
             isSprinting = false;
             
         }
+    }
+
+    public void TryJump()
+    {
+        Debug.Log("TryJump");
+        if (lastTimeJump + JumpCD <= Time.time)
+        {
+            if (lastTimeOnGround + CoyoteTime >= Time.time)
+            {
+                lastTimeJump = Time.time;
+                GravityPower = JumpingPower;
+            }
+            else
+            {
+                if (DoubleJumpAvailable)
+                {
+                    Debug.Log("DoubleJump");
+                    DoubleJumpAvailable = false;
+                    lastTimeJump = Time.time;
+                    GravityPower = JumpingPower;
+                }
+            }
+        }
+    }
+
+    public void TrySprint()
+    {
+        if (IsGrounded())
+        {
+            isSprinting = true;
+        }
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
     }
 }

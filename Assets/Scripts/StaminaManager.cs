@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class StaminaManager : MonoBehaviour
 
     public float RegeneCD;
     private float lastStaminaUse;
+
+    public GameObject StaminaBar;
+    public Image StaminaImageFilled;
 
     void Start()
     {
@@ -23,10 +27,13 @@ public class StaminaManager : MonoBehaviour
             if (Stamina < MaxStamina)
             {
                 Stamina = Stamina + (StaminaRegen * Time.deltaTime);
+                StaminaBar.SetActive(true);
+                StaminaImageFilled.fillAmount = Stamina / MaxStamina;
             }
             else
             {
                 Stamina = MaxStamina;
+                StaminaBar.SetActive(false);
             }
         }
     }
@@ -43,6 +50,8 @@ public class StaminaManager : MonoBehaviour
         {
             Stamina = Stamina - cost;
             lastStaminaUse = Time.time;
+            StaminaBar.SetActive(true);
+            StaminaImageFilled.fillAmount = Stamina / MaxStamina;
         }
 
         return res;
