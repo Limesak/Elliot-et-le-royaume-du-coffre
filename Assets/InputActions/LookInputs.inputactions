@@ -1,0 +1,60 @@
+{
+    "name": "LookInputs",
+    "maps": [
+        {
+            "name": "Mouse",
+            "id": "cf73f08c-4889-4d7a-ba0e-309598e8179f",
+            "actions": [
+                {
+                    "name": "MouseLook",
+                    "type": "PassThrough",
+                    "id": "8f2a26c0-c26b-4b8a-b89b-b286eff0a4d5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a2a12088-5931-46ba-bd34-233f10688ac2",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Controller",
+            "id": "0abda093-8232-4e86-825f-a7faebe84a43",
+            "actions": [
+                {
+                    "name": "ControllerLook",
+                    "type": "PassThrough",
+                    "id": "11a815d5-f53f-44fc-a4eb-760e9a7007ae",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ceddb067-87ee-4b37-bfc7-68ca0f4e5aec",
+                    "path": "<XInputController>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControllerLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
