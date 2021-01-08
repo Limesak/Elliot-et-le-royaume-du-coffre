@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float JumpCD;
     private float lastTimeJump;
 
-    private void Start()
+    void Start()
     {
         GravityPowerStable = GravityPower;
     }

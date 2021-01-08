@@ -45,11 +45,57 @@
                 {
                     "name": "",
                     "id": "ceddb067-87ee-4b37-bfc7-68ca0f4e5aec",
-                    "path": "<XInputController>/rightStick",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ControllerLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Both",
+            "id": "15693769-d44a-4f1a-9979-eb47d1d6666a",
+            "actions": [
+                {
+                    "name": "MouseLook",
+                    "type": "Value",
+                    "id": "90e75cb5-d7c1-4e15-a610-c18f50b4e90b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Stick",
+                    "type": "Value",
+                    "id": "666c453b-2599-4018-a3d3-ef603f333e46",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c625e71d-3523-4189-8483-15d43568bbec",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e82334f1-f56f-4f39-8431-d9beef951d25",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
