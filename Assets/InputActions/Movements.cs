@@ -187,7 +187,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1cccd6a1-c7f5-4652-b362-41e971f0477f"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -209,7 +209,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c5a44429-a98c-47ec-bb4b-89a4d3e80e66"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -220,7 +220,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d42da0c6-0a94-4b16-8038-c114368407fb"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -253,7 +253,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e8fc4c8c-96cd-4946-a737-64b8c9921940"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
