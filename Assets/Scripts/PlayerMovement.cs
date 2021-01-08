@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Movements MovementsControls;
+    public InputModeSelector IMS;
 
     public CharacterController controller;
     public float speed;
@@ -40,24 +41,52 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         MovementsControls = new Movements();
-        MovementsControls.Player.Jump.performed += ctx => TryJump();
-        MovementsControls.Player.Sprint.performed += ctx => TrySprint();
-        MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
-        
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Jump.performed += ctx => TryJump();
+            MovementsControls.Player.Sprint.performed += ctx => TrySprint();
+            MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Jump.performed += ctx => TryJump();
+            MovementsControls.Player1.Sprint.performed += ctx => TrySprint();
+            //MovementsControls.Player1.Sprint.canceled += ctx => CancelSprint();
+        }
     }
 
     void OnEnable()
     {
-        MovementsControls.Player.Move.Enable();
-        MovementsControls.Player.Sprint.Enable();
-        MovementsControls.Player.Jump.Enable();
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Move.Enable();
+            MovementsControls.Player.Sprint.Enable();
+            MovementsControls.Player.Jump.Enable();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Move.Enable();
+            MovementsControls.Player1.Sprint.Enable();
+            MovementsControls.Player1.Jump.Enable();
+        }
+        
     }
 
     void OnDisable()
     {
-        MovementsControls.Player.Move.Disable();
-        MovementsControls.Player.Sprint.Disable();
-        MovementsControls.Player.Jump.Disable();
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Move.Disable();
+            MovementsControls.Player.Sprint.Disable();
+            MovementsControls.Player.Jump.Disable();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Move.Disable();
+            MovementsControls.Player1.Sprint.Disable();
+            MovementsControls.Player1.Jump.Disable();
+        }
+        
     }
 
     void Update()
@@ -89,11 +118,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-       
+
 
 
         //Movements
-        Vector2 inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+        Vector2 inputVector = Vector2.zero;
+        if (IMS.InputMode == 0)
+        {
+            inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+        }
         Vector3 Direction = new Vector3(inputVector.x,0, inputVector.y);
 
         if(Direction.magnitude >= 0.1f)
