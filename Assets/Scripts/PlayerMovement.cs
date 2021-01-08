@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         MovementsControls = new Movements();
         MovementsControls.Player.Jump.performed += ctx => TryJump();
         MovementsControls.Player.Sprint.performed += ctx => TrySprint();
+        MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
         
     }
 
@@ -168,6 +169,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isSprinting = true;
         }
+    }
+
+    public void CancelSprint()
+    {
+        isSprinting = false;
     }
 
     public bool IsGrounded()

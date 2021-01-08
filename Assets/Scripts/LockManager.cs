@@ -50,6 +50,7 @@ public class LockManager : MonoBehaviour
     {
         MovementsControls = new Movements();
         MovementsControls.Player.Lock.performed += ctx => TryLock();
+        MovementsControls.Player.Lock.canceled += ctx => Unlock();
 
     }
 
@@ -74,47 +75,38 @@ public class LockManager : MonoBehaviour
 
     public void TryLock()
     {
-        if (isLock)
+        Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
+        List<GameObject> PossibleLocks = new List<GameObject>();
+        for (int i = 0; i < res.Length; i++)
         {
-            Unlock();
+            if (res[i].gameObject.GetComponent<LockableObject>())
+            {
+                PossibleLocks.Add(res[i].gameObject);
+            }
         }
-        else
+        float minDist = radiusOfLock * 10000;
+        GameObject CloserObject = null;
+        foreach (GameObject g in PossibleLocks)
         {
-            Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
-            List<GameObject> PossibleLocks = new List<GameObject>();
-            for (int i = 0; i < res.Length; i++)
+            if (Vector3.Distance(g.transform.position, PointOfScan.transform.position) < minDist)
             {
-                if (res[i].gameObject.GetComponent<LockableObject>())
-                {
-                    PossibleLocks.Add(res[i].gameObject);
-                }
-            }
-            float minDist = radiusOfLock * 10000;
-            GameObject CloserObject = null;
-            foreach (GameObject g in PossibleLocks)
-            {
-                if (Vector3.Distance(g.transform.position, PointOfScan.transform.position) < minDist)
-                {
-                    minDist = Vector3.Distance(g.transform.position, PointOfScan.transform.position);
-                    CloserObject = g;
-                }
-            }
-
-            if (CloserObject != null)
-            {
-                isLock = true;
-                LockedObject = CloserObject.GetComponent<LockableObject>();
-                LockedObject.Lock();
-                vcam.LookAt = CloserObject.transform;
-                vcam.Follow = LockedCamFollow.transform;
-                PivotLock.target = CloserObject.transform;
-                PassNewDataInCam(LockedValues);
-                //TransitionToNewData();
-                vcamColl.m_AvoidObstacles = false;
+                minDist = Vector3.Distance(g.transform.position, PointOfScan.transform.position);
+                CloserObject = g;
             }
         }
         
-
+        if (CloserObject != null)
+        {
+            isLock = true;
+            LockedObject = CloserObject.GetComponent<LockableObject>();
+            LockedObject.Lock();
+            vcam.LookAt = CloserObject.transform;
+            vcam.Follow = LockedCamFollow.transform;
+            PivotLock.target = CloserObject.transform;
+            PassNewDataInCam(LockedValues);
+            //TransitionToNewData();
+            vcamColl.m_AvoidObstacles = false;
+        }
     }
 
     public void Unlock()
