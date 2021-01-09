@@ -37,9 +37,18 @@ public class PlayerMovement : MonoBehaviour
     public float JumpCD;
     private float lastTimeJump;
 
+    private Vector3 hitNormal;
+    public float frictionSlope;
+    private float lastY;
+    private int cptSameY;
+    public int limitCptY;
+    private bool isStuck;
+    public float slipperySlope;
+
     void Start()
     {
         GravityPowerStable = GravityPower;
+        isStuck = false;
     }
 
     void Awake()
@@ -106,6 +115,9 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 graviDir = new Vector3(0, GravityPower, 0);
                 controller.Move(graviDir * Time.deltaTime);
             }
+
+
+           
         }
         else
         {
@@ -119,6 +131,29 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 GravityPower = GravityPowerStable;
+            }
+
+
+            if (lastY == transform.position.y)
+            {
+                cptSameY++;
+                if (cptSameY >= limitCptY)
+                {
+                    isStuck = true;
+                    lastTimeOnGround = Time.time;
+                }
+            }
+            else
+            {
+                isStuck = false;
+                lastY = transform.position.y;
+            }
+
+            if (isStuck)
+            {
+                UpdateSlope();
+                Vector3 SlopeDir = new Vector3((1f - hitNormal.y) * hitNormal.x * (1f - frictionSlope), 0, (1f - hitNormal.y) * hitNormal.z * (1f - frictionSlope));
+                controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
             }
         }
 
@@ -155,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir =new Vector3(moveDir.x, 0, moveDir.z);
 
-            if (IsGrounded())
+            if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
                 if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
                 {
@@ -185,8 +220,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            isSprinting = false;
-            
+            if (IMS.InputMode == 1)
+            {
+                isSprinting = false;
+            }
         }
     }
 
@@ -215,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TrySprint()
     {
-        if (IsGrounded())
+        if (lastTimeOnGround + CoyoteTime >= Time.time)
         {
             if (!isSprinting)
             {
@@ -234,5 +271,14 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+    }
+
+    public void UpdateSlope()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity))
+        {
+            hitNormal = hit.normal;
+        }
     }
 }

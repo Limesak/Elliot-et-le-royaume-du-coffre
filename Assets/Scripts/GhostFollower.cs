@@ -46,6 +46,8 @@ public class GhostFollower : MonoBehaviour
             DirPos = new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z);
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, DirPos, speed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, DirPos, speed * Time.deltaTime);
+
+        transform.position = Vector3.Lerp(transform.position, PM.transform.position, Time.deltaTime * speed);
     }
 }
