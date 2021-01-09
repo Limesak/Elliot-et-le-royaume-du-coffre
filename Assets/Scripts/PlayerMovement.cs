@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public InputModeSelector IMS;
 
     public CharacterController controller;
-    public float speed;
-    public float speedSprint;
+    
     public float turnSmoothVelocity;
     public float turnSmoothTime;
     public Transform cam;
@@ -19,8 +18,13 @@ public class PlayerMovement : MonoBehaviour
 
     public StaminaManager SM;
 
+    public float speed;
+    public float speedSprint;
+    private float currentSpeed;
+    public float sprintAcceleration;
     public float SprintStaminaCost;
     private bool isSprinting;
+
 
     public float GravityPower;
     private float GravityPowerStable;
@@ -133,6 +137,15 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector3 Direction = new Vector3(inputVector.x,0, inputVector.y);
 
+        if(isSprinting && currentSpeed < speedSprint)
+        {
+            currentSpeed = currentSpeed + (sprintAcceleration * Time.deltaTime);
+        }
+        if(currentSpeed > speedSprint)
+        {
+            currentSpeed = speedSprint;
+        }
+
         if(Direction.magnitude >= 0.1f)
         {
             float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -146,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
                 {
-                    controller.Move(moveDir * speedSprint * Time.deltaTime);
+                    controller.Move(moveDir * currentSpeed * Time.deltaTime);
                 }
                 else
                 {
@@ -158,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isSprinting)
                 {
-                    controller.Move(moveDir * speedSprint * Time.deltaTime);
+                    controller.Move(moveDir * currentSpeed * Time.deltaTime);
                 }
                 else
                 {
@@ -204,7 +217,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGrounded())
         {
-            isSprinting = true;
+            if (!isSprinting)
+            {
+                currentSpeed = speed;
+                isSprinting = true;
+            }
+            
         }
     }
 
