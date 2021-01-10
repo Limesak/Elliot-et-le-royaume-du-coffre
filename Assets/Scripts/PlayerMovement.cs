@@ -38,12 +38,17 @@ public class PlayerMovement : MonoBehaviour
     private float lastTimeJump;
 
     private Vector3 hitNormal;
+    private float hitDistance;
     public float frictionSlope;
     private float lastY;
     private int cptSameY;
     public int limitCptY;
     private bool isStuck;
     public float slipperySlope;
+
+    public ParticleSystem WalkDustCloud;
+
+    private Vector3 GizmoLocation;
 
     void Start()
     {
@@ -116,8 +121,9 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(graviDir * Time.deltaTime);
             }
 
-
            
+
+
         }
         else
         {
@@ -137,10 +143,14 @@ public class PlayerMovement : MonoBehaviour
             if (lastY == transform.position.y)
             {
                 cptSameY++;
-                if (cptSameY >= limitCptY)
+                if (cptSameY >= limitCptY )
                 {
                     isStuck = true;
                     lastTimeOnGround = Time.time;
+                }
+                else
+                {
+                    Debug.Log("HitDistance: " + hitDistance);
                 }
             }
             else
@@ -155,6 +165,8 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 SlopeDir = new Vector3((1f - hitNormal.y) * hitNormal.x * (1f - frictionSlope), 0, (1f - hitNormal.y) * hitNormal.z * (1f - frictionSlope));
                 controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
             }
+
+            
         }
 
 
@@ -181,7 +193,16 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = speedSprint;
         }
 
-        if(Direction.magnitude >= 0.1f)
+        if (IsAlmostGrounded())
+        {
+            WalkDustCloud.enableEmission = true;
+        }
+        else
+        {
+            WalkDustCloud.enableEmission = false;
+        }
+
+        if (Direction.magnitude >= 0.1f)
         {
             float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,turnSmoothTime);
@@ -192,18 +213,27 @@ public class PlayerMovement : MonoBehaviour
 
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
+
+                
                 if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
                 {
+                    var emission = WalkDustCloud.emission;
+                    emission.rateOverDistance = 8;
+                   
                     controller.Move(moveDir * currentSpeed * Time.deltaTime);
                 }
                 else
                 {
+                    var emission = WalkDustCloud.emission;
+                    emission.rateOverDistance = 3; 
+
                     controller.Move(moveDir * speed * Time.deltaTime);
                     isSprinting = false;
                 }
             }
             else
             {
+                
                 if (isSprinting)
                 {
                     controller.Move(moveDir * currentSpeed * Time.deltaTime);
@@ -273,12 +303,31 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, distToGround);
     }
 
+    public bool IsAlmostGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround*3);
+    }
+
     public void UpdateSlope()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity))
+        if(Physics.SphereCast(transform.position, 0.6f, -Vector3.up, out hit, Mathf.Infinity))
         {
             hitNormal = hit.normal;
+            hitDistance = Vector3.Distance(transform.position, hit.point);
+            GizmoLocation = hit.point;
+        }
+        else
+        {
+            GizmoLocation = Vector3.zero;
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        if(GizmoLocation != Vector3.zero)
+        {
+            Gizmos.DrawSphere(GizmoLocation, 0.5f);
         }
     }
 }
