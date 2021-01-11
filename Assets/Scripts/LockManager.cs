@@ -24,6 +24,7 @@ public class LockManager : MonoBehaviour
     public FreeLookValueDoc LockedValues;
 
     Movements MovementsControls;
+    public InputModeSelector IMS;
 
     void Start()
     {
@@ -49,68 +50,131 @@ public class LockManager : MonoBehaviour
     void Awake()
     {
         MovementsControls = new Movements();
-        MovementsControls.Player.Lock.performed += ctx => TryLock();
-        MovementsControls.Player.Lock.canceled += ctx => Unlock();
-
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Lock.performed += ctx => TryLock();
+            MovementsControls.Player.Lock.canceled += ctx => Unlock();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Lock.started += ctx => TryLock();
+            MovementsControls.Player1.Lock.canceled += ctx => Debug.Log("nothing");// Unlock();
+        }
+       
     }
 
     void OnEnable()
     {
-        MovementsControls.Player.Lock.Enable();
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Lock.Enable();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Lock.Enable();
+        }
+        
     }
 
     void OnDisable()
     {
-        MovementsControls.Player.Lock.Disable();
+        if (IMS.InputMode == 0)
+        {
+            MovementsControls.Player.Lock.Disable();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            MovementsControls.Player1.Lock.Disable();
+        }
+        
     }
     
 
-    void Update()
-    {
-        if (inTransition)
-        {
-            TransitionToNewData();
-        }
-    }
-
     public void TryLock()
     {
-        Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
-        List<GameObject> PossibleLocks = new List<GameObject>();
-        for (int i = 0; i < res.Length; i++)
+        if(IMS.InputMode == 0)
         {
-            if (res[i].gameObject.GetComponent<LockableObject>())
+            Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
+            List<GameObject> PossibleLocks = new List<GameObject>();
+            for (int i = 0; i < res.Length; i++)
             {
-                PossibleLocks.Add(res[i].gameObject);
+                if (res[i].gameObject.GetComponent<LockableObject>())
+                {
+                    PossibleLocks.Add(res[i].gameObject);
+                }
+            }
+            float minDist = radiusOfLock * 10000;
+            GameObject CloserObject = null;
+            foreach (GameObject g in PossibleLocks)
+            {
+                if (Vector3.Distance(g.transform.position, PointOfScan.transform.position) < minDist)
+                {
+                    minDist = Vector3.Distance(g.transform.position, PointOfScan.transform.position);
+                    CloserObject = g;
+                }
+            }
+
+            if (CloserObject != null)
+            {
+                isLock = true;
+                LockedObject = CloserObject.GetComponent<LockableObject>();
+                LockedObject.Lock();
+                vcam.LookAt = CloserObject.transform;
+                vcam.Follow = LockedCamFollow.transform;
+                PivotLock.target = CloserObject.transform;
+                PassNewDataInCam(LockedValues);
+                //TransitionToNewData();
+                vcamColl.m_AvoidObstacles = false;
             }
         }
-        float minDist = radiusOfLock * 10000;
-        GameObject CloserObject = null;
-        foreach (GameObject g in PossibleLocks)
+        else if(IMS.InputMode == 1)
         {
-            if (Vector3.Distance(g.transform.position, PointOfScan.transform.position) < minDist)
+            if (isLock)
             {
-                minDist = Vector3.Distance(g.transform.position, PointOfScan.transform.position);
-                CloserObject = g;
+                Unlock();
+            }
+            else
+            {
+                Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
+                List<GameObject> PossibleLocks = new List<GameObject>();
+                for (int i = 0; i < res.Length; i++)
+                {
+                    if (res[i].gameObject.GetComponent<LockableObject>())
+                    {
+                        PossibleLocks.Add(res[i].gameObject);
+                    }
+                }
+                float minDist = radiusOfLock * 10000;
+                GameObject CloserObject = null;
+                foreach (GameObject g in PossibleLocks)
+                {
+                    if (Vector3.Distance(g.transform.position, PointOfScan.transform.position) < minDist)
+                    {
+                        minDist = Vector3.Distance(g.transform.position, PointOfScan.transform.position);
+                        CloserObject = g;
+                    }
+                }
+
+                if (CloserObject != null)
+                {
+                    isLock = true;
+                    LockedObject = CloserObject.GetComponent<LockableObject>();
+                    LockedObject.Lock();
+                    vcam.LookAt = CloserObject.transform;
+                    vcam.Follow = LockedCamFollow.transform;
+                    PivotLock.target = CloserObject.transform;
+                    PassNewDataInCam(LockedValues);
+                    //TransitionToNewData();
+                    vcamColl.m_AvoidObstacles = false;
+                }
             }
         }
         
-        if (CloserObject != null)
-        {
-            isLock = true;
-            LockedObject = CloserObject.GetComponent<LockableObject>();
-            LockedObject.Lock();
-            vcam.LookAt = CloserObject.transform;
-            vcam.Follow = LockedCamFollow.transform;
-            PivotLock.target = CloserObject.transform;
-            PassNewDataInCam(LockedValues);
-            //TransitionToNewData();
-            vcamColl.m_AvoidObstacles = false;
-        }
     }
 
     public void Unlock()
     {
+        Debug.Log("Unlock");
         isLock = false;
         LockedObject.UnLock();
         LockedObject = null;
