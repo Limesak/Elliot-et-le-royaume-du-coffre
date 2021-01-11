@@ -61,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
         MovementsControls = new Movements();
         if (IMS.InputMode == 0)
         {
-            MovementsControls.Player.Jump.performed += ctx => TryJump();
+            MovementsControls.Player.Jump.started += ctx => TryJump();
             MovementsControls.Player.Sprint.performed += ctx => TrySprint();
             MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
         }
         else if (IMS.InputMode == 1)
         {
-            MovementsControls.Player1.Jump.performed += ctx => TryJump();
+            MovementsControls.Player1.Jump.started += ctx => TryJump();
             MovementsControls.Player1.Sprint.performed += ctx => TrySprint();
             //MovementsControls.Player1.Sprint.canceled += ctx => CancelSprint();
         }
