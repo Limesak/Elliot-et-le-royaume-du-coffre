@@ -227,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
                     var emission = WalkDustCloud.emission;
                     emission.rateOverDistance = 3; 
 
-                    controller.Move(moveDir * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
                     isSprinting = false;
                 }
             }
@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    controller.Move(moveDir * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
                     isSprinting = false;
                 }
             }
