@@ -120,6 +120,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (GravityPower > 0)
             {
+                if (IsUnderRoof())
+                {
+                    GravityPower = 0;
+                }
                 Vector3 graviDir = new Vector3(0, GravityPower, 0);
                 controller.Move(graviDir * Time.deltaTime);
             }
@@ -130,6 +134,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (GravityPower > 0 && IsUnderRoof())
+            {
+                GravityPower = 0;
+            }
             Vector3 graviDir = new Vector3(0, GravityPower, 0);
             controller.Move(graviDir * Time.deltaTime);
 
@@ -230,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
                     var emission = WalkDustCloud.emission;
                     emission.rateOverDistance = 3; 
 
-                    controller.Move(moveDir * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
                     isSprinting = false;
                 }
             }
@@ -243,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    controller.Move(moveDir * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
                     isSprinting = false;
                 }
             }
@@ -304,6 +312,11 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+    }
+
+    public bool IsUnderRoof()
+    {
+        return Physics.Raycast(transform.position, Vector3.up, distToGround);
     }
 
     public bool IsAlmostGrounded()
