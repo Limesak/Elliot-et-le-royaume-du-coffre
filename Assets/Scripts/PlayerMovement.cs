@@ -50,6 +50,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 GizmoLocation;
 
+    [Header("Unlocked Skills")]
+    public bool canDoubleJump;
+
     void Start()
     {
         GravityPowerStable = GravityPower;
@@ -269,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (DoubleJumpAvailable)
+                if (DoubleJumpAvailable && canDoubleJump)
                 {
                     Debug.Log("DoubleJump");
                     DoubleJumpAvailable = false;
