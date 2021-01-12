@@ -124,6 +124,10 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 graviDir = new Vector3(0, GravityPower, 0);
                 controller.Move(graviDir * Time.deltaTime);
             }
+            else
+            {
+                GravityPower = 0;
+            }
 
            
 
