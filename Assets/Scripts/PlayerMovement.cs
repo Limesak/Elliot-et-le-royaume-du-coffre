@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public InputModeSelector IMS;
 
     public CharacterController controller;
+
+    private bool wasOnGround;
     
     public float turnSmoothVelocity;
     public float turnSmoothTime;
@@ -45,15 +47,33 @@ public class PlayerMovement : MonoBehaviour
     public int limitCptY;
     private bool isStuck;
     public float slipperySlope;
+    public float slopeJumpFactor;
 
     public ParticleSystem WalkDustCloud;
 
     private Vector3 GizmoLocation;
 
+    public float Pushfriction;
+    private Vector3 PushDirection;
+    private bool isPushed;
+    public float PushSpeed;
+    public float MinPushForce;
+
+    public float shakeJumpForce;
+    public float shakeJumpDuration;
+    public float shakeSprintForce;
+    public float shakeSprintDuration;
+    public float shakeDashForce;
+    public float shakeDashDuration;
+    public float shakePushFactor;
+
+    public ScreenShake screenShakeScript;
+
     void Start()
     {
         GravityPowerStable = GravityPower;
         isStuck = false;
+        wasOnGround = true;
     }
 
     void Awake()
@@ -112,6 +132,9 @@ public class PlayerMovement : MonoBehaviour
         //Gravity
         if (IsGrounded())
         {
+            
+            wasOnGround = true;
+
             lastTimeOnGround = Time.time;
             DoubleJumpAvailable = true;
 
@@ -128,13 +151,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 GravityPower = 0;
             }
-
-           
-
-
         }
         else
         {
+            
             if (GravityPower > 0 && IsUnderRoof())
             {
                 GravityPower = 0;
@@ -152,23 +172,26 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-            if (lastY == transform.position.y)
+            if (lastY == transform.position.y && IsPossiblyStuck())
             {
                 cptSameY++;
                 if (cptSameY >= limitCptY )
                 {
                     isStuck = true;
                     lastTimeOnGround = Time.time;
+                    DoubleJumpAvailable = true;
+                    Debug.Log("Stuck ");
                 }
                 else
                 {
-                    Debug.Log("HitDistance: " + hitDistance);
+                    //Debug.Log("HitDistance: " + hitDistance);
                 }
             }
             else
             {
                 isStuck = false;
                 lastY = transform.position.y;
+                cptSameY = 0;
             }
 
             if (isStuck)
@@ -177,11 +200,27 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 SlopeDir = new Vector3((1f - hitNormal.y) * hitNormal.x * (1f - frictionSlope), 0, (1f - hitNormal.y) * hitNormal.z * (1f - frictionSlope));
                 controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
             }
+            if (IsAlmostGrounded() && GravityPower<0)
+            {
+                if (!wasOnGround)
+                {
+                    screenShakeScript.setShake(shakeJumpForce, shakeJumpDuration);
+                }
+                wasOnGround = true;
+            }
+            else
+            {
+                wasOnGround = false;
+            }
 
             
         }
 
-
+        //Push
+        if (isPushed)
+        {
+            Push();
+        }
 
 
         //Movements
@@ -223,7 +262,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir =new Vector3(moveDir.x, 0, moveDir.z);
 
-            if (lastTimeOnGround + CoyoteTime >= Time.time)
+            if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
             {
 
                 
@@ -233,6 +272,8 @@ public class PlayerMovement : MonoBehaviour
                     emission.rateOverDistance = 8;
                    
                     controller.Move(moveDir * currentSpeed * Time.deltaTime);
+
+                    screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
                 }
                 else
                 {
@@ -276,25 +317,34 @@ public class PlayerMovement : MonoBehaviour
         {
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
+                UpdateSlope();
+                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor, 1, hitNormal.normalized.z * slopeJumpFactor);
+                NewPush(SlopeDir * JumpingPower);
+
                 lastTimeJump = Time.time;
-                GravityPower = JumpingPower;
             }
-            else
+            else if (wasOnGround)
             {
-                if (DoubleJumpAvailable)
-                {
-                    Debug.Log("DoubleJump");
-                    DoubleJumpAvailable = false;
-                    lastTimeJump = Time.time;
-                    GravityPower = JumpingPower;
-                }
+                UpdateSlope();
+                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor, hitNormal.normalized.y, hitNormal.normalized.z * slopeJumpFactor);
+                NewPush(SlopeDir * JumpingPower);
+
+                lastTimeJump = Time.time;
+            }
+            else if(DoubleJumpAvailable)
+            {
+                NewPush(Vector3.up * JumpingPower);
+
+                Debug.Log("DoubleJump");
+                DoubleJumpAvailable = false;
+                lastTimeJump = Time.time;
             }
         }
     }
 
     public void TrySprint()
     {
-        if (lastTimeOnGround + CoyoteTime >= Time.time)
+        if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
         {
             if (!isSprinting)
             {
@@ -322,7 +372,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsAlmostGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround*3);
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
+    }
+
+    public bool IsPossiblyStuck()
+    {
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.6f, -Vector3.up,out hit, distToGround * 4);
     }
 
     public void UpdateSlope()
@@ -337,6 +393,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             GizmoLocation = Vector3.zero;
+            hitNormal = Vector3.up;
         }
     }
 
@@ -346,5 +403,34 @@ public class PlayerMovement : MonoBehaviour
         {
             Gizmos.DrawSphere(GizmoLocation, 0.5f);
         }
+    }
+
+    public bool isPushingForceObservable()
+    {
+        bool res = false;
+        if(Mathf.Abs(PushDirection.x)>=MinPushForce || Mathf.Abs(PushDirection.z) >= MinPushForce)
+        {
+            res = true;
+        }
+        return res;
+    }
+
+    public void Push()
+    {
+        controller.Move(PushDirection *PushDirection.magnitude * PushSpeed * Time.deltaTime);
+        screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f);
+        PushDirection = new Vector3(PushDirection.x * Pushfriction, 0, PushDirection.z * Pushfriction);
+        if (!isPushingForceObservable())
+        {
+            PushDirection = Vector3.zero;
+            isPushed = false;
+        }
+    }
+
+    public void NewPush(Vector3 dir)
+    {
+        GravityPower = dir.y;
+        PushDirection = new Vector3(PushDirection.x + dir.x, 0, PushDirection.z + dir.z);
+        isPushed = true;
     }
 }

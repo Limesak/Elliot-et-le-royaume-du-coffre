@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3681800035357889238}
   - component: {fileID: 3681800035357889233}
   - component: {fileID: 3681800035357889232}
+  - component: {fileID: 1859063478}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -126,6 +127,23 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &1859063478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681800035357889234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &3681800035367223589
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +212,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7786459, y: 1}
+    m_SensorSize: {x: 1.7787457, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -271,7 +289,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7786459, y: 1}
+    m_SensorSize: {x: 1.7787457, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -292,6 +310,7 @@ GameObject:
   - component: {fileID: 3681800035862483437}
   - component: {fileID: 3681800035862483436}
   - component: {fileID: 3681800035862483439}
+  - component: {fileID: 242210195}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -406,6 +425,23 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &242210195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681800035862483433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &3681800035881074835
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +510,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7786459, y: 1}
+    m_SensorSize: {x: 1.7787457, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -494,6 +530,7 @@ GameObject:
   - component: {fileID: 3681800036665438207}
   - component: {fileID: 3681800036665438206}
   - component: {fileID: 3681800036665438204}
+  - component: {fileID: 8445640896434826807}
   - component: {fileID: 3681800036665438205}
   m_Layer: 0
   m_Name: CM FreeLook1
@@ -549,7 +586,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7786459, y: 1}
+    m_SensorSize: {x: 1.7787457, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -638,6 +675,19 @@ MonoBehaviour:
   PlayerIndex: -1
   XYAxis: {fileID: -6700631133903023689, guid: 4027769e10fb8ef428c680e056a7dcb5, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &8445640896434826807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681800036665438201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1340b622491bb1a448e2ed68f5f1a51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowerFactor: 0.01
 --- !u!114 &3681800036665438205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,6 +730,7 @@ GameObject:
   - component: {fileID: 3681800037166884400}
   - component: {fileID: 3681800037166884403}
   - component: {fileID: 3681800037166884402}
+  - component: {fileID: 1671884205}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -794,3 +845,20 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &1671884205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681800037166884396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
