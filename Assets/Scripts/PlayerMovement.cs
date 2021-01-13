@@ -178,8 +178,8 @@ public class PlayerMovement : MonoBehaviour
                 if (cptSameY >= limitCptY )
                 {
                     isStuck = true;
-                    lastTimeOnGround = Time.time;
-                    DoubleJumpAvailable = true;
+                    //lastTimeOnGround = Time.time;
+                    //DoubleJumpAvailable = true;
                     Debug.Log("Stuck ");
                 }
                 else
@@ -199,6 +199,7 @@ public class PlayerMovement : MonoBehaviour
                 UpdateSlope();
                 Vector3 SlopeDir = new Vector3((1f - hitNormal.y) * hitNormal.x * (1f - frictionSlope), 0, (1f - hitNormal.y) * hitNormal.z * (1f - frictionSlope));
                 controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
+                DoubleJumpAvailable = true;
             }
             if (IsAlmostGrounded() && GravityPower<0)
             {
@@ -318,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
                 UpdateSlope();
-                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor, 1, hitNormal.normalized.z * slopeJumpFactor);
+                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor*0.1f, 1, hitNormal.normalized.z * slopeJumpFactor*0.1f);
                 NewPush(SlopeDir * JumpingPower);
 
                 lastTimeJump = Time.time;
