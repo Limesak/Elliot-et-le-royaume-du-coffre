@@ -5293,6 +5293,26 @@ PrefabInstance:
       propertyPath: screenShakeScript
       value: 
       objectReference: {fileID: 645196586}
+    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: slopeJumpFactor
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: JumpingPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: DoubleJumpingPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: JumpMaxPressTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5299395207707767068, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: StaminaBar
@@ -5323,6 +5343,11 @@ PrefabInstance:
       propertyPath: DefaultLookAt
       value: 
       objectReference: {fileID: 1522139763}
+    - target: {fileID: 5299395207707767070, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: InputMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5299395208630748012, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: target
