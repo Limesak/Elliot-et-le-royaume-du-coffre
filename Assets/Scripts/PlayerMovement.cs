@@ -33,11 +33,14 @@ public class PlayerMovement : MonoBehaviour
     public float GravityPullForce;
 
     public float JumpingPower;
+    public float DoubleJumpingPower;
     private bool DoubleJumpAvailable;
     private float lastTimeOnGround;
     public float CoyoteTime;
     public float JumpCD;
     private float lastTimeJump;
+    public float JumpMaxPressTime;
+    private bool isJumping;
 
     private Vector3 hitNormal;
     private float hitDistance;
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         GravityPowerStable = GravityPower;
         isStuck = false;
         wasOnGround = true;
+        isJumping = false;
     }
 
     void Awake()
@@ -82,12 +86,14 @@ public class PlayerMovement : MonoBehaviour
         if (IMS.InputMode == 0)
         {
             MovementsControls.Player.Jump.started += ctx => TryJump();
+            MovementsControls.Player.Jump.canceled += ctx => CancelJump();
             MovementsControls.Player.Sprint.performed += ctx => TrySprint();
             MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
         }
         else if (IMS.InputMode == 1)
         {
             MovementsControls.Player1.Jump.started += ctx => TryJump();
+            MovementsControls.Player1.Jump.canceled += ctx => CancelJump();
             MovementsControls.Player1.Sprint.performed += ctx => TrySprint();
             //MovementsControls.Player1.Sprint.canceled += ctx => CancelSprint();
         }
@@ -162,37 +168,40 @@ public class PlayerMovement : MonoBehaviour
             Vector3 graviDir = new Vector3(0, GravityPower, 0);
             controller.Move(graviDir * Time.deltaTime);
 
-            if (GravityPower > GravityPowerStable)
+            if (!isJumping)
             {
-                GravityPower = GravityPower - (GravityPullForce*Time.deltaTime);
-            }
-            else
-            {
-                GravityPower = GravityPowerStable;
-            }
-
-
-            if (lastY == transform.position.y && IsPossiblyStuck())
-            {
-                cptSameY++;
-                if (cptSameY >= limitCptY )
+                if (GravityPower > GravityPowerStable)
                 {
-                    isStuck = true;
-                    //lastTimeOnGround = Time.time;
-                    //DoubleJumpAvailable = true;
-                    Debug.Log("Stuck ");
+                    GravityPower = GravityPower - (GravityPullForce * Time.deltaTime);
                 }
                 else
                 {
-                    //Debug.Log("HitDistance: " + hitDistance);
+                    GravityPower = GravityPowerStable;
+                }
+
+                if (lastY == transform.position.y && IsPossiblyStuck())
+                {
+                    cptSameY++;
+                    if (cptSameY >= limitCptY)
+                    {
+                        isStuck = true;
+                        //lastTimeOnGround = Time.time;
+                        //DoubleJumpAvailable = true;
+                        Debug.Log("Stuck ");
+                    }
+                    else
+                    {
+                        //Debug.Log("HitDistance: " + hitDistance);
+                    }
+                }
+                else
+                {
+                    isStuck = false;
+                    lastY = transform.position.y;
+                    cptSameY = 0;
                 }
             }
-            else
-            {
-                isStuck = false;
-                lastY = transform.position.y;
-                cptSameY = 0;
-            }
+            
 
             if (isStuck)
             {
@@ -221,6 +230,12 @@ public class PlayerMovement : MonoBehaviour
         if (isPushed)
         {
             Push();
+        }
+
+        //CheckEndOfJump
+        if (isJumping && lastTimeJump + JumpMaxPressTime < Time.time)
+        {
+            isJumping = false;
         }
 
 
@@ -316,6 +331,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("TryJump");
         if (lastTimeJump + JumpCD <= Time.time)
         {
+            isJumping = true;
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
                 UpdateSlope();
@@ -334,13 +350,18 @@ public class PlayerMovement : MonoBehaviour
             }
             else if(DoubleJumpAvailable)
             {
-                NewPush(Vector3.up * JumpingPower);
+                NewPush(Vector3.up * DoubleJumpingPower);
 
                 Debug.Log("DoubleJump");
                 DoubleJumpAvailable = false;
                 lastTimeJump = Time.time;
             }
         }
+    }
+
+    public void CancelJump()
+    {
+        isJumping = false;
     }
 
     public void TrySprint()
