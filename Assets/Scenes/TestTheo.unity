@@ -5053,12 +5053,12 @@ PrefabInstance:
     - target: {fileID: 3681800035765150279, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000008419774
+      value: 0.000000008419774
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035765150279, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000017670049
+      value: -0.0000000017670049
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035881074833, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
@@ -5293,26 +5293,6 @@ PrefabInstance:
       propertyPath: screenShakeScript
       value: 
       objectReference: {fileID: 645196586}
-    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: slopeJumpFactor
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: JumpingPower
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: DoubleJumpingPower
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: JumpMaxPressTime
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5299395207707767068, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: StaminaBar
@@ -5343,11 +5323,6 @@ PrefabInstance:
       propertyPath: DefaultLookAt
       value: 
       objectReference: {fileID: 1522139763}
-    - target: {fileID: 5299395207707767070, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: InputMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5299395208630748012, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: target
