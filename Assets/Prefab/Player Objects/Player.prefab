@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5299395207707767066}
   - component: {fileID: 5299395207707767068}
   - component: {fileID: 5299395207707767069}
+  - component: {fileID: 2557452958196734171}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -81,7 +82,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.6
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -124,7 +125,7 @@ MonoBehaviour:
   SprintStaminaCost: 10
   GravityPower: -25
   GravityPullForce: 45
-  JumpingPower: 20
+  JumpingPower: 17
   DoubleJumpingPower: 3
   CoyoteTime: 0.3
   JumpCD: 0.25
@@ -185,6 +186,22 @@ MonoBehaviour:
   LockedCamFollow: {fileID: 5299395207675208858}
   DefaultLookAt: {fileID: 0}
   IMS: {fileID: 5299395207707767070}
+--- !u!114 &2557452958196734171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87122a987a7bb1479c29a2598288a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IMS: {fileID: 5299395207707767070}
+  InteractionDescription: {fileID: 0}
+  InteractionDescriptionText: {fileID: 0}
+  rotationSpeed: 30
 --- !u!1 &5299395208070292478
 GameObject:
   m_ObjectHideFlags: 0
