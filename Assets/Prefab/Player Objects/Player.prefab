@@ -125,12 +125,14 @@ MonoBehaviour:
   GravityPower: -25
   GravityPullForce: 45
   JumpingPower: 20
+  DoubleJumpingPower: 3
   CoyoteTime: 0.3
   JumpCD: 0.25
+  JumpMaxPressTime: 0.2
   frictionSlope: 0.1
   limitCptY: 2
   slipperySlope: 80
-  slopeJumpFactor: 0.5
+  slopeJumpFactor: 0.75
   WalkDustCloud: {fileID: 5299395208351855993}
   Pushfriction: 0.9
   PushSpeed: 0.7
