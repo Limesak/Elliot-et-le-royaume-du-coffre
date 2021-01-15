@@ -115,7 +115,7 @@ MonoBehaviour:
   IMS: {fileID: 5299395207707767070}
   controller: {fileID: 5299395207707767067}
   turnSmoothVelocity: 0
-  turnSmoothTime: 0.1
+  turnSmoothTime: 0.03
   cam: {fileID: 0}
   distToGround: 1.1
   SM: {fileID: 5299395207707767068}
@@ -123,6 +123,9 @@ MonoBehaviour:
   speedSprint: 15
   sprintAcceleration: 15
   SprintStaminaCost: 10
+  LockMan: {fileID: 5299395207707767069}
+  DashForce: 15
+  DashCoolDown: 0.5
   GravityPower: -25
   GravityPullForce: 45
   JumpingPower: 17

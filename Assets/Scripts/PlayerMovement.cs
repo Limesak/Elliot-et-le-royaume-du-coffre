@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     public float SprintStaminaCost;
     private bool isSprinting;
 
+    public LockManager LockMan;
+    public float DashForce;
+    public float DashCoolDown;
+    private float DashLastTime;
 
     public float GravityPower;
     private float GravityPowerStable;
@@ -388,15 +392,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void TrySprint()
     {
-        if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+        if (LockMan.isLock)
         {
-            if (!isSprinting)
+            if (DashLastTime + DashCoolDown <= Time.time)
             {
-                currentSpeed = speed;
-                isSprinting = true;
+                DashLastTime = Time.time;
+                Vector2 inputVector = Vector2.zero;
+                if (IMS.InputMode == 0)
+                {
+                    inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+                }
+                else if (IMS.InputMode == 1)
+                {
+                    inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+                }
+                Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+                if (Direction.magnitude >= 0.1f)
+                {
+                    NewPush(transform.forward * DashForce);
+                }
+                
             }
-            
+            isSprinting = false;
         }
+        else
+        {
+            if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+            {
+                if (!isSprinting)
+                {
+                    currentSpeed = speed;
+                    isSprinting = true;
+                }
+
+            }
+        }
+        
     }
 
     public void CancelSprint()

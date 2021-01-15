@@ -119,12 +119,13 @@ public class LockManager : MonoBehaviour
                 isLock = true;
                 LockedObject = CloserObject.GetComponent<LockableObject>();
                 LockedObject.Lock();
-                vcam.LookAt = CloserObject.transform;
+                //vcam.LookAt = CloserObject.transform;
+                vcam.LookAt = transform;
                 vcam.Follow = LockedCamFollow.transform;
                 PivotLock.target = CloserObject.transform;
                 PassNewDataInCam(LockedValues);
                 //TransitionToNewData();
-                vcamColl.m_AvoidObstacles = false;
+                //vcamColl.m_AvoidObstacles = false;
             }
         }
         else if(IMS.InputMode == 1)
@@ -160,12 +161,13 @@ public class LockManager : MonoBehaviour
                     isLock = true;
                     LockedObject = CloserObject.GetComponent<LockableObject>();
                     LockedObject.Lock();
-                    vcam.LookAt = CloserObject.transform;
+                    //vcam.LookAt = CloserObject.transform;
+                    vcam.LookAt = transform;
                     vcam.Follow = LockedCamFollow.transform;
                     PivotLock.target = CloserObject.transform;
                     PassNewDataInCam(LockedValues);
                     //TransitionToNewData();
-                    vcamColl.m_AvoidObstacles = false;
+                    //vcamColl.m_AvoidObstacles = false;
                 }
             }
         }
