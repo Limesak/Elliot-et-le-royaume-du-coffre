@@ -183,8 +183,11 @@ public class LockManager : MonoBehaviour
     {
         Debug.Log("Unlock");
         isLock = false;
-        LockedObject.UnLock();
-        LockedObject = null;
+        if (LockedObject != null)
+        {
+            LockedObject.UnLock();
+            LockedObject = null;
+        }
         //vcam.LookAt = DefaultLookAt.transform;
         //vcam.Follow = DefaultLookAt.transform;
         vcam.m_Priority = 10;

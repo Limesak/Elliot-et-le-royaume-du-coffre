@@ -124,7 +124,7 @@ MonoBehaviour:
   sprintAcceleration: 15
   SprintStaminaCost: 10
   LockMan: {fileID: 5299395207707767069}
-  DashForce: 15
+  DashForce: 60
   DashCoolDown: 0.5
   GravityPower: -25
   GravityPullForce: 45
@@ -140,8 +140,8 @@ MonoBehaviour:
   slipperySlope: 80
   slopeJumpFactor: 15
   WalkDustCloud: {fileID: 5299395208351855993}
-  Pushfriction: 0.9
-  PushSpeed: 0.7
+  Pushfriction: 0.01
+  PushSpeed: 250
   MinPushForce: 0.01
   shakeJumpForce: 0.4
   shakeJumpDuration: 1

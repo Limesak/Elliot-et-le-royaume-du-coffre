@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
             lastTimeOnGround = Time.time;
             DoubleJumpAvailable = true;
-
+            
             if (GravityPower > 0)
             {
                 if (IsUnderRoof())
@@ -163,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 GravityPower = 0;
+                AerianDir = Vector3.zero;
             }
 
             controller.slopeLimit = 90;
@@ -198,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
                     controller.slopeLimit = 90;
                 }
 
-                    if (lastY == transform.position.y && IsPossiblyStuck())
+                if (lastY == transform.position.y && IsPossiblyStuck())
                 {
                     cptSameY++;
                     if (cptSameY >= limitCptY)
@@ -240,6 +241,11 @@ public class PlayerMovement : MonoBehaviour
                         //landing
                     }
                     wasOnGround = true;
+                    AerianDir = Vector3.zero;
+                }
+                else
+                {
+                    controller.Move(AerianDir * AirInertieDivFactor * Time.deltaTime);
                 }
                 
             }
@@ -394,23 +400,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time)
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround)
             {
                 DashLastTime = Time.time;
-                Vector2 inputVector = Vector2.zero;
-                if (IMS.InputMode == 0)
-                {
-                    inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
-                }
-                else if (IMS.InputMode == 1)
-                {
-                    inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
-                }
-                Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
-                if (Direction.magnitude >= 0.1f)
-                {
-                    NewPush(transform.forward * DashForce);
-                }
+                Dash();
                 
             }
             isSprinting = false;
@@ -492,9 +485,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Push()
     {
-        controller.Move(PushDirection *PushDirection.magnitude * PushSpeed * Time.deltaTime);
+        controller.Move(PushDirection * PushSpeed * Time.deltaTime);
         screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f);
-        PushDirection = new Vector3(PushDirection.x * Pushfriction, 0, PushDirection.z * Pushfriction);
+        PushDirection = PushDirection  - (PushDirection*Pushfriction*Time.time);
         if (!isPushingForceObservable())
         {
             PushDirection = Vector3.zero;
@@ -505,7 +498,7 @@ public class PlayerMovement : MonoBehaviour
     public void NewPush(Vector3 dir)
     {
         GravityPower = dir.y;
-        PushDirection = new Vector3(PushDirection.x + dir.x, 0, PushDirection.z + dir.z);
+        PushDirection = new Vector3(PushDirection.x + dir.x, 0, PushDirection.z + dir.z).normalized;
         isPushed = true;
     }
 
@@ -535,6 +528,28 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         GravityPower = JumpingPower;
+    }
+
+    public void Dash()
+    {
+        //Debug.Log("Jump with dir = " + dir);
+        Vector2 inputVector = Vector2.zero;
+        if (IMS.InputMode == 0)
+        {
+            inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+        }
+        Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+        if (Direction.magnitude >= 0.1f)
+        {
+
+            AerianDir = transform.forward * DashForce;
+            GravityPower = 5;
+        }
+        
     }
 
     public void IncJump(Vector3 dir)
