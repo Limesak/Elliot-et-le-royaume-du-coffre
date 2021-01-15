@@ -157,6 +157,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 GravityPower = 0;
             }
+
+            controller.slopeLimit = 90;
         }
         else
         {
@@ -179,11 +181,21 @@ public class PlayerMovement : MonoBehaviour
                     GravityPower = GravityPowerStable;
                 }
 
-                if (lastY == transform.position.y && IsPossiblyStuck())
+                if (IsAlmostGrounded())
+                {
+                    controller.slopeLimit = 45;
+                }
+                else
+                {
+                    controller.slopeLimit = 90;
+                }
+
+                    if (lastY == transform.position.y && IsPossiblyStuck())
                 {
                     cptSameY++;
                     if (cptSameY >= limitCptY)
                     {
+                        
                         isStuck = true;
                         //lastTimeOnGround = Time.time;
                         //DoubleJumpAvailable = true;

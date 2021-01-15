@@ -5053,27 +5053,27 @@ PrefabInstance:
     - target: {fileID: 3681800035765150279, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008419774
+      value: -0.000000008419774
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035765150279, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000017670049
+      value: 0.0000000017670049
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035881074833, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24080443
+      value: 0.24080446
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035881074833, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000033933536
+      value: -0.000000029123713
       objectReference: {fileID: 0}
     - target: {fileID: 3681800035881074833, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.419092e-10
+      value: 0.0000000072257476
       objectReference: {fileID: 0}
     - target: {fileID: 3681800036665438201, guid: ad8ea05723463154d8bd17b483e13773,
         type: 3}
@@ -5182,12 +5182,12 @@ PrefabInstance:
     - target: {fileID: 3951524901423437442, guid: a674118d6dfd8d644a4fa968bf18cacd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000027268856
+      value: -0.000000029470142
       objectReference: {fileID: 0}
     - target: {fileID: 3951524901423437442, guid: a674118d6dfd8d644a4fa968bf18cacd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000006256338
+      value: 0.000000006761383
       objectReference: {fileID: 0}
     - target: {fileID: 3951524901423437442, guid: a674118d6dfd8d644a4fa968bf18cacd,
         type: 3}
@@ -5293,6 +5293,16 @@ PrefabInstance:
       propertyPath: screenShakeScript
       value: 
       objectReference: {fileID: 645196586}
+    - target: {fileID: 5299395207707767066, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: JumpingPower
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299395207707767067, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 5299395207707767068, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: StaminaBar
@@ -5323,6 +5333,11 @@ PrefabInstance:
       propertyPath: DefaultLookAt
       value: 
       objectReference: {fileID: 1522139763}
+    - target: {fileID: 5299395207707767070, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
+        type: 3}
+      propertyPath: InputMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5299395208630748012, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: target
