@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     public float SprintStaminaCost;
     private bool isSprinting;
 
+    public LockManager LockMan;
+    public float DashForce;
+    public float DashCoolDown;
+    private float DashLastTime;
 
     public float GravityPower;
     private float GravityPowerStable;
@@ -41,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     private float lastTimeJump;
     public float JumpMaxPressTime;
     private bool isJumping;
+    private Vector3 AerianDir;
+    public float AirControlDivFactor;
+    public float AirInertieDivFactor;
 
     private Vector3 hitNormal;
     private float hitDistance;
@@ -170,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 graviDir = new Vector3(0, GravityPower, 0);
             controller.Move(graviDir * Time.deltaTime);
 
+
             if (!isJumping)
             {
                 if (GravityPower > GravityPowerStable)
@@ -222,17 +230,27 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
                 DoubleJumpAvailable = true;
             }
-            if (IsAlmostGrounded() && GravityPower<0)
+            if (IsAlmostGrounded() )
             {
-                if (!wasOnGround)
+                if (GravityPower < 0)
                 {
-                    screenShakeScript.setShake(shakeJumpForce, shakeJumpDuration);
+                    if (!wasOnGround)
+                    {
+                        //screenShakeScript.setShake(shakeJumpForce, shakeJumpDuration);
+                        //landing
+                    }
+                    wasOnGround = true;
                 }
-                wasOnGround = true;
+                
             }
             else
             {
+                if(lastTimeJump+JumpMaxPressTime<= Time.time && wasOnGround)
+                {
+                    AerianDir = Vector3.zero;
+                }
                 wasOnGround = false;
+                controller.Move(AerianDir * AirInertieDivFactor* Time.deltaTime);
             }
 
             
@@ -317,11 +335,11 @@ public class PlayerMovement : MonoBehaviour
                 
                 if (isSprinting)
                 {
-                    controller.Move(moveDir * currentSpeed * Time.deltaTime);
+                    controller.Move(moveDir * currentSpeed * Time.deltaTime* AirControlDivFactor);
                 }
                 else
                 {
-                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime* AirControlDivFactor);
                     isSprinting = false;
                 }
             }
@@ -346,24 +364,20 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
-                UpdateSlope();
-                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor*0.1f, 1, hitNormal.normalized.z * slopeJumpFactor*0.1f);
-                NewPush(SlopeDir * JumpingPower);
-
+                Debug.Log("Jump");
+                Jump();
                 lastTimeJump = Time.time;
             }
             else if (wasOnGround)
             {
+                Debug.Log("IncJump");
                 UpdateSlope();
-                Vector3 SlopeDir = new Vector3(hitNormal.normalized.x * slopeJumpFactor, hitNormal.normalized.y, hitNormal.normalized.z * slopeJumpFactor);
-                NewPush(SlopeDir * JumpingPower);
-
+                IncJump(hitNormal.normalized);
                 lastTimeJump = Time.time;
             }
             else if(DoubleJumpAvailable)
             {
-                NewPush(Vector3.up * DoubleJumpingPower);
-
+                DoubleJump();
                 Debug.Log("DoubleJump");
                 DoubleJumpAvailable = false;
                 lastTimeJump = Time.time;
@@ -378,15 +392,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void TrySprint()
     {
-        if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+        if (LockMan.isLock)
         {
-            if (!isSprinting)
+            if (DashLastTime + DashCoolDown <= Time.time)
             {
-                currentSpeed = speed;
-                isSprinting = true;
+                DashLastTime = Time.time;
+                Vector2 inputVector = Vector2.zero;
+                if (IMS.InputMode == 0)
+                {
+                    inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+                }
+                else if (IMS.InputMode == 1)
+                {
+                    inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+                }
+                Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+                if (Direction.magnitude >= 0.1f)
+                {
+                    NewPush(transform.forward * DashForce);
+                }
+                
             }
-            
+            isSprinting = false;
         }
+        else
+        {
+            if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+            {
+                if (!isSprinting)
+                {
+                    currentSpeed = speed;
+                    isSprinting = true;
+                }
+
+            }
+        }
+        
     }
 
     public void CancelSprint()
@@ -466,5 +507,70 @@ public class PlayerMovement : MonoBehaviour
         GravityPower = dir.y;
         PushDirection = new Vector3(PushDirection.x + dir.x, 0, PushDirection.z + dir.z);
         isPushed = true;
+    }
+
+    public void Jump()
+    {
+        //Debug.Log("Jump with dir = " + dir);
+        Vector2 inputVector = Vector2.zero;
+        if (IMS.InputMode == 0)
+        {
+            inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+        }
+        else if (IMS.InputMode == 1)
+        {
+            inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+        }
+        Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+        if (Direction.magnitude >= 0.1f)
+        {
+
+            if (isSprinting)
+            {
+                AerianDir = transform.forward * currentSpeed ;
+            }
+            else
+            {
+                AerianDir = transform.forward * Direction.magnitude * speed ;
+            }
+        }
+        GravityPower = JumpingPower;
+    }
+
+    public void IncJump(Vector3 dir)
+    {
+        Debug.Log("Jump with dir = " + dir);
+        AerianDir = new Vector3(dir.x, 0, dir.z) * slopeJumpFactor;
+        GravityPower = dir.normalized.y * JumpingPower;
+        if (dir.y > 0.6f)
+        {
+            Vector2 inputVector = Vector2.zero;
+            if (IMS.InputMode == 0)
+            {
+                inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+            }
+            else if (IMS.InputMode == 1)
+            {
+                inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+            }
+            Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+            if (Direction.magnitude >= 0.1f)
+            {
+
+                if (isSprinting)
+                {
+                    AerianDir = (transform.forward * currentSpeed);
+                }
+                else
+                {
+                    AerianDir =  (transform.forward * Direction.magnitude * speed);
+                }
+            }
+        }
+    }
+
+    public void DoubleJump()
+    {
+        GravityPower = DoubleJumpingPower ;
     }
 }
