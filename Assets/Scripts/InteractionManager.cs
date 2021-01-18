@@ -42,12 +42,12 @@ public class InteractionManager : MonoBehaviour
     void Awake()
     {
         MovementsControls = new Movements();
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Interact.started += ctx => TryInteract();
 
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Interact.started += ctx => TryInteract();
         }
@@ -56,11 +56,11 @@ public class InteractionManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Interact.Enable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Interact.Enable();
         }
@@ -69,11 +69,11 @@ public class InteractionManager : MonoBehaviour
 
     void OnDisable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Interact.Disable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Interact.Disable();
         }

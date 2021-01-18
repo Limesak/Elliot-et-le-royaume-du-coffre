@@ -51,12 +51,12 @@ public class LockManager : MonoBehaviour
     void Awake()
     {
         MovementsControls = new Movements();
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.performed += ctx => TryLock();
             MovementsControls.Player.Lock.canceled += ctx => Unlock();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.started += ctx => TryLock();
             MovementsControls.Player1.Lock.canceled += ctx => Debug.Log("nothing");// Unlock();
@@ -66,11 +66,11 @@ public class LockManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.Enable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.Enable();
         }
@@ -79,11 +79,11 @@ public class LockManager : MonoBehaviour
 
     void OnDisable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.Disable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.Disable();
         }
@@ -93,7 +93,7 @@ public class LockManager : MonoBehaviour
 
     public void TryLock()
     {
-        if(IMS.InputMode == 0)
+        if(SaveParameter.current.InputMode == 0)
         {
             Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
             List<GameObject> PossibleLocks = new List<GameObject>();
@@ -131,7 +131,7 @@ public class LockManager : MonoBehaviour
                 //vcamColl.m_AvoidObstacles = false;
             }
         }
-        else if(IMS.InputMode == 1)
+        else if(SaveParameter.current.InputMode == 1)
         {
             if (isLock)
             {

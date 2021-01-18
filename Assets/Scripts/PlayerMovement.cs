@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
 
+    private Vector3 Direction;
+
     private bool wasOnGround;
     
     public float turnSmoothVelocity;
@@ -90,14 +92,14 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         MovementsControls = new Movements();
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Jump.started += ctx => TryJump();
             MovementsControls.Player.Jump.canceled += ctx => CancelJump();
             MovementsControls.Player.Sprint.performed += ctx => TrySprint();
             MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Jump.started += ctx => TryJump();
             MovementsControls.Player1.Jump.canceled += ctx => CancelJump();
@@ -108,13 +110,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnEnable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Move.Enable();
             MovementsControls.Player.Sprint.Enable();
             MovementsControls.Player.Jump.Enable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Move.Enable();
             MovementsControls.Player1.Sprint.Enable();
@@ -125,13 +127,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDisable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Move.Disable();
             MovementsControls.Player.Sprint.Disable();
             MovementsControls.Player.Jump.Disable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Move.Disable();
             MovementsControls.Player1.Sprint.Disable();
@@ -277,15 +279,15 @@ public class PlayerMovement : MonoBehaviour
 
         //Movements
         Vector2 inputVector = Vector2.zero;
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
         }
-        Vector3 Direction = new Vector3(inputVector.x,0, inputVector.y);
+        Direction = new Vector3(inputVector.x,0, inputVector.y);
 
         if(isSprinting && currentSpeed < speedSprint)
         {
@@ -355,7 +357,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (IMS.InputMode == 1)
+            if (SaveParameter.current.InputMode == 1)
             {
                 isSprinting = false;
             }
@@ -506,11 +508,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //Debug.Log("Jump with dir = " + dir);
         Vector2 inputVector = Vector2.zero;
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
         }
@@ -534,11 +536,11 @@ public class PlayerMovement : MonoBehaviour
     {
         //Debug.Log("Jump with dir = " + dir);
         Vector2 inputVector = Vector2.zero;
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
         }
@@ -560,11 +562,11 @@ public class PlayerMovement : MonoBehaviour
         if (dir.y > 0.6f)
         {
             Vector2 inputVector = Vector2.zero;
-            if (IMS.InputMode == 0)
+            if (SaveParameter.current.InputMode == 0)
             {
                 inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
             }
-            else if (IMS.InputMode == 1)
+            else if (SaveParameter.current.InputMode == 1)
             {
                 inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
             }
@@ -587,5 +589,10 @@ public class PlayerMovement : MonoBehaviour
     public void DoubleJump()
     {
         GravityPower = DoubleJumpingPower ;
+    }
+
+    public Vector3 GetDirection()
+    {
+        return Direction;
     }
 }

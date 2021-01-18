@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PM: {fileID: 0}
-  maxHeightGap: 2
-  speed: 14
-  maxDistFollow: 4
+  maxHeightGap: 4
+  speed: 6
+  maxDistFollow: 0.7
+  minDistToSnap: 0.1
 --- !u!1 &206079390586036113
 GameObject:
   m_ObjectHideFlags: 0
