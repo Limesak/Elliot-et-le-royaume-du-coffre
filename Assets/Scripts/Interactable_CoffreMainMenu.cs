@@ -8,9 +8,9 @@ public class Interactable_CoffreMainMenu : Interactable
 
     public sealed override void Interact()
     {
-        /* TEST
-        SaveData.current.ResetValueToDefault();
-        SceneManager.LoadScene("TestTheo", LoadSceneMode.Single);
-        */
+        if (!this.MM.Menu_ContinueOuNouvelle.activeSelf && !this.MM.Menu_EcraserOuAnnuler.activeSelf)
+        {
+            MM.PopMenuCoffre();
+        }
     }
 }

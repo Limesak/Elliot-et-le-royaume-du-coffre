@@ -25,16 +25,16 @@ public class SaveData
     }
 
     public bool createdByManager;
-    public int nbOfHealPotion;
+    public int spawnInt;
 
     public void InitMainMenu()
     {
         createdByManager = true;
-        nbOfHealPotion = 3;
+        spawnInt = 0;
     }
 
     public void ResetValueToDefault()
     {
-        nbOfHealPotion = 3;
+        spawnInt = 0;
     }
 }

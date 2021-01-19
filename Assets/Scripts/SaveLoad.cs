@@ -25,6 +25,7 @@ public class SaveLoad
 
     public static bool alreadySavedGame()
     {
+        Debug.Log("Looking for save at : " + Application.persistentDataPath + "/saves/Save.save");
         return File.Exists(Application.persistentDataPath + "/saves/Save.save");
     }
 

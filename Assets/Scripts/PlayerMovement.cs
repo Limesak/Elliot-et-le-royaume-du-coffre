@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     Movements MovementsControls;
     public InputModeSelector IMS;
 
+    public bool CanUseInput;
+
     public CharacterController controller;
 
     private Vector3 Direction;
@@ -87,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         isStuck = false;
         wasOnGround = true;
         isJumping = false;
+        CanUseInput = true;
     }
 
     void Awake()
@@ -108,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    public void OnEnable()
     {
         if (SaveParameter.current.InputMode == 0)
         {
@@ -125,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void OnDisable()
+    public void OnDisable()
     {
         if (SaveParameter.current.InputMode == 0)
         {
@@ -210,7 +213,6 @@ public class PlayerMovement : MonoBehaviour
                         isStuck = true;
                         //lastTimeOnGround = Time.time;
                         //DoubleJumpAvailable = true;
-                        Debug.Log("Stuck ");
                     }
                     else
                     {
@@ -289,14 +291,18 @@ public class PlayerMovement : MonoBehaviour
         }
         Direction = new Vector3(inputVector.x,0, inputVector.y);
 
-        if(isSprinting && currentSpeed < speedSprint)
+        if (IsAlmostGrounded())
         {
-            currentSpeed = currentSpeed + (sprintAcceleration * Time.deltaTime);
+            if (isSprinting && currentSpeed < speedSprint)
+            {
+                currentSpeed = currentSpeed + (sprintAcceleration * Time.deltaTime);
+            }
+            if (currentSpeed > speedSprint)
+            {
+                currentSpeed = speedSprint;
+            }
         }
-        if(currentSpeed > speedSprint)
-        {
-            currentSpeed = speedSprint;
-        }
+        
 
         if (IsAlmostGrounded())
         {
@@ -307,7 +313,7 @@ public class PlayerMovement : MonoBehaviour
             WalkDustCloud.enableEmission = false;
         }
 
-        if (Direction.magnitude >= 0.1f)
+        if (Direction.magnitude >= 0.1f && CanUseInput)
         {
             float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,turnSmoothTime);
@@ -366,19 +372,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        Debug.Log("TryJump");
-        if (lastTimeJump + JumpCD <= Time.time)
+        if (lastTimeJump + JumpCD <= Time.time && CanUseInput)
         {
             isJumping = true;
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
-                Debug.Log("Jump");
                 Jump();
                 lastTimeJump = Time.time;
             }
             else if (wasOnGround)
             {
-                Debug.Log("IncJump");
                 UpdateSlope();
                 IncJump(hitNormal.normalized);
                 lastTimeJump = Time.time;
@@ -386,7 +389,6 @@ public class PlayerMovement : MonoBehaviour
             else if(DoubleJumpAvailable)
             {
                 DoubleJump();
-                Debug.Log("DoubleJump");
                 DoubleJumpAvailable = false;
                 lastTimeJump = Time.time;
             }
@@ -402,7 +404,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround)
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && CanUseInput)
             {
                 DashLastTime = Time.time;
                 Dash();
@@ -412,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && CanUseInput)
             {
                 if (!isSprinting)
                 {
@@ -556,7 +558,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncJump(Vector3 dir)
     {
-        Debug.Log("Jump with dir = " + dir);
         AerianDir = new Vector3(dir.x, 0, dir.z) * slopeJumpFactor;
         GravityPower = dir.normalized.y * JumpingPower;
         if (dir.y > 0.6f)

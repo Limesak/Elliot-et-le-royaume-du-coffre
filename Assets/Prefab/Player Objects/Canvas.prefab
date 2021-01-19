@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9012432665900613411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -288,9 +288,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7474757, g: 0.9254902, b: 0.42352948, a: 1}
+    m_PressedColor: {r: 0.4650508, g: 0.65882355, b: 0.25882354, a: 1}
+    m_SelectedColor: {r: 0.72548205, g: 0.9254902, b: 0.42352948, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -309,7 +309,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7238586852151754920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970706419}
+        m_MethodName: TryPlayNewSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4542352971511472785
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,9 +454,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7474757, g: 0.9254902, b: 0.42352948, a: 1}
+    m_PressedColor: {r: 0.4650508, g: 0.65882355, b: 0.25882354, a: 1}
+    m_SelectedColor: {r: 0.72548205, g: 0.9254902, b: 0.42352948, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -464,7 +475,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 983896808679693834}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970706419}
+        m_MethodName: QuitAllMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4860607669251318854
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,9 +584,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7474757, g: 0.9254902, b: 0.42352948, a: 1}
+    m_PressedColor: {r: 0.4650508, g: 0.65882355, b: 0.25882354, a: 1}
+    m_SelectedColor: {r: 0.72548205, g: 0.9254902, b: 0.42352948, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -583,7 +605,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9065311297153451385}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970706419}
+        m_MethodName: PlayNewSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4953267229854603693
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,9 +817,10 @@ GameObject:
   - component: {fileID: 6141895017768999204}
   - component: {fileID: 6141895017768999195}
   - component: {fileID: 6141895017768999194}
+  - component: {fileID: 1970706419}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: CanvasUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,6 +907,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1970706419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141895017768999193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b027efaae8c15e44e87950b224ab2567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PM: {fileID: 0}
+  Button_ContinuerPartie: {fileID: 6584573731788320104}
+  Button_NouvellePartie: {fileID: 3787445181221572986}
+  Button_NonNePasEcraser: {fileID: 4657517794479430952}
+  Menu_ContinueOuNouvelle: {fileID: 1750627892968214054}
+  Menu_EcraserOuAnnuler: {fileID: 4953267229854603693}
 --- !u!1 &6141895018226049888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,9 +1175,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7474757, g: 0.9254902, b: 0.42352948, a: 1}
+    m_PressedColor: {r: 0.4650508, g: 0.65882355, b: 0.25882354, a: 1}
+    m_SelectedColor: {r: 0.72548205, g: 0.9254902, b: 0.42352948, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1144,7 +1196,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3328931614295407644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970706419}
+        m_MethodName: PlaySave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7004850288377175595
 GameObject:
   m_ObjectHideFlags: 0
