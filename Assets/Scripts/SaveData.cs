@@ -12,6 +12,7 @@ public class SaveData
             if (_current == null)
             {
                 _current = new SaveData();
+                _current.ResetValueToDefault();
             }
             return _current;
         }
@@ -24,14 +25,7 @@ public class SaveData
         }
     }
 
-    public bool createdByManager;
     public int spawnInt;
-
-    public void InitMainMenu()
-    {
-        createdByManager = true;
-        spawnInt = 0;
-    }
 
     public void ResetValueToDefault()
     {

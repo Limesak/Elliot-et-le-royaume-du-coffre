@@ -9,7 +9,7 @@ public class SingletonManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "MainMenu")
         {
-            SaveData.current.InitMainMenu();
+            SaveData.current.ResetValueToDefault();
         }
     }
 }
