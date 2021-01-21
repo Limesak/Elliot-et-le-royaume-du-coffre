@@ -9967,27 +9967,27 @@ PrefabInstance:
     - target: {fileID: 4256806309981337884, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017176509
+      value: 0.00000001717651
       objectReference: {fileID: 0}
     - target: {fileID: 4256806309981337884, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000010134532
+      value: -0.0000000010134533
       objectReference: {fileID: 0}
     - target: {fileID: 4256806310562494630, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.077048
+      value: 0.07704801
       objectReference: {fileID: 0}
     - target: {fileID: 4256806310562494630, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000004288809
+      value: -0.0000000042888084
       objectReference: {fileID: 0}
     - target: {fileID: 4256806310562494630, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.3142938e-10
+      value: 3.3142936e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4256806310714858096, guid: 207a756204f52fc4cae9a3002d910d76,
         type: 3}
@@ -10256,11 +10256,6 @@ PrefabInstance:
       propertyPath: InteractionDescriptionText
       value: 
       objectReference: {fileID: 536509041}
-    - target: {fileID: 3161759517273933155, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
-        type: 3}
-      propertyPath: Spawn.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3161759517273933155, guid: 0d250fe988be0bb4e9e5d3f31bfbefce,
         type: 3}
       propertyPath: Spawn.Array.data[0]

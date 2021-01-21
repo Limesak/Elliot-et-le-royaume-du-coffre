@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f394517d1372142b78947b85ecec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IMS: {fileID: 0}
   CanUseInput: 0
   controller: {fileID: 5299395207707767067}
   turnSmoothVelocity: 0
@@ -125,7 +124,7 @@ MonoBehaviour:
   AirInertieDivFactor: 0.5
   frictionSlope: 0.1
   limitCptY: 2
-  slipperySlope: 80
+  slipperySlope: 5
   slopeJumpFactor: 15
   WalkDustCloud: {fileID: 5299395208351855993}
   Pushfriction: 0.01
@@ -209,6 +208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &5299395208070292478
 GameObject:

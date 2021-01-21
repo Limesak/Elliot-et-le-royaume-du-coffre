@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Movements MovementsControls;
-    public InputModeSelector IMS;
 
     public bool CanUseInput;
 
@@ -232,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 UpdateSlope();
                 Vector3 SlopeDir = new Vector3((1f - hitNormal.y) * hitNormal.x * (1f - frictionSlope), 0, (1f - hitNormal.y) * hitNormal.z * (1f - frictionSlope));
-                controller.Move(SlopeDir * (SlopeDir .magnitude* slipperySlope) * Time.deltaTime);
+                controller.Move(SlopeDir * slipperySlope * Time.deltaTime);
                 DoubleJumpAvailable = true;
             }
             if (IsAlmostGrounded() )
