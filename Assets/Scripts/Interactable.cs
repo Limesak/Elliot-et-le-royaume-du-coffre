@@ -10,6 +10,8 @@ public class Interactable : MonoBehaviour
     private bool PlayerInRange;
     public string TextDescription;
 
+    public MenuManager MM;
+
     void Start()
     {
         InitVariables();
@@ -23,6 +25,7 @@ public class Interactable : MonoBehaviour
     public void InitVariables()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        MM = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<MenuManager>();
         PlayerInRange = false;
     }
 
@@ -56,5 +59,10 @@ public class Interactable : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(CenterOfInteraction.position, radius);
+    }
+
+    public GameObject GetPlayer()
+    {
+        return Player;
     }
 }
