@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform_movement : MonoBehaviour
+public class Platform_movement : OnOffMachine
 {
     public Transform Plat;
     public Transform[] Points;
@@ -27,26 +27,28 @@ public class Platform_movement : MonoBehaviour
 
     public void MovePlat()
     {
-        Vector3 DirPos = (Points[CurrentTarget].position - Plat.position).normalized;
-        float currentDistance = Vector3.Distance(Plat.position, Points[CurrentTarget].position);
-        if (currentDistance > (DirPos * speed * Time.deltaTime).magnitude)
+        if (isOn)
         {
-            Plat.position = Plat.position + (DirPos * speed * Time.deltaTime);
-            if (PlayerOn)
+            Vector3 DirPos = (Points[CurrentTarget].position - Plat.position).normalized;
+            float currentDistance = Vector3.Distance(Plat.position, Points[CurrentTarget].position);
+            if (currentDistance > (DirPos * speed * Time.deltaTime).magnitude)
             {
-                Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                Plat.position = Plat.position + (DirPos * speed * Time.deltaTime);
+                if (PlayerOn)
+                {
+                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                }
+            }
+            else
+            {
+                Plat.position = Points[CurrentTarget].position;
+                if (PlayerOn)
+                {
+                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                }
+                SetNewTarget();
             }
         }
-        else
-        {
-            Plat.position = Points[CurrentTarget].position;
-            if (PlayerOn)
-            {
-                Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
-            }
-            SetNewTarget();
-        }
-        
     }
 
     public void SetNewTarget()

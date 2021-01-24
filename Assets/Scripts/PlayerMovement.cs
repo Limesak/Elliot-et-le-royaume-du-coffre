@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour
 
     Movements MovementsControls;
 
-    public bool CanUseInput;
-
     public CharacterController controller;
 
     private Vector3 Direction;
@@ -38,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public float GravityPower;
     private float GravityPowerStable;
     public float GravityPullForce;
+    private bool isFloating;
 
     public float JumpingPower;
     public float DoubleJumpingPower;
@@ -88,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         isStuck = false;
         wasOnGround = true;
         isJumping = false;
-        CanUseInput = true;
+        isFloating = false;
     }
 
     void Awake()
@@ -185,11 +184,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (!isJumping)
             {
-                if (GravityPower > GravityPowerStable)
+                if (GravityPower > GravityPowerStable && !isFloating)
                 {
                     GravityPower = GravityPower - (GravityPullForce * Time.deltaTime);
                 }
-                else
+                else if(GravityPower < GravityPowerStable)
                 {
                     GravityPower = GravityPowerStable;
                 }
@@ -312,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
             WalkDustCloud.enableEmission = false;
         }
 
-        if (Direction.magnitude >= 0.1f && CanUseInput)
+        if (Direction.magnitude >= 0.1f && SaveParameter.current.canUseInputs)
         {
             float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,turnSmoothTime);
@@ -371,7 +370,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        if (lastTimeJump + JumpCD <= Time.time && CanUseInput)
+        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs)
         {
             isJumping = true;
             if (lastTimeOnGround + CoyoteTime >= Time.time)
@@ -403,7 +402,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && CanUseInput)
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs)
             {
                 DashLastTime = Time.time;
                 Dash();
@@ -413,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && CanUseInput)
+            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs)
             {
                 if (!isSprinting)
                 {
@@ -594,5 +593,16 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetDirection()
     {
         return Direction;
+    }
+
+    public void SetAerianDir(Vector3 d)
+    {
+        GravityPower = d.y;
+        AerianDir = new Vector3(d.x, 0, d.z);
+    }
+
+    public void SetGravityFloating(bool b)
+    {
+        isFloating = b;
     }
 }

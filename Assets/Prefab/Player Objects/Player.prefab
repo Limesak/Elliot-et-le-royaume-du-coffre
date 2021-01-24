@@ -40,6 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5299395207707767065}
   - component: {fileID: 5299395207707767067}
+  - component: {fileID: 795993452163915058}
+  - component: {fileID: 5338027942801331794}
   - component: {fileID: 5299395207707767066}
   - component: {fileID: 5299395207707767068}
   - component: {fileID: 5299395207707767069}
@@ -87,6 +89,32 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &795993452163915058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3b5481d0523c848b30ccb692476fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5338027942801331794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c813ce9171d9b4389964517e68ee35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PM: {fileID: 5299395207707767066}
+  screenShakeScript: {fileID: 0}
 --- !u!114 &5299395207707767066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f394517d1372142b78947b85ecec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanUseInput: 0
   controller: {fileID: 5299395207707767067}
   turnSmoothVelocity: 0
   turnSmoothTime: 0.03
