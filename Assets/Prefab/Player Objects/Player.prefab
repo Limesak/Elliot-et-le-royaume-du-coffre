@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3b5481d0523c848b30ccb692476fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PM: {fileID: 5299395207707767066}
+  ModelParent: {fileID: 5299395208180128926}
+  FlipDuration: 0.6
 --- !u!114 &5338027942801331794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PM: {fileID: 5299395207707767066}
+  AM: {fileID: 795993452163915058}
   screenShakeScript: {fileID: 0}
 --- !u!114 &5299395207707767066
 MonoBehaviour:
