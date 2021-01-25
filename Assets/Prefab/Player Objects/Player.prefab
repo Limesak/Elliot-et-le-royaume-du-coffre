@@ -146,8 +146,8 @@ MonoBehaviour:
   DashCoolDown: 0.5
   GravityPower: -25
   GravityPullForce: 45
-  JumpingPower: 10
-  DoubleJumpingPower: 3
+  JumpingPower: 12
+  DoubleJumpingPower: 7
   CoyoteTime: 0.3
   JumpCD: 0.25
   JumpMaxPressTime: 0.2
@@ -155,8 +155,8 @@ MonoBehaviour:
   AirInertieDivFactor: 0.4
   frictionSlope: 0.1
   limitCptY: 2
-  slipperySlope: 5
-  slopeJumpFactor: 15
+  slipperySlope: 15
+  slopeJumpFactor: 20
   WalkDustCloud: {fileID: 5299395208351855993}
   Pushfriction: 0.01
   PushSpeed: 250
