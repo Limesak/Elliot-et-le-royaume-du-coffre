@@ -8,46 +8,72 @@ public class GhostFollower : MonoBehaviour
     public float maxHeightGap;
     public float speed;
     public float maxDistFollow;
+    private float groundY;
+    private float currentDistance;
 
-    private float GroundHeight;
     private float DefaultSpeed;
+    private bool falling;
 
     void Start()
     {
-        GroundHeight = PM.transform.position.y;
         DefaultSpeed = speed;
+        groundY = PM.transform.position.y;
+        currentDistance = Vector3.Distance(transform.position, PM.transform.position);
+        falling=false;
     }
 
     void Update()
     {
-        Vector3 DirPos = new Vector3(PM.transform.position.x, transform.position.y, PM.transform.position.z);
-        
-        if (PM.IsGrounded())
-        {
-            GroundHeight = PM.transform.position.y;
-        }
+        Vector3 DirPos = (new Vector3(PM.transform.position.x, transform.position.y, PM.transform.position.z) - transform.position).normalized;
+        currentDistance = Vector3.Distance(transform.position, PM.transform.position);
 
-        if (Vector3.Distance(transform.position, PM.transform.position) > maxDistFollow)
+        if (currentDistance > maxDistFollow)
         {
-            speed = DefaultSpeed +(Vector3.Distance(transform.position, PM.transform.position)-maxDistFollow);
+            speed = DefaultSpeed +Mathf.Pow(currentDistance - maxDistFollow,2);
         }
         else
         {
             speed = DefaultSpeed;
         }
 
-        if(Vector3.Distance(DirPos, PM.transform.position) > maxHeightGap)
+        if(PM.transform.position.y-groundY > maxHeightGap)
         {
-            DirPos = new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z);
+            DirPos = (new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z) - transform.position).normalized;
+            falling = false;
         }
 
-        if (PM.transform.position.y< transform.position.y)
+        if (PM.transform.position.y < transform.position.y && PM.GravityPower < 0)
         {
-            DirPos = new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z);
+            DirPos = (new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z) - transform.position).normalized;
+            falling = true;
         }
 
-        //transform.position = Vector3.MoveTowards(transform.position, DirPos, speed * Time.deltaTime);
 
-        transform.position = Vector3.Lerp(transform.position, PM.transform.position, Time.deltaTime * speed);
+        if (PM.IsAlmostGrounded() && PM.GravityPower <= 0 )
+        {
+            groundY = PM.transform.position.y;
+            falling = false;
+            DirPos = (new Vector3(PM.transform.position.x, PM.transform.position.y, PM.transform.position.z) - transform.position).normalized;
+        }
+
+
+        if ((DirPos * speed * Time.deltaTime).magnitude <= currentDistance)
+        {
+            transform.position = transform.position + (DirPos * speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = PM.transform.position;
+        }
+
+
+
+
+        if (currentDistance > 50)
+        {
+            transform.position = PM.transform.position;
+        }
+
+        transform.rotation = PM.transform.rotation;
     }
 }

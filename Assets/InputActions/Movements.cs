@@ -49,6 +49,22 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""94c117e2-6535-47ef-9b86-4d72bc7370c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""58d7379f-c9d7-447f-a44b-696df02c0c70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -187,7 +203,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1cccd6a1-c7f5-4652-b362-41e971f0477f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -209,7 +225,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c5a44429-a98c-47ec-bb4b-89a4d3e80e66"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -304,6 +320,83 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""Lock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1e4706d-b534-4547-bb83-2be365e0b3f7"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""adcb3ad0-75ca-4ca8-9526-9dfa326f5bb0"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e0edfdd-df32-4cab-a43c-a7cc6beedce5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4ba5010-3a0d-416b-ab59-53ec59796b63"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b999ed2f-38d4-4164-ae96-b00f65ff6071"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5335fb92-9cb1-405e-8659-6eefb794e36f"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72c32b02-f50c-4367-add9-72044f6317c2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -339,6 +432,22 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": ""Lock"",
                     ""type"": ""Button"",
                     ""id"": ""18cc9901-992e-4324-9e95-6b5dff8663c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""3908e90a-aa26-4619-9327-4de1f46adc3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee3825ef-6bf5-4ca3-91de-9a19ab580314"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -597,6 +706,83 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""Lock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3284197b-4a7d-43f6-ac95-1d1dd1557b21"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b36a735a-9e35-44f4-845c-9acccdb4cff5"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""335da5ee-ff65-4f3a-8139-c8620dbf27aa"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db84f89e-6009-4fbb-b9b2-a2487f37960c"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b594fd0b-2350-4a89-865d-6b09c3473e64"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94d26cf0-b415-40a6-8305-b87d56dc7204"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbeb876a-6843-4a48-80aa-ece278850d1f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -609,12 +795,16 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_AttackUse = m_Player.FindAction("AttackUse", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_Sprint = m_Player1.FindAction("Sprint", throwIfNotFound: true);
         m_Player1_Jump = m_Player1.FindAction("Jump", throwIfNotFound: true);
         m_Player1_Lock = m_Player1.FindAction("Lock", throwIfNotFound: true);
+        m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
+        m_Player1_AttackUse = m_Player1.FindAction("AttackUse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -668,6 +858,8 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Lock;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_AttackUse;
     public struct PlayerActions
     {
         private @Movements m_Wrapper;
@@ -676,6 +868,8 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Lock => m_Wrapper.m_Player_Lock;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @AttackUse => m_Wrapper.m_Player_AttackUse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -697,6 +891,12 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Lock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
                 @Lock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLock;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @AttackUse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
+                @AttackUse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
+                @AttackUse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -713,6 +913,12 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @AttackUse.started += instance.OnAttackUse;
+                @AttackUse.performed += instance.OnAttackUse;
+                @AttackUse.canceled += instance.OnAttackUse;
             }
         }
     }
@@ -725,6 +931,8 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Sprint;
     private readonly InputAction m_Player1_Jump;
     private readonly InputAction m_Player1_Lock;
+    private readonly InputAction m_Player1_Interact;
+    private readonly InputAction m_Player1_AttackUse;
     public struct Player1Actions
     {
         private @Movements m_Wrapper;
@@ -733,6 +941,8 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player1_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player1_Jump;
         public InputAction @Lock => m_Wrapper.m_Player1_Lock;
+        public InputAction @Interact => m_Wrapper.m_Player1_Interact;
+        public InputAction @AttackUse => m_Wrapper.m_Player1_AttackUse;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -754,6 +964,12 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Lock.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnLock;
                 @Lock.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnLock;
                 @Lock.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnLock;
+                @Interact.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
+                @AttackUse.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
+                @AttackUse.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
+                @AttackUse.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -770,6 +986,12 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @AttackUse.started += instance.OnAttackUse;
+                @AttackUse.performed += instance.OnAttackUse;
+                @AttackUse.canceled += instance.OnAttackUse;
             }
         }
     }
@@ -780,6 +1002,8 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnAttackUse(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
@@ -787,5 +1011,7 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnAttackUse(InputAction.CallbackContext context);
     }
 }

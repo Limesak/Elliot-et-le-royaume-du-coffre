@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class LockManager : MonoBehaviour
 {
     public CinemachineFreeLook vcam;
+    public CinemachineFreeLook vcamLock;
     public CinemachineCollider vcamColl;
     public GameObject PointOfScan;
     public float radiusOfLock;
@@ -46,16 +47,16 @@ public class LockManager : MonoBehaviour
 
     }
 
-    
+
     void Awake()
     {
         MovementsControls = new Movements();
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.performed += ctx => TryLock();
             MovementsControls.Player.Lock.canceled += ctx => Unlock();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.started += ctx => TryLock();
             MovementsControls.Player1.Lock.canceled += ctx => Debug.Log("nothing");// Unlock();
@@ -65,11 +66,11 @@ public class LockManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.Enable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.Enable();
         }
@@ -78,11 +79,11 @@ public class LockManager : MonoBehaviour
 
     void OnDisable()
     {
-        if (IMS.InputMode == 0)
+        if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Lock.Disable();
         }
-        else if (IMS.InputMode == 1)
+        else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Lock.Disable();
         }
@@ -92,7 +93,7 @@ public class LockManager : MonoBehaviour
 
     public void TryLock()
     {
-        if(IMS.InputMode == 0)
+        if(SaveParameter.current.InputMode == 0)
         {
             Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
             List<GameObject> PossibleLocks = new List<GameObject>();
@@ -119,15 +120,18 @@ public class LockManager : MonoBehaviour
                 isLock = true;
                 LockedObject = CloserObject.GetComponent<LockableObject>();
                 LockedObject.Lock();
-                vcam.LookAt = CloserObject.transform;
-                vcam.Follow = LockedCamFollow.transform;
+                //vcam.LookAt = CloserObject.transform;
+                //vcam.LookAt = transform;
+                //vcam.Follow = LockedCamFollow.transform;
                 PivotLock.target = CloserObject.transform;
-                PassNewDataInCam(LockedValues);
+                vcam.m_Priority = 0;
+                vcamLock.m_Priority = 10;
+                //PassNewDataInCam(LockedValues);
                 //TransitionToNewData();
-                vcamColl.m_AvoidObstacles = false;
+                //vcamColl.m_AvoidObstacles = false;
             }
         }
-        else if(IMS.InputMode == 1)
+        else if(SaveParameter.current.InputMode == 1)
         {
             if (isLock)
             {
@@ -160,12 +164,15 @@ public class LockManager : MonoBehaviour
                     isLock = true;
                     LockedObject = CloserObject.GetComponent<LockableObject>();
                     LockedObject.Lock();
-                    vcam.LookAt = CloserObject.transform;
-                    vcam.Follow = LockedCamFollow.transform;
+                    //vcam.LookAt = CloserObject.transform;
+                    //vcam.LookAt = transform;
+                    //vcam.Follow = LockedCamFollow.transform;
                     PivotLock.target = CloserObject.transform;
-                    PassNewDataInCam(LockedValues);
+                    vcam.m_Priority = 0;
+                    vcamLock.m_Priority = 10;
+                    //PassNewDataInCam(LockedValues);
                     //TransitionToNewData();
-                    vcamColl.m_AvoidObstacles = false;
+                    //vcamColl.m_AvoidObstacles = false;
                 }
             }
         }
@@ -176,14 +183,19 @@ public class LockManager : MonoBehaviour
     {
         Debug.Log("Unlock");
         isLock = false;
-        LockedObject.UnLock();
-        LockedObject = null;
-        vcam.LookAt = DefaultLookAt.transform;
-        vcam.Follow = DefaultLookAt.transform;
+        if (LockedObject != null)
+        {
+            LockedObject.UnLock();
+            LockedObject = null;
+        }
+        //vcam.LookAt = DefaultLookAt.transform;
+        //vcam.Follow = DefaultLookAt.transform;
+        vcam.m_Priority = 10;
+        vcamLock.m_Priority = 0;
         PivotLock.target = transform;
-        PassNewDataInCam(DefaultValues);
+        //PassNewDataInCam(DefaultValues);
         //TransitionToNewData();
-        vcamColl.m_AvoidObstacles = true;
+        //vcamColl.m_AvoidObstacles = true;
     }
 
     public void PassNewDataInCam(FreeLookValueDoc data)

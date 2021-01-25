@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.2841005, z: -9.993402}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_BindingMode: 4
+  m_FollowOffset: {x: 0, y: 5.2841005, z: -11.993539}
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 0.6
+  m_VerticalDamping: 0.6
   m_ScreenX: 0.5
   m_ScreenY: 0.55
   m_DeadZoneWidth: 0
@@ -168,7 +168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035367223589}
-  m_LocalRotation: {x: 0.22311036, y: -0, z: -0, w: 0.9747932}
+  m_LocalRotation: {x: 0.18817677, y: 0.000000018893651, z: -0.000000003620017, w: 0.98213524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -212,7 +212,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7787457, y: 1}
+    m_SensorSize: {x: 1.7790055, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -245,7 +245,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035765150273}
-  m_LocalRotation: {x: 0.20538948, y: -0.000000008419774, z: 0.0000000017670049, w: 0.9786803}
+  m_LocalRotation: {x: 0.17032842, y: -1e-45, z: -0, w: 0.9853874}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -289,7 +289,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7787457, y: 1}
+    m_SensorSize: {x: 1.7790055, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -356,11 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.2841005, z: -9.993402}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_BindingMode: 4
+  m_FollowOffset: {x: 0, y: 5.2841005, z: -11.993539}
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -414,8 +414,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 0.6
+  m_VerticalDamping: 0.6
   m_ScreenX: 0.5
   m_ScreenY: 0.6
   m_DeadZoneWidth: 0
@@ -466,7 +466,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035881074835}
-  m_LocalRotation: {x: 0.24080443, y: 0.0000000033933536, z: -8.419092e-10, w: 0.97057366}
+  m_LocalRotation: {x: 0.20601015, y: -0.000000018824673, z: 0.0000000039630823, w: 0.9785499}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -510,7 +510,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7787457, y: 1}
+    m_SensorSize: {x: 1.7790055, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7787457, y: 1}
+    m_SensorSize: {x: 1.7790055, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5144141
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -646,15 +646,15 @@ MonoBehaviour:
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 14
-    m_Radius: 6
-  - m_Height: 5
     m_Radius: 10
+  - m_Height: 5
+    m_Radius: 14
   - m_Height: -1
-    m_Radius: 6
+    m_Radius: 10
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 3681800035881074832}
@@ -707,16 +707,16 @@ MonoBehaviour:
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.8
+  m_MinimumDistanceFromTarget: 0.01
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
+  m_CameraRadius: 0.5
   m_Strategy: 0
   m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0.5
-  m_DampingWhenOccluded: 0.5
+  m_SmoothingTime: 0.125
+  m_Damping: 0.1
+  m_DampingWhenOccluded: 0.1
   m_OptimalTargetDistance: 0
 --- !u!1 &3681800037166884396
 GameObject:
@@ -776,11 +776,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.2841005, z: -9.993402}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_BindingMode: 4
+  m_FollowOffset: {x: 0, y: 5.2841005, z: -11.993539}
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -834,8 +834,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 0.6
+  m_VerticalDamping: 0.6
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0

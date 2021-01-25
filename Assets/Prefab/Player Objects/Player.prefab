@@ -40,10 +40,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5299395207707767065}
   - component: {fileID: 5299395207707767067}
-  - component: {fileID: 5299395207707767070}
+  - component: {fileID: 795993452163915058}
+  - component: {fileID: 5338027942801331794}
   - component: {fileID: 5299395207707767066}
   - component: {fileID: 5299395207707767068}
   - component: {fileID: 5299395207707767069}
+  - component: {fileID: 2557452958196734171}
+  - component: {fileID: 3161759517273933155}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -81,12 +84,12 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.6
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5299395207707767070
+--- !u!114 &795993452163915058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,10 +98,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5299395207707767064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c354de7c18d212d4c8175a4c979c12b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f3b5481d0523c848b30ccb692476fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputMode: 1
+  PM: {fileID: 5299395207707767066}
+  ModelParent: {fileID: 5299395208180128926}
+  FlipDuration: 0.6
+--- !u!114 &5338027942801331794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c813ce9171d9b4389964517e68ee35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PM: {fileID: 5299395207707767066}
+  AM: {fileID: 795993452163915058}
+  screenShakeScript: {fileID: 0}
 --- !u!114 &5299395207707767066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,10 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f394517d1372142b78947b85ecec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IMS: {fileID: 5299395207707767070}
   controller: {fileID: 5299395207707767067}
   turnSmoothVelocity: 0
-  turnSmoothTime: 0.1
+  turnSmoothTime: 0.03
   cam: {fileID: 0}
   distToGround: 1.1
   SM: {fileID: 5299395207707767068}
@@ -122,20 +141,25 @@ MonoBehaviour:
   speedSprint: 15
   sprintAcceleration: 15
   SprintStaminaCost: 10
+  LockMan: {fileID: 5299395207707767069}
+  DashForce: 60
+  DashCoolDown: 0.5
   GravityPower: -25
   GravityPullForce: 45
-  JumpingPower: 20
-  DoubleJumpingPower: 3
+  JumpingPower: 12
+  DoubleJumpingPower: 7
   CoyoteTime: 0.3
   JumpCD: 0.25
   JumpMaxPressTime: 0.2
+  AirControlDivFactor: 0.6
+  AirInertieDivFactor: 0.4
   frictionSlope: 0.1
   limitCptY: 2
-  slipperySlope: 80
-  slopeJumpFactor: 0.75
+  slipperySlope: 15
+  slopeJumpFactor: 20
   WalkDustCloud: {fileID: 5299395208351855993}
-  Pushfriction: 0.9
-  PushSpeed: 0.7
+  Pushfriction: 0.01
+  PushSpeed: 250
   MinPushForce: 0.01
   shakeJumpForce: 0.4
   shakeJumpDuration: 1
@@ -175,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vcam: {fileID: 0}
+  vcamLock: {fileID: 0}
   vcamColl: {fileID: 0}
   PointOfScan: {fileID: 0}
   radiusOfLock: 20
@@ -184,7 +209,40 @@ MonoBehaviour:
   PivotLock: {fileID: 5299395208630748012}
   LockedCamFollow: {fileID: 5299395207675208858}
   DefaultLookAt: {fileID: 0}
-  IMS: {fileID: 5299395207707767070}
+  IMS: {fileID: 0}
+--- !u!114 &2557452958196734171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87122a987a7bb1479c29a2598288a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IMS: {fileID: 0}
+  InteractionDescription: {fileID: 0}
+  InteractionDescriptionText: {fileID: 0}
+  rotationSpeed: 30
+--- !u!114 &3161759517273933155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe98f19ffbc37646a95ca345cac0eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5299395208070292478
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,7 +5181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5299395208630748010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.128, z: 0}
+  m_LocalPosition: {x: 0, y: 0.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5299395207675208859}
