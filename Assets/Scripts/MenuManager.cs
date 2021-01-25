@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour
 
     public void ClassicShitsPop()
     {
-        PM.CanUseInput = false;
+        SaveParameter.current.canUseInputs = false;
     }
 
     public void PopMenuCoffre()
@@ -102,6 +102,6 @@ public class MenuManager : MonoBehaviour
     {
         Menu_ContinueOuNouvelle.SetActive(false);
         Menu_EcraserOuAnnuler.SetActive(false);
-        PM.CanUseInput = true;
+        SaveParameter.current.canUseInputs = true;
     }
 }

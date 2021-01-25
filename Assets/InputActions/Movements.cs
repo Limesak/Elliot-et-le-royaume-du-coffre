@@ -57,6 +57,14 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""58d7379f-c9d7-447f-a44b-696df02c0c70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -356,6 +364,39 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b999ed2f-38d4-4164-ae96-b00f65ff6071"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5335fb92-9cb1-405e-8659-6eefb794e36f"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72c32b02-f50c-4367-add9-72044f6317c2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -399,6 +440,14 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""3908e90a-aa26-4619-9327-4de1f46adc3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee3825ef-6bf5-4ca3-91de-9a19ab580314"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -701,6 +750,39 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b594fd0b-2350-4a89-865d-6b09c3473e64"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94d26cf0-b415-40a6-8305-b87d56dc7204"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbeb876a-6843-4a48-80aa-ece278850d1f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -714,6 +796,7 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_AttackUse = m_Player.FindAction("AttackUse", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
@@ -721,6 +804,7 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player1_Jump = m_Player1.FindAction("Jump", throwIfNotFound: true);
         m_Player1_Lock = m_Player1.FindAction("Lock", throwIfNotFound: true);
         m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
+        m_Player1_AttackUse = m_Player1.FindAction("AttackUse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -775,6 +859,7 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Lock;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_AttackUse;
     public struct PlayerActions
     {
         private @Movements m_Wrapper;
@@ -784,6 +869,7 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Lock => m_Wrapper.m_Player_Lock;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @AttackUse => m_Wrapper.m_Player_AttackUse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -808,6 +894,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @AttackUse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
+                @AttackUse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
+                @AttackUse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -827,6 +916,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @AttackUse.started += instance.OnAttackUse;
+                @AttackUse.performed += instance.OnAttackUse;
+                @AttackUse.canceled += instance.OnAttackUse;
             }
         }
     }
@@ -840,6 +932,7 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Jump;
     private readonly InputAction m_Player1_Lock;
     private readonly InputAction m_Player1_Interact;
+    private readonly InputAction m_Player1_AttackUse;
     public struct Player1Actions
     {
         private @Movements m_Wrapper;
@@ -849,6 +942,7 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player1_Jump;
         public InputAction @Lock => m_Wrapper.m_Player1_Lock;
         public InputAction @Interact => m_Wrapper.m_Player1_Interact;
+        public InputAction @AttackUse => m_Wrapper.m_Player1_AttackUse;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -873,6 +967,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
+                @AttackUse.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
+                @AttackUse.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
+                @AttackUse.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -892,6 +989,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @AttackUse.started += instance.OnAttackUse;
+                @AttackUse.performed += instance.OnAttackUse;
+                @AttackUse.canceled += instance.OnAttackUse;
             }
         }
     }
@@ -903,6 +1003,7 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnAttackUse(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
@@ -911,5 +1012,6 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnAttackUse(InputAction.CallbackContext context);
     }
 }

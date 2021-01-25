@@ -26,15 +26,11 @@ public class SaveParameter
 
     public bool createdByManager;
     public int InputMode;
-
-    public void InitMainMenu()
-    {
-        InputMode = 0;
-        createdByManager = true;
-    }
+    public bool canUseInputs;
 
     public void ResetValueToDefault()
     {
         InputMode = 0;
+        canUseInputs = true;
     }
 }
