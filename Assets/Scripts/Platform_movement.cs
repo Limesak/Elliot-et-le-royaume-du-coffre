@@ -12,18 +12,33 @@ public class Platform_movement : OnOffMachine
     private bool PlayerOn;
     public GameObject Player;
     private LineRenderer LR;
+    public bool loop;
     // Start is called before the first frame update
     void Start()
     {
-        EndTarget = 0;
         CurrentTarget = 0;
         Player = GameObject.FindGameObjectWithTag("Player");
         LR = GetComponent<LineRenderer>();
-        LR.positionCount = Points.Length;
-        for (int i = 0; i < Points.Length; i++)
+        if (loop)
         {
-            LR.SetPosition(i, Points[i].position);
+            LR.positionCount = Points.Length+1;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                LR.SetPosition(i, Points[i].position);
+            }
+            LR.SetPosition(Points.Length, Points[0].position);
+            EndTarget = Points.Length;
         }
+        else
+        {
+            LR.positionCount = Points.Length;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                LR.SetPosition(i, Points[i].position);
+            }
+        }
+        EndTarget = Points.Length;
+
         if (isOn)
         {
             Color c = new Color(0, 0, 255, 0.4f);
@@ -73,24 +88,39 @@ public class Platform_movement : OnOffMachine
 
     public void SetNewTarget()
     {
-        if(EndTarget==0 && CurrentTarget != 0)
+        if (loop)
         {
-            CurrentTarget--;
+            if (CurrentTarget < EndTarget-1)
+            {
+                CurrentTarget++;
+            }
+            else if (CurrentTarget >= EndTarget-1)
+            {
+                CurrentTarget = 0; ;
+            }
         }
-        else if (EndTarget == 0 && CurrentTarget == 0)
+        else
         {
-            EndTarget = Points.Length - 1;
-            CurrentTarget++;
+            if (EndTarget == 0 && CurrentTarget != 0)
+            {
+                CurrentTarget--;
+            }
+            else if (EndTarget == 0 && CurrentTarget == 0)
+            {
+                EndTarget = Points.Length - 1;
+                CurrentTarget++;
+            }
+            else if (EndTarget == Points.Length - 1 && CurrentTarget != Points.Length - 1)
+            {
+                CurrentTarget++;
+            }
+            else if (EndTarget == Points.Length - 1 && CurrentTarget == Points.Length - 1)
+            {
+                EndTarget = 0;
+                CurrentTarget--;
+            }
         }
-        else if (EndTarget == Points.Length - 1 && CurrentTarget != Points.Length - 1)
-        {
-            CurrentTarget++;
-        }
-        else if (EndTarget == Points.Length - 1 && CurrentTarget == Points.Length - 1)
-        {
-            EndTarget = 0;
-            CurrentTarget--;
-        }
+        
     }
 
     public void SetDetection( bool b)
