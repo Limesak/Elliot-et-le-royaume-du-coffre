@@ -28,7 +28,6 @@ public class LifeManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GetCurrentIndex());
 
         if (blockBar > 0)
         {
