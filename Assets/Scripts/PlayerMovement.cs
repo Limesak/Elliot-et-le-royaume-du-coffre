@@ -299,6 +299,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = speedSprint;
             }
+            if (!isSprinting)
+            {
+                currentSpeed = speed;
+            }
         }
         
 
@@ -335,10 +339,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
+                   
                     var emission = WalkDustCloud.emission;
                     emission.rateOverDistance = 3; 
 
-                    controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime);
+                    controller.Move(moveDir * Direction.magnitude * currentSpeed * Time.deltaTime);
                     isSprinting = false;
                 }
             }

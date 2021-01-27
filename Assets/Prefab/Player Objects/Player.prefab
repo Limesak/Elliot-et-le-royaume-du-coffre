@@ -136,6 +136,10 @@ MonoBehaviour:
   AutoHeal_Cooldown: 30
   AutoHeal_Power: 5
   InvunerableFramesDuration: 1
+  TESTvalue: 0
+  TESTgetDmg: 0
+  TESTgetHeal: 0
+  TESTgetBlock: 0
 --- !u!114 &5299395207707767066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +171,7 @@ MonoBehaviour:
   DoubleJumpingPower: 3
   CoyoteTime: 0.3
   JumpCD: 0.25
-  JumpMaxPressTime: 0.2
+  JumpMaxPressTime: 0.27
   AirControlDivFactor: 0.6
   AirInertieDivFactor: 0.4
   frictionSlope: 0.1

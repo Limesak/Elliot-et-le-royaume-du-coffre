@@ -71,7 +71,7 @@ public class Platform_movement : OnOffMachine
                 Plat.position = Plat.position + (DirPos * speed * Time.deltaTime);
                 if (PlayerOn)
                 {
-                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                    Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
             }
             else
@@ -79,7 +79,7 @@ public class Platform_movement : OnOffMachine
                 Plat.position = Points[CurrentTarget].position;
                 if (PlayerOn)
                 {
-                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                    Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
                 SetNewTarget();
             }
