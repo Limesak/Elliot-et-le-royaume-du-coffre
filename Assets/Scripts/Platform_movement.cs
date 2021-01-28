@@ -9,11 +9,11 @@ public class Platform_movement : OnOffMachine
     public float speed;
     private int EndTarget;
     private int CurrentTarget;
-    private bool PlayerOn;
-    public GameObject Player;
+    private GameObject Player;
     private LineRenderer LR;
     public bool loop;
-    // Start is called before the first frame update
+    public Platform_PlayerDetection P_PD;
+
     void Start()
     {
         CurrentTarget = 0;
@@ -36,8 +36,9 @@ public class Platform_movement : OnOffMachine
             {
                 LR.SetPosition(i, Points[i].position);
             }
+            EndTarget = 0;
         }
-        EndTarget = Points.Length;
+        
 
         if (isOn)
         {
@@ -53,11 +54,22 @@ public class Platform_movement : OnOffMachine
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         MovePlat();
-        
+        if (isOn)
+        {
+            Color c = new Color(0, 0, 255, 0.4f);
+            LR.startColor = c;
+            LR.endColor = c;
+        }
+        else
+        {
+            Color c = new Color(255, 0, 0, 0.4f);
+            LR.startColor = c;
+            LR.endColor = c;
+        }
+
     }
 
     public void MovePlat()
@@ -69,7 +81,7 @@ public class Platform_movement : OnOffMachine
             if (currentDistance > (DirPos * speed * Time.deltaTime).magnitude)
             {
                 Plat.position = Plat.position + (DirPos * speed * Time.deltaTime);
-                if (PlayerOn)
+                if (P_PD.PlayerDetected)
                 {
                     Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
@@ -77,7 +89,7 @@ public class Platform_movement : OnOffMachine
             else
             {
                 Plat.position = Points[CurrentTarget].position;
-                if (PlayerOn)
+                if (P_PD.PlayerDetected)
                 {
                     Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
@@ -121,22 +133,5 @@ public class Platform_movement : OnOffMachine
             }
         }
         
-    }
-
-    public void SetDetection( bool b)
-    {
-        PlayerOn = b;
-        if (isOn)
-        {
-            Color c = new Color(0, 0, 255, 0.4f);
-            LR.startColor = c;
-            LR.endColor = c;
-        }
-        else
-        {
-            Color c = new Color(255, 0, 0, 0.4f);
-            LR.startColor = c;
-            LR.endColor = c;
-        }
     }
 }
