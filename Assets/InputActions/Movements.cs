@@ -65,6 +65,14 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""99fd7851-0765-4dc9-85b3-159d65d6269d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -397,6 +405,39 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""AttackUse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2093cce8-6759-4bc4-b6c4-1e2ac0f49924"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7f62c4f-e81e-4d07-a04e-d6d50e7341f0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b21d6094-c6d2-4aa7-be66-c2ae230b8d51"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -448,6 +489,14 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": ""AttackUse"",
                     ""type"": ""Button"",
                     ""id"": ""ee3825ef-6bf5-4ca3-91de-9a19ab580314"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1142aa7-1ecb-493a-a2af-2175450925c9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -783,6 +832,39 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""action"": ""AttackUse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a19a4aec-46b4-47a3-a143-4ad5daa4c247"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46a1cc15-05dd-42d1-9de7-45f8849de412"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f45390ec-62d5-4f86-8e3e-3a70a319a817"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -797,6 +879,7 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player_Lock = m_Player.FindAction("Lock", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_AttackUse = m_Player.FindAction("AttackUse", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
@@ -805,6 +888,7 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player1_Lock = m_Player1.FindAction("Lock", throwIfNotFound: true);
         m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
         m_Player1_AttackUse = m_Player1.FindAction("AttackUse", throwIfNotFound: true);
+        m_Player1_Menu = m_Player1.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -860,6 +944,7 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Lock;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_AttackUse;
+    private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
         private @Movements m_Wrapper;
@@ -870,6 +955,7 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Lock => m_Wrapper.m_Player_Lock;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @AttackUse => m_Wrapper.m_Player_AttackUse;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -897,6 +983,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @AttackUse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
                 @AttackUse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
                 @AttackUse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackUse;
+                @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -919,6 +1008,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @AttackUse.started += instance.OnAttackUse;
                 @AttackUse.performed += instance.OnAttackUse;
                 @AttackUse.canceled += instance.OnAttackUse;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -933,6 +1025,7 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Lock;
     private readonly InputAction m_Player1_Interact;
     private readonly InputAction m_Player1_AttackUse;
+    private readonly InputAction m_Player1_Menu;
     public struct Player1Actions
     {
         private @Movements m_Wrapper;
@@ -943,6 +1036,7 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Lock => m_Wrapper.m_Player1_Lock;
         public InputAction @Interact => m_Wrapper.m_Player1_Interact;
         public InputAction @AttackUse => m_Wrapper.m_Player1_AttackUse;
+        public InputAction @Menu => m_Wrapper.m_Player1_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -970,6 +1064,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @AttackUse.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
                 @AttackUse.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
                 @AttackUse.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAttackUse;
+                @Menu.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -992,6 +1089,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @AttackUse.started += instance.OnAttackUse;
                 @AttackUse.performed += instance.OnAttackUse;
                 @AttackUse.canceled += instance.OnAttackUse;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -1004,6 +1104,7 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnLock(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAttackUse(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
@@ -1013,5 +1114,6 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnLock(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAttackUse(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
