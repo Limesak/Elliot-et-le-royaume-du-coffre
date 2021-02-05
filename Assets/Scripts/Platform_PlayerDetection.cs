@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Platform_PlayerDetection : MonoBehaviour
 {
-    public Platform_movement PlatScript;
+    public bool PlayerDetected;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            PlatScript.SetDetection(true);
+            PlayerDetected = true;
         }
     }
 
@@ -18,7 +18,7 @@ public class Platform_PlayerDetection : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlatScript.SetDetection(false);
+            PlayerDetected = false;
         }
     }
 }
