@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8288418274395898753}
   - component: {fileID: 8288418274395898754}
   - component: {fileID: 8288418274395898755}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efa82971c84c9e408b966aa215b2c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlatScript: {fileID: 8288418275440481331}
+  PlayerDetected: 0
 --- !u!1 &8288418275439965028
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +295,8 @@ MonoBehaviour:
   - {fileID: 8288418275439965083}
   - {fileID: 8288418274994228259}
   speed: 2
-  Player: {fileID: 0}
+  loop: 0
+  P_PD: {fileID: 8288418275174427201}
 --- !u!120 &8288418275440481330
 LineRenderer:
   m_ObjectHideFlags: 0

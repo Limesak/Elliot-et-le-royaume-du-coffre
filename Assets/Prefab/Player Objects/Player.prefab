@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5299395207707767067}
   - component: {fileID: 795993452163915058}
   - component: {fileID: 5338027942801331794}
+  - component: {fileID: 4475008074506487850}
   - component: {fileID: 5299395207707767066}
   - component: {fileID: 5299395207707767068}
   - component: {fileID: 5299395207707767069}
@@ -119,6 +120,26 @@ MonoBehaviour:
   PM: {fileID: 5299395207707767066}
   AM: {fileID: 795993452163915058}
   screenShakeScript: {fileID: 0}
+--- !u!114 &4475008074506487850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850fdb8a17793d94583c049eefbb505e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cells: []
+  AutoHeal_Cooldown: 30
+  AutoHeal_Power: 5
+  InvunerableFramesDuration: 1
+  TESTvalue: 0
+  TESTgetDmg: 0
+  TESTgetHeal: 0
+  TESTgetBlock: 0
 --- !u!114 &5299395207707767066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +171,7 @@ MonoBehaviour:
   DoubleJumpingPower: 7
   CoyoteTime: 0.3
   JumpCD: 0.25
-  JumpMaxPressTime: 0.2
+  JumpMaxPressTime: 0.27
   AirControlDivFactor: 0.6
   AirInertieDivFactor: 0.4
   frictionSlope: 0.1

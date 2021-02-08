@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlaySave");
         QuitAllMenu();
         SaveData.current = (SaveData) SaveLoad.Load();
-        SceneManager.LoadScene("TestTheo", LoadSceneMode.Single);
+        SceneManager.LoadScene("DJN_Academie1", LoadSceneMode.Single);
     }
 
     public void TryPlayNewSave()
@@ -95,7 +95,7 @@ public class MenuManager : MonoBehaviour
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
         SaveLoad.Save(SaveData.current);
-        SceneManager.LoadScene("TestTheo", LoadSceneMode.Single);
+        SceneManager.LoadScene("DJN_Academie1", LoadSceneMode.Single);
     }
 
     public void QuitAllMenu()
