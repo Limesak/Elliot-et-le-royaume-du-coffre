@@ -15,12 +15,14 @@ public class Interactable_SceneTransitionZone : Interactable
     {
         InitVariables();
         used = false;
-        TextDescription = TextDescription +" \""+ SceneManager.GetSceneByBuildIndex(SceneIndex).name + "\"" ;
+        string path = SceneUtility.GetScenePathByBuildIndex(SceneIndex);
+        string sceneName = path.Substring(0, path.Length - 6).Substring(path.LastIndexOf('/') + 1);
+        TextDescription = TextDescription +" \""+ sceneName + "\"" ;
     }
 
     public sealed override void Interact()
     {
-        if (NeedInteraction)
+        if (NeedInteraction && !MM.isUnfading)
         {
             InternInteract();
         }
@@ -35,30 +37,13 @@ public class Interactable_SceneTransitionZone : Interactable
             SaveData.current.spawnInt = NextSpawnInt;
             MM.BlackScreen.gameObject.SetActive(true);
             MM.BlackScreen.color = new Color(0, 0, 0, 0);
-            StartCoroutine(Fade());
+            StartCoroutine(MM.FadeNLoad());
         }
-    }
-
-    IEnumerator Fade()
-    {
-        while (MM.BlackScreen.color.a < 1)
-        {
-            if(MM.BlackScreen.color.a + MM.Speed * Time.deltaTime >= 1)
-            {
-                MM.BlackScreen.color = new Color(0, 0, 0, 1);
-            }
-            else
-            {
-                MM.BlackScreen.color = new Color(0, 0, 0, MM.BlackScreen.color.a + MM.Speed * Time.deltaTime);
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        SceneManager.LoadScene("Loading");
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !NeedInteraction && !MM.isUnfading)
         {
             
             InternInteract();

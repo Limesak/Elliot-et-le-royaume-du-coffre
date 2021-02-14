@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [Header("Accessor")]
 
     public PlayerMovement PM;
+    public bool isUnfading;
 
     [Header("BlackScreen")]
 
@@ -34,6 +35,7 @@ public class MenuManager : MonoBehaviour
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
+        isUnfading = false;
         StartCoroutine(Unfade());
         QuitAllMenu();
     }
@@ -130,8 +132,9 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    IEnumerator FadeNLoad()
+    public IEnumerator FadeNLoad()
     {
+        
         while (BlackScreen.color.a < 1)
         {
             if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
@@ -151,6 +154,7 @@ public class MenuManager : MonoBehaviour
     {
         while (BlackScreen.color.a > 0)
         {
+            isUnfading = true;
             if (BlackScreen.color.a + Speed * Time.deltaTime <= 0)
             {
                 BlackScreen.color = new Color(0, 0, 0, 0);
@@ -161,5 +165,6 @@ public class MenuManager : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+        isUnfading = false;
     }
 }

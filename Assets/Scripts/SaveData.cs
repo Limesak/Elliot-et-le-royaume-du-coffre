@@ -43,5 +43,6 @@ public class SaveData
         LifeCellule_2 = 25;
         LifeCellule_3 = 25;
         LifeCellule_4 = 25;
+        Debug.Log("SaveData reseted");
     }
 }
