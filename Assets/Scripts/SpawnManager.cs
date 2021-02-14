@@ -16,9 +16,9 @@ public class SpawnManager : MonoBehaviour
     IEnumerator DelayedPositionChange()
     {
         yield return null;
-        Debug.Log("Spawn = " + SaveData.current.spawnInt + " at " + Spawn[SaveData.current.spawnInt].position);
+        //Debug.Log("Spawn = " + SaveData.current.spawnInt + " at " + Spawn[SaveData.current.spawnInt].position);
         transform.position = Spawn[SaveData.current.spawnInt].position;
-        Debug.Log("with player at  " + transform.position);
+        //Debug.Log("with player at  " + transform.position);
         PlayerFollower = GameObject.FindGameObjectWithTag("PlayerFollower");
         PlayerFollower.transform.position = transform.position;
         Cam = GameObject.FindGameObjectWithTag("CineMainCam");

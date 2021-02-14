@@ -101,7 +101,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""f1cf967e-200f-4568-be63-326a6ada64b1"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -299,7 +299,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""871649b6-503e-452b-b163-2b8b61806591"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -516,7 +516,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""ZQSD"",
-                    ""id"": ""0b371dd9-ba1e-417f-a0b6-6cbc5f33efa4"",
+                    ""id"": ""5aca587d-9af2-4329-b3d3-739a11912134"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -527,8 +527,8 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""5ecb2168-3b18-48e2-8bca-b3482f17b3e6"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""id"": ""9c8f813c-69ec-4dfd-a854-7798c1d10654"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -538,7 +538,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""f2ebd719-3265-4556-9f0a-eed323b5052f"",
+                    ""id"": ""7ea02b75-a354-4730-bda2-a34a1bc218d5"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -549,7 +549,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""ae40ef48-4b88-4538-bec7-35d69a90eaaf"",
+                    ""id"": ""65a23f5a-2435-4bb0-b4c3-3669fcaf06b8"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -560,7 +560,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""3238ec28-aacb-4a76-9cc3-5c64b54e6242"",
+                    ""id"": ""4638181a-cbf0-45ce-9ab5-216b19a0489f"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -726,7 +726,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""38681a2c-c1c6-4429-8a16-a458f5f3978c"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
