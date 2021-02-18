@@ -25,7 +25,6 @@ public class LockManager : MonoBehaviour
     public FreeLookValueDoc LockedValues;
 
     Movements MovementsControls;
-    public InputModeSelector IMS;
 
     void Start()
     {
@@ -120,15 +119,9 @@ public class LockManager : MonoBehaviour
                 isLock = true;
                 LockedObject = CloserObject.GetComponent<LockableObject>();
                 LockedObject.Lock();
-                //vcam.LookAt = CloserObject.transform;
-                //vcam.LookAt = transform;
-                //vcam.Follow = LockedCamFollow.transform;
                 PivotLock.target = CloserObject.transform;
                 vcam.m_Priority = 0;
                 vcamLock.m_Priority = 10;
-                //PassNewDataInCam(LockedValues);
-                //TransitionToNewData();
-                //vcamColl.m_AvoidObstacles = false;
             }
         }
         else if(SaveParameter.current.InputMode == 1)
@@ -164,15 +157,9 @@ public class LockManager : MonoBehaviour
                     isLock = true;
                     LockedObject = CloserObject.GetComponent<LockableObject>();
                     LockedObject.Lock();
-                    //vcam.LookAt = CloserObject.transform;
-                    //vcam.LookAt = transform;
-                    //vcam.Follow = LockedCamFollow.transform;
                     PivotLock.target = CloserObject.transform;
                     vcam.m_Priority = 0;
                     vcamLock.m_Priority = 10;
-                    //PassNewDataInCam(LockedValues);
-                    //TransitionToNewData();
-                    //vcamColl.m_AvoidObstacles = false;
                 }
             }
         }
@@ -188,14 +175,9 @@ public class LockManager : MonoBehaviour
             LockedObject.UnLock();
             LockedObject = null;
         }
-        //vcam.LookAt = DefaultLookAt.transform;
-        //vcam.Follow = DefaultLookAt.transform;
         vcam.m_Priority = 10;
         vcamLock.m_Priority = 0;
         PivotLock.target = transform;
-        //PassNewDataInCam(DefaultValues);
-        //TransitionToNewData();
-        //vcamColl.m_AvoidObstacles = true;
     }
 
     public void PassNewDataInCam(FreeLookValueDoc data)
@@ -209,133 +191,6 @@ public class LockManager : MonoBehaviour
 
     }
 
-    public void TransitionToNewData()
-    {
-        int check = 0;
-        if (isLock)
-        {
-            if (vcam.m_Orbits[0].m_Height> LockedValues.TopH)
-            {
-                vcam.m_Orbits[0].m_Height = vcam.m_Orbits[0].m_Height - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[0].m_Height = LockedValues.TopH;
-                check++;
-            }
-            if (vcam.m_Orbits[0].m_Radius > LockedValues.TopR)
-            {
-                vcam.m_Orbits[0].m_Radius = vcam.m_Orbits[0].m_Radius - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[0].m_Radius = LockedValues.TopR;
-                check++;
-            }
-            if (vcam.m_Orbits[1].m_Height > LockedValues.MidH)
-            {
-                vcam.m_Orbits[1].m_Height = vcam.m_Orbits[0].m_Height - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[1].m_Height = LockedValues.MidH;
-                check++;
-            }
-            if (vcam.m_Orbits[1].m_Radius > LockedValues.MidR)
-            {
-                vcam.m_Orbits[1].m_Radius = vcam.m_Orbits[0].m_Radius - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[1].m_Radius = LockedValues.MidR;
-                check++;
-            }
-            if (vcam.m_Orbits[2].m_Height < LockedValues.BotH)
-            {
-                vcam.m_Orbits[2].m_Height = vcam.m_Orbits[0].m_Height + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[2].m_Height = LockedValues.BotH;
-                check++;
-            }
-            if (vcam.m_Orbits[2].m_Radius > LockedValues.BotR)
-            {
-                vcam.m_Orbits[2].m_Radius = vcam.m_Orbits[0].m_Radius - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[2].m_Radius = LockedValues.BotR;
-                check++;
-            }
-        }
-        else
-        {
-            if (vcam.m_Orbits[0].m_Height < DefaultValues.TopH)
-            {
-                vcam.m_Orbits[0].m_Height = vcam.m_Orbits[0].m_Height + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[0].m_Height = DefaultValues.TopH;
-                check++;
-            }
-            if (vcam.m_Orbits[0].m_Radius < DefaultValues.TopR)
-            {
-                vcam.m_Orbits[0].m_Radius = vcam.m_Orbits[0].m_Radius + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[0].m_Radius = DefaultValues.TopR;
-                check++;
-            }
-            if (vcam.m_Orbits[1].m_Height < DefaultValues.MidH)
-            {
-                vcam.m_Orbits[1].m_Height = vcam.m_Orbits[0].m_Height + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[1].m_Height = DefaultValues.MidH;
-                check++;
-            }
-            if (vcam.m_Orbits[1].m_Radius < DefaultValues.MidR)
-            {
-                vcam.m_Orbits[1].m_Radius = vcam.m_Orbits[0].m_Radius + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[1].m_Radius = DefaultValues.MidR;
-                check++;
-            }
-            if (vcam.m_Orbits[2].m_Height > DefaultValues.BotH)
-            {
-                vcam.m_Orbits[2].m_Height = vcam.m_Orbits[0].m_Height - incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[2].m_Height = DefaultValues.BotH;
-                check++;
-            }
-            if (vcam.m_Orbits[2].m_Radius < DefaultValues.BotR)
-            {
-                vcam.m_Orbits[2].m_Radius = vcam.m_Orbits[0].m_Radius + incrementTransition * Time.deltaTime;
-            }
-            else
-            {
-                vcam.m_Orbits[2].m_Radius = DefaultValues.BotR;
-                check++;
-            }
-        }
-
-        if (check >= 6)
-        {
-            inTransition = false;
-        }
-        else
-        {
-            inTransition = true;
-        }
-        
-    }
+   
 
 }

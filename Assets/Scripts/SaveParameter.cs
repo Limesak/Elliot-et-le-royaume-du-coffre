@@ -12,6 +12,7 @@ public class SaveParameter
             if (_current == null)
             {
                 _current = new SaveParameter();
+                _current.ResetValueToDefault();
             }
             return _current;
         }
@@ -26,11 +27,13 @@ public class SaveParameter
 
     public bool createdByManager;
     public int InputMode;
+    public float Xsensibility;
     public bool canUseInputs;
 
     public void ResetValueToDefault()
     {
         InputMode = 0;
         canUseInputs = true;
+        Xsensibility = 160;
     }
 }
