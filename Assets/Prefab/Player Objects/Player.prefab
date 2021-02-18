@@ -69,6 +69,7 @@ Transform:
   - {fileID: 5299395208180128926}
   - {fileID: 5299395208630748011}
   - {fileID: 5299395208351855991}
+  - {fileID: 1616354224825501775}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PM: {fileID: 5299395207707767066}
   ModelParent: {fileID: 5299395208180128926}
-  FlipDuration: 0.6
+  FlipDuration: 0.7
 --- !u!114 &5338027942801331794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850fdb8a17793d94583c049eefbb505e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cells: []
-  AutoHeal_Cooldown: 30
+  Cells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  AutoHeal_Cooldown: 5
   AutoHeal_Power: 5
   InvunerableFramesDuration: 1
   TESTvalue: 0
@@ -167,8 +172,9 @@ MonoBehaviour:
   DashCoolDown: 0.5
   GravityPower: -25
   GravityPullForce: 45
-  JumpingPower: 12
-  DoubleJumpingPower: 7
+  DivingGravityForce: -45
+  JumpingPower: 10
+  DoubleJumpingPower: 3
   CoyoteTime: 0.3
   JumpCD: 0.25
   JumpMaxPressTime: 0.27
@@ -230,7 +236,6 @@ MonoBehaviour:
   PivotLock: {fileID: 5299395208630748012}
   LockedCamFollow: {fileID: 5299395207675208858}
   DefaultLookAt: {fileID: 0}
-  IMS: {fileID: 0}
 --- !u!114 &2557452958196734171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87122a987a7bb1479c29a2598288a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IMS: {fileID: 0}
   InteractionDescription: {fileID: 0}
   InteractionDescriptionText: {fileID: 0}
   rotationSpeed: 30
@@ -260,7 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawn:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1341,7 +1344,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5224,3 +5227,95 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 50
   LookYtoo: 1
+--- !u!1 &7382045005721437403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1616354224825501775}
+  - component: {fileID: 9024623742109871066}
+  m_Layer: 0
+  m_Name: Spot Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1616354224825501775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382045005721437403}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.356, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5299395207707767065}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!108 &9024623742109871066
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382045005721437403}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+  m_Intensity: 300
+  m_Range: 15
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 0
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 5
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0

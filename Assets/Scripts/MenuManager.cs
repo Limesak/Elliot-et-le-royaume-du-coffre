@@ -11,6 +11,12 @@ public class MenuManager : MonoBehaviour
     [Header("Accessor")]
 
     public PlayerMovement PM;
+    public bool isUnfading;
+
+    [Header("BlackScreen")]
+
+    public Image BlackScreen;
+    public float Speed;
 
     [Header("FirstButtonOfMenuPage")]
 
@@ -27,6 +33,10 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 1);
+        isUnfading = false;
+        StartCoroutine(Unfade());
         QuitAllMenu();
     }
 
@@ -71,7 +81,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlaySave");
         QuitAllMenu();
         SaveData.current = (SaveData) SaveLoad.Load();
-        SceneManager.LoadScene("DJN_Academie1", LoadSceneMode.Single);
+        StartCoroutine(FadeNLoad());
     }
 
     public void TryPlayNewSave()
@@ -94,8 +104,9 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlayNewSave");
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
+        SaveData.current.currentScene = 1;
         SaveLoad.Save(SaveData.current);
-        SceneManager.LoadScene("DJN_Academie1", LoadSceneMode.Single);
+        StartCoroutine(FadeNLoad());
     }
 
     public void QuitAllMenu()
@@ -103,5 +114,57 @@ public class MenuManager : MonoBehaviour
         Menu_ContinueOuNouvelle.SetActive(false);
         Menu_EcraserOuAnnuler.SetActive(false);
         SaveParameter.current.canUseInputs = true;
+    }
+
+    IEnumerator Fade()
+    {
+        while (BlackScreen.color.a < 1)
+        {
+            if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
+            {
+                BlackScreen.color = new Color(0, 0, 0, 1);
+            }
+            else
+            {
+                BlackScreen.color = new Color(0, 0, 0, BlackScreen.color.a + Speed * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator FadeNLoad()
+    {
+        
+        while (BlackScreen.color.a < 1)
+        {
+            if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
+            {
+                BlackScreen.color = new Color(0, 0, 0, 1);
+            }
+            else
+            {
+                BlackScreen.color = new Color(0, 0, 0, BlackScreen.color.a + Speed * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        SceneManager.LoadScene("Loading");
+    }
+
+    IEnumerator Unfade()
+    {
+        while (BlackScreen.color.a > 0)
+        {
+            isUnfading = true;
+            if (BlackScreen.color.a + Speed * Time.deltaTime <= 0)
+            {
+                BlackScreen.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                BlackScreen.color = new Color(0, 0, 0, BlackScreen.color.a - Speed * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        isUnfading = false;
     }
 }

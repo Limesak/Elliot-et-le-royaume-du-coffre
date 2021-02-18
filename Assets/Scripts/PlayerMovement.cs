@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private float GravityPowerStable;
     public float GravityPullForce;
     private bool isFloating;
+    private bool isDiving;
+    public float DivingGravityForce;
 
     public float JumpingPower;
     public float DoubleJumpingPower;
@@ -88,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         wasOnGround = true;
         isJumping = false;
         isFloating = false;
+        isDiving = false;
     }
 
     void Awake()
@@ -168,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
                 GravityPower = 0;
                 AerianDir = Vector3.zero;
             }
-
+            isDiving = false;
             controller.slopeLimit = 90;
         }
         else
@@ -184,14 +187,29 @@ public class PlayerMovement : MonoBehaviour
 
             if (!isJumping)
             {
-                if (GravityPower > GravityPowerStable && !isFloating)
+                if (isDiving)
                 {
-                    GravityPower = GravityPower - (GravityPullForce * Time.deltaTime);
+                    if (GravityPower > DivingGravityForce && !isFloating)
+                    {
+                        GravityPower = GravityPower - (GravityPullForce * Time.deltaTime);
+                    }
+                    else if (GravityPower < DivingGravityForce)
+                    {
+                        GravityPower = DivingGravityForce;
+                    }
                 }
-                else if(GravityPower < GravityPowerStable)
+                else
                 {
-                    GravityPower = GravityPowerStable;
+                    if (GravityPower > GravityPowerStable && !isFloating)
+                    {
+                        GravityPower = GravityPower - (GravityPullForce * Time.deltaTime);
+                    }
+                    else if (GravityPower < GravityPowerStable)
+                    {
+                        GravityPower = GravityPowerStable;
+                    }
                 }
+                
 
                 if (IsAlmostGrounded())
                 {
@@ -389,7 +407,7 @@ public class PlayerMovement : MonoBehaviour
                 IncJump(hitNormal.normalized);
                 lastTimeJump = Time.time;
             }
-            else if(DoubleJumpAvailable)
+            else if(DoubleJumpAvailable && !isDiving)
             {
                 DoubleJump();
                 DoubleJumpAvailable = false;
@@ -610,4 +628,15 @@ public class PlayerMovement : MonoBehaviour
     {
         isFloating = b;
     }
+
+    public void SetDiving(bool b)
+    {
+        isDiving = b;
+    }
+
+    public bool GetDiving()
+    {
+        return isDiving;
+    }
+
 }

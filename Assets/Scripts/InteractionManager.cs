@@ -7,7 +7,6 @@ public class InteractionManager : MonoBehaviour
 {
     private List<Interactable> PossibleInteraction = new List<Interactable>();
     Movements MovementsControls;
-    public InputModeSelector IMS;
     public GameObject InteractionDescription;
     public Text InteractionDescriptionText;
 

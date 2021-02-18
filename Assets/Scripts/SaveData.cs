@@ -25,7 +25,11 @@ public class SaveData
         }
     }
 
+    //Geo Position infos
     public int spawnInt;
+    public int currentScene;
+
+    //Life infos
     public float LifeCellule_1;
     public float LifeCellule_2;
     public float LifeCellule_3;
@@ -34,9 +38,11 @@ public class SaveData
     public void ResetValueToDefault()
     {
         spawnInt = 0;
+        currentScene = 0;
         LifeCellule_1 = 25;
         LifeCellule_2 = 25;
         LifeCellule_3 = 25;
         LifeCellule_4 = 25;
+        Debug.Log("SaveData reseted");
     }
 }
