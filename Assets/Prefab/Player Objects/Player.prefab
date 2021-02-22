@@ -174,7 +174,7 @@ MonoBehaviour:
   GravityPullForce: 45
   DivingGravityForce: -45
   JumpingPower: 10
-  DoubleJumpingPower: 3
+  DoubleJumpingPower: 7
   CoyoteTime: 0.3
   JumpCD: 0.25
   JumpMaxPressTime: 0.27
@@ -264,6 +264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawn:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
