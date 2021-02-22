@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using SamDriver.Decal;
 
 public class DecaleShadowPlayer : MonoBehaviour
 {
-    public DecalMesh DM;
+    //public DecalMesh DM;
     public GameObject[] MeshObjects;
     public int MeshMaxLimit;
     public MeshFilter[] PossibleFloors;
