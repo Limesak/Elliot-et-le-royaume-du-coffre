@@ -64,7 +64,7 @@ public class AttackUseManager : MonoBehaviour
 
     private void CheckStart()
     {
-        if (!PM.IsAlmostGrounded())
+        if (!PM.IsAlmostGrounded() && !PM.GetDiving())
         {
             AM.LaunchAirAttack();
         }

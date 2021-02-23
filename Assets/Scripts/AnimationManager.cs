@@ -25,6 +25,7 @@ public class AnimationManager : MonoBehaviour
     {
         //SaveParameter.current.canUseInputs = false;
         PM.SetGravityFloating(true);
+        PM.SetDiving(true);
         PM.GravityPower = 0;
         ModelParent.DOLocalRotate(new Vector3(90, 0, 0), FlipDuration/4).OnComplete(() => { LaunchAirAttackP2(); });
     }
@@ -48,7 +49,7 @@ public class AnimationManager : MonoBehaviour
     {
         //SaveParameter.current.canUseInputs = false;
         PM.SetGravityFloating(false);
-        PM.GravityPower = -30;
+        PM.GravityPower = PM.DivingGravityForce;
         ModelParent.localEulerAngles = Vector3.zero;
     }
 }

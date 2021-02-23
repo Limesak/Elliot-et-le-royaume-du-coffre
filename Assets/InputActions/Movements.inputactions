@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "99fd7851-0765-4dc9-85b3-159d65d6269d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -80,7 +88,7 @@
                 {
                     "name": "up",
                     "id": "f1cf967e-200f-4568-be63-326a6ada64b1",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -278,7 +286,7 @@
                 {
                     "name": "",
                     "id": "871649b6-503e-452b-b163-2b8b61806591",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -384,6 +392,39 @@
                     "action": "AttackUse",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2093cce8-6759-4bc4-b6c4-1e2ac0f49924",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7f62c4f-e81e-4d07-a04e-d6d50e7341f0",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b21d6094-c6d2-4aa7-be66-c2ae230b8d51",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -438,6 +479,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "e1142aa7-1ecb-493a-a2af-2175450925c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -454,7 +503,7 @@
                 },
                 {
                     "name": "ZQSD",
-                    "id": "0b371dd9-ba1e-417f-a0b6-6cbc5f33efa4",
+                    "id": "5aca587d-9af2-4329-b3d3-739a11912134",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -465,8 +514,8 @@
                 },
                 {
                     "name": "up",
-                    "id": "5ecb2168-3b18-48e2-8bca-b3482f17b3e6",
-                    "path": "<Keyboard>/z",
+                    "id": "9c8f813c-69ec-4dfd-a854-7798c1d10654",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -476,7 +525,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "f2ebd719-3265-4556-9f0a-eed323b5052f",
+                    "id": "7ea02b75-a354-4730-bda2-a34a1bc218d5",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -487,7 +536,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "ae40ef48-4b88-4538-bec7-35d69a90eaaf",
+                    "id": "65a23f5a-2435-4bb0-b4c3-3669fcaf06b8",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -498,7 +547,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "3238ec28-aacb-4a76-9cc3-5c64b54e6242",
+                    "id": "4638181a-cbf0-45ce-9ab5-216b19a0489f",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -664,7 +713,7 @@
                 {
                     "name": "",
                     "id": "38681a2c-c1c6-4429-8a16-a458f5f3978c",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -768,6 +817,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "AttackUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a19a4aec-46b4-47a3-a143-4ad5daa4c247",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46a1cc15-05dd-42d1-9de7-45f8849de412",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f45390ec-62d5-4f86-8e3e-3a70a319a817",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
