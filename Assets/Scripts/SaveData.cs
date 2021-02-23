@@ -26,9 +26,17 @@ public class SaveData
     }
 
     public int spawnInt;
+    public float LifeCellule_1;
+    public float LifeCellule_2;
+    public float LifeCellule_3;
+    public float LifeCellule_4;
 
     public void ResetValueToDefault()
     {
         spawnInt = 0;
+        LifeCellule_1 = 25;
+        LifeCellule_2 = 25;
+        LifeCellule_3 = 25;
+        LifeCellule_4 = 25;
     }
 }

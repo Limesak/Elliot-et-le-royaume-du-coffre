@@ -9,21 +9,37 @@ public class Platform_movement : OnOffMachine
     public float speed;
     private int EndTarget;
     private int CurrentTarget;
-    private bool PlayerOn;
-    public GameObject Player;
+    private GameObject Player;
     private LineRenderer LR;
-    // Start is called before the first frame update
+    public bool loop;
+    public Platform_PlayerDetection P_PD;
+
     void Start()
     {
-        EndTarget = 0;
         CurrentTarget = 0;
         Player = GameObject.FindGameObjectWithTag("Player");
         LR = GetComponent<LineRenderer>();
-        LR.positionCount = Points.Length;
-        for (int i = 0; i < Points.Length; i++)
+        if (loop)
         {
-            LR.SetPosition(i, Points[i].position);
+            LR.positionCount = Points.Length+1;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                LR.SetPosition(i, Points[i].position);
+            }
+            LR.SetPosition(Points.Length, Points[0].position);
+            EndTarget = Points.Length;
         }
+        else
+        {
+            LR.positionCount = Points.Length;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                LR.SetPosition(i, Points[i].position);
+            }
+            EndTarget = 0;
+        }
+        
+
         if (isOn)
         {
             Color c = new Color(0, 0, 255, 0.4f);
@@ -38,11 +54,22 @@ public class Platform_movement : OnOffMachine
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         MovePlat();
-        
+        if (isOn)
+        {
+            Color c = new Color(0, 0, 255, 0.4f);
+            LR.startColor = c;
+            LR.endColor = c;
+        }
+        else
+        {
+            Color c = new Color(255, 0, 0, 0.4f);
+            LR.startColor = c;
+            LR.endColor = c;
+        }
+
     }
 
     public void MovePlat()
@@ -54,17 +81,17 @@ public class Platform_movement : OnOffMachine
             if (currentDistance > (DirPos * speed * Time.deltaTime).magnitude)
             {
                 Plat.position = Plat.position + (DirPos * speed * Time.deltaTime);
-                if (PlayerOn)
+                if (P_PD.PlayerDetected)
                 {
-                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                    Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
             }
             else
             {
                 Plat.position = Points[CurrentTarget].position;
-                if (PlayerOn)
+                if (P_PD.PlayerDetected)
                 {
-                    Player.transform.position = Player.transform.position + (DirPos * speed * Time.deltaTime);
+                    Player.GetComponent<CharacterController>().Move(DirPos * speed * Time.deltaTime);
                 }
                 SetNewTarget();
             }
@@ -73,40 +100,38 @@ public class Platform_movement : OnOffMachine
 
     public void SetNewTarget()
     {
-        if(EndTarget==0 && CurrentTarget != 0)
+        if (loop)
         {
-            CurrentTarget--;
-        }
-        else if (EndTarget == 0 && CurrentTarget == 0)
-        {
-            EndTarget = Points.Length - 1;
-            CurrentTarget++;
-        }
-        else if (EndTarget == Points.Length - 1 && CurrentTarget != Points.Length - 1)
-        {
-            CurrentTarget++;
-        }
-        else if (EndTarget == Points.Length - 1 && CurrentTarget == Points.Length - 1)
-        {
-            EndTarget = 0;
-            CurrentTarget--;
-        }
-    }
-
-    public void SetDetection( bool b)
-    {
-        PlayerOn = b;
-        if (isOn)
-        {
-            Color c = new Color(0, 0, 255, 0.4f);
-            LR.startColor = c;
-            LR.endColor = c;
+            if (CurrentTarget < EndTarget-1)
+            {
+                CurrentTarget++;
+            }
+            else if (CurrentTarget >= EndTarget-1)
+            {
+                CurrentTarget = 0; ;
+            }
         }
         else
         {
-            Color c = new Color(255, 0, 0, 0.4f);
-            LR.startColor = c;
-            LR.endColor = c;
+            if (EndTarget == 0 && CurrentTarget != 0)
+            {
+                CurrentTarget--;
+            }
+            else if (EndTarget == 0 && CurrentTarget == 0)
+            {
+                EndTarget = Points.Length - 1;
+                CurrentTarget++;
+            }
+            else if (EndTarget == Points.Length - 1 && CurrentTarget != Points.Length - 1)
+            {
+                CurrentTarget++;
+            }
+            else if (EndTarget == Points.Length - 1 && CurrentTarget == Points.Length - 1)
+            {
+                EndTarget = 0;
+                CurrentTarget--;
+            }
         }
+        
     }
 }
