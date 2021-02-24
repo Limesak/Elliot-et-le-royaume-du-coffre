@@ -7,6 +7,7 @@ public class AnimationManager : MonoBehaviour
 {
     public PlayerMovement PM;
     public Transform ModelParent;
+    public Animator anim;
 
     public float FlipDuration;
     // Start is called before the first frame update
@@ -18,7 +19,11 @@ public class AnimationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        anim.SetBool("pressingJump", PM.GetJumping());
+        anim.SetBool("isGrounded", PM.IsGroundedAnim());
+        anim.SetBool("sprinting", PM.GetSprinting());
+        anim.SetFloat("walkCoef", PM.GetDirectionInputs().magnitude);
+
     }
 
     public void LaunchAirAttack()
@@ -52,4 +57,11 @@ public class AnimationManager : MonoBehaviour
         PM.GravityPower = PM.DivingGravityForce;
         ModelParent.localEulerAngles = Vector3.zero;
     }
+
+    public void StartJump()
+    {
+        anim.SetTrigger("jump");
+        Debug.Log("jumpAnim");
+    }
+
 }
