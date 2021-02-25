@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Movements MovementsControls;
+    public AnimationManager AM;
 
     public CharacterController controller;
 
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public float sprintAcceleration;
     public float SprintStaminaCost;
     private bool isSprinting;
+    private bool isMoving;
 
     public LockManager LockMan;
     public float DashForce;
@@ -91,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
         isFloating = false;
         isDiving = false;
+        isMoving = false;
     }
 
     void Awake()
@@ -335,6 +338,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Direction.magnitude >= 0.1f && SaveParameter.current.canUseInputs)
         {
+            isMoving = true;
             float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -388,6 +392,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isSprinting = false;
             }
+            isMoving = false ;
         }
     }
 
@@ -474,6 +479,12 @@ public class PlayerMovement : MonoBehaviour
         return Physics.SphereCast(transform.position, 0.6f, -Vector3.up,out hit, distToGround * 4);
     }
 
+    public bool IsGroundedAnim()
+    {
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.6f, -Vector3.up, out hit, distToGround);
+    }
+
     public void UpdateSlope()
     {
         RaycastHit hit;
@@ -530,6 +541,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         //Debug.Log("Jump with dir = " + dir);
+        AM.StartJump();
         Vector2 inputVector = Vector2.zero;
         if (SaveParameter.current.InputMode == 0)
         {
@@ -637,6 +649,26 @@ public class PlayerMovement : MonoBehaviour
     public bool GetDiving()
     {
         return isDiving;
+    }
+
+    public bool GetJumping()
+    {
+        return isJumping;
+    }
+
+    public bool GetSprinting()
+    {
+        return isSprinting;
+    }
+
+    public bool GetMoving()
+    {
+        return isMoving;
+    }
+
+    public Vector3 GetDirectionInputs()
+    {
+        return Direction;
     }
 
 }
