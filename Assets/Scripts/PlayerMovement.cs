@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     Movements MovementsControls;
     public AnimationManager AM;
+    public float coefHighLanding;
 
     public CharacterController controller;
 
@@ -482,7 +483,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGroundedAnim()
     {
         RaycastHit hit;
-        return Physics.SphereCast(transform.position, 0.6f, -Vector3.up, out hit, distToGround);
+        return Physics.SphereCast(transform.position, 0.6f, -Vector3.up, out hit, distToGround* coefHighLanding);
     }
 
     public void UpdateSlope()
