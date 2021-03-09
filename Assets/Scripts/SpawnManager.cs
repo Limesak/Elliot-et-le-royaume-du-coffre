@@ -10,6 +10,12 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        transform.position = Spawn[SaveData.current.spawnInt].position;
+        //Debug.Log("with player at  " + transform.position);
+        PlayerFollower = GameObject.FindGameObjectWithTag("PlayerFollower");
+        PlayerFollower.transform.position = transform.position;
+        Cam = GameObject.FindGameObjectWithTag("CineMainCam");
+        Cam.transform.position = transform.position;
         StartCoroutine(DelayedPositionChange());
     }
 
