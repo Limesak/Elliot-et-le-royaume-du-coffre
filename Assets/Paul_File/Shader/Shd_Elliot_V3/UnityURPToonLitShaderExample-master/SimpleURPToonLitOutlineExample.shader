@@ -25,7 +25,7 @@ because:
     - we want to avoid breaking SRP batcher's batching because SRP batcher is per shader variant batching, not per shader
     - all modern GPU(include newer mobile devices) can handle static uniform branching with "almost" no performance cost
 */
-Shader "SimpleURPToonLitExample(With Outline)"
+Shader "Custom Shader/SimpleURPToonLitExample(With Outline)"
 {
     Properties
     {
@@ -47,17 +47,17 @@ Shader "SimpleURPToonLitExample(With Outline)"
         [HDR] _EmissionColor("_EmissionColor", Color) = (0,0,0)
         _EmissionMulByBaseColor("_EmissionMulByBaseColor", Range(0,1)) = 0
         [NoScaleOffset]_EmissionMap("_EmissionMap", 2D) = "white" {}
-        _EmissionMapChannelMask("_EmissionMapChannelMask", Vector) = (1,1,1,0)
+        [HideInInspector] _EmissionMapChannelMask("_EmissionMapChannelMask", Vector) = (1,1,1,0)
 
         [Header(Occlusion)]
-        [Toggle]_UseOcclusion("_UseOcclusion (on/off Occlusion completely)", Float) = 0
-        _OcclusionStrength("_OcclusionStrength", Range(0.0, 1.0)) = 1.0
-        _OcclusionIndirectStrength("_OcclusionIndirectStrength", Range(0.0, 1.0)) = 0.5
-        _OcclusionDirectStrength("_OcclusionDirectStrength", Range(0.0, 1.0)) = 0.75
-        [NoScaleOffset]_OcclusionMap("_OcclusionMap", 2D) = "white" {}
-        _OcclusionMapChannelMask("_OcclusionMapChannelMask", Vector) = (1,0,0,0)
-        _OcclusionRemapStart("_OcclusionRemapStart", Range(0,1)) = 0
-        _OcclusionRemapEnd("_OcclusionRemapEnd", Range(0,1)) = 1
+        [HideInInspector] [Toggle]_UseOcclusion("_UseOcclusion (on/off Occlusion completely)", Float) = 0
+        [HideInInspector] _OcclusionStrength("_OcclusionStrength", Range(0.0, 1.0)) = 1.0
+        [HideInInspector] _OcclusionIndirectStrength("_OcclusionIndirectStrength", Range(0.0, 1.0)) = 0.5
+        [HideInInspector] _OcclusionDirectStrength("_OcclusionDirectStrength", Range(0.0, 1.0)) = 0.75
+        [HideInInspector] [NoScaleOffset]_OcclusionMap("_OcclusionMap", 2D) = "white" {}
+        [HideInInspector] _OcclusionMapChannelMask("_OcclusionMapChannelMask", Vector) = (1,0,0,0)
+        [HideInInspector] _OcclusionRemapStart("_OcclusionRemapStart", Range(0,1)) = 0
+        [HideInInspector] _OcclusionRemapEnd("_OcclusionRemapEnd", Range(0,1)) = 1
 
         [Header(Lighting)]
         _IndirectLightMinColor("_IndirectLightMinColor", Color) = (0.1,0.1,0.1,1) // can prevent completely black if lightprobe not baked
@@ -100,7 +100,7 @@ Shader "SimpleURPToonLitExample(With Outline)"
             "RenderPipeline" = "UniversalPipeline"
 
             // explict SubShader tag to avoid confusion
-            "RenderType"="Opaque"
+            "RenderType"="Transparent"
             "UniversalMaterialType" = "Lit"
             "Queue"="Geometry"
         }
