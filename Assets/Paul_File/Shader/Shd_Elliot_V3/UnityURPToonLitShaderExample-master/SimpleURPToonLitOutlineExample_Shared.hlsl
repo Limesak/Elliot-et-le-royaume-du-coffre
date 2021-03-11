@@ -42,6 +42,10 @@ CBUFFER_START(UnityPerMaterial)
     // alpha
     half    _Cutoff;
 
+    //Opacity
+    float _UseOpacity;
+    half   _AlphaValue;
+
     // emission
     float   _UseEmission;
     half3   _EmissionColor;
@@ -155,7 +159,10 @@ Varyings VertexShaderWork(Attributes input)
 half4 GetFinalBaseColor(Varyings input)
 {
     half4 color = tex2D(_BaseMap, input.uv) * _BaseColor;
-    color.a = 0.5;
+    if (_UseOpacity)
+    {
+        color.a = _AlphaValue;
+    }
     return color;
 }
 half3 GetFinalEmissionColor(Varyings input)
