@@ -73,6 +73,14 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LAT"",
+                    ""type"": ""Button"",
+                    ""id"": ""bcc7bfcc-1da3-413e-964d-08efeeb2a29a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -436,6 +444,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cce4b9d-99ee-4bb0-a1bf-e27721a5b5d7"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LAT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -880,6 +899,7 @@ public class @Movements : IInputActionCollection, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_AttackUse = m_Player.FindAction("AttackUse", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_LAT = m_Player.FindAction("LAT", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
@@ -945,6 +965,7 @@ public class @Movements : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_AttackUse;
     private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_LAT;
     public struct PlayerActions
     {
         private @Movements m_Wrapper;
@@ -956,6 +977,7 @@ public class @Movements : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @AttackUse => m_Wrapper.m_Player_AttackUse;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @LAT => m_Wrapper.m_Player_LAT;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -986,6 +1008,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @LAT.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLAT;
+                @LAT.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLAT;
+                @LAT.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLAT;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1011,6 +1036,9 @@ public class @Movements : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @LAT.started += instance.OnLAT;
+                @LAT.performed += instance.OnLAT;
+                @LAT.canceled += instance.OnLAT;
             }
         }
     }
@@ -1105,6 +1133,7 @@ public class @Movements : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnAttackUse(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnLAT(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
