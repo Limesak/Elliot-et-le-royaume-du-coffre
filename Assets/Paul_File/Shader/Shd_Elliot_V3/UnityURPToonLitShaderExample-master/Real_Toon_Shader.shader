@@ -11,6 +11,10 @@ Shader "Custom Shader/Real_Toon_Shader"
         [Toggle(_UseAlphaClipping)]_UseAlphaClipping("_UseAlphaClipping", Float) = 0
         _Cutoff("_Cutoff (Alpha Cutoff)", Range(0.0, 1.0)) = 0.5
 
+        [Header(Opacity)]
+        [Toggle] _UseOpacity("_UseOpacity", Float) = 0
+        _AlphaValue ("Alpha Value", Range(0,1)) = 1
+
         [Header(Emission)]
         [Toggle]_UseEmission("_UseEmission (on/off Emission completely)", Float) = 0
         [HDR] _EmissionColor("_EmissionColor", Color) = (0,0,0)
