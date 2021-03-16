@@ -27,7 +27,8 @@ public class AnimationManager : MonoBehaviour
         {
             anim.ResetTrigger("startAirAttack");
         }
-
+        anim.SetBool("floatingAA", !PM.GetGravityFloating());
+        //anim.SetFloat("AirAttackSpeed", ((PM.DistanceFromGround() / 45) / (0.167f * Time.deltaTime)) * 0.7f);
     }
 
     public void LaunchAirAttack()
