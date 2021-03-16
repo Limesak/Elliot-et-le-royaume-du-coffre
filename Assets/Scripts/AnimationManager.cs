@@ -23,7 +23,12 @@ public class AnimationManager : MonoBehaviour
         anim.SetBool("isGrounded", PM.IsGroundedAnim());
         anim.SetBool("sprinting", PM.GetSprinting());
         anim.SetFloat("walkCoef", PM.GetDirectionInputs().magnitude);
-
+        if (PM.IsGrounded())
+        {
+            anim.ResetTrigger("startAirAttack");
+        }
+        anim.SetBool("floatingAA", !PM.GetGravityFloating());
+        //anim.SetFloat("AirAttackSpeed", ((PM.DistanceFromGround() / 45) / (0.167f * Time.deltaTime)) * 0.7f);
     }
 
     public void LaunchAirAttack()
@@ -32,30 +37,16 @@ public class AnimationManager : MonoBehaviour
         PM.SetGravityFloating(true);
         PM.SetDiving(true);
         PM.GravityPower = 0;
-        ModelParent.DOLocalRotate(new Vector3(90, 0, 0), FlipDuration/4).OnComplete(() => { LaunchAirAttackP2(); });
+        anim.SetTrigger("startAirAttack");
+        StartCoroutine(EndAirAttack());
     }
 
-    public void LaunchAirAttackP2()
+    IEnumerator EndAirAttack()
     {
-        ModelParent.DOLocalRotate(new Vector3(180, 0, 0), FlipDuration/4).OnComplete(() => { LaunchAirAttackP3(); });
-    }
-
-    public void LaunchAirAttackP3()
-    {
-        ModelParent.DOLocalRotate(new Vector3(270, 0, 0), FlipDuration / 4).OnComplete(() => { LaunchAirAttackP4(); });
-    }
-
-    public void LaunchAirAttackP4()
-    {
-        ModelParent.DOLocalRotate(new Vector3(360, 0, 0), FlipDuration / 4).OnComplete(() => { LaunchAirAttackP5(); });
-    }
-
-    public void LaunchAirAttackP5()
-    {
-        //SaveParameter.current.canUseInputs = false;
+        yield return new WaitForSeconds(FlipDuration);
         PM.SetGravityFloating(false);
         PM.GravityPower = PM.DivingGravityForce;
-        ModelParent.localEulerAngles = Vector3.zero;
+        anim.ResetTrigger("startAirAttack");
     }
 
     public void StartJump()

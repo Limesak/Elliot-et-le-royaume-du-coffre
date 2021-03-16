@@ -469,6 +469,17 @@ public class PlayerMovement : MonoBehaviour
         isSprinting = false;
     }
 
+    public float DistanceFromGround()
+    {
+        RaycastHit hit;
+        Physics.SphereCast(transform.position, 0.6f, -Vector3.up, out hit, 100);
+        if (hit.point==null)
+        {
+            hit.point = transform.position - new Vector3(0 ,- 100, 0);
+        }
+        return Vector3.Distance(transform.position, hit.point);
+    }
+
     public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround);
@@ -650,6 +661,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetGravityFloating(bool b)
     {
         isFloating = b;
+    }
+
+    public bool GetGravityFloating()
+    {
+        return isFloating;
     }
 
     public void SetDiving(bool b)
