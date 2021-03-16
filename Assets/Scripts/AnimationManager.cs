@@ -64,4 +64,35 @@ public class AnimationManager : MonoBehaviour
         Debug.Log("jumpAnim");
     }
 
+    public void LaunchAttack()
+    {
+        anim.SetTrigger("startAttack");
+        anim.SetBool("combo2", false);
+        anim.SetBool("combo3", false);
+        anim.SetBool("combo4", false);
+        Debug.Log("startAttack");
+    }
+
+    public void LaunchAttackCombo2()
+    {
+        anim.SetBool("combo2", true);
+        anim.SetBool("combo3", false);
+        anim.SetBool("combo4", false);
+        Debug.Log("combo2");
+    }
+    public void LaunchAttackCombo3()
+    {
+        anim.SetBool("combo2", true);
+        anim.SetBool("combo3", true);
+        anim.SetBool("combo4", false);
+        Debug.Log("combo3");
+    }
+    public void LaunchAttackCombo4()
+    {
+        anim.SetBool("combo2", true);
+        anim.SetBool("combo3", true);
+        anim.SetBool("combo4", true);
+        Debug.Log("combo4");
+    }
+
 }
