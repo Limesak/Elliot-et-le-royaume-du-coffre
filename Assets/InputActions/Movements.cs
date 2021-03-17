@@ -219,7 +219,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1cccd6a1-c7f5-4652-b362-41e971f0477f"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -241,7 +241,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c5a44429-a98c-47ec-bb4b-89a4d3e80e66"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -384,7 +384,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b999ed2f-38d4-4164-ae96-b00f65ff6071"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -395,7 +395,7 @@ public class @Movements : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5335fb92-9cb1-405e-8659-6eefb794e36f"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
