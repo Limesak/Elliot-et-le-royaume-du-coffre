@@ -80,7 +80,7 @@ public class AttackUseManager : MonoBehaviour
     {
         if(HM.CurrentHands == HandManager.Holding.SwordShield || HM.CurrentHands == HandManager.Holding.Empty)
         {
-            Debug.Log("Attack1");
+            //Debug.Log("Attack1");
             HM.CurrentHands = HandManager.Holding.SwordShield;
             HM.UpdateHands();
 
@@ -93,7 +93,7 @@ public class AttackUseManager : MonoBehaviour
 
             if (!isAttacking && PM.IsAlmostGrounded() && ComboLastDate+AttackCD_failedCombo<=Time.time)
             {
-                Debug.Log("Attack1A1");
+                //Debug.Log("Attack1A1");
                 ComboLastDate = Time.time;
                 AttackLastDate = Time.time;
                 CurrentAttackID = (int)Random.RandomRange(1, 10000000);
@@ -103,7 +103,7 @@ public class AttackUseManager : MonoBehaviour
             }
             else if (isAttacking && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex>=1 && comboIndex <=3)
             {
-                Debug.Log("Attack1B1");
+                //Debug.Log("Attack1B1");
                 ComboLastDate = Time.time;
                 CurrentAttackID = (int)Random.RandomRange(1, 10000000);
                 isAttacking = true;
@@ -138,5 +138,10 @@ public class AttackUseManager : MonoBehaviour
     public bool GetAttacking()
     {
         return isAttacking;
+    }
+
+    public int GetCurrentKey()
+    {
+        return CurrentAttackID;
     }
 }
