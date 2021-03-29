@@ -8,14 +8,16 @@ public class SwordTrigger : MonoBehaviour
     public HandManager HM;
     public bool canDamage;
 
+    public GameObject Debug_CanDamageSign;
+
     void Start()
     {
-        
+        Debug_CanDamageSign.SetActive(false);
     }
 
     void Update()
     {
-        
+        Debug_CanDamageSign.SetActive(canDamage);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,11 @@ public class SwordTrigger : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other)
+    {
+        DealDamage(other);
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         DealDamage(other);
     }
