@@ -9,6 +9,8 @@ public class AttackUseManager : MonoBehaviour
     public AnimationManager AM;
     public ScreenShake screenShakeScript;
     public HandManager HM;
+    public GameObject Debug_ComboTimeSign;
+    public GameObject Debug_AttrackingSign;
 
     public float AttackCD_failedCombo;
     public float AttackCD_doingCombo;
@@ -18,6 +20,7 @@ public class AttackUseManager : MonoBehaviour
     private bool isAttacking;
     private int comboIndex;
     private int CurrentAttackID;
+    private bool isComboing;
 
     void Awake()
     {
@@ -64,16 +67,31 @@ public class AttackUseManager : MonoBehaviour
     void Start()
     {
         isAttacking = false;
+        isComboing = false;
         CurrentAttackID = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (ComboLastDate + AttackCD_failedCombo <= Time.time)
         {
             isAttacking = false;
+            isComboing = false;
         }
+        */
+
+        if (isComboing && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex >= 1 && comboIndex <= 3)
+        {
+            Debug_ComboTimeSign.SetActive(true);
+        }
+        else
+        {
+            Debug_ComboTimeSign.SetActive(false);
+        }
+
+        Debug_AttrackingSign.SetActive(isAttacking);
     }
 
     private void CheckStart()
@@ -87,8 +105,8 @@ public class AttackUseManager : MonoBehaviour
             if (!PM.IsAlmostGrounded() && !PM.GetDiving())
             {
                 AM.LaunchAirAttack();
-                CurrentAttackID = (int)Random.RandomRange(1, 10000000);
-                isAttacking = true;
+                CurrentAttackID = (int)Random.Range(1, 10000000);
+                //isAttacking = true;
             }
 
             if (!isAttacking && PM.IsAlmostGrounded() && ComboLastDate+AttackCD_failedCombo<=Time.time)
@@ -96,19 +114,20 @@ public class AttackUseManager : MonoBehaviour
                 //Debug.Log("Attack1A1");
                 ComboLastDate = Time.time;
                 AttackLastDate = Time.time;
-                CurrentAttackID = (int)Random.RandomRange(1, 10000000);
+                CurrentAttackID = (int)Random.Range(1, 10000000);
                 isAttacking = true;
                 comboIndex = 1;
                 AM.LaunchAttack();
             }
-            else if (isAttacking && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex>=1 && comboIndex <=3)
+            else if (isComboing && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex>=1 && comboIndex <=3)
             {
                 //Debug.Log("Attack1B1");
                 ComboLastDate = Time.time;
-                CurrentAttackID = (int)Random.RandomRange(1, 10000000);
+                CurrentAttackID = (int)Random.Range(1, 10000000);
                 isAttacking = true;
+                isComboing = false;
 
-                if(comboIndex == 1)
+                if (comboIndex == 1)
                 {
                     comboIndex = 2;
                     AM.LaunchAttackCombo2();
@@ -121,7 +140,6 @@ public class AttackUseManager : MonoBehaviour
                 else if (comboIndex == 3)
                 {
                     comboIndex = 4;
-                    ComboLastDate = Time.time+0.7f;
                     AM.LaunchAttackCombo4();
                 }
             }
@@ -138,6 +156,21 @@ public class AttackUseManager : MonoBehaviour
     public bool GetAttacking()
     {
         return isAttacking;
+    }
+
+    public void SetAttacking(bool b)
+    {
+        isAttacking = b;
+    }
+
+    public bool GetComboing()
+    {
+        return isComboing;
+    }
+
+    public void SetComboing(bool b)
+    {
+        isComboing = b;
     }
 
     public int GetCurrentKey()
