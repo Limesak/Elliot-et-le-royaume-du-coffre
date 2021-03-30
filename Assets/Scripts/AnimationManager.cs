@@ -10,13 +10,12 @@ public class AnimationManager : MonoBehaviour
     public Animator anim;
 
     public float FlipDuration;
-    // Start is called before the first frame update
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         anim.SetBool("pressingJump", PM.GetJumping());
@@ -52,7 +51,7 @@ public class AnimationManager : MonoBehaviour
     public void StartJump()
     {
         anim.SetTrigger("jump");
-        Debug.Log("jumpAnim");
+        //Debug.Log("jumpAnim");
     }
 
     public void LaunchAttack()
@@ -61,7 +60,7 @@ public class AnimationManager : MonoBehaviour
         anim.SetBool("combo2", false);
         anim.SetBool("combo3", false);
         anim.SetBool("combo4", false);
-        Debug.Log("startAttack");
+        //Debug.Log("startAttack");
     }
 
     public void LaunchAttackCombo2()
@@ -69,21 +68,21 @@ public class AnimationManager : MonoBehaviour
         anim.SetBool("combo2", true);
         anim.SetBool("combo3", false);
         anim.SetBool("combo4", false);
-        Debug.Log("combo2");
+        //Debug.Log("combo2");
     }
     public void LaunchAttackCombo3()
     {
         anim.SetBool("combo2", true);
         anim.SetBool("combo3", true);
         anim.SetBool("combo4", false);
-        Debug.Log("combo3");
+        //Debug.Log("combo3");
     }
     public void LaunchAttackCombo4()
     {
         anim.SetBool("combo2", true);
         anim.SetBool("combo3", true);
         anim.SetBool("combo4", true);
-        Debug.Log("combo4");
+        //Debug.Log("combo4");
     }
 
 }
