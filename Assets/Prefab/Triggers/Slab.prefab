@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6643501174039491653}
   - component: {fileID: 1314701680173926484}
-  - component: {fileID: 2861292933137490924}
-  m_Layer: 0
+  - component: {fileID: 7624911987537396900}
+  m_Layer: 2
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2861292933137490924
+--- !u!114 &7624911987537396900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,12 +54,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 908944976237622297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94827de15b75c054687ec1120e5cb83b, type: 3}
+  m_Script: {fileID: 11500000, guid: eb288ca68c6b70b4594c15c02bc5e0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToActivate: {fileID: 0}
-  animTrigger: {fileID: 0}
-  iAmSlab: 0
+  TR: []
+  animTrigger: {fileID: 9142303990029625373}
   canBeUnset: 0
 --- !u!1 &2347507728011358983
 GameObject:
@@ -71,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7855252312546469292}
   - component: {fileID: 9142303990029625373}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Slab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
