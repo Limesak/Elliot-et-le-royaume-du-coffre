@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6958353054956705902}
   - component: {fileID: 2511947080319330255}
   - component: {fileID: 7040048961123140298}
+  - component: {fileID: 3793576273827275185}
+  - component: {fileID: 2127358254}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -94,6 +96,44 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3793576273827275185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301855515729543168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d9bd412e6018f4ca29f98457723f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TR: []
+  colorOfTrigger:
+  - {fileID: 2100000, guid: 8b260e213b3dc054d93cfc61b86d10d7, type: 2}
+  - {fileID: 2100000, guid: 8b96dc748ccffda4486a39312da7fe78, type: 2}
+  - {fileID: 2100000, guid: ec3946ed1097f2c45b633edb2d1987a5, type: 2}
+  - {fileID: 2100000, guid: e7454f9e7dc50b04bac3dc0c3080cd4e, type: 2}
+  - {fileID: 2100000, guid: b16ad9dbc157d1c40b69bc4f3579dcd0, type: 2}
+  triggerRenderer: {fileID: 2511947080319330255}
+  currentSwitchPosition: 0
+  DestroyOnUse: 0
+--- !u!54 &2127358254
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301855515729543168}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &4202165371387388606
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +236,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4101249185530326902}
-  - component: {fileID: 770864594}
   m_Layer: 0
   m_Name: TriggerToHit
   m_TagString: HittableTrigger
@@ -220,21 +259,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &770864594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6946894784010033778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70040747c26f08a449c6c904b2b053ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToTrigger: {fileID: 0}
-  colorOfTrigger:
-  - {fileID: 2100000, guid: 54329cfe51f8e004883d79a1298cba68, type: 2}
-  - {fileID: 2100000, guid: 66061fee4378be148ad7e73c80f6b4be, type: 2}
-  triggerRenderer: {fileID: 2511947080319330255}
-  switchPosition: 0

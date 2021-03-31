@@ -22,26 +22,30 @@ public class SwordTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DealDamage(other);
+        DealWithCollider(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        DealDamage(other);
+        DealWithCollider(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        DealDamage(other);
+        //DealWithCollider(other);
     }
 
-    private void DealDamage(Collider other)
+    private void DealWithCollider(Collider other)
     {
         //Debug.Log("Enter DD");
         if (canDamage && other.gameObject.GetComponent<DamageReceiver>())
         {
-            //Debug.Log("DD");
             other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey()));
+        }
+
+        if (canDamage && other.gameObject.GetComponent<Trigger_Poutch>())
+        {
+            other.gameObject.GetComponent<Trigger_Poutch>().Triggered();
         }
     }
 
