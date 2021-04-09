@@ -29,11 +29,15 @@ public class SaveParameter
     public int InputMode;
     public float Xsensibility;
     public bool canUseInputs;
+    public bool canUseOnglets;
+    public MenuMemoryTMP MMTMP;
 
     public void ResetValueToDefault()
     {
         InputMode = 0;
         canUseInputs = true;
+        canUseOnglets = true;
         Xsensibility = 160;
+        MMTMP = new MenuMemoryTMP();
     }
 }

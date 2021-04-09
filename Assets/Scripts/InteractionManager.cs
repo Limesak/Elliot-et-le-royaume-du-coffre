@@ -125,7 +125,7 @@ public class InteractionManager : MonoBehaviour
     public void TryInteract()
     {
         Debug.Log("TryInteract");
-        if (canInteract())
+        if (canInteract() && SaveParameter.current.canUseInputs)
         {
             GetClosestInteraction().Interact();
             target = GetClosestInteraction().transform;
