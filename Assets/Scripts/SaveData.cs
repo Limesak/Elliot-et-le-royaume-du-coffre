@@ -35,6 +35,13 @@ public class SaveData
     public float LifeCellule_3;
     public float LifeCellule_4;
 
+    //Inventory
+    public bool[] UnlockList;
+    public int CurrentItemHEAD;
+    public int CurrentItemBACK;
+    public int CurrentItemSHIELD;
+    public int CurrentItemSWORD;
+
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -43,6 +50,18 @@ public class SaveData
         LifeCellule_2 = 25;
         LifeCellule_3 = 25;
         LifeCellule_4 = 25;
+
+        CurrentItemHEAD = -1;
+        CurrentItemBACK = -1;
+        CurrentItemSHIELD = -1;
+        CurrentItemSWORD = -1;
+
+        UnlockList = new bool[4];
+        for(int i = 0; i< UnlockList.Length; i++)
+        {
+            UnlockList[i] = true;//True pour debug   &  False for build
+        }
+
         Debug.Log("SaveData reseted");
     }
 }
