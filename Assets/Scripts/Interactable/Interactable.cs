@@ -15,11 +15,13 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         InitVariables();
+        CustomStart();
     }
 
     void Update()
     {
         CheckForProximity();
+        CustomUpdate();
     }
 
     public void InitVariables()
@@ -53,6 +55,18 @@ public class Interactable : MonoBehaviour
     {
         //custom on each son
         Debug.Log("This is a motherScript, please replace it with the adequat son.");
+    }
+
+    public virtual void CustomUpdate()
+    {
+        //custom on each son
+        //Debug.Log("This is a motherScript, please replace it with the adequat son.");
+    }
+
+    public virtual void CustomStart()
+    {
+        //custom on each son
+        //Debug.Log("This is a motherScript, please replace it with the adequat son.");
     }
 
     private void OnDrawGizmosSelected()

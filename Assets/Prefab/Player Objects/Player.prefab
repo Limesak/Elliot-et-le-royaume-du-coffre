@@ -607,7 +607,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.9
+  m_Radius: 0.33
   m_Height: 3.5130832
   m_Direction: 2
   m_Center: {x: 0.045830872, y: -0.00000023859988, z: 1.8105056}
@@ -771,6 +771,7 @@ GameObject:
   - component: {fileID: 5299395207707767069}
   - component: {fileID: 2557452958196734171}
   - component: {fileID: 3161759517273933155}
+  - component: {fileID: 5989918969698462382}
   - component: {fileID: 5192176717586396716}
   m_Layer: 0
   m_Name: Player
@@ -1030,6 +1031,27 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &5989918969698462382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928fb9ab8eab525488854e972c15dca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CPT_Intros:
+  - Niveau chiffres,
+  - "Au long de ma journ\xE9e "
+  - 'Aujourd''hui '
+  MISSION_Intros:
+  - 'Mon prochain objectif est simple :'
+  - "La mission que je dois r\xE9aliser est : "
+  CHAR_noteNmission: 8364
+  CHAR_missionNhintNhint: 163
 --- !u!54 &5192176717586396716
 Rigidbody:
   m_ObjectHideFlags: 0

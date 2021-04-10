@@ -6,11 +6,58 @@ using UnityEngine.SceneManagement;
 public class Interactable_SavePoint : Interactable
 {
     public int spawnIndex;
+    public Renderer ColorIndicator;
+    public Material CanUseColor;
+    public Material CantUseColor;
+    public float cooldown;
+    private float lastUse;
+
+    public sealed override void CustomStart()
+    {
+        lastUse = -9999;
+    }
 
     public sealed override void Interact()
     {
-        SaveData.current.spawnInt = spawnIndex;
-        SaveData.current.currentScene = SceneManager.GetActiveScene().buildIndex;
-        SaveLoad.Save(SaveData.current);
+        if(lastUse + cooldown <= Time.time)
+        {
+            lastUse = Time.time;
+            GetPlayer().GetComponent<DiaryManager>().SaveInSaveData();
+            foreach (LifeCelluleManager lcm in GetPlayer().GetComponent<LifeManager>().Cells)
+            {
+                if (lcm.index == 1)
+                {
+                    SaveData.current.LifeCellule_1 = lcm.GetHP();
+                }
+                else if (lcm.index == 2)
+                {
+                    SaveData.current.LifeCellule_2 = lcm.GetHP();
+                }
+                else if (lcm.index == 3)
+                {
+                    SaveData.current.LifeCellule_3 = lcm.GetHP();
+                }
+                else if (lcm.index == 4)
+                {
+                    SaveData.current.LifeCellule_4 = lcm.GetHP();
+                }
+            }
+            SaveData.current.spawnInt = spawnIndex;
+            SaveData.current.currentScene = SceneManager.GetActiveScene().buildIndex;
+            SaveLoad.Save(SaveData.current);
+        }
+        
+    }
+
+    public sealed override void CustomUpdate()
+    {
+        if (lastUse + cooldown <= Time.time)
+        {
+            ColorIndicator.material.color = CanUseColor.color;
+        }
+        else
+        {
+            ColorIndicator.material.color = CantUseColor.color;
+        }
     }
 }

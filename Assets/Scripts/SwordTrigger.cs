@@ -27,7 +27,7 @@ public class SwordTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        DealWithCollider(other);
+        //DealWithCollider(other);
     }
 
     private void OnTriggerStay(Collider other)

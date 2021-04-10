@@ -33,6 +33,26 @@ public class Interactable_SceneTransitionZone : Interactable
         if (!used)
         {
             used = true;
+            GetPlayer().GetComponent<DiaryManager>().SaveTMPinSaveData();
+            foreach (LifeCelluleManager lcm in GetPlayer().GetComponent<LifeManager>().Cells)
+            {
+                if (lcm.index == 1)
+                {
+                    SaveData.current.LifeCellule_1 = lcm.GetHP();
+                }
+                else if (lcm.index == 2)
+                {
+                    SaveData.current.LifeCellule_2 = lcm.GetHP();
+                }
+                else if (lcm.index == 3)
+                {
+                    SaveData.current.LifeCellule_3 = lcm.GetHP();
+                }
+                else if (lcm.index == 4)
+                {
+                    SaveData.current.LifeCellule_4 = lcm.GetHP();
+                }
+            }
             SaveData.current.currentScene = SceneIndex;
             SaveData.current.spawnInt = NextSpawnInt;
             MM.BlackScreen.gameObject.SetActive(true);
