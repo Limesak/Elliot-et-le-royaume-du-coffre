@@ -127,6 +127,58 @@ public class DiaryManager : MonoBehaviour
         return res;
     }
 
+    public string GetAdventureOf(int index)
+    {
+        string res = "";
+        string s = "";
+
+        if (index < SaveData.current.Diary.Length && SaveData.current.Diary.Length>0)
+        {
+            s = SaveData.current.Diary[index];
+            
+        }
+        else
+        {
+            s = MakeMeString();
+        }
+
+        res = s.Substring(0, s.IndexOf(CHAR_noteNmission));
+
+        return res;
+    }
+
+    public string GetMissionOf(int index)
+    {
+        string res = "";
+        string s = "";
+
+        if (index < SaveData.current.Diary.Length)
+        {
+            s = SaveData.current.Diary[index];
+
+        }
+        else
+        {
+            s = MakeMeString();
+        }
+
+        if (s.Contains(CHAR_missionNhintNhint + ""))
+        {
+            string[] TMPhints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
+            res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint));
+            for (int i = 0; i < TMPhints.Length; i++)
+            {
+                res = res + "\n" +"¤"+ TMPhints[i];
+            }
+        }
+        else
+        { 
+            res = s.Substring(s.IndexOf(CHAR_noteNmission)+1);
+        }
+
+        return res;
+    }
+
     public bool DidKill()
     {
         bool res = false;

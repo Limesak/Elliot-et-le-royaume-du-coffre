@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     public PlayerMovement PM;
     public bool isUnfading;
     public HandManager HM;
+    public DiaryManager DM;
 
     [Header("BlackScreen")]
 
@@ -49,6 +50,10 @@ public class MenuManager : MonoBehaviour
 
     public Text Memoire;
     public Text Infos;
+    public Text Day;
+    private int currentDay;
+    public Button GoBef;
+    public Button GoAft;
 
     [Header("Main Menus CARTE")]
 
@@ -70,11 +75,14 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         ReturnButton.SetActive(false);
+        GoBef.interactable = false;
+        GoAft.interactable = false;
         Carnet_ORIGIN = Carnet_GLOBAL.transform.position;
         Carnet_ORIGIN_scale = Carnet_GLOBAL.transform.localScale;
         MenuOn = false;
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         HM = GameObject.FindGameObjectWithTag("Player").GetComponent<HandManager>();
+        DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
         isUnfading = false;
@@ -145,6 +153,8 @@ public class MenuManager : MonoBehaviour
         {
             SaveParameter.current.canUseInputs = true;
         }
+
+        
     }
 
     public void PopMenuCoffre()
@@ -243,10 +253,78 @@ public class MenuManager : MonoBehaviour
                 Carnet_Pages[i].SetActive(false);
             }
         }
-        if (index == 2)
+
+        if (index == 0)
+        {
+            MISSION_PopCurrentDay();
+            MISSION_checkborders();
+            EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+        }
+        else if (index == 2)
         {
             STUFF_PopButton();
         }
+    }
+
+    public void MISSION_PopCurrentDay()
+    {
+        currentDay = SaveData.current.Diary.Length;
+        MISSION_PopDay();
+    }
+
+    public void MISSION_goBefore()
+    {
+        currentDay = currentDay-1;
+        MISSION_PopDay();
+        MISSION_checkborders();
+    }
+
+    public void MISSION_goAfter()
+    {
+        currentDay = currentDay+1;
+        MISSION_PopDay();
+        MISSION_checkborders();
+    }
+
+    public void MISSION_checkborders()
+    {
+        if (MenuOn && SaveParameter.current.MMTMP.index == 0)
+        {
+            if (currentDay == 0)
+            {
+                if (GoBef.IsInteractable())
+                {
+                    GoBef.interactable = false;
+                    EventSystem.current.SetSelectedGameObject(GoAft.gameObject);
+                }
+
+            }
+            else
+            {
+                GoBef.interactable = true;
+            }
+
+            if (currentDay == SaveData.current.Diary.Length)
+            {
+                if (GoAft.IsInteractable())
+                {
+                    GoAft.interactable = false;
+                    EventSystem.current.SetSelectedGameObject(GoBef.gameObject);
+                }
+            }
+            else
+            {
+                GoAft.interactable = true;
+            }
+        }
+    }
+
+    private void MISSION_PopDay()
+    {
+        int realDay = currentDay + 1;
+        Day.text = "Jour " + realDay;
+        Memoire.text = DM.GetAdventureOf(currentDay);
+        Infos.text = DM.GetMissionOf(currentDay);
     }
 
     public void CARTE_Show(int index)
