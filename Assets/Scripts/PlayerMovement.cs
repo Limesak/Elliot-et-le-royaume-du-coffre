@@ -421,7 +421,7 @@ public class PlayerMovement : MonoBehaviour
                 IncJump(hitNormal.normalized);
                 lastTimeJump = Time.time;
             }
-            else if(DoubleJumpAvailable && !isDiving)
+            else if(DoubleJumpAvailable && !isDiving && SaveData.current.CurrentItemBACK==1)
             {
                 DoubleJump();
                 DoubleJumpAvailable = false;

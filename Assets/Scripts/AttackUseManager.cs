@@ -96,7 +96,7 @@ public class AttackUseManager : MonoBehaviour
 
     private void CheckStart()
     {
-        if(HM.CurrentHands == HandManager.Holding.SwordShield || HM.CurrentHands == HandManager.Holding.Empty)
+        if((HM.CurrentHands == HandManager.Holding.SwordShield || HM.CurrentHands == HandManager.Holding.Empty) && SaveData.current.CurrentItemSWORD != -1)
         {
             //Debug.Log("Attack1");
             HM.CurrentHands = HandManager.Holding.SwordShield;

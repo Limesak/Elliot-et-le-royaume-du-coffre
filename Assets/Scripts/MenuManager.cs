@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
 
     public PlayerMovement PM;
     public bool isUnfading;
+    public HandManager HM;
+    public DiaryManager DM;
 
     [Header("BlackScreen")]
 
@@ -42,14 +44,45 @@ public class MenuManager : MonoBehaviour
     public Transform Carnet_HiddenPos;
     private bool MenuOn;
     public GameObject ButtonFirstMainMenu;
+    public GameObject ReturnButton;
+
+    [Header("Main Menus MISSION")]
+
+    public Text Memoire;
+    public Text Infos;
+    public Text Day;
+    private int currentDay;
+    public Button GoBef;
+    public Button GoAft;
+
+    [Header("Main Menus CARTE")]
+
+    public GameObject MainMap;
+    public GameObject Map1;
+
+    [Header("Main Menus EQUIPEMENT")]
+
+    public GameObject DecriptionSheet;
+    public GameObject SpotHead;
+    public GameObject SpotBack;
+    public GameObject SpotShield;
+    public GameObject SpotSword;
+    public GameObject[] SpotsOFF;
+    public GameObject[] Buttons;
+    public GameObject[] Illus;
 
 
     void Start()
     {
+        ReturnButton.SetActive(false);
+        GoBef.interactable = false;
+        GoAft.interactable = false;
         Carnet_ORIGIN = Carnet_GLOBAL.transform.position;
         Carnet_ORIGIN_scale = Carnet_GLOBAL.transform.localScale;
         MenuOn = false;
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        HM = GameObject.FindGameObjectWithTag("Player").GetComponent<HandManager>();
+        DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
         isUnfading = false;
@@ -120,6 +153,8 @@ public class MenuManager : MonoBehaviour
         {
             SaveParameter.current.canUseInputs = true;
         }
+
+        
     }
 
     public void PopMenuCoffre()
@@ -181,12 +216,315 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(FadeNLoad());
     }
 
+    //--------------------  MAIN MENU SHiTS  -------------------------------------------------------------------------------------------
+
     public void Cancel()
     {
         if (!SaveParameter.current.canUseInputs)
         {
-            CloseMainMenu();
+            if(SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.Main)
+            {
+                CloseMainMenu();
+            }
+            else if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.InOpenMap)
+            {
+                SaveParameter.current.canUseOnglets = true;
+                ReturnButton.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+                MainMap.SetActive(true);
+                Map1.SetActive(false);
+                SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
+            }
+            
         }
+    }
+
+    public void OpenPage(int index)
+    {
+        SaveParameter.current.MMTMP.index = index;
+        for (int i = 0; i < Carnet_Pages.Length; i++)
+        {
+            if(i == index)
+            {
+                Carnet_Pages[i].SetActive(true);
+            }
+            else
+            {
+                Carnet_Pages[i].SetActive(false);
+            }
+        }
+
+        if (index == 0)
+        {
+            MISSION_PopCurrentDay();
+            MISSION_checkborders();
+            EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+        }
+        else if (index == 2)
+        {
+            STUFF_PopButton();
+        }
+    }
+
+    public void MISSION_PopCurrentDay()
+    {
+        currentDay = SaveData.current.Diary.Length;
+        MISSION_PopDay();
+    }
+
+    public void MISSION_goBefore()
+    {
+        currentDay = currentDay-1;
+        MISSION_PopDay();
+        MISSION_checkborders();
+    }
+
+    public void MISSION_goAfter()
+    {
+        currentDay = currentDay+1;
+        MISSION_PopDay();
+        MISSION_checkborders();
+    }
+
+    public void MISSION_checkborders()
+    {
+        if (MenuOn && SaveParameter.current.MMTMP.index == 0)
+        {
+            if (currentDay == 0)
+            {
+                if (GoBef.IsInteractable())
+                {
+                    GoBef.interactable = false;
+                    EventSystem.current.SetSelectedGameObject(GoAft.gameObject);
+                }
+
+            }
+            else
+            {
+                GoBef.interactable = true;
+            }
+
+            if (currentDay == SaveData.current.Diary.Length)
+            {
+                if (GoAft.IsInteractable())
+                {
+                    GoAft.interactable = false;
+                    EventSystem.current.SetSelectedGameObject(GoBef.gameObject);
+                }
+            }
+            else
+            {
+                GoAft.interactable = true;
+            }
+        }
+    }
+
+    private void MISSION_PopDay()
+    {
+        int realDay = currentDay + 1;
+        Day.text = "Jour " + realDay;
+        Memoire.text = DM.GetAdventureOf(currentDay);
+        Infos.text = DM.GetMissionOf(currentDay);
+    }
+
+    public void CARTE_Show(int index)
+    {
+        if(index == 0)
+        {
+            ReturnButton.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(ReturnButton);
+            MainMap.SetActive(false);
+            Map1.SetActive(true);
+            SaveParameter.current.canUseOnglets = false;
+            SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.InOpenMap;
+            
+        }
+        else if(index == 1)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    public void STUFF_PopButton()
+    {
+        for(int i = 0; i < Buttons.Length; i++)
+        {
+            if (SaveData.current.UnlockList[i])
+            {
+                Buttons[i].SetActive(true);
+                if (i == 0)//HEAD
+                {
+                    if(i == SaveData.current.CurrentItemHEAD)
+                    {
+                        Buttons[i].transform.localPosition = SpotHead.transform.localPosition;
+                        Illus[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Buttons[i].transform.localPosition = SpotsOFF[i].transform.localPosition;
+                        Illus[i].SetActive(false);
+                    }
+                }
+                else if (i == 1)//BACK
+                {
+                    if (i == SaveData.current.CurrentItemBACK)
+                    {
+                        Buttons[i].transform.localPosition = SpotBack.transform.localPosition;
+                        Illus[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Buttons[i].transform.localPosition = SpotsOFF[i].transform.localPosition;
+                        Illus[i].SetActive(false);
+                    }
+                }
+                else if (i == 2)//SWORD
+                {
+                    if (i == SaveData.current.CurrentItemSWORD)
+                    {
+                        Buttons[i].transform.localPosition = SpotSword.transform.localPosition;
+                        Illus[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Buttons[i].transform.localPosition = SpotsOFF[i].transform.localPosition;
+                        Illus[i].SetActive(false);
+                    }
+                }
+                else if (i == 3)//SHIELD
+                {
+                    if (i == SaveData.current.CurrentItemSHIELD)
+                    {
+                        Buttons[i].transform.localPosition = SpotShield.transform.localPosition;
+                        Illus[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Buttons[i].transform.localPosition = SpotsOFF[i].transform.localPosition;
+                        Illus[i].SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                Buttons[i].SetActive(false);
+                Illus[i].SetActive(false);
+            }
+        }
+    }
+
+    public void STUFF_EquipeOrUnequipThis(int index)
+    {
+        if (index == 0)//HEAD
+        {
+            if(index == SaveData.current.CurrentItemHEAD)
+            {
+                SaveData.current.CurrentItemHEAD = -1;
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Illus[index].SetActive(false);
+            }
+            else
+            {
+                if(SaveData.current.CurrentItemHEAD == -1)
+                {
+                    SaveData.current.CurrentItemHEAD = index;
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+                else
+                {
+                    Illus[SaveData.current.CurrentItemHEAD].SetActive(false);
+                    Buttons[SaveData.current.CurrentItemHEAD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemHEAD].transform.localPosition, 0.3f);
+                    SaveData.current.CurrentItemHEAD = index;
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+            }
+        }
+        else if (index == 1)//BACK
+        {
+            if (index == SaveData.current.CurrentItemBACK)
+            {
+                SaveData.current.CurrentItemBACK = -1;
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Illus[index].SetActive(false);
+            }
+            else
+            {
+                if (SaveData.current.CurrentItemBACK == -1)
+                {
+                    SaveData.current.CurrentItemBACK = index;
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+                else
+                {
+                    Illus[SaveData.current.CurrentItemBACK].SetActive(false);
+                    Buttons[SaveData.current.CurrentItemBACK].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemBACK].transform.localPosition, 0.3f);
+                    SaveData.current.CurrentItemBACK = index;
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+            }
+        }
+        else if (index == 2)//SWORDS
+        {
+            if (index == SaveData.current.CurrentItemSWORD)
+            {
+                SaveData.current.CurrentItemSWORD = -1;
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Illus[index].SetActive(false);
+            }
+            else
+            {
+                if (SaveData.current.CurrentItemSWORD == -1)
+                {
+                    SaveData.current.CurrentItemSWORD = index;
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+                else
+                {
+                    Illus[SaveData.current.CurrentItemSWORD].SetActive(false);
+                    Buttons[SaveData.current.CurrentItemSWORD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSWORD].transform.localPosition, 0.3f);
+                    SaveData.current.CurrentItemSWORD = index;
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+            }
+        }
+        else if (index == 3)//SHIELDS
+        {
+            if (index == SaveData.current.CurrentItemSHIELD)
+            {
+                SaveData.current.CurrentItemSHIELD = -1;
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Illus[index].SetActive(false);
+            }
+            else
+            {
+                if (SaveData.current.CurrentItemSHIELD == -1)
+                {
+                    SaveData.current.CurrentItemSHIELD = index;
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+                else
+                {
+                    Illus[SaveData.current.CurrentItemSHIELD].SetActive(false);
+                    Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.3f);
+                    SaveData.current.CurrentItemSHIELD = index;
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f);
+                    Illus[index].SetActive(true);
+                }
+            }
+        }
+        HM.UpdateClothes();
+        HM.UpdateHands();
     }
 
     public void OpenOrKillMainMenu()
@@ -198,15 +536,21 @@ public class MenuManager : MonoBehaviour
             Carnet_GLOBAL.SetActive(true);
             if (Carnet_OPEN.activeSelf)
             {
+                OpenPage(SaveParameter.current.MMTMP.index);
+                if (SaveParameter.current.MMTMP.index==2)
+                {
+                    STUFF_PopButton();
+                }
+                EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
                 Carnet_GLOBAL.transform.DOKill();
                 Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.19f);
-                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.2f).OnComplete(() => { EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.2f);
             }
             else
             {
                 Carnet_GLOBAL.transform.DOKill();
                 Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
-                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0);  EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
             }
         }
         else
@@ -235,6 +579,8 @@ public class MenuManager : MonoBehaviour
         Menu_EcraserOuAnnuler.SetActive(false);
         SaveParameter.current.canUseInputs = true;
     }
+
+    // ---------------------   BLACK SCREEN   --------------------------------------------------------
 
     IEnumerator Fade()
     {
