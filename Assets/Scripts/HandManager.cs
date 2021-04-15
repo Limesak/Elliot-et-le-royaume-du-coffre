@@ -12,6 +12,7 @@ public class HandManager : MonoBehaviour
     public SwordType CurrentSword;
     public ShieldType CurrentShield;
 
+    [Header("SWORDS")]
     [SerializeField]
     private GameObject Sword_Wood;
     [SerializeField]
@@ -20,16 +21,26 @@ public class HandManager : MonoBehaviour
     private GameObject Sword_Pin;
     [SerializeField]
     private GameObject Sword_Bone;
+    [Header("SHIELDS")]
     [SerializeField]
     private GameObject Shield_Wood;
+    [Header("UTILITY")]
     [SerializeField]
     private GameObject Utility_Wand;
     [SerializeField]
     private GameObject Special_Bucket;
 
+    [Header("HEAD")]
+    [SerializeField]
+    private GameObject Head_Bucket;
+    [Header("BACK")]
+    [SerializeField]
+    private GameObject Back_Cape;
+
     void Start()
     {
         UpdateHands();
+        UpdateClothes();
     }
 
     // Update is called once per frame
@@ -38,8 +49,51 @@ public class HandManager : MonoBehaviour
         
     }
 
+    public void UpdateClothes()
+    {
+        if(SaveData.current.CurrentItemHEAD == 0)
+        {
+            Head_Bucket.SetActive(true);
+        }
+        else
+        {
+            Head_Bucket.SetActive(false);
+        }
+
+        if (SaveData.current.CurrentItemBACK == 1)
+        {
+            Back_Cape.SetActive(true);
+        }
+        else
+        {
+            Back_Cape.SetActive(false);
+        }
+    }
+
     public void UpdateHands()
     {
+        if (SaveData.current.CurrentItemSWORD == 2)
+        {
+            CurrentSword = SwordType.Wood;
+        }
+        else
+        {
+            CurrentSword = SwordType.Wood;
+            if(CurrentHands == Holding.SwordShield)
+            {
+                CurrentHands = Holding.Empty;
+            }
+        }
+
+        if (SaveData.current.CurrentItemSHIELD == 3)
+        {
+            CurrentShield = ShieldType.Wood;
+        }
+        else
+        {
+            CurrentShield = ShieldType.Empty;
+        }
+
         if (CurrentHands == Holding.Empty)
         {
             Sword_Wood.SetActive(false);

@@ -8,18 +8,22 @@ public class SlidingButton : MonoBehaviour
 {
     public Button MyButton;
     private Vector3 ORIGIN;
+    private Vector3 ORIGINbanderole;
     public Transform SlidePos;
     private bool Slided;
     private UnityEngine.EventSystems.EventSystem ES;
 
+    public GameObject Banderole;
+    public Transform SlidePosBanderole;
+
     void Start()
     {
-        ORIGIN = transform.position;
+        ORIGIN = transform.localPosition;
+        ORIGINbanderole = Banderole.transform.localPosition;
         Slided = false;
         ES = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (SaveParameter.current.canUseOnglets)
@@ -36,8 +40,10 @@ public class SlidingButton : MonoBehaviour
             if (!Slided)
             {
                 transform.DOKill();
+                Banderole.transform.DOKill();
                 Slided = true;
-                transform.DOMove(SlidePos.position, 0.2f);
+                transform.DOLocalMove(SlidePos.localPosition, 0.2f);
+                Banderole.transform.DOLocalMove(SlidePosBanderole.localPosition, 0.2f);
             }
             
         }
@@ -46,8 +52,10 @@ public class SlidingButton : MonoBehaviour
             if (Slided)
             {
                 transform.DOKill();
+                Banderole.transform.DOKill();
                 Slided = false;
-                transform.DOMove(ORIGIN, 0.2f);
+                transform.DOLocalMove(ORIGIN, 0.2f);
+                Banderole.transform.DOLocalMove(ORIGINbanderole, 0.2f);
             }
         }
     }
