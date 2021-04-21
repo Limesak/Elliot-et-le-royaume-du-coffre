@@ -669,12 +669,14 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_InitDialogueP2()
     {
+        ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
         ClosedScroll.SetActive(false);
         RollingScroll.SetActive(true);
-        RollingScroll.transform.DOPunchScale(new Vector3(RollingScroll.transform.localScale.x+0.1f, RollingScroll.transform.localScale.y + 0.1f, RollingScroll.transform.localScale.z + 0.1f), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
+        RollingScroll.transform.DOScale(new Vector3(RollingScroll.transform.localScale.x+0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
         FlatScroll.SetActive(true);
         FlatScroll.transform.localPosition = FLAT_SCROLL_ORIGIN;

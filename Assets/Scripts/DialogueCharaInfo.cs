@@ -52,7 +52,7 @@ public class DialogueCharaInfo : MonoBehaviour
         if (isTalking && !inWork)
         {
             initTalking = false;
-            transform.DOPunchPosition(Vector3.up*2f,0.4f).OnComplete(() => { inWork = false; RecursiveTalk(); });
+            transform.DOPunchPosition(Vector3.up*10f,1.2f).OnComplete(() => { inWork = false; RecursiveTalk(); });
         }
     }
 
