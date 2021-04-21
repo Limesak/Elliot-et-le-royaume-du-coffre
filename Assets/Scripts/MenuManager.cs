@@ -9,6 +9,9 @@ using DG.Tweening;
 
 public class MenuManager : MonoBehaviour
 {
+    public enum Character { None, Elliot, LecheCuillere, Poussierin };
+    public enum WIT { None, Left, Both, Right };
+    public enum DialogueActionButton { None, Next, Pass, Quit , Branch};
     Movements MovementsControls;
 
     [Header("Accessor")]
@@ -71,9 +74,49 @@ public class MenuManager : MonoBehaviour
     public GameObject[] Buttons;
     public GameObject[] Illus;
 
+    [Header("DIALOGUES")]
+    public GameObject DIALOGUE_ButtonA;
+    public GameObject DIALOGUE_ButtonB;
+    private ConversationInfo CurrentConv;
+    private bool isDialogueOn;
+    public Text DIALOGUE_ButtonAtext;
+    public Text DIALOGUE_ButtonBtext;
+    private int ConvCurrentIndex;
+    private int BranchCurrentIndex;
+    private string DialogueCurrentText;
+    private bool isWritingDialogue;
+    public float writingCharacterDuration;
+    private float lastCharacterWroteDate;
+    public Text DIALOGUE_TextContent;
+
+    [Header("DIALOGUES Scrolls")]
+    public GameObject CLOSED_SCROLL_HIDDEN_POS;
+    private Vector3 CLOSED_SCROLL_ORIGIN;
+    public GameObject ClosedScroll;
+    public GameObject RollingScroll;
+    public GameObject FlatScroll;
+    public GameObject FLAT_SCROLL_HIDDEN_POS;
+    private Vector3 FLAT_SCROLL_ORIGIN;
+
+    [Header("DIALOGUES Characters")]
+    public DialogueCharaInfo[] CharactersOnLeft;
+    public DialogueCharaInfo[] CharactersOnRight;
+
 
     void Start()
     {
+        CLOSED_SCROLL_ORIGIN = ClosedScroll.transform.localPosition;
+        ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
+        ClosedScroll.SetActive(false);
+        RollingScroll.SetActive(false);
+        FLAT_SCROLL_ORIGIN = FlatScroll.transform.localPosition;
+        FlatScroll.SetActive(false);
+        isDialogueOn = false;
+        ConvCurrentIndex = 0;
+        BranchCurrentIndex = 0;
+        DialogueCurrentText = "";
+        isWritingDialogue = false;
+
         ReturnButton.SetActive(false);
         GoBef.interactable = false;
         GoAft.interactable = false;
@@ -145,7 +188,7 @@ public class MenuManager : MonoBehaviour
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
         Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
 
-        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf)
+        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || isDialogueOn)
         {
             SaveParameter.current.canUseInputs = false;
         }
@@ -154,7 +197,23 @@ public class MenuManager : MonoBehaviour
             SaveParameter.current.canUseInputs = true;
         }
 
-        
+        if(isDialogueOn && isWritingDialogue && lastCharacterWroteDate + writingCharacterDuration <= Time.time)
+        {
+            if(DialogueCurrentText.Length == CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent.Length)
+            {
+                isWritingDialogue = false;
+            }
+            else
+            {
+                lastCharacterWroteDate = Time.time;
+                DialogueCurrentText = DialogueCurrentText + CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent.ToCharArray()[DialogueCurrentText.Length];
+            }
+            DIALOGUE_TextContent.text = DialogueCurrentText;
+        }
+        else
+        {
+            Debug.Log("Not Writing");
+        }
     }
 
     public void PopMenuCoffre()
@@ -234,6 +293,10 @@ public class MenuManager : MonoBehaviour
                 MainMap.SetActive(true);
                 Map1.SetActive(false);
                 SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
+            }
+            else if(isDialogueOn && CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].isButtonBPresent)
+            {
+                DIALOGUE_ButtonBPressed();
             }
             
         }
@@ -579,6 +642,186 @@ public class MenuManager : MonoBehaviour
         Menu_EcraserOuAnnuler.SetActive(false);
         SaveParameter.current.canUseInputs = true;
     }
+
+    //--------------------  DIALOGUE  -------------------------------------------------------------------------------------------
+
+    public bool isInDialogue()
+    {
+        return isDialogueOn;
+    }
+
+    public void DIALOGUE_OpenDialogue(ConversationInfo ConvInfo)
+    {
+        CurrentConv = ConvInfo;
+        DialogueCurrentText = "";
+        ConvCurrentIndex = 0;
+        BranchCurrentIndex = 0;
+        SaveParameter.current.canUseInputs = false;
+        isDialogueOn = true;
+        DIALOGUE_InitDialogueP1();
+    }
+
+    public void DIALOGUE_InitDialogueP1()
+    {
+        ClosedScroll.SetActive(true);
+        ClosedScroll.transform.DOLocalMove(CLOSED_SCROLL_ORIGIN, 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP2(); });
+    }
+
+    public void DIALOGUE_InitDialogueP2()
+    {
+        ClosedScroll.SetActive(false);
+        RollingScroll.SetActive(true);
+        RollingScroll.transform.DOPunchScale(new Vector3(RollingScroll.transform.localScale.x+0.1f, RollingScroll.transform.localScale.y + 0.1f, RollingScroll.transform.localScale.z + 0.1f), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
+    }
+    public void DIALOGUE_InitDialogueP3()
+    {
+        RollingScroll.SetActive(false);
+        FlatScroll.SetActive(true);
+        FlatScroll.transform.localPosition = FLAT_SCROLL_ORIGIN;
+        DIALOGUE_UpdateCharacter();
+        DIALOGUE_UpdateText();
+        DIALOGUE_UpdateButton();
+    }
+
+    public void DIALOGUE_UpdateText()
+    {
+        DialogueCurrentText = "";
+        DIALOGUE_TextContent.text = "";
+        isWritingDialogue = true;
+    }
+
+    public void DIALOGUE_UpdateButton()
+    {
+        DIALOGUE_ButtonA.SetActive(true);
+        DIALOGUE_ButtonAtext.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ButtonAContent;
+        if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].isButtonBPresent)
+        {
+            DIALOGUE_ButtonB.SetActive(true);
+            DIALOGUE_ButtonBtext.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ButtonBContent;
+        }
+        else
+        {
+            DIALOGUE_ButtonB.SetActive(false);
+        }
+
+        EventSystem.current.SetSelectedGameObject(DIALOGUE_ButtonA);
+    }
+
+    public void DIALOGUE_UpdateCharacter()
+    {
+        foreach(DialogueCharaInfo dci in CharactersOnLeft)
+        {
+            if(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].PersoLeft == dci.Name)
+            {
+                if (!dci.gameObject.activeSelf)
+                {
+                    dci.gameObject.SetActive(true);
+                    dci.Wake();
+                }
+
+                dci.PopEmotion(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].PersoLeftEmotionIndex);
+
+                if(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].WhoIsTalking == WIT.Left || CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].WhoIsTalking == WIT.Both)
+                {
+                    dci.Talk();
+                }
+                else
+                {
+                    dci.StopTalking();
+                }
+            }
+            else
+            {
+                if (dci.gameObject.activeSelf)
+                {
+                    dci.StopTalking();
+                    dci.PutToSleep();
+                }
+            }
+        }
+
+        foreach (DialogueCharaInfo dci in CharactersOnRight)
+        {
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].PersoRight == dci.Name)
+            {
+                if (!dci.gameObject.activeSelf)
+                {
+                    dci.gameObject.SetActive(true);
+                    dci.Wake();
+                }
+
+                dci.PopEmotion(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].PersoRightEmotionIndex);
+
+                if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].WhoIsTalking == WIT.Right || CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].WhoIsTalking == WIT.Both)
+                {
+                    dci.Talk();
+                }
+                else
+                {
+                    dci.StopTalking();
+                }
+            }
+            else
+            {
+                if (dci.gameObject.activeSelf)
+                {
+                    dci.StopTalking();
+                    dci.PutToSleep();
+                }
+            }
+        }
+    }
+
+    public void DIALOGUE_KILLUI()
+    {
+        SaveParameter.current.canUseInputs = true;
+        isDialogueOn = false;
+        foreach (DialogueCharaInfo dci in CharactersOnRight)
+        {
+            dci.PutToSleep();
+        }
+        foreach (DialogueCharaInfo dci in CharactersOnLeft)
+        {
+            dci.PutToSleep();
+        }
+
+        DIALOGUE_ButtonA.SetActive(false);
+        DIALOGUE_ButtonB.SetActive(false);
+
+        FlatScroll.transform.DOLocalMove(FLAT_SCROLL_HIDDEN_POS.transform.localPosition, 0.3f).OnComplete(() => { FlatScroll.SetActive(false);   }); ;
+    }
+
+
+    public void DIALOGUE_ButtonAPressed()
+    {
+        if (isDialogueOn)
+        {
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
+            {
+                ConvCurrentIndex++;
+                DIALOGUE_UpdateCharacter();
+                DIALOGUE_UpdateText();
+                DIALOGUE_UpdateButton();
+            }
+            else if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Quit)
+            {
+                DIALOGUE_KILLUI();
+            }
+        }
+        
+    }
+
+    public void DIALOGUE_ButtonBPressed()
+    {
+        if (isDialogueOn)
+        {
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Quit)
+            {
+                DIALOGUE_KILLUI();
+            }
+        }
+    }
+
 
     // ---------------------   BLACK SCREEN   --------------------------------------------------------
 
