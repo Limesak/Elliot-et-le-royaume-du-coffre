@@ -46,11 +46,22 @@ public class SaveData
     public string[] Diary;
     public string[] TMP_Buffer;
     public int TMP_CPTmoney;
+    public int TMP_CPTcandy;
+    public int TMP_CPTYellowKey;
     public int[] TMP_CPTkills;
     public int TMP_CPTcurrentIntro;
     public string TMP_MISSIONcontent;
     public string[] TMP_MISSIONhint;
     public bool hasBeenTMP;
+
+    //Uniques
+    public bool haveMAILLET;
+    public bool haveDiscoveredMoney;
+    public int CPT_Money;
+    public bool haveDiscoveredCandy;
+    public int CPT_Candy;
+    public bool haveDiscoveredYellowKey;
+    public int CPT_YellowKey;
 
     public void ResetValueToDefault()
     {
@@ -75,6 +86,8 @@ public class SaveData
         Diary = new string[0];
         TMP_Buffer = new string[0];
         TMP_CPTmoney = 0;
+        TMP_CPTYellowKey = 0;
+        TMP_CPTcandy = 0;
         TMP_CPTkills = new int[1];//A changer si nombre de mobs est modifié
         for (int i = 0; i < TMP_CPTkills.Length; i++)
         {
@@ -85,6 +98,13 @@ public class SaveData
         TMP_MISSIONhint = new string[0];
         hasBeenTMP = false;
 
+        haveMAILLET = false;
+        haveDiscoveredMoney = false;
+        haveDiscoveredCandy = false;
+        haveDiscoveredYellowKey = false;
+        CPT_Money = 0;
+        CPT_Candy = 0;
+        CPT_YellowKey = 0;
 
         Debug.Log("SaveData reseted");
     }

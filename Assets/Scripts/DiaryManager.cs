@@ -6,6 +6,8 @@ public class DiaryManager : MonoBehaviour
 {
     [Header("Compteurs")]
     private int CPT_money;
+    private int CPT_candy;
+    private int CPT_yellowKey;
     private int[] CPT_kills;
     public string[] CPT_Intros;
     private int CPT_currentIntro;
@@ -36,6 +38,8 @@ public class DiaryManager : MonoBehaviour
         if (SaveData.current.hasBeenTMP)
         {
             CPT_money = SaveData.current.TMP_CPTmoney;
+            CPT_candy = SaveData.current.TMP_CPTcandy;
+            CPT_yellowKey = SaveData.current.TMP_CPTYellowKey;
             CPT_kills = SaveData.current.TMP_CPTkills;
             CPT_currentIntro = SaveData.current.TMP_CPTcurrentIntro;
             BUFFER_list = SaveData.current.TMP_Buffer;
@@ -85,7 +89,7 @@ public class DiaryManager : MonoBehaviour
 
         if (DidKill())
         {
-            res = res + CPT_Intros[CPT_currentIntro] + " j'ai démimé ";
+            res = res + CPT_Intros[CPT_currentIntro] + " j'ai décimé ";
             for (int i = 0; i < CPT_kills.Length; i++)
             {
                 if (CPT_kills[i] > 0)
@@ -101,9 +105,34 @@ public class DiaryManager : MonoBehaviour
                 }
             }
 
-            if (CPT_money > 0)
+            if (DidCollect())
             {
-                res = res + " et j'ai récolté " + CPT_money + " pièces.";
+                res = res + " et j'ai récolté ";
+                bool notfirst = false;
+                if (CPT_money > 0)
+                {
+                    notfirst = true;
+                    res = res + CPT_money + " pièces";
+                }
+                if (CPT_candy > 0)
+                {
+                    if (notfirst)
+                    {
+                        res = res + ", ";
+                    }
+                    notfirst = true;
+                    res = res + CPT_money + " bonbons";
+                }
+                if (CPT_yellowKey > 0)
+                {
+                    if (notfirst)
+                    {
+                        res = res + ", ";
+                    }
+                    notfirst = true;
+                    res = res + CPT_money + " clés de gobelin jaunies";
+                }
+                res = res + ".";
             }
             else
             {
@@ -194,10 +223,24 @@ public class DiaryManager : MonoBehaviour
         return res;
     }
 
+    public bool DidCollect()
+    {
+        bool res = false;
+
+        if (CPT_money > 0 ||CPT_candy >0 || CPT_yellowKey>0)
+        {
+            res = true;
+        }
+
+        return res;
+    }
+
     public void SaveTMPinSaveData()
     {
         SaveData.current.TMP_Buffer = BUFFER_list;
         SaveData.current.TMP_CPTmoney = CPT_money;
+        SaveData.current.TMP_CPTcandy = CPT_candy;
+        SaveData.current.TMP_CPTYellowKey = CPT_yellowKey;
         SaveData.current.TMP_CPTkills = CPT_kills;
         SaveData.current.TMP_CPTcurrentIntro = CPT_currentIntro;
         SaveData.current.TMP_MISSIONcontent = MISSION_content;

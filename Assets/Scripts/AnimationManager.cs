@@ -8,6 +8,7 @@ public class AnimationManager : MonoBehaviour
     public PlayerMovement PM;
     public Transform ModelParent;
     public Animator anim;
+    public GameObject CAPE;
 
     public float FlipDuration;
 
@@ -29,6 +30,10 @@ public class AnimationManager : MonoBehaviour
         }
         anim.SetBool("floatingAA", !PM.GetGravityFloating());
         //anim.SetFloat("AirAttackSpeed", ((PM.DistanceFromGround() / 45) / (0.167f * Time.deltaTime)) * 0.7f);
+        if (!CAPE.GetComponent<Cloth>().enabled && !PM.isPlayerJumping())
+        {
+            CAPE.GetComponent<Cloth>().enabled = true;
+        }
     }
 
     public void LaunchAirAttack()
@@ -53,6 +58,13 @@ public class AnimationManager : MonoBehaviour
     {
         anim.SetTrigger("jump");
         //Debug.Log("jumpAnim");
+    }
+
+    public void StartAirJump()
+    {
+        //anim.SetTrigger("airJump");
+        //Debug.Log("jumpAnim");
+        CAPE.GetComponent<Cloth>().enabled = false;
     }
 
     public void LaunchAttack()

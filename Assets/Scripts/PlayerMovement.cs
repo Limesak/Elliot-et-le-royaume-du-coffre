@@ -342,9 +342,15 @@ public class PlayerMovement : MonoBehaviour
         if (Direction.magnitude >= 0.1f && SaveParameter.current.canUseInputs )
         {
             isMoving = true;
-            float targetAngle= Mathf.Atan2(Direction.x, Direction.z) *Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+            if (SaveParameter.current.canUseRotation)
+            {
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+            
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir =new Vector3(moveDir.x, 0, moveDir.z);
@@ -644,6 +650,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void DoubleJump()
     {
+        AM.StartAirJump();
         GravityPower = DoubleJumpingPower ;
     }
 
@@ -696,6 +703,11 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetDirectionInputs()
     {
         return Direction;
+    }
+
+    public bool isPlayerJumping()
+    {
+        return isJumping;
     }
 
 }
