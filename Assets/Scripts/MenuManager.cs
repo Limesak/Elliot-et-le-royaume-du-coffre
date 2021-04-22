@@ -74,6 +74,12 @@ public class MenuManager : MonoBehaviour
     public GameObject[] Buttons;
     public GameObject[] Illus;
 
+    [Header("Main Menus UNIQUES")]
+    public GameObject CEINTURE_Maillet;
+    public GameObject POCHE_Money;
+    public GameObject POCHE_Candy;
+    public GameObject POCHE_YellowKey;
+
     [Header("DIALOGUES")]
     public GameObject DIALOGUE_ButtonA;
     public GameObject DIALOGUE_ButtonB;
@@ -327,7 +333,13 @@ public class MenuManager : MonoBehaviour
         {
             STUFF_PopButton();
         }
+        else if(index == 3)
+        {
+            UNIQUES_PopItems();
+        }
     }
+
+    
 
     public void MISSION_PopCurrentDay()
     {
@@ -590,6 +602,45 @@ public class MenuManager : MonoBehaviour
         HM.UpdateHands();
     }
 
+    public void UNIQUES_PopItems()
+    {
+        if (SaveData.current.haveMAILLET)
+        {
+            CEINTURE_Maillet.SetActive(true);
+        }
+        else
+        {
+            CEINTURE_Maillet.SetActive(false);
+        }
+
+        if (SaveData.current.haveDiscoveredMoney)
+        {
+            POCHE_Money.SetActive(true);
+        }
+        else
+        {
+            POCHE_Money.SetActive(false);
+        }
+
+        if (SaveData.current.haveDiscoveredCandy)
+        {
+            POCHE_Candy.SetActive(true);
+        }
+        else
+        {
+            POCHE_Candy.SetActive(false);
+        }
+
+        if (SaveData.current.haveDiscoveredYellowKey)
+        {
+            POCHE_YellowKey.SetActive(true);
+        }
+        else
+        {
+            POCHE_YellowKey.SetActive(false);
+        }
+    }
+
     public void OpenOrKillMainMenu()
     {
         if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
@@ -669,12 +720,14 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_InitDialogueP2()
     {
+        ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
         ClosedScroll.SetActive(false);
         RollingScroll.SetActive(true);
-        RollingScroll.transform.DOPunchScale(new Vector3(RollingScroll.transform.localScale.x+0.1f, RollingScroll.transform.localScale.y + 0.1f, RollingScroll.transform.localScale.z + 0.1f), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
+        RollingScroll.transform.DOScale(new Vector3(RollingScroll.transform.localScale.x+0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
         FlatScroll.SetActive(true);
         FlatScroll.transform.localPosition = FLAT_SCROLL_ORIGIN;
