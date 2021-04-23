@@ -14,13 +14,13 @@ public class TextUpdater : MonoBehaviour
         switch (choice)
         {
             case Value.Money:
-                TextToUpdate.text = SaveData.current.TMP_CPTmoney + "";
+                TextToUpdate.text = SaveData.current.CPT_Money + "";
                 break;
             case Value.Candy:
-                TextToUpdate.text = SaveData.current.TMP_CPTcandy + "";
+                TextToUpdate.text = SaveData.current.CPT_Candy + "";
                 break;
             case Value.YellowKey:
-                TextToUpdate.text = SaveData.current.TMP_CPTYellowKey + "";
+                TextToUpdate.text = SaveData.current.CPT_YellowKey + "";
                 break;
             default:
                 TextToUpdate.text = "x";
