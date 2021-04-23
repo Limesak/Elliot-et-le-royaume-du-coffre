@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class Poussierin : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class Poussierin : MonoBehaviour
     public float YLookingOffset;
     private bool isAttacking;
     private Vector3 PosWhenAttacking;
+    private int AttackKey;
 
 
     void Start()
@@ -303,7 +305,13 @@ public class Poussierin : MonoBehaviour
             Anim.SetTrigger("die");
             StopWalking();
             PLAYER.GetComponent<DiaryManager>().AddAKill(0);
+            transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
         }
+    }
+
+    public void DiePartTwo()
+    {
+        transform.DOScale(Vector3.zero, 0.8f).OnComplete(() => { Destroy(gameObject); });
     }
 
     public bool CanSeePlayer()
@@ -427,11 +435,17 @@ public class Poussierin : MonoBehaviour
         isAttacking = true;
         didCombatMove = false;
         PosWhenAttacking = PLAYER.transform.position;
+        AttackKey = Random.Range(1, 10000);
     }
 
     public void CanWalk()
     {
         isAttacking = false;
         Debug.Log("Attack done");
+    }
+
+    public int GetAttackKey()
+    {
+        return AttackKey;
     }
 }

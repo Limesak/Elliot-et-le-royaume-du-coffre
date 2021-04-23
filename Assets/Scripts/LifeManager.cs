@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
+    public MenuManager MM;
     public LifeCelluleManager[] Cells;
     private bool isDead;
 
@@ -21,64 +22,77 @@ public class LifeManager : MonoBehaviour
     public bool TESTgetHeal;
     public bool TESTgetBlock;
 
+    private string KeyMemory;
+
     void Start()
     {
         isDead = false;
+        KeyMemory = "";
     }
 
     void Update()
     {
-
-        if (blockBar > 0)
+        if(GetCurrentIndex() < 0 && !isDead)
         {
-            CheckUsability();
+            Die();
+            return;
         }
-
-        if(AutoHeal_Cooldown+ lastHit<= Time.time && !Cells[GetCurrentIndex()].Full())
+        if (!isDead)
         {
-            AutoHeal(AutoHeal_Power * Time.deltaTime);
-            Debug.Log("AutoHeal");
-        }
+            if (blockBar > 0)
+            {
+                CheckUsability();
+            }
 
-        if (TESTgetDmg)
-        {
-            TESTgetDmg = false;
-            GetDamage(TESTvalue);
-            Debug.Log("Test DMG");
-        }
+            if ( AutoHeal_Cooldown + lastHit <= Time.time && !Cells[GetCurrentIndex()].Full())
+            {
+                AutoHeal(AutoHeal_Power * Time.deltaTime);
+                Debug.Log("AutoHeal");
+            }
 
-        if (TESTgetHeal)
-        {
-            TESTgetHeal = false;
-            GetHeal(TESTvalue);
-            Debug.Log("Test HEAL");
-        }
+            if (TESTgetDmg)
+            {
+                TESTgetDmg = false;
+                GetDamage(new DamageForPlayer(TESTvalue, Random.Range(0, 10000), gameObject));
+                Debug.Log("Test DMG");
+            }
 
-        if (TESTgetBlock)
-        {
-            TESTgetBlock = false;
-            TryToBlockBar((int) TESTvalue, 10);
-            Debug.Log("Test BLOCK");
-        }
+            if (TESTgetHeal)
+            {
+                TESTgetHeal = false;
+                GetHeal(TESTvalue);
+                Debug.Log("Test HEAL");
+            }
 
-        CheckRest();
+            if (TESTgetBlock)
+            {
+                TESTgetBlock = false;
+                TryToBlockBar((int)TESTvalue, 10);
+                Debug.Log("Test BLOCK");
+            }
+
+            CheckRest();
+        }
+       
     }
 
-    public void GetDamage(float dmg)
+    public void GetDamage(DamageForPlayer dmg)
     {
-        if (!isDead && InvunerableFramesDuration + lastHit <= Time.time)
+        if (!isDead && InvunerableFramesDuration + lastHit <= Time.time && !KeyMemory.Contains(dmg._key+""))
         {
             int index = GetCurrentIndex();
             if (index < Cells.Length && index != -1)
             {
                 lastHit = Time.time;
-                Cells[index].GetDamage(dmg);
+                Cells[index].GetDamage(dmg._power);
             }
             else
             {
                 Die();
             }
+            KeyMemory = KeyMemory + dmg._key;
         }
+        
     }
 
     public void GetHeal(float heal)
@@ -194,6 +208,14 @@ public class LifeManager : MonoBehaviour
 
     public void Die()
     {
-        isDead = true;
+        if (!isDead)
+        {
+            SaveData.current.ResetValueToDefault();
+            isDead = true;
+            MM.BlackScreen.gameObject.SetActive(true);
+            MM.BlackScreen.color = new Color(0, 0, 0, 0);
+            StartCoroutine(MM.FadeNLoad());
+        }
+        
     }
 }
