@@ -262,4 +262,24 @@ public class DiaryManager : MonoBehaviour
         SaveData.current.hasBeenTMP = false;
         ResetDiary();
     }
+
+    public void AddAKill(int indexType)
+    {
+        CPT_kills[indexType] = CPT_kills[indexType] + 1;
+    }
+
+    public void AddMoney(int howMuch)
+    {
+        CPT_money = CPT_money + howMuch;
+    }
+
+    public void AddCandy(int howMuch)
+    {
+        CPT_candy = CPT_candy + howMuch;
+    }
+
+    public void AddYellowKey(int howMuch)
+    {
+        CPT_yellowKey = CPT_yellowKey + howMuch;
+    }
 }
