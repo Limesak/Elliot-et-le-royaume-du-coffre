@@ -286,11 +286,12 @@ public class Poussierin : MonoBehaviour
             CurrentAnimVersion = (int) Random.Range(1, 3);
             Anim.SetInteger("animVersion", CurrentAnimVersion);
             lastTimeDamageTaken = Time.time;
-            if (HP > 0 && !isDead)
+            if (HP > 0 && !isDead && !isAttacking)
             {
                 Anim.SetTrigger("hit");
+                //isAttacking = false;
             }
-            else 
+            else if(HP <= 0 && !isDead)
             {
                 Die();
             }

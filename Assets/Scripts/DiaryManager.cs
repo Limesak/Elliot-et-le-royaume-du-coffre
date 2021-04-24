@@ -90,18 +90,28 @@ public class DiaryManager : MonoBehaviour
         if (DidKill())
         {
             res = res + CPT_Intros[CPT_currentIntro] + " j'ai décimé ";
+            bool first = true;
             for (int i = 0; i < CPT_kills.Length; i++)
             {
                 if (CPT_kills[i] > 0)
                 {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        res = res + ", ";
+                    }
                     if (i == 0)
                     {
-                        res = res + CPT_kills[i] + " poussierins " + ", ";
+                        res = res + CPT_kills[i] + " poussierins " ;
                     }
                     else if (i == 1)
                     {
-                        res = res  +CPT_kills[i] + " REMPLACERLENOMDUMOB " + ", ";
+                        res = res  +CPT_kills[i] + " REMPLACERLENOMDUMOB ";
                     }
+                    
                 }
             }
 
