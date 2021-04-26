@@ -10,24 +10,28 @@ public class AnimEventTransmitter : MonoBehaviour
     public void isDangerous()
     {
         ST.canDamage = true;
+        SaveParameter.current.canUseRotation = false;
         //Debug.Log("isDangerous");
     }
 
     public void isntDangerous()
     {
         ST.canDamage = false;
+        SaveParameter.current.canUseRotation = true;
         //Debug.Log("isntDangerous");
     }
 
     public void canWalk()
     {
         AM.SetAttacking(false);
+        
         //Debug.Log("canWalk");
     }
 
     public void cantWalk()
     {
         AM.SetAttacking(true);
+        
         //Debug.Log("cantWalk");
 
     }

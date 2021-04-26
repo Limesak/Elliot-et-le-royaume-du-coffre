@@ -21,28 +21,10 @@ public class LockManager : MonoBehaviour
 
     public GameObject DefaultLookAt;
 
-    public FreeLookValueDoc DefaultValues;
-    public FreeLookValueDoc LockedValues;
-
     Movements MovementsControls;
 
     void Start()
     {
-        DefaultValues = new FreeLookValueDoc();
-        DefaultValues.TopH = 14;
-        DefaultValues.TopR = 6;
-        DefaultValues.MidH = 5;
-        DefaultValues.MidR = 10;
-        DefaultValues.BotH = -1;
-        DefaultValues.BotR = 6;
-
-        LockedValues = new FreeLookValueDoc();
-        LockedValues.TopH = 1.5f;
-        LockedValues.TopR = 0f;
-        LockedValues.MidH = 1f;
-        LockedValues.MidR = 0f;
-        LockedValues.BotH = -0.5f;
-        LockedValues.BotR = 0f;
 
     }
 
@@ -180,16 +162,6 @@ public class LockManager : MonoBehaviour
         PivotLock.target = transform;
     }
 
-    public void PassNewDataInCam(FreeLookValueDoc data)
-    {
-        vcam.m_Orbits[0].m_Height = data.TopH;
-        vcam.m_Orbits[0].m_Radius = data.TopR;
-        vcam.m_Orbits[1].m_Height = data.MidH;
-        vcam.m_Orbits[1].m_Radius = data.MidR;
-        vcam.m_Orbits[2].m_Height = data.BotH;
-        vcam.m_Orbits[2].m_Radius = data.BotR;
-
-    }
 
    
 

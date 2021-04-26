@@ -74,6 +74,12 @@ public class MenuManager : MonoBehaviour
     public GameObject[] Buttons;
     public GameObject[] Illus;
 
+    [Header("Main Menus UNIQUES")]
+    public GameObject CEINTURE_Maillet;
+    public GameObject POCHE_Money;
+    public GameObject POCHE_Candy;
+    public GameObject POCHE_YellowKey;
+
     [Header("DIALOGUES")]
     public GameObject DIALOGUE_ButtonA;
     public GameObject DIALOGUE_ButtonB;
@@ -191,6 +197,7 @@ public class MenuManager : MonoBehaviour
         if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || isDialogueOn)
         {
             SaveParameter.current.canUseInputs = false;
+            Debug.Log("Stuck");
         }
         else
         {
@@ -281,23 +288,30 @@ public class MenuManager : MonoBehaviour
     {
         if (!SaveParameter.current.canUseInputs)
         {
-            if(SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.Main)
+            if (isDialogueOn)
             {
-                CloseMainMenu();
+                if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].isButtonBPresent)
+                {
+                    DIALOGUE_ButtonBPressed();
+                }
             }
-            else if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.InOpenMap)
+            else if(MenuOn)
             {
-                SaveParameter.current.canUseOnglets = true;
-                ReturnButton.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
-                MainMap.SetActive(true);
-                Map1.SetActive(false);
-                SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
+                if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.Main)
+                {
+                    CloseMainMenu();
+                }
+                else if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.InOpenMap)
+                {
+                    SaveParameter.current.canUseOnglets = true;
+                    ReturnButton.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+                    MainMap.SetActive(true);
+                    Map1.SetActive(false);
+                    SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
+                }
             }
-            else if(isDialogueOn && CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].isButtonBPresent)
-            {
-                DIALOGUE_ButtonBPressed();
-            }
+            
             
         }
     }
@@ -327,7 +341,13 @@ public class MenuManager : MonoBehaviour
         {
             STUFF_PopButton();
         }
+        else if(index == 3)
+        {
+            UNIQUES_PopItems();
+        }
     }
+
+    
 
     public void MISSION_PopCurrentDay()
     {
@@ -590,40 +610,83 @@ public class MenuManager : MonoBehaviour
         HM.UpdateHands();
     }
 
-    public void OpenOrKillMainMenu()
+    public void UNIQUES_PopItems()
     {
-        if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
+        if (SaveData.current.haveMAILLET)
         {
-            SaveParameter.current.canUseInputs = false;
-            MenuOn = true;
-            Carnet_GLOBAL.SetActive(true);
-            if (Carnet_OPEN.activeSelf)
-            {
-                OpenPage(SaveParameter.current.MMTMP.index);
-                if (SaveParameter.current.MMTMP.index==2)
-                {
-                    STUFF_PopButton();
-                }
-                EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
-                Carnet_GLOBAL.transform.DOKill();
-                Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.19f);
-                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.2f);
-            }
-            else
-            {
-                Carnet_GLOBAL.transform.DOKill();
-                Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
-                Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0);  EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
-            }
+            CEINTURE_Maillet.SetActive(true);
         }
         else
         {
-            SaveParameter.current.canUseInputs = true;
-            MenuOn = false;
-            Carnet_GLOBAL.transform.DOKill();
-            Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.19f);
-            Carnet_GLOBAL.transform.DOMove(Carnet_HiddenPos.position, 0.2f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+            CEINTURE_Maillet.SetActive(false);
         }
+
+        if (SaveData.current.haveDiscoveredMoney)
+        {
+            POCHE_Money.SetActive(true);
+        }
+        else
+        {
+            POCHE_Money.SetActive(false);
+        }
+
+        if (SaveData.current.haveDiscoveredCandy)
+        {
+            POCHE_Candy.SetActive(true);
+        }
+        else
+        {
+            POCHE_Candy.SetActive(false);
+        }
+
+        if (SaveData.current.haveDiscoveredYellowKey)
+        {
+            POCHE_YellowKey.SetActive(true);
+        }
+        else
+        {
+            POCHE_YellowKey.SetActive(false);
+        }
+    }
+
+    public void OpenOrKillMainMenu()
+    {
+        if (!isDialogueOn)
+        {
+            if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
+            {
+                SaveParameter.current.canUseInputs = false;
+                MenuOn = true;
+                Carnet_GLOBAL.SetActive(true);
+                if (Carnet_OPEN.activeSelf)
+                {
+                    OpenPage(SaveParameter.current.MMTMP.index);
+                    if (SaveParameter.current.MMTMP.index == 2)
+                    {
+                        STUFF_PopButton();
+                    }
+                    EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+                    Carnet_GLOBAL.transform.DOKill();
+                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.19f);
+                    Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.2f);
+                }
+                else
+                {
+                    Carnet_GLOBAL.transform.DOKill();
+                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
+                    Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                }
+            }
+            else
+            {
+                SaveParameter.current.canUseInputs = true;
+                MenuOn = false;
+                Carnet_GLOBAL.transform.DOKill();
+                Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.19f);
+                Carnet_GLOBAL.transform.DOMove(Carnet_HiddenPos.position, 0.2f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+            }
+        }
+        
     }
 
     public void CloseMainMenu()
@@ -669,12 +732,14 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_InitDialogueP2()
     {
+        ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
         ClosedScroll.SetActive(false);
         RollingScroll.SetActive(true);
-        RollingScroll.transform.DOPunchScale(new Vector3(RollingScroll.transform.localScale.x+0.1f, RollingScroll.transform.localScale.y + 0.1f, RollingScroll.transform.localScale.z + 0.1f), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
+        RollingScroll.transform.DOScale(new Vector3(RollingScroll.transform.localScale.x+0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
         FlatScroll.SetActive(true);
         FlatScroll.transform.localPosition = FLAT_SCROLL_ORIGIN;

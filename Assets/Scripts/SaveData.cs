@@ -46,11 +46,25 @@ public class SaveData
     public string[] Diary;
     public string[] TMP_Buffer;
     public int TMP_CPTmoney;
+    public int TMP_CPTcandy;
+    public int TMP_CPTYellowKey;
     public int[] TMP_CPTkills;
     public int TMP_CPTcurrentIntro;
     public string TMP_MISSIONcontent;
     public string[] TMP_MISSIONhint;
     public bool hasBeenTMP;
+
+    //Uniques
+    public bool haveMAILLET;
+    public bool haveDiscoveredMoney;
+    public int CPT_Money;
+    public bool haveDiscoveredCandy;
+    public int CPT_Candy;
+    public bool haveDiscoveredYellowKey;
+    public int CPT_YellowKey;
+
+    //EnemyKillList
+    public bool[] KillList;
 
     public void ResetValueToDefault()
     {
@@ -75,6 +89,8 @@ public class SaveData
         Diary = new string[0];
         TMP_Buffer = new string[0];
         TMP_CPTmoney = 0;
+        TMP_CPTYellowKey = 0;
+        TMP_CPTcandy = 0;
         TMP_CPTkills = new int[1];//A changer si nombre de mobs est modifié
         for (int i = 0; i < TMP_CPTkills.Length; i++)
         {
@@ -85,6 +101,19 @@ public class SaveData
         TMP_MISSIONhint = new string[0];
         hasBeenTMP = false;
 
+        haveMAILLET = true;//false for build
+        haveDiscoveredMoney = true;//false for build
+        haveDiscoveredCandy = true;//false for build
+        haveDiscoveredYellowKey = true;//false for build
+        CPT_Money = 10;// 0 for build
+        CPT_Candy = 4;// 0 for build
+        CPT_YellowKey = 2;// 0 for build
+
+        KillList = new bool[1];
+        for (int i = 0; i < KillList.Length; i++)
+        {
+            KillList[i] = true;//True pour debug   &  False for build
+        }
 
         Debug.Log("SaveData reseted");
     }

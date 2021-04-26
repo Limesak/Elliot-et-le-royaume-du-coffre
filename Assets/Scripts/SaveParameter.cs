@@ -30,6 +30,7 @@ public class SaveParameter
     public float Xsensibility;
     public bool canUseInputs;
     public bool canUseOnglets;
+    public bool canUseRotation;
     public MenuMemoryTMP MMTMP;
 
     public void ResetValueToDefault()
@@ -37,6 +38,7 @@ public class SaveParameter
         InputMode = 0;
         canUseInputs = true;
         canUseOnglets = true;
+        canUseRotation = true;
         Xsensibility = 160;
         MMTMP = new MenuMemoryTMP();
     }
