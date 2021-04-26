@@ -10,6 +10,7 @@ using DG.Tweening;
 public class MenuManager : MonoBehaviour
 {
     public enum Character { None, Elliot, LecheCuillere, Poussierin };
+    public enum TypeOfPolaroid { Bestiaire, Lieux, Souvenirs };
     public enum WIT { None, Left, Both, Right };
     public enum DialogueActionButton { None, Next, Pass, Quit , Branch};
     Movements MovementsControls;
@@ -79,6 +80,15 @@ public class MenuManager : MonoBehaviour
     public GameObject POCHE_Money;
     public GameObject POCHE_Candy;
     public GameObject POCHE_YellowKey;
+
+    [Header("Main Menus CODEX")]
+    public int CODEX_Bestiaire_CurrentIndex;
+    public int CODEX_Lieux_CurrentIndex;
+    public int CODEX_Souvenirs_CurrentIndex;
+    public PolaroidButton[] CODEX_Bestiaire_List;
+    public PolaroidButton[] CODEX_Lieux_List;
+    public PolaroidButton[] CODEX_Souvenirs_List;
+
 
     [Header("DIALOGUES")]
     public GameObject DIALOGUE_ButtonA;
@@ -344,6 +354,10 @@ public class MenuManager : MonoBehaviour
         else if(index == 3)
         {
             UNIQUES_PopItems();
+        }
+        else if (index == 4)
+        {
+            CODEX_Setup();
         }
     }
 
@@ -646,6 +660,141 @@ public class MenuManager : MonoBehaviour
         else
         {
             POCHE_YellowKey.SetActive(false);
+        }
+    }
+
+    public void CODEX_Setup()
+    {
+        for(int i = 0; i < CODEX_Bestiaire_List.Length; i++)
+        {
+            if(i == CODEX_Bestiaire_CurrentIndex - 1)
+            {
+                if (CODEX_Bestiaire_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Bestiaire_List[i].GoLeft();
+                }
+                else
+                {
+                    CODEX_Bestiaire_List[i].gameObject.SetActive(true);
+                    CODEX_Bestiaire_List[i].PopLeft();
+                }
+            }
+            else if(i == CODEX_Bestiaire_CurrentIndex)
+            {
+                if (CODEX_Bestiaire_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Bestiaire_List[i].GoMid();
+                }
+                else
+                {
+                    CODEX_Bestiaire_List[i].gameObject.SetActive(true);
+                    CODEX_Bestiaire_List[i].PopMid();
+                }
+            }
+            else if (i == CODEX_Bestiaire_CurrentIndex +1)
+            {
+                if (CODEX_Bestiaire_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Bestiaire_List[i].GoRight();
+                }
+                else
+                {
+                    CODEX_Bestiaire_List[i].gameObject.SetActive(true);
+                    CODEX_Bestiaire_List[i].PopRight();
+                }
+            }
+            else
+            {
+                CODEX_Bestiaire_List[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < CODEX_Lieux_List.Length; i++)
+        {
+            if (i == CODEX_Lieux_CurrentIndex - 1)
+            {
+                if (CODEX_Lieux_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Lieux_List[i].GoLeft();
+                }
+                else
+                {
+                    CODEX_Lieux_List[i].gameObject.SetActive(true);
+                    CODEX_Lieux_List[i].PopLeft();
+                }
+            }
+            else if (i == CODEX_Lieux_CurrentIndex)
+            {
+                if (CODEX_Lieux_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Lieux_List[i].GoMid();
+                }
+                else
+                {
+                    CODEX_Lieux_List[i].gameObject.SetActive(true);
+                    CODEX_Lieux_List[i].PopMid();
+                }
+            }
+            else if (i == CODEX_Lieux_CurrentIndex + 1)
+            {
+                if (CODEX_Lieux_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Lieux_List[i].GoRight();
+                }
+                else
+                {
+                    CODEX_Lieux_List[i].gameObject.SetActive(true);
+                    CODEX_Lieux_List[i].PopRight();
+                }
+            }
+            else
+            {
+                CODEX_Lieux_List[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < CODEX_Souvenirs_List.Length; i++)
+        {
+            if (i == CODEX_Souvenirs_CurrentIndex - 1)
+            {
+                if (CODEX_Souvenirs_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Souvenirs_List[i].GoLeft();
+                }
+                else
+                {
+                    CODEX_Souvenirs_List[i].gameObject.SetActive(true);
+                    CODEX_Souvenirs_List[i].PopLeft();
+                }
+            }
+            else if (i == CODEX_Souvenirs_CurrentIndex)
+            {
+                if (CODEX_Souvenirs_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Souvenirs_List[i].GoMid();
+                }
+                else
+                {
+                    CODEX_Souvenirs_List[i].gameObject.SetActive(true);
+                    CODEX_Souvenirs_List[i].PopMid();
+                }
+            }
+            else if (i == CODEX_Souvenirs_CurrentIndex + 1)
+            {
+                if (CODEX_Souvenirs_List[i].gameObject.activeSelf)
+                {
+                    CODEX_Souvenirs_List[i].GoRight();
+                }
+                else
+                {
+                    CODEX_Souvenirs_List[i].gameObject.SetActive(true);
+                    CODEX_Souvenirs_List[i].PopRight();
+                }
+            }
+            else
+            {
+                CODEX_Souvenirs_List[i].gameObject.SetActive(false);
+            }
         }
     }
 
