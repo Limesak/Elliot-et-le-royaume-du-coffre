@@ -27,6 +27,13 @@ public class Poussierin : MonoBehaviour
     private float lastTimeEyeMoved;
     public GameObject[] PointsToLookAt;
     private int CurrentIndexPTLA;
+    public MeshRenderer HeadMR;
+    public SkinnedMeshRenderer BodyMR;
+    public Material[] HeadSkins;
+    public Material[] BodySkins;
+    public GameObject PREFAB_Head;
+    public GameObject PREFAB_Hit;
+    public GameObject PREFAB_HitSword;
 
     [Header("Deplacement & Targets")]
     private Vector3 LastPositionSeen;
@@ -89,6 +96,9 @@ public class Poussierin : MonoBehaviour
         HP = HPmax;
         isAgressive = false;
         PLAYER = GameObject.FindGameObjectWithTag("Player");
+        HeadMR.material = HeadSkins[Random.Range(0,HeadSkins.Length)];
+        BodyMR.material = BodySkins[Random.Range(0, BodySkins.Length)];
+        transform.localScale = transform.localScale * Random.Range(0.6f, 1.2f);
     }
 
     void Update()
@@ -282,13 +292,16 @@ public class Poussierin : MonoBehaviour
                 AntiBugMemory = AntiBugMemory + d._key;
                 HP = HP - d._power;
                 triggerHit = true;
-            }
+                Instantiate(PREFAB_Hit, d._impactPoint, Quaternion.identity);
+                Instantiate(PREFAB_HitSword, d._impactPoint, Quaternion.identity);
+}
         }
         if (triggerHit)
         {
             CurrentAnimVersion = (int) Random.Range(1, 3);
             Anim.SetInteger("animVersion", CurrentAnimVersion);
             lastTimeDamageTaken = Time.time;
+            
             if (HP > 0 && !isDead && (!isAttacking || isAttacking && LastAttackType != AttackType.Vertical))
             {
                 Anim.SetTrigger("hit");
@@ -309,13 +322,21 @@ public class Poussierin : MonoBehaviour
             Anim.SetTrigger("die");
             StopWalking();
             PLAYER.GetComponent<DiaryManager>().AddAKill(0);
+            SaveData.current.KillList[TableIndex] = true;
             transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
         }
     }
 
     public void DiePartTwo()
     {
-        transform.DOScale(Vector3.zero, 0.8f).OnComplete(() => { Destroy(gameObject); });
+        transform.DOScale(Vector3.zero, 0.8f).OnComplete(() => { DiePartThree(); });
+    }
+
+    public void DiePartThree()
+    {
+        GameObject SpawnedHead = Instantiate(PREFAB_Head, ModelEye.transform.position, Quaternion.identity);
+        SpawnedHead.GetComponent<MeshRenderer>().material = HeadMR.material;
+        Destroy(gameObject);
     }
 
     public bool CanSeePlayer()

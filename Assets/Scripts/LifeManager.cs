@@ -24,6 +24,8 @@ public class LifeManager : MonoBehaviour
 
     private string KeyMemory;
 
+    public GameObject PREFAB_Hit;
+
     void Start()
     {
         isDead = false;
@@ -53,7 +55,7 @@ public class LifeManager : MonoBehaviour
             if (TESTgetDmg)
             {
                 TESTgetDmg = false;
-                GetDamage(new DamageForPlayer(TESTvalue, Random.Range(0, 10000), gameObject));
+                GetDamage(new DamageForPlayer(TESTvalue, Random.Range(0, 10000), gameObject, gameObject.transform.position));
                 Debug.Log("Test DMG");
             }
 
@@ -78,9 +80,15 @@ public class LifeManager : MonoBehaviour
 
     public void GetDamage(DamageForPlayer dmg)
     {
+        if(SaveData.current.CurrentItemHEAD == 0)
+        {
+            dmg._power = dmg._power * 0.7f;
+            Debug.Log("Tanked by bucket");
+        }
         if (!isDead && InvunerableFramesDuration + lastHit <= Time.time && !KeyMemory.Contains(dmg._key+""))
         {
             int index = GetCurrentIndex();
+            Instantiate(PREFAB_Hit, dmg._impactPoint, Quaternion.identity);
             if (index < Cells.Length && index != -1)
             {
                 lastHit = Time.time;
