@@ -40,7 +40,7 @@ public class SwordTrigger : MonoBehaviour
         //Debug.Log("Enter DD");
         if (canDamage && other.gameObject.GetComponent<DamageReceiver>())
         {
-            other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey(),AM.gameObject));
+            other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey(),AM.gameObject,other.ClosestPointOnBounds(transform.position)));
         }
 
         if (canDamage && other.gameObject.GetComponent<Trigger_Poutch>())

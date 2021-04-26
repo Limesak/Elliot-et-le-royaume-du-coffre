@@ -117,7 +117,7 @@ public class SaveData
         KillList = new bool[1];
         for (int i = 0; i < KillList.Length; i++)
         {
-            KillList[i] = true;//True pour debug   &  False for build
+            KillList[i] = false;
         }
 
         Codex_Bestiaire_unlockList = new bool[3];
