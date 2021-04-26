@@ -63,6 +63,9 @@ public class SaveData
     public bool haveDiscoveredYellowKey;
     public int CPT_YellowKey;
 
+    //EnemyKillList
+    public bool[] KillList;
+
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -98,13 +101,19 @@ public class SaveData
         TMP_MISSIONhint = new string[0];
         hasBeenTMP = false;
 
-        haveMAILLET = false;
-        haveDiscoveredMoney = false;
-        haveDiscoveredCandy = false;
-        haveDiscoveredYellowKey = false;
-        CPT_Money = 0;
-        CPT_Candy = 0;
-        CPT_YellowKey = 0;
+        haveMAILLET = true;//false for build
+        haveDiscoveredMoney = true;//false for build
+        haveDiscoveredCandy = true;//false for build
+        haveDiscoveredYellowKey = true;//false for build
+        CPT_Money = 10;// 0 for build
+        CPT_Candy = 4;// 0 for build
+        CPT_YellowKey = 2;// 0 for build
+
+        KillList = new bool[1];
+        for (int i = 0; i < KillList.Length; i++)
+        {
+            KillList[i] = true;//True pour debug   &  False for build
+        }
 
         Debug.Log("SaveData reseted");
     }

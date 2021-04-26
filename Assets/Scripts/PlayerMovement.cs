@@ -355,48 +355,52 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             moveDir =new Vector3(moveDir.x, 0, moveDir.z);
 
-            if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
+            if (SaveParameter.current.canUseInputs)
             {
-
-                if (!AUM.GetAttacking())
+                if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
                 {
-                    if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
+
+                    if (!AUM.GetAttacking())
                     {
-                        var emission = WalkDustCloud.emission;
-                        emission.rateOverDistance = 8;
+                        if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
+                        {
+                            var emission = WalkDustCloud.emission;
+                            emission.rateOverDistance = 8;
 
-                        controller.Move(moveDir * currentSpeed * Time.deltaTime);
+                            controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
-                        screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
+                            screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
+                        }
+                        else
+                        {
+
+                            var emission = WalkDustCloud.emission;
+                            emission.rateOverDistance = 3;
+
+                            controller.Move(moveDir * Direction.magnitude * currentSpeed * Time.deltaTime);
+                            isSprinting = false;
+                        }
                     }
-                    else
-                    {
 
-                        var emission = WalkDustCloud.emission;
-                        emission.rateOverDistance = 3;
-
-                        controller.Move(moveDir * Direction.magnitude * currentSpeed * Time.deltaTime);
-                        isSprinting = false;
-                    }
                 }
-                    
-            }
-            else
-            {
-                if (!AUM.GetAttacking())
+                else
                 {
-                    if (isSprinting)
+                    if (!AUM.GetAttacking())
                     {
-                        controller.Move(moveDir * currentSpeed * Time.deltaTime * AirControlDivFactor);
+                        if (isSprinting)
+                        {
+                            controller.Move(moveDir * currentSpeed * Time.deltaTime * AirControlDivFactor);
+                        }
+                        else
+                        {
+                            controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime * AirControlDivFactor);
+                            isSprinting = false;
+                        }
                     }
-                    else
-                    {
-                        controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime * AirControlDivFactor);
-                        isSprinting = false;
-                    }
+
                 }
-                
             }
+            
             
 
 
