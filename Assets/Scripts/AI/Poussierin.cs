@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class Poussierin : MonoBehaviour
 {
+    public enum AttackType { Vertical, Horizontal};
+
     [Header("Inspector Info")]
     public DamageCentralizer DC;
     public Animator Anim;
@@ -75,6 +77,7 @@ public class Poussierin : MonoBehaviour
     private bool isAttacking;
     private Vector3 PosWhenAttacking;
     private int AttackKey;
+    private AttackType LastAttackType;
 
 
     void Start()
@@ -286,10 +289,10 @@ public class Poussierin : MonoBehaviour
             CurrentAnimVersion = (int) Random.Range(1, 3);
             Anim.SetInteger("animVersion", CurrentAnimVersion);
             lastTimeDamageTaken = Time.time;
-            if (HP > 0 && !isDead && !isAttacking)
+            if (HP > 0 && !isDead && (!isAttacking || isAttacking && LastAttackType != AttackType.Vertical))
             {
                 Anim.SetTrigger("hit");
-                //isAttacking = false;
+                isAttacking = false;
             }
             else if(HP <= 0 && !isDead)
             {
@@ -426,10 +429,12 @@ public class Poussierin : MonoBehaviour
         if (rdm <= 50)
         {
             Anim.SetTrigger("verticalAttack");
+            LastAttackType = AttackType.Vertical;
         }
         else
         {
             Anim.SetTrigger("horizontalAttack");
+            LastAttackType = AttackType.Horizontal;
         }
         lastAttackDate = Time.time;
         CurrentAdditionalAttrackCooldown = Random.Range(0, AttackMaxAdditionnalCooldown);
