@@ -11,6 +11,7 @@ public class AttackUseManager : MonoBehaviour
     public HandManager HM;
     public GameObject Debug_ComboTimeSign;
     public GameObject Debug_AttrackingSign;
+    public SwordTrigger ST;
 
     public float AttackCD_failedCombo;
     public float AttackCD_doingCombo;
@@ -176,5 +177,14 @@ public class AttackUseManager : MonoBehaviour
     public int GetCurrentKey()
     {
         return CurrentAttackID;
+    }
+
+    public void CancelAttack()
+    {
+        SaveParameter.current.canUseInputs = true;
+        SaveParameter.current.canUseRotation = true;
+        isAttacking = false;
+        ST.canDamage = false;
+        SetComboing(false);
     }
 }
