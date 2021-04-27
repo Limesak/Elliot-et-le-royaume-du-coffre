@@ -84,6 +84,11 @@ public class LockManager : MonoBehaviour
     {
         if(SaveParameter.current.InputMode == 0)
         {
+            if (isLock)
+            {
+                isLock = false;
+                LockedObject.UnLock();
+            }
             Collider[] res = Physics.OverlapSphere(PointOfScan.transform.position, radiusOfLock);
             List<GameObject> PossibleLocks = new List<GameObject>();
             for (int i = 0; i < res.Length; i++)
