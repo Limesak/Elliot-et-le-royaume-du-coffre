@@ -81,6 +81,22 @@ MonoBehaviour:
   - {fileID: 4207303017258261184}
   - {fileID: 4061528309852867514}
   - {fileID: 1158399610564491588}
+  HeadMR: {fileID: 2605382310334580722}
+  BodyMR: {fileID: 8409302968657472295}
+  HeadSkins:
+  - {fileID: 2100000, guid: f4b41de8dd03a884dac1786ac9d4b60c, type: 2}
+  - {fileID: 2100000, guid: 7f9e323cb062a6e41ba0f3a682dc0cf1, type: 2}
+  - {fileID: 2100000, guid: cf0af97a977ceb74ab78e33b5d229bb8, type: 2}
+  BodySkins:
+  - {fileID: 2100000, guid: baba40c876cd1004c995960b74b5bbd7, type: 2}
+  - {fileID: 2100000, guid: 52908d14e13b7e94b8268ebb0520a095, type: 2}
+  - {fileID: 2100000, guid: efd78a36715b97446b57fe3d3750c3a9, type: 2}
+  PREFAB_Head: {fileID: 3823212545256696502, guid: d2cd8e4b41d1db846be39ccb9307ee58,
+    type: 3}
+  PREFAB_Hit: {fileID: 6308170016303996140, guid: ab8cc3e2708be0b4888f01889906ebc3,
+    type: 3}
+  PREFAB_HitSword: {fileID: 3002999571980210678, guid: f7076595ea600cf45ac277430aa8c68a,
+    type: 3}
   WanderingPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -104,8 +120,8 @@ MonoBehaviour:
   ModelEye: {fileID: 8758784868369711044}
   TauntDuration: 2
   MinDistToHit: 3
-  DamageHorizontalAttack: 10
-  DamageVerticalAttack: 15
+  DamageHorizontalAttack: 15
+  DamageVerticalAttack: 45
   AttackBaseCooldown: 3
   AttackMaxAdditionnalCooldown: 4
   StunDuration: 1.3
@@ -3278,9 +3294,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.24
-  m_Height: 1.36
+  m_Height: 2.32
   m_Direction: 0
-  m_Center: {x: 0.17, y: 0, z: 0}
+  m_Center: {x: 0.65, y: 0, z: 0}
 --- !u!54 &1938019715
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4884,9 +4900,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.24
-  m_Height: 1.36
+  m_Height: 2.32
   m_Direction: 0
-  m_Center: {x: 0.17, y: 0, z: 0}
+  m_Center: {x: 0.65, y: 0, z: 0}
 --- !u!54 &31841784
 Rigidbody:
   m_ObjectHideFlags: 0

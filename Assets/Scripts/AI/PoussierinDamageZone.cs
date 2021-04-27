@@ -29,7 +29,7 @@ public class PoussierinDamageZone : MonoBehaviour
         //Debug.Log("Enter DD");
         if (canDamage && other.gameObject.GetComponent<LifeManager>())
         {
-            other.gameObject.GetComponent<LifeManager>().GetDamage(new DamageForPlayer(CurrentDamage(),Entity.GetAttackKey(),Entity.gameObject));
+            other.gameObject.GetComponent<LifeManager>().GetDamage(new DamageForPlayer(CurrentDamage(),Entity.GetAttackKey(),Entity.gameObject, other.ClosestPointOnBounds(transform.position)));
         }
     }
 
