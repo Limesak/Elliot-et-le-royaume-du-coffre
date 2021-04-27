@@ -66,6 +66,11 @@ public class SaveData
     //EnemyKillList
     public bool[] KillList;
 
+    //Codex
+    public bool[] Codex_Bestiaire_unlockList;
+    public bool[] Codex_Lieux_unlockList;
+    public bool[] Codex_Souvenirs_unlockList;
+
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -112,7 +117,23 @@ public class SaveData
         KillList = new bool[1];
         for (int i = 0; i < KillList.Length; i++)
         {
-            KillList[i] = true;//True pour debug   &  False for build
+            KillList[i] = false;
+        }
+
+        Codex_Bestiaire_unlockList = new bool[3];
+        for (int i = 0; i < Codex_Bestiaire_unlockList.Length; i++)
+        {
+            Codex_Bestiaire_unlockList[i] = true;//True pour debug   &  False for build
+        }
+        Codex_Lieux_unlockList = new bool[3];
+        for (int i = 0; i < Codex_Lieux_unlockList.Length; i++)
+        {
+            Codex_Lieux_unlockList[i] = true;//True pour debug   &  False for build
+        }
+        Codex_Souvenirs_unlockList = new bool[3];
+        for (int i = 0; i < Codex_Souvenirs_unlockList.Length; i++)
+        {
+            Codex_Souvenirs_unlockList[i] = true;//True pour debug   &  False for build
         }
 
         Debug.Log("SaveData reseted");

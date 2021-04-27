@@ -15,6 +15,10 @@ public class SlideSheetOnSelect : MonoBehaviour
 
     public GameObject Ring;
     private Vector3 ScaleOrigin;
+    public bool dontShowRing;
+
+    public bool GrowOnSelect;
+
 
     void Start()
     {
@@ -35,7 +39,14 @@ public class SlideSheetOnSelect : MonoBehaviour
                 transform.DOKill();
                 Slided = true;
                 MySheet.transform.DOLocalMove(SlidePos.localPosition, 0.2f);
-                Ring.transform.DOScale(ScaleOrigin, 0.1f);
+                if (!dontShowRing)
+                {
+                    Ring.transform.DOScale(ScaleOrigin, 0.1f);
+                }
+                if (GrowOnSelect)
+                {
+                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
+                }
             }
 
         }
@@ -47,6 +58,14 @@ public class SlideSheetOnSelect : MonoBehaviour
                 Slided = false;
                 MySheet.transform.DOLocalMove(ORIGIN, 0.2f);
                 Ring.transform.DOScale(Vector3.zero, 0.1f);
+                if (!dontShowRing)
+                {
+                    Ring.transform.DOScale(Vector3.zero, 0.1f);
+                }
+                if (GrowOnSelect)
+                {
+                    transform.DOScale(new Vector3(1, 1, 1), 0.2f);
+                }
             }
         }
     }

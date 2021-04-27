@@ -25,12 +25,8 @@ public class PoussierinAnimTransmitter : MonoBehaviour
 
     public void DoingHorizontalAttack()
     {
-        foreach (PoussierinDamageZone pdz in DZ)
-        {
-            pdz.AT = PoussierinDamageZone.AttackType.horizontal;
-            pdz.canDamage = true;
-        }
-        
+        DZ[0].AT = PoussierinDamageZone.AttackType.horizontal;
+        DZ[0].canDamage = true;
     }
 
     public void AttackFinished()
@@ -40,5 +36,15 @@ public class PoussierinAnimTransmitter : MonoBehaviour
             pdz.canDamage = false;
         }
         
+    }
+
+    public void GoSlow()
+    {
+        Entity.Anim.SetFloat("attackSpeed", 0.25f);
+    }
+
+    public void GoNormalSpeed()
+    {
+        Entity.Anim.SetFloat("attackSpeed", 1f);
     }
 }
