@@ -28,6 +28,14 @@ public class LockManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if(isLock && LockedObject == null)
+        {
+            isLock = false;
+        }
+    }
+
 
     void Awake()
     {
