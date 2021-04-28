@@ -13,6 +13,7 @@ public class Poussierin : MonoBehaviour
     public Animator Anim;
     private GameObject PLAYER;
     public NavMeshAgent NavAgent;
+    public LockableObject LO;
 
     [Header("Global Info")]
     public int TableIndex;
@@ -323,6 +324,7 @@ public class Poussierin : MonoBehaviour
             StopWalking();
             PLAYER.GetComponent<DiaryManager>().AddAKill(0);
             SaveData.current.KillList[TableIndex] = true;
+            LO.Die();
             transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
         }
     }
