@@ -63,8 +63,8 @@ public class SaveData
     public bool haveDiscoveredYellowKey;
     public int CPT_YellowKey;
 
-    //EnemyKillList
-    public bool[] KillList;
+    //Relevant shits
+    public string RELEVANT_KeyList;
 
     //Codex
     public bool[] Codex_Bestiaire_unlockList;
@@ -114,11 +114,7 @@ public class SaveData
         CPT_Candy = 0;// 0 for build
         CPT_YellowKey = 0;// 0 for build
 
-        KillList = new bool[1];
-        for (int i = 0; i < KillList.Length; i++)
-        {
-            KillList[i] = false;
-        }
+        RELEVANT_KeyList = "";
 
         Codex_Bestiaire_unlockList = new bool[3];
         for (int i = 0; i < Codex_Bestiaire_unlockList.Length; i++)

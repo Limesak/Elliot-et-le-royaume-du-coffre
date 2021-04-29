@@ -9,6 +9,7 @@ public class LootEntity : MonoBehaviour
     public bool isFollowing;
     private LootManager LM;
     public float SpeedIfFollowing;
+    public RelevantEntity RE;
 
     void Start()
     {
@@ -29,6 +30,10 @@ public class LootEntity : MonoBehaviour
         if(Vector3.Distance(transform.position, LM.gameObject.transform.position) <= DetectionRadius)
         {
             LM.Loot(Type);
+            if (RE != null)
+            {
+                RE.NotRelevantAnymore();
+            }
             Destroy(gameObject);
         }
     }

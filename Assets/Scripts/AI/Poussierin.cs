@@ -14,6 +14,7 @@ public class Poussierin : MonoBehaviour
     private GameObject PLAYER;
     public NavMeshAgent NavAgent;
     public LockableObject LO;
+    public RelevantEntity RE;
 
     public GameObject Prefab_Piece;
     public GameObject Prefab_Bonbon;
@@ -93,10 +94,6 @@ public class Poussierin : MonoBehaviour
 
     void Start()
     {
-        if(SaveData.current.KillList[TableIndex] && !RespawnAfterReload)
-        {
-            Destroy(gameObject);
-        }
         HP = HPmax;
         isAgressive = false;
         PLAYER = GameObject.FindGameObjectWithTag("Player");
@@ -326,7 +323,10 @@ public class Poussierin : MonoBehaviour
             Anim.SetTrigger("die");
             StopWalking();
             PLAYER.GetComponent<DiaryManager>().AddAKill(0);
-            SaveData.current.KillList[TableIndex] = true;
+            if (RE != null && !RespawnAfterReload)
+            {
+                RE.NotRelevantAnymore();
+            }
             LO.Die();
             transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
         }

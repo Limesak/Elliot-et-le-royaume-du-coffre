@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2821921775388347470}
   - component: {fileID: 2821921775388347469}
   - component: {fileID: 2821921775388347468}
+  - component: {fileID: 4262362960055105158}
   m_Layer: 0
   m_Name: Loot Bonbon
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   DetectionRadius: 0.6
   isFollowing: 0
   SpeedIfFollowing: 20
+  RE: {fileID: 4262362960055105158}
 --- !u!114 &2821921775388347468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +144,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+--- !u!114 &4262362960055105158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2821921775388347471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a456ea9930b2848b5e48492a138b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: 
 --- !u!1 &2821921775747771827
 GameObject:
   m_ObjectHideFlags: 0
