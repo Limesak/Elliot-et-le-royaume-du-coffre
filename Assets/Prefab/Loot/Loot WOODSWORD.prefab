@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 11011364961686711}
   - component: {fileID: 11011364961686708}
   - component: {fileID: 11011364961686709}
+  - component: {fileID: 5593178145651309339}
   m_Layer: 0
   m_Name: Loot WOODSWORD
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   DetectionRadius: 1
   isFollowing: 0
   SpeedIfFollowing: 20
+  RE: {fileID: 5593178145651309339}
 --- !u!114 &11011364961686709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+--- !u!114 &5593178145651309339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11011364961686710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a456ea9930b2848b5e48492a138b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: WOODSWORDUNLOCK
 --- !u!1001 &4473674958775478256
 PrefabInstance:
   m_ObjectHideFlags: 0

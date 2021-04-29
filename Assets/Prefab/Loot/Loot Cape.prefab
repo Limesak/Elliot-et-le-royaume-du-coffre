@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2080360390440458045}
   - component: {fileID: 2080360390440458046}
   - component: {fileID: 2080360390440458047}
+  - component: {fileID: 3418576386139418314}
   m_Layer: 0
   m_Name: Loot Cape
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   DetectionRadius: 1
   isFollowing: 0
   SpeedIfFollowing: 20
+  RE: {fileID: 3418576386139418314}
 --- !u!114 &2080360390440458047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+--- !u!114 &3418576386139418314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080360390440458044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a456ea9930b2848b5e48492a138b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: CAPEUNLOCK
 --- !u!1001 &2080360389783258770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,6 +143,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.36832437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.08982289
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.40050915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.88959813
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e048408a92b8fe84c8fb723410f2d83b, type: 3}

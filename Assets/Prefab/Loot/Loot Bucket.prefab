@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5092398391815358466}
   - component: {fileID: 5092398391815358465}
   - component: {fileID: 5092398391815358464}
+  - component: {fileID: 4428572498039582841}
   m_Layer: 0
   m_Name: Loot Bucket
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   DetectionRadius: 1
   isFollowing: 0
   SpeedIfFollowing: 20
+  RE: {fileID: 4428572498039582841}
 --- !u!114 &5092398391815358464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
+--- !u!114 &4428572498039582841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092398391815358467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a456ea9930b2848b5e48492a138b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: BUCKETUNLOCK
 --- !u!1 &5092398392109705727
 GameObject:
   m_ObjectHideFlags: 0
