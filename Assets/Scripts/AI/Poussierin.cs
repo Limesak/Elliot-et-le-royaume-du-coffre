@@ -15,6 +15,9 @@ public class Poussierin : MonoBehaviour
     public NavMeshAgent NavAgent;
     public LockableObject LO;
 
+    public GameObject Prefab_Piece;
+    public GameObject Prefab_Bonbon;
+
     [Header("Global Info")]
     public int TableIndex;
     public bool RespawnAfterReload;
@@ -337,6 +340,37 @@ public class Poussierin : MonoBehaviour
     public void DiePartThree()
     {
         GameObject SpawnedHead = Instantiate(PREFAB_Head, ModelEye.transform.position, Quaternion.identity);
+        float rdm = Random.Range(0, 100);
+        if (rdm > 95)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else if(rdm > 80)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else if (rdm > 50)
+        {
+            for(int i = 0; i< 3; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else
+        {
+            Instantiate(Prefab_Piece,transform.position + new Vector3(Random.Range(-0.5f,0.5f),1+ Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+        }
+
+        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2)
+        {
+            Instantiate(Prefab_Bonbon, transform.position + new Vector3( 0,1 , 0), Quaternion.identity);
+        }
         SpawnedHead.GetComponent<MeshRenderer>().material = HeadMR.material;
         Destroy(gameObject);
     }

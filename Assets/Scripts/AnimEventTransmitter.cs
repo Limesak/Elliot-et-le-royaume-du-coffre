@@ -24,7 +24,7 @@ public class AnimEventTransmitter : MonoBehaviour
     public void canWalk()
     {
         AM.SetAttacking(false);
-        
+        SaveParameter.current.canUseRotation = true;
         //Debug.Log("canWalk");
     }
 
