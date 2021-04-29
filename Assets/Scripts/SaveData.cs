@@ -88,7 +88,7 @@ public class SaveData
         UnlockList = new bool[4];
         for(int i = 0; i< UnlockList.Length; i++)
         {
-            UnlockList[i] = true;//True pour debug   &  False for build
+            UnlockList[i] = false;//True pour debug   &  False for build
         }
 
         Diary = new string[0];
@@ -107,12 +107,12 @@ public class SaveData
         hasBeenTMP = false;
 
         haveMAILLET = true;//false for build
-        haveDiscoveredMoney = true;//false for build
-        haveDiscoveredCandy = true;//false for build
-        haveDiscoveredYellowKey = true;//false for build
-        CPT_Money = 10;// 0 for build
-        CPT_Candy = 4;// 0 for build
-        CPT_YellowKey = 2;// 0 for build
+        haveDiscoveredMoney = false;//false for build
+        haveDiscoveredCandy = false;//false for build
+        haveDiscoveredYellowKey = false;//false for build
+        CPT_Money = 0;// 0 for build
+        CPT_Candy = 0;// 0 for build
+        CPT_YellowKey = 0;// 0 for build
 
         KillList = new bool[1];
         for (int i = 0; i < KillList.Length; i++)
