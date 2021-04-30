@@ -24,6 +24,6 @@ public class LockableObject : MonoBehaviour
     public void Die()
     {
         Destroy(HoverSignal);
-        Destroy(gameObject);
+        Destroy(this);
     }
 }

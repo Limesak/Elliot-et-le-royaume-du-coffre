@@ -14,6 +14,10 @@ public class Poussierin : MonoBehaviour
     private GameObject PLAYER;
     public NavMeshAgent NavAgent;
     public LockableObject LO;
+    public RelevantEntity RE;
+
+    public GameObject Prefab_Piece;
+    public GameObject Prefab_Bonbon;
 
     [Header("Global Info")]
     public int TableIndex;
@@ -90,10 +94,6 @@ public class Poussierin : MonoBehaviour
 
     void Start()
     {
-        if(SaveData.current.KillList[TableIndex] && !RespawnAfterReload)
-        {
-            Destroy(gameObject);
-        }
         HP = HPmax;
         isAgressive = false;
         PLAYER = GameObject.FindGameObjectWithTag("Player");
@@ -323,7 +323,10 @@ public class Poussierin : MonoBehaviour
             Anim.SetTrigger("die");
             StopWalking();
             PLAYER.GetComponent<DiaryManager>().AddAKill(0);
-            SaveData.current.KillList[TableIndex] = true;
+            if (RE != null && !RespawnAfterReload)
+            {
+                RE.NotRelevantAnymore();
+            }
             LO.Die();
             transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
         }
@@ -337,6 +340,37 @@ public class Poussierin : MonoBehaviour
     public void DiePartThree()
     {
         GameObject SpawnedHead = Instantiate(PREFAB_Head, ModelEye.transform.position, Quaternion.identity);
+        float rdm = Random.Range(0, 100);
+        if (rdm > 95)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else if(rdm > 80)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else if (rdm > 50)
+        {
+            for(int i = 0; i< 3; i++)
+            {
+                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+            }
+        }
+        else
+        {
+            Instantiate(Prefab_Piece,transform.position + new Vector3(Random.Range(-0.5f,0.5f),1+ Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+        }
+
+        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2)
+        {
+            Instantiate(Prefab_Bonbon, transform.position + new Vector3( 0,1 , 0), Quaternion.identity);
+        }
         SpawnedHead.GetComponent<MeshRenderer>().material = HeadMR.material;
         Destroy(gameObject);
     }

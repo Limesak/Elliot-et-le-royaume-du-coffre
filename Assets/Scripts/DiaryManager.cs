@@ -131,7 +131,7 @@ public class DiaryManager : MonoBehaviour
                         res = res + ", ";
                     }
                     notfirst = true;
-                    res = res + CPT_money + " bonbons";
+                    res = res + CPT_candy + " bonbons";
                 }
                 if (CPT_yellowKey > 0)
                 {
@@ -140,7 +140,7 @@ public class DiaryManager : MonoBehaviour
                         res = res + ", ";
                     }
                     notfirst = true;
-                    res = res + CPT_money + " clés de gobelin jaunies";
+                    res = res + CPT_yellowKey + " clés de gobelin jaunies";
                 }
                 res = res + ".";
             }
@@ -151,9 +151,35 @@ public class DiaryManager : MonoBehaviour
         }
         else
         {
-            if (CPT_money > 0)
+
+            if (DidCollect())
             {
-                res = res + CPT_Intros[CPT_currentIntro] + " j'ai récolté " + CPT_money + " pièces.";
+                res = res + CPT_Intros[CPT_currentIntro] + " j'ai récolté ";
+                bool notfirst = false;
+                if (CPT_money > 0)
+                {
+                    notfirst = true;
+                    res = res + CPT_money + " pièces";
+                }
+                if (CPT_candy > 0)
+                {
+                    if (notfirst)
+                    {
+                        res = res + ", ";
+                    }
+                    notfirst = true;
+                    res = res + CPT_candy + " bonbons";
+                }
+                if (CPT_yellowKey > 0)
+                {
+                    if (notfirst)
+                    {
+                        res = res + ", ";
+                    }
+                    notfirst = true;
+                    res = res + CPT_yellowKey + " clés de gobelin jaunies";
+                }
+                res = res + ".";
             }
         }
 
@@ -291,5 +317,16 @@ public class DiaryManager : MonoBehaviour
     public void AddYellowKey(int howMuch)
     {
         CPT_yellowKey = CPT_yellowKey + howMuch;
+    }
+
+    public void AddBufferEntry(string content)
+    {
+        string[] newList = new string[BUFFER_list.Length + 1];
+        for(int i = 0; i < BUFFER_list.Length; i++)
+        {
+            newList[i] = BUFFER_list[i];
+        }
+        newList[BUFFER_list.Length] =content;
+        BUFFER_list = newList;
     }
 }
