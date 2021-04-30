@@ -163,7 +163,7 @@ public class LockManager : MonoBehaviour
 
     public void Unlock()
     {
-        Debug.Log("Unlock");
+        //Debug.Log("Unlock");
         isLock = false;
         if (LockedObject != null)
         {

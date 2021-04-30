@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     public float shakePushFactor;
 
     public ScreenShake screenShakeScript;
+    public ScreenShake screenShakeScriptLock;
 
     void Start()
     {
@@ -370,6 +371,7 @@ public class PlayerMovement : MonoBehaviour
                         controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
                         screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
+                        screenShakeScriptLock.setShake(shakeSprintForce, shakeSprintDuration);
                         if (AUM.GetAttacking())
                         {
                             AUM.CancelAttack();
@@ -524,7 +526,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsAlmostGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
+        //return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
+
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.5f, -Vector3.up, out hit, distToGround * 2);
     }
 
     public bool IsPossiblyStuck()
@@ -577,6 +582,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller.Move(PushDirection * PushSpeed * Time.deltaTime);
         screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f);
+        screenShakeScriptLock.setShake(PushDirection.magnitude * shakePushFactor, 0.25f);
         PushDirection = PushDirection  - (PushDirection*Pushfriction*Time.time);
         if (!isPushingForceObservable())
         {

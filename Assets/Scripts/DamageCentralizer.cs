@@ -21,7 +21,7 @@ public class DamageCentralizer : MonoBehaviour
         if (d._key != lastKey)
         {
             lastKey = d._key;
-            Debug.Log("Hit power: " + d._power);
+            //Debug.Log("Hit power: " + d._power);
             DamageInMemory.Add(d);
         }
     }

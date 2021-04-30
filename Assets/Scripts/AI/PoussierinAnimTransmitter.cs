@@ -9,7 +9,7 @@ public class PoussierinAnimTransmitter : MonoBehaviour
 
     public void CanWalk()
     {
-        Debug.Log("Attack done transmitter");
+        //Debug.Log("Attack done transmitter");
         Entity.CanWalk();
     }
 
