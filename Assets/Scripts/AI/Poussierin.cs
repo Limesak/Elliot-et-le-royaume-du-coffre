@@ -118,7 +118,7 @@ public class Poussierin : MonoBehaviour
                             LookAt(PosWhenAttacking);
                             ModelEye.transform.LookAt(PosWhenAttacking);
                             StopWalking();
-                            Debug.Log("isAttacking");
+                            //Debug.Log("isAttacking");
                         }
                         else//not Attacking
                         {
@@ -504,7 +504,7 @@ public class Poussierin : MonoBehaviour
     public void CanWalk()
     {
         isAttacking = false;
-        Debug.Log("Attack done");
+        //Debug.Log("Attack done");
     }
 
     public int GetAttackKey()

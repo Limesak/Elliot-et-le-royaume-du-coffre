@@ -10,10 +10,26 @@ public class LoadingSceneManager : MonoBehaviour
     public Image Back;
     public Text SceneName;
 
+    public GameObject[] Illus;
+
     void Start()
     {
-        SceneName.text = SceneManager.GetSceneByBuildIndex(SaveData.current.currentScene).name;
+        string path = SceneUtility.GetScenePathByBuildIndex(SaveData.current.currentScene);
+        string sceneName = path.Substring(0, path.Length - 6).Substring(path.LastIndexOf('/') + 1);
+        SceneName.text = " \"" + sceneName + "\"";
         StartCoroutine(LoadAsync());
+
+        for(int i =0;i< Illus.Length;i++)
+        {
+            if( i == SaveData.current.currentScene)
+            {
+                Illus[i].SetActive(true);
+            }
+            else
+            {
+                Illus[i].SetActive(false);
+            }
+        }
     }
 
     IEnumerator LoadAsync()
@@ -24,7 +40,7 @@ public class LoadingSceneManager : MonoBehaviour
         {
             Full.fillAmount = progression.progress;
             Full.color = new Color(255, 255, 255, 255 * progression.progress);
-            Back.color = new Color(58, 58, 58, 255 * progression.progress);
+            //Back.color = new Color(58, 58, 58, 255 * progression.progress);
 
 
             yield return new WaitForEndOfFrame();

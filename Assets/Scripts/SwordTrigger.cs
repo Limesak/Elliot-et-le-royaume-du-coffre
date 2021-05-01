@@ -8,6 +8,12 @@ public class SwordTrigger : MonoBehaviour
     public HandManager HM;
     public bool canDamage;
 
+    public ScreenShake screenShakeScript;
+    public ScreenShake screenShakeScriptLock;
+
+    public float HitShakeForce;
+    public float HitShakeDuration;
+
     public GameObject Debug_CanDamageSign;
 
     void Start()
@@ -17,7 +23,7 @@ public class SwordTrigger : MonoBehaviour
 
     void Update()
     {
-        Debug_CanDamageSign.SetActive(canDamage);
+        //Debug_CanDamageSign.SetActive(canDamage);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,12 +33,12 @@ public class SwordTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //DealWithCollider(other);
+        DealWithCollider(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //DealWithCollider(other);
+        DealWithCollider(other);
     }
 
     private void DealWithCollider(Collider other)
@@ -41,11 +47,15 @@ public class SwordTrigger : MonoBehaviour
         if (canDamage && other.gameObject.GetComponent<DamageReceiver>())
         {
             other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey(),AM.gameObject,other.ClosestPointOnBounds(transform.position)));
+            screenShakeScript.setShake(HitShakeForce,HitShakeDuration);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
         }
 
         if (canDamage && other.gameObject.GetComponent<Trigger_Poutch>())
         {
-            other.gameObject.GetComponent<Trigger_Poutch>().Triggered();
+            other.gameObject.GetComponent<Trigger_Poutch>().TriggerCD();
+            screenShakeScript.setShake(HitShakeForce, HitShakeDuration);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
         }
     }
 
