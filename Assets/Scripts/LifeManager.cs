@@ -106,7 +106,7 @@ public class LifeManager : MonoBehaviour
             {
                 Die();
             }
-            KeyMemory = KeyMemory + dmg._key;
+            KeyMemory = KeyMemory + dmg._key+"|";
         }
         
     }
