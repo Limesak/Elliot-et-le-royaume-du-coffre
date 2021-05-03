@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &11011364961686710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11011364961686711}
+  - component: {fileID: 11011364961686708}
+  - component: {fileID: 11011364961686709}
+  - component: {fileID: 5593178145651309339}
+  m_Layer: 0
+  m_Name: Loot WOODSWORD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &11011364961686711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11011364961686710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.153, y: 0.29633284, z: 82.481}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4152062469854068763}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11011364961686708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11011364961686710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c41a3c162a1344daa074edfd835d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 4
+  DetectionRadius: 1
+  isFollowing: 0
+  SpeedIfFollowing: 20
+  RE: {fileID: 5593178145651309339}
+--- !u!114 &11011364961686709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11011364961686710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7531bb1591b494d821e4685230b8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 200
+--- !u!114 &5593178145651309339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11011364961686710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a456ea9930b2848b5e48492a138b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: WOODSWORDUNLOCK
+--- !u!1001 &4473674958775478256
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 11011364961686711}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.56066847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.537529
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.37738428
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.40423328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.18794067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8116988
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -27.432001
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 64.052
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -43.433002
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+        type: 3}
+      propertyPath: m_Name
+      value: Wood_Sword_Model
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9288b5f3b3e5a6d42b58e148bfd375ef, type: 3}
+--- !u!4 &4152062469854068763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9288b5f3b3e5a6d42b58e148bfd375ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 4473674958775478256}
+  m_PrefabAsset: {fileID: 0}

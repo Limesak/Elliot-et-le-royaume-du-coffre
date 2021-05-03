@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     public float shakePushFactor;
 
     public ScreenShake screenShakeScript;
+    public ScreenShake screenShakeScriptLock;
 
     void Start()
     {
@@ -360,44 +361,55 @@ public class PlayerMovement : MonoBehaviour
                 if (lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded())
                 {
 
-                    if (!AUM.GetAttacking())
+                    
+                    if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
                     {
-                        if (isSprinting && SM.UseXamount(SprintStaminaCost * Time.deltaTime))
+                       
+                        var emission = WalkDustCloud.emission;
+                        emission.rateOverDistance = 8;
+
+                        controller.Move(moveDir * currentSpeed * Time.deltaTime);
+
+                        screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
+                        screenShakeScriptLock.setShake(shakeSprintForce, shakeSprintDuration);
+                        if (AUM.GetAttacking())
                         {
-                            var emission = WalkDustCloud.emission;
-                            emission.rateOverDistance = 8;
-
-                            controller.Move(moveDir * currentSpeed * Time.deltaTime);
-
-                            screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
+                            AUM.CancelAttack();
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (!AUM.GetAttacking())
                         {
-
                             var emission = WalkDustCloud.emission;
                             emission.rateOverDistance = 3;
 
                             controller.Move(moveDir * Direction.magnitude * currentSpeed * Time.deltaTime);
                             isSprinting = false;
                         }
+                        
                     }
-
                 }
                 else
                 {
-                    if (!AUM.GetAttacking())
+                    
+                    if (isSprinting)
                     {
-                        if (isSprinting)
+                        controller.Move(moveDir * currentSpeed * Time.deltaTime * AirControlDivFactor);
+                        if (AUM.GetAttacking())
                         {
-                            controller.Move(moveDir * currentSpeed * Time.deltaTime * AirControlDivFactor);
+                            AUM.CancelAttack();
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (!AUM.GetAttacking())
                         {
                             controller.Move(moveDir * Direction.magnitude * speed * Time.deltaTime * AirControlDivFactor);
                             isSprinting = false;
                         }
+                        
                     }
-
                 }
             }
             
@@ -417,9 +429,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs && !AUM.GetAttacking())
+        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs)
         {
             isJumping = true;
+            if (AUM.GetAttacking())
+            {
+                AUM.CancelAttack();
+            }
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
                 Jump();
@@ -449,8 +465,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs && !AUM.GetAttacking())
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs)
             {
+                if (AUM.GetAttacking())
+                {
+                    AUM.CancelAttack();
+                }
                 DashLastTime = Time.time;
                 Dash();
                 
@@ -459,10 +479,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs && !AUM.GetAttacking())
+            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs )
             {
                 if (!isSprinting)
                 {
+                    if (AUM.GetAttacking())
+                    {
+                        AUM.CancelAttack();
+                    }
                     currentSpeed = speed;
                     isSprinting = true;
                     HM.CurrentHands = HandManager.Holding.Empty;
@@ -502,7 +526,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsAlmostGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
+        //return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
+
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.5f, -Vector3.up, out hit, distToGround * 2);
     }
 
     public bool IsPossiblyStuck()
@@ -555,6 +582,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller.Move(PushDirection * PushSpeed * Time.deltaTime);
         screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f);
+        screenShakeScriptLock.setShake(PushDirection.magnitude * shakePushFactor, 0.25f);
         PushDirection = PushDirection  - (PushDirection*Pushfriction*Time.time);
         if (!isPushingForceObservable())
         {

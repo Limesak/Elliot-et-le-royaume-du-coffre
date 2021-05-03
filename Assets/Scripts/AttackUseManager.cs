@@ -7,10 +7,11 @@ public class AttackUseManager : MonoBehaviour
     Movements MovementsControls;
     public PlayerMovement PM;
     public AnimationManager AM;
-    public ScreenShake screenShakeScript;
+    
     public HandManager HM;
     public GameObject Debug_ComboTimeSign;
     public GameObject Debug_AttrackingSign;
+    public SwordTrigger ST;
 
     public float AttackCD_failedCombo;
     public float AttackCD_doingCombo;
@@ -69,6 +70,8 @@ public class AttackUseManager : MonoBehaviour
         isAttacking = false;
         isComboing = false;
         CurrentAttackID = 0;
+        Debug_ComboTimeSign.SetActive(false);
+        Debug_AttrackingSign.SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,7 +84,7 @@ public class AttackUseManager : MonoBehaviour
             isComboing = false;
         }
         */
-
+        /*
         if (isComboing && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex >= 1 && comboIndex <= 3)
         {
             Debug_ComboTimeSign.SetActive(true);
@@ -92,6 +95,7 @@ public class AttackUseManager : MonoBehaviour
         }
 
         Debug_AttrackingSign.SetActive(isAttacking);
+        */
     }
 
     private void CheckStart()
@@ -176,5 +180,14 @@ public class AttackUseManager : MonoBehaviour
     public int GetCurrentKey()
     {
         return CurrentAttackID;
+    }
+
+    public void CancelAttack()
+    {
+        SaveParameter.current.canUseInputs = true;
+        SaveParameter.current.canUseRotation = true;
+        isAttacking = false;
+        ST.canDamage = false;
+        SetComboing(false);
     }
 }

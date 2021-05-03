@@ -694,6 +694,10 @@ MonoBehaviour:
   AM: {fileID: 5338027942801331794}
   HM: {fileID: 7885946410932800873}
   canDamage: 0
+  screenShakeScript: {fileID: 0}
+  screenShakeScriptLock: {fileID: 0}
+  HitShakeForce: 0.8
+  HitShakeDuration: 0.3
   Debug_CanDamageSign: {fileID: 117844341}
 --- !u!54 &3888564244817161247
 Rigidbody:
@@ -840,6 +844,7 @@ GameObject:
   - component: {fileID: 2557452958196734171}
   - component: {fileID: 3161759517273933155}
   - component: {fileID: 5989918969698462382}
+  - component: {fileID: 6919931764136827068}
   - component: {fileID: 5192176717586396716}
   m_Layer: 0
   m_Name: Player
@@ -941,10 +946,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PM: {fileID: 5299395207707767066}
   AM: {fileID: 795993452163915058}
-  screenShakeScript: {fileID: 0}
   HM: {fileID: 7885946410932800873}
   Debug_ComboTimeSign: {fileID: 1948055691842525093}
   Debug_AttrackingSign: {fileID: 7349004987480583809}
+  ST: {fileID: 7478999516795596896}
   AttackCD_failedCombo: 0.5
   AttackCD_doingCombo: 0.65
   ComboMinTimingWindows: 0.05
@@ -973,6 +978,10 @@ MonoBehaviour:
   TESTgetDmg: 0
   TESTgetHeal: 0
   TESTgetBlock: 0
+  screenShakeScript: {fileID: 0}
+  screenShakeScriptLock: {fileID: 0}
+  StunShakeForce: 1
+  StunShakeDuration: 0.4
   PREFAB_Hit: {fileID: 6472570738383366240, guid: 01cfa2435ed218343b40b3504033c52e,
     type: 3}
 --- !u!114 &5299395207707767066
@@ -1030,6 +1039,7 @@ MonoBehaviour:
   shakeDashDuration: 1
   shakePushFactor: 0.1
   screenShakeScript: {fileID: 0}
+  screenShakeScriptLock: {fileID: 0}
 --- !u!114 &5299395207707767068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1131,19 @@ MonoBehaviour:
   - 'Aujourd''hui '
   CHAR_noteNmission: 8364
   CHAR_missionNhintNhint: 163
+--- !u!114 &6919931764136827068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d734d50748f02649ab2126ba233c1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DM: {fileID: 5989918969698462382}
 --- !u!54 &5192176717586396716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8446,6 +8469,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9111686743528505449}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5614225912287552449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5504935408748305496, guid: f73589bb7ff23ea4d90dfaffeda11a34,
+    type: 3}
+  m_PrefabInstance: {fileID: 9111686743528505449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3393923533203029496 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f73589bb7ff23ea4d90dfaffeda11a34,
@@ -8455,12 +8484,6 @@ Animator:
 --- !u!1 &8895127780035098487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8862273420913248482, guid: f73589bb7ff23ea4d90dfaffeda11a34,
-    type: 3}
-  m_PrefabInstance: {fileID: 9111686743528505449}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5614225912287552449 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -5504935408748305496, guid: f73589bb7ff23ea4d90dfaffeda11a34,
     type: 3}
   m_PrefabInstance: {fileID: 9111686743528505449}
   m_PrefabAsset: {fileID: 0}

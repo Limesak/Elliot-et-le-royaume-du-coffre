@@ -24,6 +24,12 @@ public class LifeManager : MonoBehaviour
 
     private string KeyMemory;
 
+    public ScreenShake screenShakeScript;
+    public ScreenShake screenShakeScriptLock;
+
+    public float StunShakeForce;
+    public float StunShakeDuration;
+
     public GameObject PREFAB_Hit;
 
     void Start()
@@ -49,7 +55,7 @@ public class LifeManager : MonoBehaviour
             if ( AutoHeal_Cooldown + lastHit <= Time.time && !Cells[GetCurrentIndex()].Full())
             {
                 AutoHeal(AutoHeal_Power * Time.deltaTime);
-                Debug.Log("AutoHeal");
+                //Debug.Log("AutoHeal");
             }
 
             if (TESTgetDmg)
@@ -83,7 +89,7 @@ public class LifeManager : MonoBehaviour
         if(SaveData.current.CurrentItemHEAD == 0)
         {
             dmg._power = dmg._power * 0.7f;
-            Debug.Log("Tanked by bucket");
+            //Debug.Log("Tanked by bucket");
         }
         if (!isDead && InvunerableFramesDuration + lastHit <= Time.time && !KeyMemory.Contains(dmg._key+""))
         {
@@ -93,12 +99,14 @@ public class LifeManager : MonoBehaviour
             {
                 lastHit = Time.time;
                 Cells[index].GetDamage(dmg._power);
+                screenShakeScript.setShake(StunShakeForce, StunShakeDuration);
+                screenShakeScriptLock.setShake(StunShakeForce, StunShakeDuration);
             }
             else
             {
                 Die();
             }
-            KeyMemory = KeyMemory + dmg._key;
+            KeyMemory = KeyMemory + dmg._key+"|";
         }
         
     }
@@ -133,7 +141,7 @@ public class LifeManager : MonoBehaviour
         {
             if (Cells[i].restDMG > 0 && i!= Cells.Length-1)
             {
-                Debug.Log("Rest founded for cell n°" + i + " with restDMG=" + Cells[i].restDMG);
+                //Debug.Log("Rest founded for cell n°" + i + " with restDMG=" + Cells[i].restDMG);
                 float rest = Cells[i].restDMG;
                 Cells[i + 1].GetDamage(rest);
                 Cells[i].restDMG = 0;
@@ -144,7 +152,7 @@ public class LifeManager : MonoBehaviour
                 
                 if (Cells[i - 1].GetHP() != -1)
                 {
-                    Debug.Log("Rest founded for cell n°" + i + " with restHEAL=" + Cells[i].restHEAL);
+                    //Debug.Log("Rest founded for cell n°" + i + " with restHEAL=" + Cells[i].restHEAL);
                     float rest = Cells[i].restHEAL;
                     Cells[i - 1].GetHeal(rest);
                     Cells[i].restHEAL = 0;

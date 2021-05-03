@@ -20,4 +20,10 @@ public class LockableObject : MonoBehaviour
     {
         HoverSignal.SetActive(false);
     }
+
+    public void Die()
+    {
+        Destroy(HoverSignal);
+        Destroy(this);
+    }
 }

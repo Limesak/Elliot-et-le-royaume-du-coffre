@@ -202,12 +202,12 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
-        Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
+        //Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
 
         if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || isDialogueOn)
         {
             SaveParameter.current.canUseInputs = false;
-            Debug.Log("Stuck");
+            //Debug.Log("Stuck");
         }
         else
         {
@@ -229,7 +229,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Writing");
+            //Debug.Log("Not Writing");
         }
     }
 
