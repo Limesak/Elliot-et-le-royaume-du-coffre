@@ -168,7 +168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035367223589}
-  m_LocalRotation: {x: 0.11201136, y: -0.000000017094186, z: 0.0000000019268687, w: 0.99370694}
+  m_LocalRotation: {x: 0.08503542, y: -0, z: -0, w: 0.99637794}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -209,10 +209,10 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7775551, y: 1}
+    m_SensorSize: {x: 1.77758, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -245,7 +245,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035765150273}
-  m_LocalRotation: {x: 0.09396563, y: 0.0000000074176163, z: -7.0009853e-10, w: 0.9955755}
+  m_LocalRotation: {x: 0.06694568, y: -0.000000004211234, z: 2.8255778e-10, w: 0.99775666}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -286,10 +286,10 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7775551, y: 1}
+    m_SensorSize: {x: 1.77758, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -466,7 +466,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3681800035881074835}
-  m_LocalRotation: {x: 0.13006786, y: -1e-45, z: -0, w: 0.9915051}
+  m_LocalRotation: {x: 0.103144966, y: -1e-45, z: -0, w: 0.99466634}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -507,10 +507,10 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7775551, y: 1}
+    m_SensorSize: {x: 1.77758, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -584,10 +584,10 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7775551, y: 1}
+    m_SensorSize: {x: 1.77758, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowerFactor: 0.001
+  LensCurrentZoomModifier: 10
 --- !u!114 &3681800036665438205
 MonoBehaviour:
   m_ObjectHideFlags: 0

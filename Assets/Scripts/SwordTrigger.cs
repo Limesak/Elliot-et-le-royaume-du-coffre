@@ -47,15 +47,15 @@ public class SwordTrigger : MonoBehaviour
         if (canDamage && other.gameObject.GetComponent<DamageReceiver>())
         {
             other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey(),AM.gameObject,other.ClosestPointOnBounds(transform.position)));
-            screenShakeScript.setShake(HitShakeForce,HitShakeDuration);
-            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
+            screenShakeScript.setShake(HitShakeForce,HitShakeDuration, true);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration, true);
         }
 
         if (canDamage && other.gameObject.GetComponent<Trigger_Poutch>())
         {
             other.gameObject.GetComponent<Trigger_Poutch>().TriggerCD();
-            screenShakeScript.setShake(HitShakeForce, HitShakeDuration);
-            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
+            screenShakeScript.setShake(HitShakeForce, HitShakeDuration, false);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration, false);
         }
     }
 
