@@ -132,6 +132,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6085bdf1-622e-4664-a44a-3bb49d730944"",
+                    ""path"": ""<DualShockGamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1cccd6a1-c7f5-4652-b362-41e971f0477f"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -145,6 +156,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c5a44429-a98c-47ec-bb4b-89a4d3e80e66"",
                     ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae8cbe23-50dc-4fbd-ab9b-b5d97e901188"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -176,6 +198,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3ef0d081-61a8-402b-806e-4fd445eb08de"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""43462625-f339-43d4-bb75-890e73861176"",
                     ""path"": ""<XInputController>/leftTrigger"",
                     ""interactions"": """",
@@ -189,6 +222,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c54a6066-78ce-4fba-bfa2-0e66785a5793"",
                     ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2983e5df-d4bb-4163-991b-a738bfb32eef"",
+                    ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -220,6 +264,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f0f4e4b9-6c89-46a5-ad56-a4dd0cbea52e"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b999ed2f-38d4-4164-ae96-b00f65ff6071"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -233,6 +288,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""5335fb92-9cb1-405e-8659-6eefb794e36f"",
                     ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f46ebca-36cd-42a3-bb04-854b851a4d4b"",
+                    ""path"": ""<DualShockGamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -264,6 +330,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2b02b574-dc41-43be-bd9e-ba588415f6e0"",
+                    ""path"": ""<DualShockGamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""16172a10-c58f-4dfb-86c2-46cf8243c794"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
@@ -277,6 +354,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""27225c58-52c7-4345-9d1c-51b667a152be"",
                     ""path"": ""<XInputController>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConsumeCandy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f990e09-b85c-4f6d-8038-65f27116abb8"",
+                    ""path"": ""<DualShockGamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -308,6 +396,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""709df7b2-e444-482a-998d-187a4355f69c"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1fae1152-5f4c-4e35-af62-0f15734150e2"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
@@ -330,6 +429,17 @@ public class @Movements : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""142402cd-4b16-424b-aaf0-2420a6088fd6"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchToolBefore"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""84c10ce7-a5c7-4f0c-843f-1c3540c182ca"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
@@ -343,6 +453,17 @@ public class @Movements : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""538c8f0d-b52f-438a-b9ea-4ffdaa80074d"",
                     ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchToolAfter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8de54672-455b-42e2-874d-2925bbc8d0e3"",
+                    ""path"": ""<DualShockGamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
