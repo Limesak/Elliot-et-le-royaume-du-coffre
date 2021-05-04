@@ -370,8 +370,8 @@ public class PlayerMovement : MonoBehaviour
 
                         controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
-                        screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration);
-                        screenShakeScriptLock.setShake(shakeSprintForce, shakeSprintDuration);
+                        screenShakeScript.setShake(shakeSprintForce, shakeSprintDuration, false);
+                        screenShakeScriptLock.setShake(shakeSprintForce, shakeSprintDuration, false);
                         if (AUM.GetAttacking())
                         {
                             AUM.CancelAttack();
@@ -581,8 +581,8 @@ public class PlayerMovement : MonoBehaviour
     public void Push()
     {
         controller.Move(PushDirection * PushSpeed * Time.deltaTime);
-        screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f);
-        screenShakeScriptLock.setShake(PushDirection.magnitude * shakePushFactor, 0.25f);
+        screenShakeScript.setShake(PushDirection.magnitude*shakePushFactor, 0.25f, false);
+        screenShakeScriptLock.setShake(PushDirection.magnitude * shakePushFactor, 0.25f,false);
         PushDirection = PushDirection  - (PushDirection*Pushfriction*Time.time);
         if (!isPushingForceObservable())
         {

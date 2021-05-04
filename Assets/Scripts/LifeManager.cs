@@ -99,8 +99,8 @@ public class LifeManager : MonoBehaviour
             {
                 lastHit = Time.time;
                 Cells[index].GetDamage(dmg._power);
-                screenShakeScript.setShake(StunShakeForce, StunShakeDuration);
-                screenShakeScriptLock.setShake(StunShakeForce, StunShakeDuration);
+                screenShakeScript.setShake(StunShakeForce+(dmg._power*0.001f), StunShakeDuration,false);
+                screenShakeScriptLock.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration,false);
             }
             else
             {
