@@ -32,7 +32,7 @@ public class Animations_Testing : MonoBehaviour
         MovementsControls = new Movements();
         if (SaveParameter.current.InputMode == 0)
         {
-            MovementsControls.Player.LAT.performed += ctx => Ctrlanim();
+            //MovementsControls.Player.LAT.performed += ctx => Ctrlanim();
         }
         anim = transform.GetComponent<Animator>();
     }
@@ -45,7 +45,7 @@ public class Animations_Testing : MonoBehaviour
     {
         if (SaveParameter.current.InputMode == 0)
         {
-            MovementsControls.Player.LAT.Enable();
+            //MovementsControls.Player.LAT.Enable();
         }
 
     }
@@ -54,7 +54,7 @@ public class Animations_Testing : MonoBehaviour
     {
         if (SaveParameter.current.InputMode == 0)
         {
-            MovementsControls.Player.LAT.Disable();
+            //MovementsControls.Player.LAT.Disable();
         }
     }
 

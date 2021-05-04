@@ -60,9 +60,10 @@ public class SlideSheetOnSelect : MonoBehaviour
                 transform.DOKill();
                 Slided = false;
                 MySheet.transform.DOLocalMove(ORIGIN, 0.2f);
-                Ring.transform.DOScale(Vector3.zero, 0.1f);
+                
                 if (!dontShowRing)
                 {
+                    Ring.transform.DOScale(Vector3.zero, 0.1f);
                     Ring.transform.DOScale(Vector3.zero, 0.1f);
                 }
                 if (GrowOnSelect)

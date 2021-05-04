@@ -170,12 +170,12 @@ public class MenuManager : MonoBehaviour
         if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Menu.started += ctx => OpenOrKillMainMenu();
-            MovementsControls.Player.Interact.started += ctx => Cancel();
+            MovementsControls.Player.Block.started += ctx => Cancel();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Menu.started += ctx => OpenOrKillMainMenu();
-            MovementsControls.Player1.Interact.started += ctx => Cancel();
+            MovementsControls.Player1.Block.started += ctx => Cancel();
         }
     }
 
@@ -184,12 +184,12 @@ public class MenuManager : MonoBehaviour
         if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Menu.Enable();
-            MovementsControls.Player.Interact.Enable();
+            MovementsControls.Player.Block.Enable();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Menu.Enable();
-            MovementsControls.Player1.Interact.Enable();
+            MovementsControls.Player1.Block.Enable();
         }
 
     }
@@ -199,12 +199,12 @@ public class MenuManager : MonoBehaviour
         if (SaveParameter.current.InputMode == 0)
         {
             MovementsControls.Player.Menu.Disable();
-            MovementsControls.Player.Interact.Disable();
+            MovementsControls.Player.Block.Disable();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Menu.Disable();
-            MovementsControls.Player1.Interact.Disable();
+            MovementsControls.Player1.Block.Disable();
         }
 
     }
