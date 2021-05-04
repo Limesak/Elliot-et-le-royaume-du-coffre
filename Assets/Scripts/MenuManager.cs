@@ -32,11 +32,15 @@ public class MenuManager : MonoBehaviour
     public GameObject Button_ContinuerPartie;
     public GameObject Button_NouvellePartie;
     public GameObject Button_NonNePasEcraser;
+    public GameObject Button_Rester; 
+    public GameObject Button_NePasQuitter;
 
     [Header("StandAlone Menus")]
 
     public GameObject Menu_ContinueOuNouvelle;
     public GameObject Menu_EcraserOuAnnuler;
+    public GameObject Menu_QuitterOuRester;
+    public GameObject Menu_ChambreOuRester;
 
     [Header("Main Menus")]
 
@@ -89,6 +93,12 @@ public class MenuManager : MonoBehaviour
     public PolaroidButton[] CODEX_Lieux_List;
     public PolaroidButton[] CODEX_Souvenirs_List;
 
+    [Header("Main Menus SETTINGS")]
+    public int SETTINGS_CurrentIndex;
+    public GameObject[] SETTINGS_SecMenuClosed;
+    public GameObject[] SETTINGS_SecMenuOpen;
+    public GameObject[] SETTINGS_SecMenuIcone;
+    public GameObject[] SETTINGS_SecMenuButton;
 
     [Header("DIALOGUES")]
     public GameObject DIALOGUE_ButtonA;
@@ -132,11 +142,12 @@ public class MenuManager : MonoBehaviour
         BranchCurrentIndex = 0;
         DialogueCurrentText = "";
         isWritingDialogue = false;
+        SETTINGS_CurrentIndex = -1;
 
         ReturnButton.SetActive(false);
         GoBef.interactable = false;
         GoAft.interactable = false;
-        Carnet_ORIGIN = Carnet_GLOBAL.transform.position;
+        Carnet_ORIGIN = Carnet_GLOBAL.transform.localPosition;
         Carnet_ORIGIN_scale = Carnet_GLOBAL.transform.localScale;
         MenuOn = false;
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -145,7 +156,7 @@ public class MenuManager : MonoBehaviour
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
         isUnfading = false;
-        Carnet_GLOBAL.transform.position = Carnet_HiddenPos.position;
+        Carnet_GLOBAL.transform.localPosition = Carnet_HiddenPos.localPosition;
         Carnet_GLOBAL.transform.localScale = Carnet_HiddenPos.localScale;
         Carnet_OPEN.SetActive(false);
         Carnet_GLOBAL.SetActive(false);
@@ -204,7 +215,7 @@ public class MenuManager : MonoBehaviour
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
         //Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
 
-        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || isDialogueOn)
+        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn)
         {
             SaveParameter.current.canUseInputs = false;
             //Debug.Log("Stuck");
@@ -231,6 +242,8 @@ public class MenuManager : MonoBehaviour
         {
             //Debug.Log("Not Writing");
         }
+
+        
     }
 
     public void PopMenuCoffre()
@@ -320,6 +333,12 @@ public class MenuManager : MonoBehaviour
                     Map1.SetActive(false);
                     SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
                 }
+                else if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.OnSettingsSecondaryMenu)
+                {
+                    SETTINGS_OpenSecondaryMenu(-1);
+                    EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
+                    SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.Main;
+                }
             }
             
             
@@ -358,6 +377,10 @@ public class MenuManager : MonoBehaviour
         else if (index == 4)
         {
             CODEX_Setup();
+        }
+        else if (index == 5)
+        {
+            SETTINGS_OpenSecondaryMenu(SETTINGS_CurrentIndex);
         }
     }
 
@@ -798,6 +821,70 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void SETTINGS_OpenSecondaryMenu(int index)
+    {
+        SETTINGS_CurrentIndex = index;
+        for(int i = 0; i < SETTINGS_SecMenuOpen.Length; i++)
+        {
+            SETTINGS_SecMenuButton[i].SetActive(true);
+            if (i == SETTINGS_CurrentIndex)
+            {
+                SETTINGS_SecMenuOpen[i].SetActive(true);
+                SETTINGS_SecMenuClosed[i].SetActive(false);
+                SETTINGS_SecMenuIcone[i].SetActive(true);
+                SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.OnSettingsSecondaryMenu;
+            }
+            else
+            {
+                SETTINGS_SecMenuOpen[i].SetActive(false);
+                SETTINGS_SecMenuClosed[i].SetActive(true);
+                SETTINGS_SecMenuIcone[i].SetActive(false);
+            }
+        }
+    }
+
+    public void SETTINGS_TryToGoBackToMainMenu()
+    {
+        CloseMainMenu();
+        Menu_ChambreOuRester.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(Button_Rester);
+        SaveParameter.current.canUseInputs = false;
+    }
+
+    public void SETTINGS_GoBackToMainMenu()
+    {
+        SaveData.current.ResetValueToDefault();
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 0);
+        StartCoroutine(FadeNLoad());
+    }
+
+    public void SETTINGS_TryToQuitGame()
+    {
+        CloseMainMenu();
+        Menu_QuitterOuRester.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(Button_NePasQuitter);
+        SaveParameter.current.canUseInputs = false;
+    }
+
+    public void SETTINGS_GoQuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void SETTINGS_ChangeInputMode(int index)
+    {
+        SaveParameter.current.InputMode = index;
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 0);
+        StartCoroutine(FadeNLoad());
+    }
+
+    public void SETTINGS_GoFullscreen(bool b)
+    {
+        Screen.fullScreen = b;
+    }
+
     public void OpenOrKillMainMenu()
     {
         if (!isDialogueOn)
@@ -817,13 +904,13 @@ public class MenuManager : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
                     Carnet_GLOBAL.transform.DOKill();
                     Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.19f);
-                    Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.2f);
+                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.2f);
                 }
                 else
                 {
                     Carnet_GLOBAL.transform.DOKill();
                     Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
-                    Carnet_GLOBAL.transform.DOMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
                 }
             }
             else
@@ -832,7 +919,7 @@ public class MenuManager : MonoBehaviour
                 MenuOn = false;
                 Carnet_GLOBAL.transform.DOKill();
                 Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.19f);
-                Carnet_GLOBAL.transform.DOMove(Carnet_HiddenPos.position, 0.2f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+                Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.2f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
             }
         }
         
@@ -845,13 +932,15 @@ public class MenuManager : MonoBehaviour
         MenuOn = false;
         Carnet_GLOBAL.transform.DOKill();
         Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.29f);
-        Carnet_GLOBAL.transform.DOMove(Carnet_HiddenPos.position, 0.3f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+        Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.3f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
     }
 
     public void QuitAllMenu()
     {
         Menu_ContinueOuNouvelle.SetActive(false);
         Menu_EcraserOuAnnuler.SetActive(false);
+        Menu_QuitterOuRester.SetActive(false);
+        Menu_ChambreOuRester.SetActive(false);
         SaveParameter.current.canUseInputs = true;
     }
 
