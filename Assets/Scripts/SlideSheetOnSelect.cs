@@ -23,8 +23,11 @@ public class SlideSheetOnSelect : MonoBehaviour
     void Start()
     {
         ORIGIN = MySheet.transform.localPosition;
-        ScaleOrigin = Ring.transform.localScale;
-        Ring.transform.localScale = Vector3.zero;
+        if (!dontShowRing)
+        {
+            ScaleOrigin = Ring.transform.localScale;
+            Ring.transform.localScale = Vector3.zero;
+        }
         Slided = false;
         ES = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
     }
