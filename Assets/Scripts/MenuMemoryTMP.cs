@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MenuMemoryTMP 
 {
-    public enum CancelState { Main, InOpenMap, OnStuffDesciption, OnCodexDesciption };
+    public enum CancelState { Main, InOpenMap, OnStuffDesciption, OnCodexDesciption, OnSettingsSecondaryMenu };
 
     public int index;
     public CancelState CS;
