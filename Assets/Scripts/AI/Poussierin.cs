@@ -381,7 +381,8 @@ public class Poussierin : MonoBehaviour
             Instantiate(Prefab_Piece,transform.position + new Vector3(Random.Range(-0.5f,0.5f),1+ Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
         }
 
-        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2)
+        float rdm2 = Random.Range(0, 100);
+        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 60)
         {
             Instantiate(Prefab_Bonbon, transform.position + new Vector3( 0,1 , 0), Quaternion.identity);
         }
