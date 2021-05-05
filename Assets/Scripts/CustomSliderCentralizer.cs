@@ -15,8 +15,11 @@ public class CustomSliderCentralizer : MonoBehaviour
     public Color ColorOut;
     public AudioMixer mixer;
 
+    private ElliotSoundSystem ESS;
+
     void Start()
     {
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
         GetCurrentValue();
     }
 
@@ -29,6 +32,7 @@ public class CustomSliderCentralizer : MonoBehaviour
     public void SetNewValue(float value)
     {
         CurrentValue = value;
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Effects, 0.8f, false);
     }
 
     public void UpdateUI()

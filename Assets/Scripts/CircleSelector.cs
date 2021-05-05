@@ -11,12 +11,14 @@ public class CircleSelector : MonoBehaviour
     public GameObject Circle;
     private bool Selected;
     private UnityEngine.EventSystems.EventSystem ES;
+    private ElliotSoundSystem ESS;
 
     void Start()
     {
         ORIGINscale = Circle.transform.localScale;
         Circle.transform.localScale = Vector3.zero;
         ES = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class CircleSelector : MonoBehaviour
                 transform.DOKill();
                 Selected = true;
                 Circle.transform.DOScale(ORIGINscale, 0.2f);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_CrayonEcrit), ESS.Asource_Effects, 0.8f, false);
             }
 
         }

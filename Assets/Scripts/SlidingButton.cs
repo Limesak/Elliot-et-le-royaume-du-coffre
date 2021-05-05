@@ -16,12 +16,15 @@ public class SlidingButton : MonoBehaviour
     public GameObject Banderole;
     public Transform SlidePosBanderole;
 
+    private ElliotSoundSystem ESS;
+
     void Start()
     {
         ORIGIN = transform.localPosition;
         ORIGINbanderole = Banderole.transform.localPosition;
         Slided = false;
         ES = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     void Update()
@@ -43,6 +46,7 @@ public class SlidingButton : MonoBehaviour
                 Banderole.transform.DOKill();
                 Slided = true;
                 transform.DOLocalMove(SlidePos.localPosition, 0.2f);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Effects, 0.8f, false);
                 Banderole.transform.DOLocalMove(SlidePosBanderole.localPosition, 0.2f);
             }
             
@@ -55,6 +59,7 @@ public class SlidingButton : MonoBehaviour
                 Banderole.transform.DOKill();
                 Slided = false;
                 transform.DOLocalMove(ORIGIN, 0.2f);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Effects, 0.8f, false);
                 Banderole.transform.DOLocalMove(ORIGINbanderole, 0.2f);
             }
         }
