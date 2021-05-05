@@ -100,6 +100,11 @@ public class MenuManager : MonoBehaviour
     public GameObject[] SETTINGS_SecMenuOpen;
     public GameObject[] SETTINGS_SecMenuIcone;
     public GameObject[] SETTINGS_SecMenuButton;
+    public GameObject SETTINGS_OpenDiffCardPOS;
+    public GameObject SETTINGS_CloseDiffCardPOS;
+    public GameObject[] SETTINGS_DiffCards;
+    public GameObject[] SETTINGS_DiffNames;
+    public GameObject[] SETTINGS_DiffiButtons;
 
     [Header("DIALOGUES")]
     public GameObject DIALOGUE_ButtonA;
@@ -403,6 +408,7 @@ public class MenuManager : MonoBehaviour
         else if (index == 5)
         {
             SETTINGS_OpenSecondaryMenu(SETTINGS_CurrentIndex);
+            SETTINGS_UpdateDifficultyUI();
         }
     }
 
@@ -848,6 +854,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_OpenSecondaryMenu(int index)
     {
+        SETTINGS_UpdateDifficultyUI();
         SETTINGS_CurrentIndex = index;
         for(int i = 0; i < SETTINGS_SecMenuOpen.Length; i++)
         {
@@ -856,14 +863,16 @@ public class MenuManager : MonoBehaviour
             {
                 SETTINGS_SecMenuOpen[i].SetActive(true);
                 SETTINGS_SecMenuClosed[i].SetActive(false);
-                SETTINGS_SecMenuIcone[i].SetActive(true);
+                //SETTINGS_SecMenuIcone[i].SetActive(true);
+                SETTINGS_SecMenuButton[i].GetComponent<PopWhenSelected>().StayOn = true;
                 SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.OnSettingsSecondaryMenu;
             }
             else
             {
                 SETTINGS_SecMenuOpen[i].SetActive(false);
                 SETTINGS_SecMenuClosed[i].SetActive(true);
-                SETTINGS_SecMenuIcone[i].SetActive(false);
+                //SETTINGS_SecMenuIcone[i].SetActive(false);
+                SETTINGS_SecMenuButton[i].GetComponent<PopWhenSelected>().StayOn = false;
             }
         }
     }
@@ -914,6 +923,74 @@ public class MenuManager : MonoBehaviour
     {
         ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         Screen.fullScreen = b;
+    }
+
+    public void SETTINGS_UpdateDifficultyUI()
+    {
+        for (int j = 0; j < SETTINGS_DiffCards.Length; j++)
+        {
+            if (SaveData.current.CurrentDifficulty == j)
+            {
+                if (EventSystem.current.currentSelectedGameObject == SETTINGS_DiffiButtons[0] || EventSystem.current.currentSelectedGameObject == SETTINGS_DiffiButtons[1])
+                {
+                    SETTINGS_DiffCards[j].transform.DOKill();
+                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_OpenDiffCardPOS.transform.localPosition, 0.2f);
+                    ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.1f, false);
+                }
+                else
+                {
+                    SETTINGS_DiffCards[j].transform.DOKill();
+                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.2f);
+                }
+            }
+            else
+            {
+                SETTINGS_DiffCards[j].transform.DOKill();
+                SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.2f);
+            }
+        }
+
+        for (int i = 0; i < SETTINGS_DiffNames.Length; i++)
+        {
+            if (SaveData.current.CurrentDifficulty == i)
+            {
+                SETTINGS_DiffNames[i].SetActive(true);
+            }
+            else
+            {
+                SETTINGS_DiffNames[i].SetActive(false);
+            }
+        }
+    }
+
+    public void SETTINGS_TryUpDifficulty()
+    {
+        SETTINGS_OpenSecondaryMenu(-1); 
+        if (SaveData.current.CurrentDifficulty < SETTINGS_DiffNames.Length - 1)
+        {
+            ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            SaveData.current.CurrentDifficulty++;
+            SETTINGS_UpdateDifficultyUI();
+        }
+        else
+        {
+            ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
+        }
+    }
+
+    public void SETTINGS_TryDownDifficulty()
+    {
+        SETTINGS_OpenSecondaryMenu(-1);
+        if (SaveData.current.CurrentDifficulty > 0)
+        {
+            ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            SaveData.current.CurrentDifficulty--;
+            SETTINGS_UpdateDifficultyUI();
+        }
+        else
+        {
+            ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
+        }
     }
 
     public void OpenOrKillMainMenu()

@@ -71,6 +71,9 @@ public class SaveData
     public bool[] Codex_Lieux_unlockList;
     public bool[] Codex_Souvenirs_unlockList;
 
+    //Challenge
+    public int CurrentDifficulty;
+
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -131,6 +134,8 @@ public class SaveData
         {
             Codex_Souvenirs_unlockList[i] = true;//True pour debug   &  False for build
         }
+
+        CurrentDifficulty = 1;
 
         Debug.Log("SaveData reseted");
     }
