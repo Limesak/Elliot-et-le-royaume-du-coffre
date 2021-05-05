@@ -6,6 +6,13 @@ public class AnimEventTransmitter : MonoBehaviour
 {
     public SwordTrigger ST;
     public AttackUseManager AM;
+    private ElliotSoundSystem ESS;
+    private float lastStepDate;
+
+    private void Start()
+    {
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
+    }
 
     public void isDangerous()
     {
@@ -46,5 +53,45 @@ public class AnimEventTransmitter : MonoBehaviour
     {
         AM.SetComboing(false);
         //Debug.Log("cantCombo");
+    }
+
+    public void SOUND_StepMarche()
+    {
+        if (lastStepDate + 0.1f <= Time.time)
+        {
+            lastStepDate = Time.time;
+            ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasMarche), ESS.Asource_Effects, 0.2f, false);
+        }
+        
+    }
+
+    public void SOUND_StepSprint()
+    {
+        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasSprint), ESS.Asource_Effects, 0.3f, false);
+    }
+
+    public void SOUND_SwingAttack1()
+    {
+        ESS.PlaySound(ESS.COMBAT_Attaque1, ESS.Asource_Effects, 0.8f, false);
+    }
+
+    public void SOUND_SwingAttack2()
+    {
+        ESS.PlaySound(ESS.COMBAT_Attaque2, ESS.Asource_Effects, 0.8f, false);
+    }
+
+    public void SOUND_SwingAttack3()
+    {
+        ESS.PlaySound(ESS.COMBAT_Attaque3, ESS.Asource_Effects, 0.8f, false);
+    }
+
+    public void SOUND_SwingAttack4()
+    {
+        ESS.PlaySound(ESS.COMBAT_Attaque4, ESS.Asource_Effects, 0.8f, false);
+    }
+
+    public void SOUND_SwingAttackAir()
+    {
+        ESS.PlaySound(ESS.COMBAT_AttaqueAerienne, ESS.Asource_Effects, 0.8f, false);
     }
 }
