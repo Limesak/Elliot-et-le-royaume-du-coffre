@@ -32,15 +32,14 @@ public class ElliotSoundSystem : MonoBehaviour
     public AudioClip UI_GameOver;
 
     public AudioClip[] UI_CARNET_PageTournee;
-    public AudioClip[] UI_CARNET_PageEffleuree;
-    public AudioClip[] UI_CARNET_ScotchPose;
-    public AudioClip[] UI_CARNET_ScotchArrache;
+    public AudioClip UI_CARNET_ScotchPose;
+    public AudioClip UI_CARNET_ScotchArrache;
     public AudioClip[] UI_CARNET_CrayonEcrit;
     public AudioClip UI_CARNET_OuvertureCarnet;
     public AudioClip UI_CARNET_FermetureCarnet;
 
     public AudioClip[] UI_DIALOGUE_ParcheminDeroule;
-    public AudioClip UI_DIALOGUE_ParcheminEnroule;
+    public AudioClip[] UI_DIALOGUE_ParcheminEnroule;
     public AudioClip[] UI_DIALOGUE_BlipBloup;
 
     public AudioClip[] UI_LOOT_RamassePiece;
@@ -82,5 +81,10 @@ public class ElliotSoundSystem : MonoBehaviour
         {
             Debug.Log("MISSING SOUND MOTHERFUCKER   "+clip.ToString());
         }
+    }
+
+    public AudioClip OneOf(AudioClip[] list)
+    {
+        return list[(int)Random.Range(0,list.Length)];
     }
 }

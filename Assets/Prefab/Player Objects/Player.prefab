@@ -909,7 +909,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2000dd427b497a24f960b4507c638ac3, type: 3}
   - {fileID: 8300000, guid: 79235cee13398e340afdd2a953ae7065, type: 3}
   - {fileID: 8300000, guid: 1023b9ad683fbc34fb741868035459b6, type: 3}
-  COMBAT_Meurt: {fileID: 0}
+  COMBAT_Meurt: {fileID: 8300000, guid: 6288ccc4eb0775248aad69e22f423080, type: 3}
   COMBAT_TapeEnnemiAvecEpee:
   - {fileID: 8300000, guid: 3c22c0bb16ce95d4bada1643027e1261, type: 3}
   - {fileID: 8300000, guid: 139cc3684a4428e4cb722e07be194ba0, type: 3}
@@ -918,7 +918,7 @@ MonoBehaviour:
   COMBAT_TapeTriggerAvecEpee: {fileID: 8300000, guid: a1cd67ea83f85d1469912bf16dcac21b,
     type: 3}
   COMBAT_Soin: {fileID: 8300000, guid: 7aacb79739e29784aabde025fe6b4594, type: 3}
-  COMBAT_MangerBonbon: {fileID: 0}
+  COMBAT_MangerBonbon: {fileID: 8300000, guid: ebc2509c5bf0f7846a951f88e0ba34e6, type: 3}
   MOUVEMENT_BruitDePasMarche:
   - {fileID: 8300000, guid: f056961366743f54e81ca52757fbe3e2, type: 3}
   - {fileID: 8300000, guid: 60c1d4d5fc343b94f90fccb9e0dd2538, type: 3}
@@ -968,9 +968,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cae49bdf800a4584580d5b2d7d004a5b, type: 3}
   - {fileID: 8300000, guid: bbf85fb6aafca8545b20f488ac2cd621, type: 3}
   - {fileID: 8300000, guid: 733f5dd65e5221a4ea546302050a6001, type: 3}
-  UI_CARNET_PageEffleuree: []
-  UI_CARNET_ScotchPose: []
-  UI_CARNET_ScotchArrache: []
+  UI_CARNET_ScotchPose: {fileID: 8300000, guid: 7b7307829255fe74e92043b447c05e8e,
+    type: 3}
+  UI_CARNET_ScotchArrache: {fileID: 8300000, guid: 4a148452419769746bfcf1369532dac5,
+    type: 3}
   UI_CARNET_CrayonEcrit:
   - {fileID: 8300000, guid: 6efc15a5e651f9e4db458ccb18121b09, type: 3}
   - {fileID: 8300000, guid: bfa0de7858a0fa44ab464390ef243792, type: 3}
@@ -987,7 +988,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 776a4fcc5c82b1344af24a4c42fa8e7b, type: 3}
   - {fileID: 8300000, guid: 11696519fd0706b41b9803efe97cbecd, type: 3}
   - {fileID: 8300000, guid: bb417bb036453a646b58eeb270361aec, type: 3}
-  UI_DIALOGUE_ParcheminEnroule: {fileID: 0}
+  UI_DIALOGUE_ParcheminEnroule:
+  - {fileID: 8300000, guid: d3813d48cb2e02240b6c4f0600159f53, type: 3}
+  - {fileID: 8300000, guid: ec492960d4c3a1341a8dd194c3e45f56, type: 3}
+  - {fileID: 8300000, guid: 340570b5da961fc4caf63d818a8de5e1, type: 3}
+  - {fileID: 8300000, guid: 71eedc9719e16c14f81a9a1e6adea81e, type: 3}
   UI_DIALOGUE_BlipBloup:
   - {fileID: 8300000, guid: 0a27bb1c6b3618c4b9045aa9b891e6ca, type: 3}
   - {fileID: 8300000, guid: 4b10eec6254ab1b49b57128bf28e70ab, type: 3}
@@ -1026,7 +1031,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97e0821c3f64bff499bcd269784419bc, type: 3}
   - {fileID: 8300000, guid: cdd37beddcbfd5d478a1441bd3653853, type: 3}
   - {fileID: 8300000, guid: b4af5de18a57e614da5c62209c75ba4a, type: 3}
-  UI_LOOT_RamasseBonbon: {fileID: 0}
+  UI_LOOT_RamasseBonbon: {fileID: 8300000, guid: caecf3b62af09a04cb93f2986a37e8a8,
+    type: 3}
   UI_LOOT_RamasseCle: {fileID: 8300000, guid: 56e198c6ff447af48b8eec33cc4ffd31, type: 3}
   UI_LOOT_RamasseEquipement: {fileID: 8300000, guid: 5ad27763acea4aa4395e8c94ca3a87ad,
     type: 3}
