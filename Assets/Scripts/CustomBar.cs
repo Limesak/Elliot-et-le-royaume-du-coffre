@@ -79,7 +79,7 @@ public class CustomBar : MonoBehaviour
                 //Debug.Log("NOTHING");
                 break;
         }
-        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Effects, 0.8f, false);
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
     }
 
     public void GoAfter()
@@ -103,7 +103,7 @@ public class CustomBar : MonoBehaviour
                 //Debug.Log("NOTHING");
                 break;
         }
-        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Effects, 0.8f, false);
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
     }
 
     public void Appliquer()
@@ -120,6 +120,6 @@ public class CustomBar : MonoBehaviour
                 //Debug.Log("NOTHING");
                 break;
         }
-        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Effects, 0.8f, false);
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
     }
 }
