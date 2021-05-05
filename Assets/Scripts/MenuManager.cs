@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
     public bool isUnfading;
     public HandManager HM;
     public DiaryManager DM;
+    private ElliotSoundSystem ESS;
 
     [Header("BlackScreen")]
 
@@ -114,6 +115,8 @@ public class MenuManager : MonoBehaviour
     public float writingCharacterDuration;
     private float lastCharacterWroteDate;
     public Text DIALOGUE_TextContent;
+    public float BlipBloupCooldown;
+    private float lastBlipBloup;
 
     [Header("DIALOGUES Scrolls")]
     public GameObject CLOSED_SCROLL_HIDDEN_POS;
@@ -150,6 +153,7 @@ public class MenuManager : MonoBehaviour
         Carnet_ORIGIN = Carnet_GLOBAL.transform.localPosition;
         Carnet_ORIGIN_scale = Carnet_GLOBAL.transform.localScale;
         MenuOn = false;
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         HM = GameObject.FindGameObjectWithTag("Player").GetComponent<HandManager>();
         DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
@@ -235,6 +239,12 @@ public class MenuManager : MonoBehaviour
             {
                 lastCharacterWroteDate = Time.time;
                 DialogueCurrentText = DialogueCurrentText + CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent.ToCharArray()[DialogueCurrentText.Length];
+
+                if (lastBlipBloup + BlipBloupCooldown < Time.time)
+                {
+                    lastBlipBloup = Time.time;
+                    ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_BlipBloup), ESS.Asource_Interface, 0.8f, false);
+                }
             }
             DIALOGUE_TextContent.text = DialogueCurrentText;
         }
@@ -248,6 +258,7 @@ public class MenuManager : MonoBehaviour
 
     public void PopMenuCoffre()
     {
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.canUseInputs = false;
         Menu_ContinueOuNouvelle.SetActive(true);
         if (SaveLoad.alreadySavedGame())
@@ -270,6 +281,7 @@ public class MenuManager : MonoBehaviour
         SaveParameter.current.canUseInputs = false;
         Menu_EcraserOuAnnuler.SetActive(true);
         EventSystem.current.SetSelectedGameObject(Button_NonNePasEcraser);
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
     }
 
     public void PlaySave()
@@ -278,6 +290,7 @@ public class MenuManager : MonoBehaviour
         QuitAllMenu();
         SaveData.current = (SaveData) SaveLoad.Load();
         StartCoroutine(FadeNLoad());
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
     }
 
     public void TryPlayNewSave()
@@ -287,9 +300,11 @@ public class MenuManager : MonoBehaviour
             Debug.Log("Save found");
             Menu_ContinueOuNouvelle.SetActive(false);
             PopMenuCoffreConfirmation();
+
         }
         else
         {
+            ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
             Debug.Log("No save");
             PlayNewSave();
         }
@@ -297,6 +312,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayNewSave()
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         Debug.Log("PlayNewSave");
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
@@ -320,6 +336,7 @@ public class MenuManager : MonoBehaviour
             }
             else if(MenuOn)
             {
+                ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
                 if (SaveParameter.current.MMTMP.CS == MenuMemoryTMP.CancelState.Main)
                 {
                     CloseMainMenu();
@@ -347,6 +364,11 @@ public class MenuManager : MonoBehaviour
 
     public void OpenPage(int index)
     {
+        if(index != SaveParameter.current.MMTMP.index)
+        {
+            ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.8f, false);
+        }
+        
         SaveParameter.current.MMTMP.index = index;
         for (int i = 0; i < Carnet_Pages.Length; i++)
         {
@@ -397,6 +419,7 @@ public class MenuManager : MonoBehaviour
         currentDay = currentDay-1;
         MISSION_PopDay();
         MISSION_checkborders();
+        ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.8f, false);
     }
 
     public void MISSION_goAfter()
@@ -404,6 +427,7 @@ public class MenuManager : MonoBehaviour
         currentDay = currentDay+1;
         MISSION_PopDay();
         MISSION_checkborders();
+        ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.8f, false);
     }
 
     public void MISSION_checkborders()
@@ -457,7 +481,7 @@ public class MenuManager : MonoBehaviour
             Map1.SetActive(true);
             SaveParameter.current.canUseOnglets = false;
             SaveParameter.current.MMTMP.CS = MenuMemoryTMP.CancelState.InOpenMap;
-            
+            ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         }
         else if(index == 1)
         {
@@ -539,12 +563,13 @@ public class MenuManager : MonoBehaviour
 
     public void STUFF_EquipeOrUnequipThis(int index)
     {
+        ESS.PlaySound(ESS.UI_CARNET_ScotchArrache, ESS.Asource_Interface, 0.8f, false);
         if (index == 0)//HEAD
         {
             if(index == SaveData.current.CurrentItemHEAD)
             {
                 SaveData.current.CurrentItemHEAD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -552,15 +577,15 @@ public class MenuManager : MonoBehaviour
                 if(SaveData.current.CurrentItemHEAD == -1)
                 {
                     SaveData.current.CurrentItemHEAD = index;
-                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemHEAD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemHEAD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemHEAD].transform.localPosition, 0.3f);
+                    Buttons[SaveData.current.CurrentItemHEAD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemHEAD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemHEAD = index;
-                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -570,7 +595,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemBACK)
             {
                 SaveData.current.CurrentItemBACK = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -578,15 +603,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemBACK == -1)
                 {
                     SaveData.current.CurrentItemBACK = index;
-                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemBACK].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemBACK].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemBACK].transform.localPosition, 0.3f);
+                    Buttons[SaveData.current.CurrentItemBACK].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemBACK].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemBACK = index;
-                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -596,7 +621,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemSWORD)
             {
                 SaveData.current.CurrentItemSWORD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -604,15 +629,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemSWORD == -1)
                 {
                     SaveData.current.CurrentItemSWORD = index;
-                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemSWORD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemSWORD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSWORD].transform.localPosition, 0.3f);
+                    Buttons[SaveData.current.CurrentItemSWORD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSWORD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemSWORD = index;
-                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -622,7 +647,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemSHIELD)
             {
                 SaveData.current.CurrentItemSHIELD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f);
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -630,15 +655,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemSHIELD == -1)
                 {
                     SaveData.current.CurrentItemSHIELD = index;
-                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemSHIELD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.3f);
+                    Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemSHIELD = index;
-                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f);
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -845,6 +870,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_TryToGoBackToMainMenu()
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         CloseMainMenu();
         Menu_ChambreOuRester.SetActive(true);
         EventSystem.current.SetSelectedGameObject(Button_Rester);
@@ -853,6 +879,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_GoBackToMainMenu()
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         SaveData.current.ResetValueToDefault();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 0);
@@ -861,6 +888,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_TryToQuitGame()
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         CloseMainMenu();
         Menu_QuitterOuRester.SetActive(true);
         EventSystem.current.SetSelectedGameObject(Button_NePasQuitter);
@@ -869,11 +897,13 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_GoQuitGame()
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         Application.Quit();
     }
 
     public void SETTINGS_ChangeInputMode(int index)
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.InputMode = index;
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 0);
@@ -882,6 +912,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_GoFullscreen(bool b)
     {
+        ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         Screen.fullScreen = b;
     }
 
@@ -891,6 +922,7 @@ public class MenuManager : MonoBehaviour
         {
             if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
             {
+                ESS.PlaySound(ESS.UI_CARNET_OuvertureCarnet, ESS.Asource_Interface, 0.8f, false);
                 SaveParameter.current.canUseInputs = false;
                 MenuOn = true;
                 Carnet_GLOBAL.SetActive(true);
@@ -915,6 +947,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
+                ESS.PlaySound(ESS.UI_CARNET_FermetureCarnet, ESS.Asource_Interface, 0.8f, false);
                 SaveParameter.current.canUseInputs = true;
                 MenuOn = false;
                 Carnet_GLOBAL.transform.DOKill();
@@ -927,6 +960,8 @@ public class MenuManager : MonoBehaviour
 
     public void CloseMainMenu()
     {
+        ESS.PlaySound(ESS.UI_CARNET_FermetureCarnet, ESS.Asource_Interface, 0.8f, false);
+        
         SaveParameter.current.canUseInputs = true;
         Carnet_OPEN.SetActive(false);
         MenuOn = false;
@@ -937,6 +972,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitAllMenu()
     {
+        ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
         Menu_ContinueOuNouvelle.SetActive(false);
         Menu_EcraserOuAnnuler.SetActive(false);
         Menu_QuitterOuRester.SetActive(false);
@@ -964,12 +1000,14 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_InitDialogueP1()
     {
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         ClosedScroll.SetActive(true);
         ClosedScroll.transform.DOLocalMove(CLOSED_SCROLL_ORIGIN, 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP2(); });
     }
 
     public void DIALOGUE_InitDialogueP2()
     {
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
         ClosedScroll.SetActive(false);
         RollingScroll.SetActive(true);
@@ -977,6 +1015,7 @@ public class MenuManager : MonoBehaviour
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
         FlatScroll.SetActive(true);
@@ -1077,6 +1116,7 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_KILLUI()
     {
+        ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.canUseInputs = true;
         isDialogueOn = false;
         foreach (DialogueCharaInfo dci in CharactersOnRight)
@@ -1099,6 +1139,7 @@ public class MenuManager : MonoBehaviour
     {
         if (isDialogueOn)
         {
+            ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
             {
                 ConvCurrentIndex++;
@@ -1118,6 +1159,7 @@ public class MenuManager : MonoBehaviour
     {
         if (isDialogueOn)
         {
+            ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Quit)
             {
                 DIALOGUE_KILLUI();

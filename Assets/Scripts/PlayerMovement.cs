@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
+    private ElliotSoundSystem ESS;
     Movements MovementsControls;
     public AnimationManager AM;
     public AttackUseManager AUM;
@@ -98,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         isFloating = false;
         isDiving = false;
         isMoving = false;
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     void Awake()
@@ -217,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
                 
-
+                /*
                 if (IsAlmostGrounded())
                 {
                     controller.slopeLimit = 45;
@@ -226,6 +228,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     controller.slopeLimit = 90;
                 }
+                */
 
                 if (lastY == transform.position.y && IsPossiblyStuck())
                 {
@@ -266,6 +269,8 @@ public class PlayerMovement : MonoBehaviour
                     {
                         //screenShakeScript.setShake(shakeJumpForce, shakeJumpDuration);
                         //landing
+                        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasMarche), ESS.Asource_Effects, 0.3f, false);
+                        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasSprint), ESS.Asource_Effects, 0.5f, false);
                     }
                     wasOnGround = true;
                     AerianDir = Vector3.zero;
@@ -625,6 +630,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         GravityPower = JumpingPower;
+        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_Saut), ESS.Asource_Effects, 0.5f, false);
     }
 
     public void Dash()
@@ -646,11 +652,12 @@ public class PlayerMovement : MonoBehaviour
             AerianDir = transform.forward * DashForce;
             GravityPower = 5;
         }
-        
+        ESS.PlaySound(ESS.MOUVEMENT_Dash, ESS.Asource_Effects, 0.5f, false);
     }
 
     public void IncJump(Vector3 dir)
     {
+        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_Saut), ESS.Asource_Effects, 0.4f, false);
         AerianDir = new Vector3(dir.x, 0, dir.z) * slopeJumpFactor;
         GravityPower = dir.normalized.y * JumpingPower;
         if (dir.y > 0.6f)
@@ -684,6 +691,7 @@ public class PlayerMovement : MonoBehaviour
     {
         AM.StartAirJump();
         GravityPower = DoubleJumpingPower ;
+        ESS.PlaySound(ESS.MOUVEMENT_DoubleSaut, ESS.Asource_Effects, 0.6f, false);
     }
 
     public Vector3 GetDirection()

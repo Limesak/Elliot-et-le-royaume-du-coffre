@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
+    private ElliotSoundSystem ESS;
     public MenuManager MM;
     public LifeCelluleManager[] Cells;
     private bool isDead;
@@ -36,6 +37,7 @@ public class LifeManager : MonoBehaviour
     {
         isDead = false;
         KeyMemory = "";
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     void Update()
@@ -101,6 +103,13 @@ public class LifeManager : MonoBehaviour
                 Cells[index].GetDamage(dmg._power);
                 screenShakeScript.setShake(StunShakeForce+(dmg._power*0.001f), StunShakeDuration,false);
                 screenShakeScriptLock.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration,false);
+                ESS.PlaySound(ESS.OneOf(ESS.COMBAT_PrendDegat), ESS.Asource_Effects, 0.8f, false);
+
+                int rdm = Random.Range(0, 100);
+                if (rdm > 70)
+                {
+                    ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
+                }
             }
             else
             {
@@ -119,6 +128,7 @@ public class LifeManager : MonoBehaviour
             if (index < Cells.Length && index != -1)
             {
                 Cells[index].GetHeal(heal);
+                ESS.PlaySound(ESS.COMBAT_Soin, ESS.Asource_Effects, 0.8f, false);
             }
         }
     }
@@ -226,6 +236,8 @@ public class LifeManager : MonoBehaviour
     {
         if (!isDead)
         {
+            ESS.PlaySound(ESS.UI_GameOver, ESS.Asource_Interface, 0.8f, false);
+            ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
             SaveData.current.ResetValueToDefault();
             isDead = true;
             MM.BlackScreen.gameObject.SetActive(true);
