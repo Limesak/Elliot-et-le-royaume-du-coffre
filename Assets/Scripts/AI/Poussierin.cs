@@ -382,10 +382,44 @@ public class Poussierin : MonoBehaviour
         }
 
         float rdm2 = Random.Range(0, 100);
-        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 60)
+        switch (SaveData.current.CurrentDifficulty)
         {
-            Instantiate(Prefab_Bonbon, transform.position + new Vector3( 0,1 , 0), Quaternion.identity);
+            case 0:
+                if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 1 && rdm2 > 30)
+                {
+                    Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+                break;
+            case 1:
+                if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 50)
+                {
+                    Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+                break;
+            case 2:
+                if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 50)
+                {
+                    Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+                break;
+            case 3:
+                if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 70)
+                {
+                    Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+                break;
+            case 4:
+                if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() == 3 && rdm2 > 70)
+                {
+                    Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+                break;
+            default:
+                //Debug.Log("NOTHING");
+                break;
         }
+
+        
         SpawnedHead.GetComponent<MeshRenderer>().material = HeadMR.material;
         Destroy(gameObject);
     }

@@ -31,7 +31,7 @@ public class CircleSelector : MonoBehaviour
                 transform.DOKill();
                 Selected = true;
                 Circle.transform.DOScale(ORIGINscale, 0.2f);
-                ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_CrayonEcrit), ESS.Asource_Effects, 0.8f, false);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_CrayonEcrit), ESS.Asource_Interface, 0.8f, false);
             }
 
         }

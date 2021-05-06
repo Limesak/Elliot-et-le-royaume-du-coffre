@@ -13,7 +13,21 @@ public class PhysicCollider : MonoBehaviour
         {
             Vector3 pos = transform.position;
             Vector3 dir = (collision.gameObject.transform.position - this.transform.position ).normalized;
+            dir.y = 1;
             collision.gameObject.GetComponent<Rigidbody>().AddForce(dir*Force,ForceMode.Impulse);
+            Debug.Log("Push");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collide");
+        if (other.gameObject.tag == "PhysicEntity")
+        {
+            Vector3 pos = transform.position;
+            Vector3 dir = (other.gameObject.transform.position - this.transform.position).normalized;
+            dir.y = 1;
+            other.gameObject.GetComponent<Rigidbody>().AddForce(dir * Force, ForceMode.Impulse);
             Debug.Log("Push");
         }
     }
