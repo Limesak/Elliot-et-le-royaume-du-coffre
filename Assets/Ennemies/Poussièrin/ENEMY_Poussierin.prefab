@@ -135,6 +135,8 @@ MonoBehaviour:
   speedOfRotation: 5
   radiusOfCombatEvolution: 3
   YLookingOffset: -2.75
+  HitPushForce: 20
+  ForceFriction: 150
 --- !u!195 &3919395317771799506
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -144,7 +146,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 82324360203556649}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3313,7 +3315,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.24
+  m_Radius: 0.4
   m_Height: 2.32
   m_Direction: 0
   m_Center: {x: 0.65, y: 0, z: 0}
@@ -4919,7 +4921,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.24
+  m_Radius: 0.4
   m_Height: 2.32
   m_Direction: 0
   m_Center: {x: 0.65, y: 0, z: 0}

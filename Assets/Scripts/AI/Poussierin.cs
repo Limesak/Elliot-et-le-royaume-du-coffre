@@ -90,21 +90,32 @@ public class Poussierin : MonoBehaviour
     private Vector3 PosWhenAttacking;
     private int AttackKey;
     private AttackType LastAttackType;
-
+    private bool isPushed;
+    private float currentForce;
+    private Vector3 currentPushDirection;
+    public float HitPushForce;
+    public float ForceFriction;
 
     void Start()
     {
         HP = HPmax;
+        currentForce = 0;
         isAgressive = false;
+        isPushed = false;
+        currentPushDirection = Vector3.zero;
         PLAYER = GameObject.FindGameObjectWithTag("Player");
         HeadMR.material = HeadSkins[Random.Range(0,HeadSkins.Length)];
         BodyMR.material = BodySkins[Random.Range(0, BodySkins.Length)];
-        transform.localScale = transform.localScale * Random.Range(0.6f, 1.2f);
+        transform.localScale = transform.localScale * Random.Range(0.85f, 1.2f);
     }
 
     void Update()
     {
         CheckHP();
+        if (isPushed)
+        {
+            Push(currentPushDirection, currentForce);
+        }
         if (!isDead )
         {
             if (isAgressive)
@@ -286,7 +297,8 @@ public class Poussierin : MonoBehaviour
         List<Damage> TickDamage = DC.AnalyseCache();
         string AntiBugMemory = "";
         bool triggerHit = false;
-        foreach(Damage d in TickDamage)
+        Vector3 Direction = Vector3.zero;
+        foreach (Damage d in TickDamage)
         {
             if (!AntiBugMemory.Contains(d._key + ""))
             {
@@ -295,10 +307,12 @@ public class Poussierin : MonoBehaviour
                 triggerHit = true;
                 Instantiate(PREFAB_Hit, d._impactPoint, Quaternion.identity);
                 Instantiate(PREFAB_HitSword, d._impactPoint, Quaternion.identity);
+                Direction = (transform.position - d._source.transform.position).normalized;
 }
         }
         if (triggerHit)
         {
+            Push(Direction,HitPushForce);
             CurrentAnimVersion = (int) Random.Range(1, 3);
             Anim.SetInteger("animVersion", CurrentAnimVersion);
             lastTimeDamageTaken = Time.time;
@@ -367,7 +381,8 @@ public class Poussierin : MonoBehaviour
             Instantiate(Prefab_Piece,transform.position + new Vector3(Random.Range(-0.5f,0.5f),1+ Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
         }
 
-        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2)
+        float rdm2 = Random.Range(0, 100);
+        if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 60)
         {
             Instantiate(Prefab_Bonbon, transform.position + new Vector3( 0,1 , 0), Quaternion.identity);
         }
@@ -510,5 +525,19 @@ public class Poussierin : MonoBehaviour
     public int GetAttackKey()
     {
         return AttackKey;
+    }
+
+    public void Push(Vector3 direction, float force)
+    {
+        isPushed = true;
+        
+        NavAgent.Warp(transform.position+(direction*force*Time.deltaTime));
+        currentPushDirection = direction;
+        currentForce = force-(ForceFriction * Time.deltaTime);
+
+        if (currentForce <= 0)
+        {
+            isPushed = false;
+        }
     }
 }

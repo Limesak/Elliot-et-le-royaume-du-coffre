@@ -19,14 +19,20 @@ public class SlideSheetOnSelect : MonoBehaviour
 
     public bool GrowOnSelect;
 
+    private ElliotSoundSystem ESS;
+
 
     void Start()
     {
         ORIGIN = MySheet.transform.localPosition;
-        ScaleOrigin = Ring.transform.localScale;
-        Ring.transform.localScale = Vector3.zero;
+        if (!dontShowRing)
+        {
+            ScaleOrigin = Ring.transform.localScale;
+            Ring.transform.localScale = Vector3.zero;
+        }
         Slided = false;
         ES = GameObject.Find("EventSystem").GetComponent<UnityEngine.EventSystems.EventSystem>();
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     void Update()
@@ -39,9 +45,11 @@ public class SlideSheetOnSelect : MonoBehaviour
                 transform.DOKill();
                 Slided = true;
                 MySheet.transform.DOLocalMove(SlidePos.localPosition, 0.2f);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Effects, 0.3f, false);
                 if (!dontShowRing)
                 {
                     Ring.transform.DOScale(ScaleOrigin, 0.1f);
+                    ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_CrayonEcrit), ESS.Asource_Effects, 0.1f, false);
                 }
                 if (GrowOnSelect)
                 {
@@ -57,9 +65,10 @@ public class SlideSheetOnSelect : MonoBehaviour
                 transform.DOKill();
                 Slided = false;
                 MySheet.transform.DOLocalMove(ORIGIN, 0.2f);
-                Ring.transform.DOScale(Vector3.zero, 0.1f);
+                ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Effects, 0.1f, false);
                 if (!dontShowRing)
                 {
+                    Ring.transform.DOScale(Vector3.zero, 0.1f);
                     Ring.transform.DOScale(Vector3.zero, 0.1f);
                 }
                 if (GrowOnSelect)

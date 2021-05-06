@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwordTrigger : MonoBehaviour
 {
+    private ElliotSoundSystem ESS;
     public AttackUseManager AM;
     public HandManager HM;
     public bool canDamage;
@@ -16,9 +17,12 @@ public class SwordTrigger : MonoBehaviour
 
     public GameObject Debug_CanDamageSign;
 
+    private float lastHitDate;
+
     void Start()
     {
         Debug_CanDamageSign.SetActive(false);
+        ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
     }
 
     void Update()
@@ -38,7 +42,7 @@ public class SwordTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        DealWithCollider(other);
+        //DealWithCollider(other);
     }
 
     private void DealWithCollider(Collider other)
@@ -47,15 +51,27 @@ public class SwordTrigger : MonoBehaviour
         if (canDamage && other.gameObject.GetComponent<DamageReceiver>())
         {
             other.gameObject.GetComponent<DamageReceiver>().Receive(new Damage(CurrentDamage(), AM.GetCurrentKey(),AM.gameObject,other.ClosestPointOnBounds(transform.position)));
-            screenShakeScript.setShake(HitShakeForce,HitShakeDuration);
-            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
+            screenShakeScript.setShake(HitShakeForce,HitShakeDuration, true);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration, true);
+            if (lastHitDate + 0.1f < Time.time)
+            {
+                lastHitDate = Time.time;
+                ESS.PlaySound(ESS.OneOf(ESS.COMBAT_TapeEnnemiAvecEpee), ESS.Asource_Effects, 0.7f, false);
+            }
+            
         }
 
         if (canDamage && other.gameObject.GetComponent<Trigger_Poutch>())
         {
             other.gameObject.GetComponent<Trigger_Poutch>().TriggerCD();
-            screenShakeScript.setShake(HitShakeForce, HitShakeDuration);
-            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration);
+            screenShakeScript.setShake(HitShakeForce, HitShakeDuration, false);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration, false);
+            if (lastHitDate + 0.1f < Time.time)
+            {
+                lastHitDate = Time.time;
+                ESS.PlaySound(ESS.COMBAT_TapeTriggerAvecEpee, ESS.Asource_Effects, 0.4f, false);
+            }
+            
         }
     }
 
