@@ -98,4 +98,13 @@ public class AnimationManager : MonoBehaviour
         //Debug.Log("combo4");
     }
 
+    public void Dash()
+    {
+        anim.SetTrigger("dash");
+    }
+
+    public void SetBlocking(bool b)
+    {
+        anim.SetBool("blocking",b);
+    }
 }
