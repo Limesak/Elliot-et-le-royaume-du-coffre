@@ -177,7 +177,15 @@ public class LockManager : MonoBehaviour
 
     public GameObject GetLockedObject()
     {
-        return LockedObject.gameObject;
+        if(LockedObject != null)
+        {
+            return LockedObject.gameObject;
+        }
+        else
+        {
+            return null;
+        }
+        
     }
    
 

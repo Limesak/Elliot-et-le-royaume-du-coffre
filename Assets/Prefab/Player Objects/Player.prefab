@@ -981,7 +981,10 @@ MonoBehaviour:
     type: 3}
   COMBAT_Soin: {fileID: 8300000, guid: 7aacb79739e29784aabde025fe6b4594, type: 3}
   COMBAT_MangerBonbon: {fileID: 8300000, guid: ebc2509c5bf0f7846a951f88e0ba34e6, type: 3}
-  COMBAT_HitBouclier: []
+  COMBAT_HitBouclier:
+  - {fileID: 8300000, guid: 25b0b983f0c4c9a4b91c50425e5fb3c6, type: 3}
+  - {fileID: 8300000, guid: 31786faf13f7025439140eb9060f7047, type: 3}
+  - {fileID: 8300000, guid: d21e867d86d9d5c4f9c4442ba11d8708, type: 3}
   MOUVEMENT_BruitDePasMarche:
   - {fileID: 8300000, guid: f056961366743f54e81ca52757fbe3e2, type: 3}
   - {fileID: 8300000, guid: 60c1d4d5fc343b94f90fccb9e0dd2538, type: 3}

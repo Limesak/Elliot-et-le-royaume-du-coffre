@@ -117,28 +117,49 @@ public class LifeManager : MonoBehaviour
         if (!isDead && InvunerableFramesDuration + lastHit <= Time.time && !KeyMemory.Contains(dmg._key+""))
         {
             int index = GetCurrentIndex();
-            Instantiate(PREFAB_Hit, dmg._impactPoint, Quaternion.identity);
+            
             if (index < Cells.Length && index != -1)
             {
                 if (PM.isCurrentlyBlocking())
                 {
-                    if(Vector3.Distance(dmg._source.transform.position, BlockPos.transform.position)< Vector3.Distance(dmg._source.transform.position, WeakPos.transform.position) && SM.UseXamount(20))
+                    if(Vector3.Distance(dmg._source.transform.position, BlockPos.transform.position)< Vector3.Distance(dmg._source.transform.position, WeakPos.transform.position))
+                    {
+                        if (SM.UseXamount(20))
+                        {
+                            ESS.PlaySound(ESS.OneOf(ESS.COMBAT_HitBouclier), ESS.Asource_Effects, 0.8f, false);
+                            lastHit = Time.time;
+                        }
+                        else
+                        {
+                            lastHit = Time.time;
+                            Cells[index].GetDamage(dmg._power);
+                            screenShakeScript.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
+                            screenShakeScriptLock.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
+                            ESS.PlaySound(ESS.OneOf(ESS.COMBAT_PrendDegat), ESS.Asource_Effects, 0.8f, false);
+                            PM.CancelBlock();
+                            Instantiate(PREFAB_Hit, dmg._impactPoint, Quaternion.identity);
+                            int rdm = Random.Range(0, 100);
+                            if (rdm > 70)
+                            {
+                                ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
+                            }
+                        }
+                        
+                    }
+                    else
                     {
                         lastHit = Time.time;
                         Cells[index].GetDamage(dmg._power);
                         screenShakeScript.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
                         screenShakeScriptLock.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
                         ESS.PlaySound(ESS.OneOf(ESS.COMBAT_PrendDegat), ESS.Asource_Effects, 0.8f, false);
-
+                        PM.CancelBlock();
+                        Instantiate(PREFAB_Hit, dmg._impactPoint, Quaternion.identity);
                         int rdm = Random.Range(0, 100);
                         if (rdm > 70)
                         {
                             ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
                         }
-                    }
-                    else
-                    {
-                        ESS.PlaySound(ESS.OneOf(ESS.COMBAT_HitBouclier), ESS.Asource_Effects, 0.8f, false);
                     }
                 }
                 else
@@ -148,7 +169,7 @@ public class LifeManager : MonoBehaviour
                     screenShakeScript.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
                     screenShakeScriptLock.setShake(StunShakeForce + (dmg._power * 0.001f), StunShakeDuration, false);
                     ESS.PlaySound(ESS.OneOf(ESS.COMBAT_PrendDegat), ESS.Asource_Effects, 0.8f, false);
-
+                    Instantiate(PREFAB_Hit, dmg._impactPoint, Quaternion.identity);
                     int rdm = Random.Range(0, 100);
                     if (rdm > 70)
                     {

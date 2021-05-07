@@ -107,4 +107,10 @@ public class AnimationManager : MonoBehaviour
     {
         anim.SetBool("blocking",b);
     }
+
+    public void SetXYwalkVelues(float x, float y)
+    {
+        anim.SetFloat("XvalueWalk", x);
+        anim.SetFloat("YvalueWalk", y);
+    }
 }
