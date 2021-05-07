@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StaminaManager : MonoBehaviour
 {
+    public PlayerMovement PM;
+
     public float Stamina;
     private float MaxStamina;
     public float StaminaRegen;
@@ -22,7 +24,7 @@ public class StaminaManager : MonoBehaviour
 
     void Update()
     {
-        if(lastStaminaUse + RegeneCD <= Time.time)
+        if(lastStaminaUse + RegeneCD <= Time.time && !PM.isCurrentlyBlocking())
         {
             if (Stamina < MaxStamina)
             {

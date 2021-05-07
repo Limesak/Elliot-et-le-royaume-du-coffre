@@ -175,7 +175,18 @@ public class LockManager : MonoBehaviour
         PivotLock.target = transform;
     }
 
-
+    public GameObject GetLockedObject()
+    {
+        if(LockedObject != null)
+        {
+            return LockedObject.gameObject;
+        }
+        else
+        {
+            return null;
+        }
+        
+    }
    
 
 }

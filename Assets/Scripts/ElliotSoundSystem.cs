@@ -20,6 +20,7 @@ public class ElliotSoundSystem : MonoBehaviour
     public AudioClip COMBAT_TapeTriggerAvecEpee;
     public AudioClip COMBAT_Soin;
     public AudioClip COMBAT_MangerBonbon;
+    public AudioClip[] COMBAT_HitBouclier;
 
     public AudioClip[] MOUVEMENT_BruitDePasMarche;
     public AudioClip[] MOUVEMENT_BruitDePasSprint;
