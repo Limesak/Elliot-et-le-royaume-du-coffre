@@ -93,6 +93,22 @@ public class LifeManager : MonoBehaviour
             dmg._power = dmg._power * 0.7f;
             //Debug.Log("Tanked by bucket");
         }
+
+        switch (SaveData.current.CurrentDifficulty)
+        {
+            case 0:
+                dmg._power = dmg._power * 0.5f;
+                break;
+            case 3:
+                dmg._power = dmg._power * 2f;
+                break;
+            case 4:
+                dmg._power = dmg._power * 3f;
+                break;
+            default:
+                //Debug.Log("NOTHING");
+                break;
+        }
         if (!isDead && InvunerableFramesDuration + lastHit <= Time.time && !KeyMemory.Contains(dmg._key+""))
         {
             int index = GetCurrentIndex();
@@ -135,12 +151,49 @@ public class LifeManager : MonoBehaviour
 
     public void AutoHeal(float heal)
     {
+        
         if (!isDead)
         {
             int index = GetCurrentIndex();
-            if (index < Cells.Length && index != -1)
+            switch (SaveData.current.CurrentDifficulty)
             {
-                Cells[index].GetHealOnlyThisBar(heal);
+                case 0:
+                    if (index < Cells.Length && index != -1)
+                    {
+                        Cells[index].GetHealOnlyThisBar(heal * 1.2f);
+                        if (Cells[index].Full() && index>0)
+                        {
+                            Cells[index-1].GetHealOnlyThisBar(heal * 1.2f);
+                        }
+                    }
+                    break;
+                case 1:
+                    if (index < Cells.Length && index != -1)
+                    {
+                        Cells[index].GetHealOnlyThisBar(heal);
+                    }
+                    break;
+                case 2:
+                    if (index < Cells.Length && index != -1)
+                    {
+                        Cells[index].GetHealOnlyThisBar(heal);
+                    }
+                    break;
+                case 3:
+                    if (index < Cells.Length && index != -1 && index != 0)
+                    {
+                        Cells[index].GetHealOnlyThisBar(heal * 0.7f);
+                    }
+                    break;
+                case 4:
+                    if (index < Cells.Length && index == 3)
+                    {
+                        Cells[index].GetHealOnlyThisBar(heal * 0.7f);
+                    }
+                    break;
+                default:
+                    //Debug.Log("NOTHING");
+                    break;
             }
         }
     }
@@ -245,5 +298,10 @@ public class LifeManager : MonoBehaviour
             StartCoroutine(MM.FadeNLoad());
         }
         
+    }
+
+    public bool isAlive()
+    {
+        return !isDead;
     }
 }

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public AttackUseManager AUM;
     public HandManager HM;
     public float coefHighLanding;
+    public LifeManager LM;
 
     public CharacterController controller;
 
@@ -181,11 +182,19 @@ public class PlayerMovement : MonoBehaviour
                 AerianDir = Vector3.zero;
             }
             isDiving = false;
-            controller.slopeLimit = 90;
+            controller.slopeLimit = 45;
         }
         else
         {
-            
+            if (IsAlmostGrounded())
+            {
+                controller.slopeLimit = 45;
+            }
+            else
+            {
+                controller.slopeLimit = 90;
+            }
+
             if (GravityPower > 0 && IsUnderRoof())
             {
                 GravityPower = 0;
@@ -308,32 +317,36 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Movements
-        Vector2 inputVector = Vector2.zero;
-        if (SaveParameter.current.InputMode == 0)
+        if (LM.isAlive())
         {
-            inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
-        }
-        else if (SaveParameter.current.InputMode == 1)
-        {
-            inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
-        }
-        Direction = new Vector3(inputVector.x,0, inputVector.y);
+            Vector2 inputVector = Vector2.zero;
+            if (SaveParameter.current.InputMode == 0)
+            {
+                inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+            }
+            else if (SaveParameter.current.InputMode == 1)
+            {
+                inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+            }
+            Direction = new Vector3(inputVector.x, 0, inputVector.y);
 
-        if (IsAlmostGrounded())
-        {
-            if (isSprinting && currentSpeed < speedSprint)
+            if (IsAlmostGrounded())
             {
-                currentSpeed = currentSpeed + (sprintAcceleration * Time.deltaTime);
-            }
-            if (currentSpeed > speedSprint)
-            {
-                currentSpeed = speedSprint;
-            }
-            if (!isSprinting)
-            {
-                currentSpeed = speed;
+                if (isSprinting && currentSpeed < speedSprint)
+                {
+                    currentSpeed = currentSpeed + (sprintAcceleration * Time.deltaTime);
+                }
+                if (currentSpeed > speedSprint)
+                {
+                    currentSpeed = speedSprint;
+                }
+                if (!isSprinting)
+                {
+                    currentSpeed = speed;
+                }
             }
         }
+        
         
 
         if (IsAlmostGrounded())
@@ -434,7 +447,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs)
+        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs && LM.isAlive())
         {
             isJumping = true;
             if (AUM.GetAttacking())
@@ -470,7 +483,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs)
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs && LM.isAlive())
             {
                 if (AUM.GetAttacking())
                 {
@@ -484,7 +497,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs )
+            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs && LM.isAlive())
             {
                 if (!isSprinting)
                 {
@@ -534,7 +547,7 @@ public class PlayerMovement : MonoBehaviour
         //return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
 
         RaycastHit hit;
-        return Physics.SphereCast(transform.position, 0.5f, -Vector3.up, out hit, distToGround * 2);
+        return Physics.SphereCast(transform.position, 0.52f, -Vector3.up, out hit, distToGround * 1.6f);
     }
 
     public bool IsPossiblyStuck()
