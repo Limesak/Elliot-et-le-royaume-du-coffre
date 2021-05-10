@@ -98,4 +98,19 @@ public class AnimationManager : MonoBehaviour
         //Debug.Log("combo4");
     }
 
+    public void Dash()
+    {
+        anim.SetTrigger("dash");
+    }
+
+    public void SetBlocking(bool b)
+    {
+        anim.SetBool("blocking",b);
+    }
+
+    public void SetXYwalkVelues(float x, float y)
+    {
+        anim.SetFloat("XvalueWalk", x);
+        anim.SetFloat("YvalueWalk", y);
+    }
 }
