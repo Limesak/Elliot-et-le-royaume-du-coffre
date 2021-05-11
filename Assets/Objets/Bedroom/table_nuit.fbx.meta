@@ -3,7 +3,12 @@ guid: 8da2a4006752510478a87450fc385946
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: table_chevet_default_mat
+    second: {fileID: 2100000, guid: c11069b701cda524b9786d60a090a124, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
