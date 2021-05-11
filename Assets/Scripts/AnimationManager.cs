@@ -65,6 +65,7 @@ public class AnimationManager : MonoBehaviour
         //anim.SetTrigger("airJump");
         //Debug.Log("jumpAnim");
         CAPE.GetComponent<Cloth>().enabled = false;
+        anim.SetTrigger("airJump");
     }
 
     public void LaunchAttack()
@@ -123,4 +124,5 @@ public class AnimationManager : MonoBehaviour
     {
         anim.SetTrigger("die");
     }
+
 }
