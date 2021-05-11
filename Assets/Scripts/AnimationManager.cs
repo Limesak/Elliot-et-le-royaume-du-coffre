@@ -113,4 +113,14 @@ public class AnimationManager : MonoBehaviour
         anim.SetFloat("XvalueWalk", x);
         anim.SetFloat("YvalueWalk", y);
     }
+
+    public void GetHit()
+    {
+        anim.SetTrigger("hit");
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("die");
+    }
 }

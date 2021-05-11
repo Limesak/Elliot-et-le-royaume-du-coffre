@@ -5,6 +5,7 @@ using UnityEngine;
 public class LifeManager : MonoBehaviour
 {
     private ElliotSoundSystem ESS;
+    public AnimationManager AM;
     public PlayerMovement PM;
     public StaminaManager SM;
     public MenuManager MM;
@@ -127,6 +128,8 @@ public class LifeManager : MonoBehaviour
                         if (SM.UseXamount(20))
                         {
                             ESS.PlaySound(ESS.OneOf(ESS.COMBAT_HitBouclier), ESS.Asource_Effects, 0.8f, false);
+                            screenShakeScript.setShake((StunShakeForce/2) + (dmg._power * 0.001f), StunShakeDuration/2, false);
+                            screenShakeScriptLock.setShake((StunShakeForce / 2) + (dmg._power * 0.001f), StunShakeDuration/2, false);
                             lastHit = Time.time;
                         }
                         else
@@ -143,6 +146,7 @@ public class LifeManager : MonoBehaviour
                             {
                                 ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
                             }
+                            AM.GetHit();
                         }
                         
                     }
@@ -160,6 +164,7 @@ public class LifeManager : MonoBehaviour
                         {
                             ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
                         }
+                        AM.GetHit();
                     }
                 }
                 else
@@ -175,6 +180,7 @@ public class LifeManager : MonoBehaviour
                     {
                         ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
                     }
+                    AM.GetHit();
                 }
                 
             }
@@ -340,6 +346,7 @@ public class LifeManager : MonoBehaviour
     {
         if (!isDead)
         {
+            AM.Die();
             ESS.PlaySound(ESS.UI_GameOver, ESS.Asource_Interface, 0.8f, false);
             ESS.PlaySound(ESS.COMBAT_Meurt, ESS.Asource_Effects, 0.8f, false);
             SaveData.current.ResetValueToDefault();
