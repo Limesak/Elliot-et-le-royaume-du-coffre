@@ -3,7 +3,12 @@ guid: 6aa2ffc006f7b7c4ca15ec279d997825
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: armoire_default_mat
+    second: {fileID: 2100000, guid: 76e2db4f4afcfab44a10964515662516, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
