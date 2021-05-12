@@ -1281,6 +1281,7 @@ GameObject:
   - component: {fileID: 3161759517273933155}
   - component: {fileID: 5989918969698462382}
   - component: {fileID: 6919931764136827068}
+  - component: {fileID: 8175353842166681070}
   - component: {fileID: 8367054130754791813}
   m_Layer: 0
   m_Name: Player
@@ -1405,6 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850fdb8a17793d94583c049eefbb505e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AM: {fileID: 795993452163915058}
   PM: {fileID: 5299395207707767066}
   SM: {fileID: 5299395207707767068}
   MM: {fileID: 0}
@@ -1590,6 +1592,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DM: {fileID: 5989918969698462382}
+--- !u!114 &8175353842166681070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299395207707767064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03de7be176c09b458b931bf02e59186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MM: {fileID: 0}
 --- !u!81 &8367054130754791813
 AudioListener:
   m_ObjectHideFlags: 0

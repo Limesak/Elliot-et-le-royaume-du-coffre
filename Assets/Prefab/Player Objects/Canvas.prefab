@@ -152,6 +152,80 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &52073066218715615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1771737845162345710}
+  - component: {fileID: 2915034758256776827}
+  - component: {fileID: 2459979586075908408}
+  m_Layer: 5
+  m_Name: BlackScreen ForDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1771737845162345710
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52073066218715615}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6141895017768999205}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 15000, y: 5000}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2915034758256776827
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52073066218715615}
+  m_CullTransparentMesh: 0
+--- !u!114 &2459979586075908408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52073066218715615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 86ae15d05bd6322449d1225a7d5e992e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &52480916173656572
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,7 +5664,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Toute progression qui n'a pas \xE9t\xE9 sauvegard\xE9e sera perdu, voulez
-    vous continuer ?\n"
+    vous vraiment quitter ?\n"
 --- !u!1 &1400291854199152098
 GameObject:
   m_ObjectHideFlags: 0
@@ -8619,7 +8693,7 @@ RectTransform:
   - {fileID: 1701417336872824497}
   - {fileID: 61336666319110840}
   m_Father: {fileID: 6141895017768999205}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17359,7 +17433,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6141895017768999205}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21206,7 +21280,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6141895017768999205}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5408169699428128247
 GameObject:
@@ -25185,6 +25259,7 @@ RectTransform:
   - {fileID: 731650781206454927}
   - {fileID: 1684094644271596216}
   - {fileID: 9012432665900613411}
+  - {fileID: 1771737845162345710}
   - {fileID: 1977967369847453183}
   - {fileID: 656144750081558115}
   - {fileID: 4403913903619357842}
@@ -25272,6 +25347,7 @@ MonoBehaviour:
   isUnfading: 0
   HM: {fileID: 0}
   DM: {fileID: 0}
+  CM: {fileID: 0}
   BlackScreen: {fileID: 5687557488970563206}
   Speed: 1
   Button_ContinuerPartie: {fileID: 6584573731788320104}
@@ -25388,6 +25464,8 @@ MonoBehaviour:
   writingCharacterDuration: 0.01
   DIALOGUE_TextContent: {fileID: 7209615338979195289}
   BlipBloupCooldown: 0.12
+  BlackScreenForDialogue: {fileID: 2459979586075908408}
+  MaxAlphaValue: 0.75
   CLOSED_SCROLL_HIDDEN_POS: {fileID: 8102668504231104821}
   ClosedScroll: {fileID: 3876225898909086174}
   RollingScroll: {fileID: 3087010954820081617}
