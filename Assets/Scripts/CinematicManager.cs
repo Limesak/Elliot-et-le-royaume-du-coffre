@@ -9,6 +9,7 @@ public class CinematicManager : MonoBehaviour
     private CinematicStep[] CurrentCinematic;
     private int CurrentIndex;
     private CinemachineFreeLook LastCinematicCamera;
+    public DiaryManager DM;
 
     public MenuManager MM;
 
@@ -98,6 +99,12 @@ public class CinematicManager : MonoBehaviour
                 CurrentCinematic = null;
                 CurrentIndex = 0;
                 LastCinematicCamera = null;
+                break;
+            case CinematicStep.StepType.AddLineToDiaryBuffer:
+                DM.AddBufferEntry(CurrentCinematic[CurrentIndex].BufferLine);
+                break;
+            case CinematicStep.StepType.ChangeMission:
+                DM.ChangeTheMission(CurrentCinematic[CurrentIndex].MissionLine);
                 break;
             default:
                 //Debug.Log("NOTHING");
