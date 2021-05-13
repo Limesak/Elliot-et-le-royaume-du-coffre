@@ -55,7 +55,7 @@ public class DiaryManager : MonoBehaviour
 
             if (SaveData.current.Diary.Length == 0)
             {
-                MISSION_content = "TODO: Ecrire le contenu de la première mission dans le script DiaryManager.cs dans la function ResetDiary()";//Ecrire mission 1 ici !
+                MISSION_content = "Je devrai explorer les environs.";//Ecrire mission 1 ici !
                 MISSION_hints = new string[0];//Ajouter indice ici si première mission en a besoin (mais je trouve ca pas logique)
             }
             else
@@ -328,5 +328,11 @@ public class DiaryManager : MonoBehaviour
         }
         newList[BUFFER_list.Length] =content;
         BUFFER_list = newList;
+    }
+
+    public void ChangeTheMission(string content)
+    {
+        MISSION_content = content;
+        MISSION_hints = new string[0];
     }
 }
