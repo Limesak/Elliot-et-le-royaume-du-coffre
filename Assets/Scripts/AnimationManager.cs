@@ -65,6 +65,7 @@ public class AnimationManager : MonoBehaviour
         //anim.SetTrigger("airJump");
         //Debug.Log("jumpAnim");
         CAPE.GetComponent<Cloth>().enabled = false;
+        anim.SetTrigger("airJump");
     }
 
     public void LaunchAttack()
@@ -113,4 +114,15 @@ public class AnimationManager : MonoBehaviour
         anim.SetFloat("XvalueWalk", x);
         anim.SetFloat("YvalueWalk", y);
     }
+
+    public void GetHit()
+    {
+        anim.SetTrigger("hit");
+    }
+
+    public void Die()
+    {
+        anim.SetTrigger("die");
+    }
+
 }
