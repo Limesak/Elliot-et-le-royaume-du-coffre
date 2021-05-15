@@ -21,9 +21,19 @@ public class AnimationManager : MonoBehaviour
     {
         anim.SetBool("pressingJump", PM.GetJumping());
         anim.SetBool("isGrounded", PM.IsGroundedAnim());
-        anim.SetBool("sprinting", PM.GetSprinting());
+        if (SaveParameter.current.canUseInputs)
+        {
+            anim.SetBool("sprinting", PM.GetSprinting());
+            anim.SetFloat("walkCoef", PM.GetDirectionInputs().magnitude);
+        }
+        else
+        {
+            anim.SetBool("sprinting", false);
+            anim.SetFloat("walkCoef", 0);
+        }
+        
         anim.SetBool("canUseInput", SaveParameter.current.canUseInputs);
-        anim.SetFloat("walkCoef", PM.GetDirectionInputs().magnitude);
+        
         if (PM.IsGrounded())
         {
             anim.ResetTrigger("startAirAttack");

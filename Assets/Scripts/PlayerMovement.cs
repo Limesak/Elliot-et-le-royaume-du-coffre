@@ -473,6 +473,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (!SaveParameter.current.canUseInputs)
+            {
+                isSprinting = false;
+            }
+
             if (SaveParameter.current.InputMode == 1)
             {
                 isSprinting = false;
