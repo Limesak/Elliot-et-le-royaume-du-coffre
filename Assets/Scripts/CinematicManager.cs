@@ -108,6 +108,9 @@ public class CinematicManager : MonoBehaviour
             case CinematicStep.StepType.ChangeMission:
                 DM.ChangeTheMission(CurrentCinematic[CurrentIndex].MissionLine);
                 break;
+            case CinematicStep.StepType.AddHint:
+                DM.AddHint(CurrentCinematic[CurrentIndex].HintLine);
+                break;
             default:
                 //Debug.Log("NOTHING");
                 break;

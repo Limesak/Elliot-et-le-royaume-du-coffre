@@ -51,25 +51,25 @@ public class LootManager : MonoBehaviour
                 //Debug.Log("Bucket");
                 DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de BUCKET dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[0] = true;
-                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.3f, false);
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 break;
             case LootType.Cape:
                 //Debug.Log("Cape");
                 DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de CAPE dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[1] = true;
-                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.3f, false);
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 break;
             case LootType.WoodSword:
                 //Debug.Log("WoodSword");
-                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de WOODSWORD dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                //DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de WOODSWORD dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[2] = true;
-                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.3f, false);
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 break;
             case LootType.WoodShield:
                 //Debug.Log("WoodShield");
                 DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de WOODSHIELD dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[3] = true;
-                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.3f, false);
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 break;
             default:
                 //Debug.Log("NOTHING");

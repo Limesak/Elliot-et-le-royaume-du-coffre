@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7525484285080889771}
   - component: {fileID: 2233133079544678001}
   - component: {fileID: 8254757167794657203}
-  - component: {fileID: 5493947869374590701}
   - component: {fileID: 2101778352}
+  - component: {fileID: 8078790377258266869}
   m_Layer: 0
   m_Name: littleTree
   m_TagString: Untagged
@@ -805,21 +805,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5493947869374590701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8912502240228564050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640575c899aa9354388b3042e5aadd2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hacked: 0
-  Done: 0
-  timeDis: 2
 --- !u!33 &2101778352
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -828,3 +813,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8912502240228564050}
   m_Mesh: {fileID: 0}
+--- !u!114 &8078790377258266869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912502240228564050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d9bd412e6018f4ca29f98457723f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TR: []
+  Cooldown: 0
+  colorOfTrigger:
+  - {fileID: 2100000, guid: e27ae38a97c4d664fa60bd959317d12a, type: 2}
+  - {fileID: 2100000, guid: 54329cfe51f8e004883d79a1298cba68, type: 2}
+  triggerRenderer: {fileID: 7525484285080889771}
+  currentSwitchPosition: 0
+  DestroyOnUse: 1
