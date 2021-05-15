@@ -7,6 +7,7 @@ public class LootManager : MonoBehaviour
     public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet };
 
     public DiaryManager DM;
+    public BonbonUseManager BM;
 
     private ElliotSoundSystem ESS;
 
@@ -37,6 +38,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.haveDiscoveredCandy = true;
                 SaveData.current.CPT_Candy += 1;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseBonbon, ESS.Asource_Effects, 0.8f, false);
+                BM.UpdateValues();
                 break;
             case LootType.CleJaune:
                 //Debug.Log("CleJaune");

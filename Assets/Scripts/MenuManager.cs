@@ -23,6 +23,7 @@ public class MenuManager : MonoBehaviour
     public DiaryManager DM;
     private ElliotSoundSystem ESS;
     public CinematicManager CM;
+    public BonbonUseManager BM;
 
     [Header("BlackScreen")]
 
@@ -167,6 +168,7 @@ public class MenuManager : MonoBehaviour
         HM = GameObject.FindGameObjectWithTag("Player").GetComponent<HandManager>();
         DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
         CM = GameObject.FindGameObjectWithTag("Player").GetComponent<CinematicManager>();
+        BM = GameObject.FindGameObjectWithTag("Player").GetComponent<BonbonUseManager>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
         BlackScreenForDialogue.gameObject.SetActive(true);
@@ -260,6 +262,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
             DIALOGUE_TextContent.text = DialogueCurrentText;
+            
         }
         else
         {
@@ -969,6 +972,7 @@ public class MenuManager : MonoBehaviour
                 SETTINGS_DiffNames[i].SetActive(false);
             }
         }
+        BM.UpdateValues();
     }
 
     public void SETTINGS_TryUpDifficulty()
@@ -1227,6 +1231,13 @@ public class MenuManager : MonoBehaviour
         if (isDialogueOn)
         {
             ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            if (isWritingDialogue)
+            {
+                isWritingDialogue = false;
+                DIALOGUE_TextContent.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent;
+                return;
+            }
+
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
             {
                 ConvCurrentIndex++;

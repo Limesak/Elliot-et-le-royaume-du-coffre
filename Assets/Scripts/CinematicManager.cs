@@ -23,10 +23,12 @@ public class CinematicManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if(isInCinematic && CurrentCinematic == null)
         {
             isInCinematic = false;
         }
+        */
     }
 
     public void StartNewCinematic(CinematicStep[] CC)
