@@ -16,6 +16,7 @@ public class CinematicScript_C2S2 : CinematicScript
     public GameObject PosToGo2;
     public GameObject VCFT_EquiperObjet;
     public GameObject VCFT_UtiliserEpee;
+    public GameObject VCFT_Spawn;
 
     public sealed override void ExecuteScript()
     {
@@ -73,6 +74,7 @@ public class CinematicScript_C2S2 : CinematicScript
         NavAgentLutin.SetDestination(PosToGo2.transform.position);
         VCFT_EquiperObjet.SetActive(true);
         VCFT_UtiliserEpee.SetActive(true);
+        VCFT_Spawn.SetActive(true);
     }
 
     IEnumerator Step7_AferWaitingX(float X)

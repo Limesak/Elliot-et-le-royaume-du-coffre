@@ -50,6 +50,19 @@ public class TutoManager : MonoBehaviour
         {
             if (FourreToutList[i].activeSelf)
             {
+                if (FourreToutList[i] == TUTO_DeplacemenNCamera)
+                {
+                    SaveData.current.TutoDone_Deplacement = true;
+                }
+                else if (FourreToutList[i] == TUTO_EquiperObjet)
+                {
+                    SaveData.current.TutoDone_Equiper = true;
+                }
+                else if (FourreToutList[i] == TUTO_Epee)
+                {
+                    SaveData.current.TutoDone_Sword = true;
+                }
+
                 ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.4f, false);
                 FourreToutList[i].transform.DOLocalMove(PosClose.transform.localPosition, 0.3f).OnComplete(() => { FourreToutList[i].SetActive(false); });
             }
@@ -72,6 +85,38 @@ public class TutoManager : MonoBehaviour
             SaveParameter.current.canUseInputs = false;
             isOn = true;
         }
+        else
+        {
+            if (fiche == TUTO_DeplacemenNCamera)
+            {
+                SaveData.current.TutoDone_Deplacement = true;
+            }
+            else if (fiche == TUTO_EquiperObjet)
+            {
+                SaveData.current.TutoDone_Equiper = true;
+            }
+            else if (fiche == TUTO_Epee)
+            {
+                SaveData.current.TutoDone_Sword = true;
+            }
+
+            /*
+                if (FourreToutList[i].name == "Tuto Deplacement et Camera")
+                {
+                    SaveData.current.TutoDone_Deplacement = true;
+                }
+                else if (FourreToutList[i].name == "Tuto Equiper Objet")
+                {
+                    SaveData.current.TutoDone_Equiper = true;
+                }
+                else if (FourreToutList[i].name == "Tuto Epee")
+                {
+                    SaveData.current.TutoDone_Sword = true;
+                }
+                */
+        }
+
+        
     }
 
     public bool isInTuto()
