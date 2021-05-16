@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValueCheckerForTuto : MonoBehaviour
+public class ValueChecker : MonoBehaviour
 {
-    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX};
-    public enum TutoType { DeplacementCamera, EquiperObjet, UtiliserEpee };
+    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone};
+    public enum TutoType { None, DeplacementCamera, EquiperObjet, UtiliserEpee };
 
     [Header("Global infos")]
     public LookType Type;
@@ -14,6 +14,7 @@ public class ValueCheckerForTuto : MonoBehaviour
     private TutoManager TM;
     private bool locked;
     private MenuManager MM;
+    public CinematicCentralizer CC;
 
     void Start()
     {
@@ -41,6 +42,11 @@ public class ValueCheckerForTuto : MonoBehaviour
                 StartCoroutine(Step1_AferWaitingX(waitDuration));
                 locked = true;
             }
+            else if (Type == LookType.TutoEpeeDone && SaveData.current.TutoDone_Sword)
+            {
+                StartCoroutine(Step1_AferWaitingX(waitDuration));
+                locked = true;
+            }
         }
         
     }
@@ -61,6 +67,10 @@ public class ValueCheckerForTuto : MonoBehaviour
         else if (Tuto == TutoType.UtiliserEpee)
         {
             TM.Open(TM.TUTO_Epee);
+        }
+        else if (Type == LookType.TutoEpeeDone)
+        {
+            CC.Recept();
         }
         Destroy(gameObject);
     }

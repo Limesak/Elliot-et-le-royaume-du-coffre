@@ -17,15 +17,19 @@ public class NotifManager : MonoBehaviour
 
     public void NewNotif(string content)
     {
-        foreach(NotifEntity ne in List)
+        if (SaveData.current.CurrentDifficulty != 2 && SaveData.current.CurrentDifficulty != 4)
         {
-            if (ne != null)
+            foreach (NotifEntity ne in List)
             {
-                ne.GoDown();
+                if (ne != null)
+                {
+                    ne.GoDown();
+                }
             }
+            NotifEntity newNotif = GameObject.Instantiate(PREFAB_Notif, NotifHolder.transform).GetComponent<NotifEntity>();
+            newNotif.textDisplay.text = content;
+            List.Add(newNotif);
         }
-        NotifEntity newNotif = GameObject.Instantiate(PREFAB_Notif, NotifHolder.transform).GetComponent<NotifEntity>();
-        newNotif.textDisplay.text = content;
-        List.Add(newNotif);
+        
     }
 }
