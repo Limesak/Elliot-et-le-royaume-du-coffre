@@ -10,6 +10,7 @@ public class CinematicManager : MonoBehaviour
     private int CurrentIndex;
     private CinemachineFreeLook LastCinematicCamera;
     public DiaryManager DM;
+    public NotifManager NM;
 
     public MenuManager MM;
 
@@ -19,6 +20,7 @@ public class CinematicManager : MonoBehaviour
         CurrentCinematic = null;
         CurrentIndex = 0;
         LastCinematicCamera = null;
+        NM = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<NotifManager>();
     }
 
     void Update()
@@ -44,10 +46,10 @@ public class CinematicManager : MonoBehaviour
 
     public void LaunchCurrentStep()
     {
-        Debug.Log("Launching step "+ CurrentIndex + "/" + (CurrentCinematic.Length-1) + "  :  " + CurrentCinematic[CurrentIndex].Type.ToString());
+        //Debug.Log("Launching step "+ CurrentIndex + "/" + (CurrentCinematic.Length-1) + "  :  " + CurrentCinematic[CurrentIndex].Type.ToString());
         if (CurrentIndex >= CurrentCinematic.Length)
         {
-            Debug.Log("Aborting because Steps.Length = " + CurrentCinematic.Length);
+            //Debug.Log("Aborting because Steps.Length = " + CurrentCinematic.Length);
             isInCinematic = false;
             CurrentCinematic = null;
             CurrentIndex = 0;
@@ -67,7 +69,7 @@ public class CinematicManager : MonoBehaviour
                 }
                 LastCinematicCamera = CurrentCinematic[CurrentIndex].CinematicCamera;
                 CurrentCinematic[CurrentIndex].CinematicCamera.m_Priority = 50;
-                Debug.Log("Trying to set up cam " + CurrentCinematic[CurrentIndex].CinematicCamera.gameObject.name);
+                //Debug.Log("Trying to set up cam " + CurrentCinematic[CurrentIndex].CinematicCamera.gameObject.name);
                 break;
             case CinematicStep.StepType.QuitCamera:
                 if (LastCinematicCamera != null)
@@ -82,7 +84,7 @@ public class CinematicManager : MonoBehaviour
                 }
                 break;
             case CinematicStep.StepType.PopDialogue:
-                Debug.Log("Trying to set up dialogue " + CurrentCinematic[CurrentIndex].Conversation.gameObject.name);
+                //Debug.Log("Trying to set up dialogue " + CurrentCinematic[CurrentIndex].Conversation.gameObject.name);
                 MM.DIALOGUE_OpenDialogue(CurrentCinematic[CurrentIndex].Conversation);
                 break;
             case CinematicStep.StepType.Fade:
@@ -107,9 +109,11 @@ public class CinematicManager : MonoBehaviour
                 break;
             case CinematicStep.StepType.ChangeMission:
                 DM.ChangeTheMission(CurrentCinematic[CurrentIndex].MissionLine);
+                NM.NewNotif("Mission mise à jour!");
                 break;
             case CinematicStep.StepType.AddHint:
                 DM.AddHint(CurrentCinematic[CurrentIndex].HintLine);
+                NM.NewNotif("Indice ajouté!");
                 break;
             default:
                 //Debug.Log("NOTHING");
@@ -126,7 +130,7 @@ public class CinematicManager : MonoBehaviour
 
     IEnumerator GoLaunchStepAferWaitingX(float X)
     {
-        Debug.Log("Launching next step in " + X +" secondes");
+        //Debug.Log("Launching next step in " + X +" secondes");
         yield return new WaitForSeconds(X);
         LaunchCurrentStep();
     }

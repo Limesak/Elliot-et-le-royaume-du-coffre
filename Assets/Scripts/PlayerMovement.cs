@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         isDiving = false;
         isMoving = false;
         ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
+        
     }
 
     void Awake()

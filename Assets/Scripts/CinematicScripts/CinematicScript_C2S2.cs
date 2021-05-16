@@ -14,6 +14,8 @@ public class CinematicScript_C2S2 : CinematicScript
     public GameObject PosForDrop;
     public GameObject PosToGo;
     public GameObject PosToGo2;
+    public GameObject VCFT_EquiperObjet;
+    public GameObject VCFT_UtiliserEpee;
 
     public sealed override void ExecuteScript()
     {
@@ -69,6 +71,8 @@ public class CinematicScript_C2S2 : CinematicScript
         yield return new WaitForSeconds(X);
         //Do stuffs
         NavAgentLutin.SetDestination(PosToGo2.transform.position);
+        VCFT_EquiperObjet.SetActive(true);
+        VCFT_UtiliserEpee.SetActive(true);
     }
 
     IEnumerator Step7_AferWaitingX(float X)
