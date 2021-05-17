@@ -11,12 +11,10 @@ public class Interactable_SavePoint : Interactable
     public Material CantUseColor;
     public float cooldown;
     private float lastUse;
-    public NotifManager NM;
 
     public sealed override void CustomStart()
     {
         lastUse = -9999;
-        NM = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<NotifManager>();
     }
 
     public sealed override void Interact()
@@ -47,7 +45,6 @@ public class Interactable_SavePoint : Interactable
             SaveData.current.spawnInt = spawnIndex;
             SaveData.current.currentScene = SceneManager.GetActiveScene().buildIndex;
             SaveLoad.Save(SaveData.current);
-            NM.NewNotif("Progression sauvegardée!");
         }
         
     }
