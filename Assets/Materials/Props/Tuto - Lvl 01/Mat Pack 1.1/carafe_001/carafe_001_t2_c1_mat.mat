@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: carafe_001_t2_c1_mat
   m_Shader: {fileID: 4800000, guid: 8a07d6f761da17246ac686961e85686c, type: 3}
-  m_ShaderKeywords: _USEEMISSION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -90,7 +90,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UseAlphaClipping: 0
-    - _UseEmission: 1
+    - _UseEmission: 0
     - _UseOcclusion: 0
     - _UseOpacity: 0
     - _WorkflowMode: 1
