@@ -26,6 +26,7 @@ public class CinematicScript_C1S1 : CinematicScript
         yield return new WaitForSeconds(X);
         //Do stuffs
         AnimPoupou.SetTrigger("Surprise");
+        //StartCoroutine(Step2_AferWaitingX(0.4f));
     }
 
     IEnumerator Step2_AferWaitingX(float X)
@@ -34,6 +35,7 @@ public class CinematicScript_C1S1 : CinematicScript
         //Do stuffs
         AnimLutin.SetTrigger("Surprise");
         AnimLutin.SetBool("isInPanic", true);
+        //StartCoroutine(Step3_AferWaitingX(1.4f));
     }
 
     IEnumerator Step3_AferWaitingX(float X)
@@ -42,6 +44,7 @@ public class CinematicScript_C1S1 : CinematicScript
         //Do stuffs
         AnimLutin.SetTrigger("Run");
         NavAgentLutin.SetDestination(Destination.transform.position);
+        //StartCoroutine(Step4_AferWaitingX(0.5f));
     }
 
     IEnumerator Step4_AferWaitingX(float X)
@@ -50,6 +53,7 @@ public class CinematicScript_C1S1 : CinematicScript
         //Do stuffs
         AnimPoupou.SetTrigger("Walk");
         NavAgentPoupou.SetDestination(Destination.transform.position);
+        //StartCoroutine(Step5_AferWaitingX(2.5f));
     }
 
     IEnumerator Step5_AferWaitingX(float X)
