@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 485666996277969232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_01_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3462110961536326343}
   - component: {fileID: 2269668189630795183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,8 @@ GameObject:
   - component: {fileID: 4105933081301031650}
   - component: {fileID: 4105933081301031651}
   - component: {fileID: 4682562643513135023}
-  m_Layer: 0
+  - component: {fileID: 1931400165}
+  m_Layer: 8
   m_Name: Cinematic2 LecheCuillere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +197,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369204475606953388}
-  m_LocalRotation: {x: -0, y: 0.5989031, z: -0, w: -0.8008214}
+  m_LocalRotation: {x: 0, y: 0.59890497, z: -0, w: -0.8008202}
   m_LocalPosition: {x: -0.029, y: -0.084, z: 1.122}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
@@ -245,7 +246,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.18
+  m_Height: 2.95
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -436,9 +437,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 15
+  speed: 7
   LookYtoo: 0
   dontLook: 1
+--- !u!136 &1931400165
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369204475606953388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 2.9124353
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.399, z: 0}
 --- !u!1 &637379163494021782
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5583529744765141932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pied_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 922669549791283270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_02_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396420571488578852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Auri_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16756954739365244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IK Chain002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698674891064764345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orteil_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2433845779736831858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vert_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +652,7 @@ GameObject:
   - component: {fileID: 8485961000665696855}
   - component: {fileID: 8625028282721303625}
   - component: {fileID: 8289597546164546995}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Bonnet_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4618413937257849682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_02_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5187729279932235548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Bones_Bonnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1556183221567723200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pouce_02_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2756100720619654493}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cheville_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,7 +853,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 479297354677095486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_01_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4885658910385435897}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Principal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,7 +921,7 @@ GameObject:
   - component: {fileID: 4930852118392879377}
   - component: {fileID: 7052001900538223338}
   - component: {fileID: 1960690424984151136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Coude_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5689800953792566132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Bassin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1506838954487481825}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vert_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4939249923409220505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_01_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686093716745345173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Pointe_Roll_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1107,7 +1122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8790813579866335413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_03_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 888717960411772050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pouce_01_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,7 +1184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6051133098268665212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tibia_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,7 +1215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5774922158627518858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bras_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,7 +1246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3462060946470745170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Clav_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826186861999037662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Maj_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1292,7 +1307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6906474058520521095}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bassin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1325,7 +1340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8637210948188637155}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_03_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,7 +1371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7325377944271993647}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Ind_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6168935976664002555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Femur_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1417,7 +1432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2784188239718991859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_02_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1448,7 +1463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2464813254796680807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Talon_Roll_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1479,7 +1494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2766618513021990168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,7 +1526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527038730711694053}
   - component: {fileID: 3297171458621279025}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ceinture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6424249233185943530}
   - component: {fileID: 6138884461056878960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Salopette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1361577377102309008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_03_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6508833086062737072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Femur_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1773,7 @@ GameObject:
   - component: {fileID: 521577211319859453}
   - component: {fileID: 3317068269822456543}
   - component: {fileID: 6266235574827120616}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Bras_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1836,7 +1851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3540399059255129906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tibia_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1867,7 +1882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188902862136288116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vert_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1898,7 +1913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4280047685229737144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cheville_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9118377644351242163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_01_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1961,7 +1976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8051522179114972233}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_01_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1992,7 +2007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5577701415034196336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Genoux_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2024,7 +2039,7 @@ GameObject:
   - component: {fileID: 1367361888859607413}
   - component: {fileID: 704715582906585086}
   - component: {fileID: 4267898653156214761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Coude_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2104,7 +2119,7 @@ GameObject:
   - component: {fileID: 6382969584228841212}
   - component: {fileID: 2190165731896808344}
   - component: {fileID: 6774709477609723130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Pied_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2182,7 +2197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 420182629264178131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Pouce_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2212,7 +2227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2891287576914717778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_02_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2245,7 +2260,7 @@ GameObject:
   - component: {fileID: 4592653586732808363}
   - component: {fileID: 2221611415252652473}
   - component: {fileID: 4036912714432051335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Main_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2322,7 +2337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8642197364320750719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Ann_0D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2352,7 +2367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6627196429692661641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Ext_t\xEAte"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2382,7 +2397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276169980862274567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Auri_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2412,7 +2427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1815598143866780886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_03_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2443,7 +2458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8715975234747766889}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Pouce_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2475,7 +2490,7 @@ GameObject:
   - component: {fileID: 6020102520601692856}
   - component: {fileID: 1014646918674603396}
   - component: {fileID: 7774439501301501287}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Pied_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2553,7 +2568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2894300873098658374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bonnet_Bones_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2584,7 +2599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732002960399903698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bras_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2615,7 +2630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733949735233628465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Av_Bras_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2646,7 +2661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3721786353874379591}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_02_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2677,7 +2692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5232871400829639114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_01_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2708,7 +2723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2806302295586995715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Ind_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2738,7 +2753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6989411332489200877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Talon_Roll_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2769,7 +2784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503653867664370004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Main_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2800,7 +2815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 86878411484766397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Vert_Principal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2832,7 +2847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5832650629527218797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pied_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2863,7 +2878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494074332268763445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Genoux_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2893,7 +2908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3051959234071629464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Maj_0D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2923,7 +2938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7426267912703568970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IK Chain001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2954,7 +2969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657436918964016916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_01_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2985,7 +3000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1968991844883454669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_03_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3016,7 +3031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6235704204575109152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Plant_Roll_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3047,7 +3062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7765825112317826863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maj_02_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3080,7 +3095,7 @@ GameObject:
   - component: {fileID: 960565024447426493}
   - component: {fileID: 1996767081818948073}
   - component: {fileID: 4055208554413583152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bebar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3157,7 +3172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634969241526741530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Pied_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3188,7 +3203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5407118694710285634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Main_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3218,7 +3233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8069207918665784835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "T\xEAte"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3257,7 +3272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3355855056375572400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Pied_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3288,7 +3303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985911499091590103}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_01_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3319,7 +3334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5256493954094965400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Cheville_Roll_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3350,7 +3365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232460220069816518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Vert_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3383,7 +3398,7 @@ GameObject:
   - component: {fileID: 4696068501041419925}
   - component: {fileID: 3855196788991114591}
   - component: {fileID: 391714461002980033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Main_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3460,7 +3475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2958277887327010341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pouce_02_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3491,7 +3506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2543345766684700192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vert_Principal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3525,7 +3540,7 @@ GameObject:
   - component: {fileID: 1239831605582596719}
   - component: {fileID: 5507828759062361802}
   - component: {fileID: 2715911510380392632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Oeil_Droit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3602,7 +3617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3292628112489914047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pouce_01_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3633,7 +3648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 839513729400652959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Vert_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3664,7 +3679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920964756326767669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bonnet_Bones_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3695,7 +3710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4070786390974532733}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Av_Bras_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3727,7 +3742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3020468003958880434}
   - component: {fileID: 3620505869562741458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Bonnet_courb\xE9"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3811,7 +3826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4260963280553157279}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Plant_Roll_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3844,7 +3859,7 @@ GameObject:
   - component: {fileID: 4207196295490964891}
   - component: {fileID: 2472385177224547076}
   - component: {fileID: 4429359713788189669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Bras_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3924,7 +3939,7 @@ GameObject:
   - component: {fileID: 1494038006728713572}
   - component: {fileID: 264702994359304704}
   - component: {fileID: 7635950264342237037}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sourcil_Gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4001,7 +4016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5484252277584312659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_03_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4032,7 +4047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3970332895573804352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Clav_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4065,7 +4080,7 @@ GameObject:
   - component: {fileID: 6654558927108661748}
   - component: {fileID: 4184956648646494968}
   - component: {fileID: 227787837335564239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Oeil_Gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4142,7 +4157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8874727915797592900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Vert_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4175,7 +4190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8624008706339359718}
   - component: {fileID: 7819200170060814805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pantouffle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4260,7 +4275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591331919319757289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ann_02_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4291,7 +4306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5890739431513768350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orteil_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4324,7 +4339,7 @@ GameObject:
   - component: {fileID: 3495653734668499112}
   - component: {fileID: 1842733423409711657}
   - component: {fileID: 7517134268773740470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sourcil_Droit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4401,7 +4416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6569092841463532784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bonnet_Bones_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4432,7 +4447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7234366690637982875}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Pointe_Roll_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4463,7 +4478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5332884704189859832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_02_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4494,7 +4509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7747331572839384017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4530,7 +4545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 37160848356260842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ext_Ann_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4561,7 +4576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5315440661174844119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Cheville_Roll_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4592,7 +4607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304802587826314102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4628,7 +4643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611172372237864681}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Auri_03_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4661,7 +4676,7 @@ GameObject:
   - component: {fileID: 3631050870185401344}
   - component: {fileID: 4161473393292361466}
   - component: {fileID: 6893199239232104758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ctrl_Bonnet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4739,7 +4754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2532597257249041504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ind_03_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
