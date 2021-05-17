@@ -23,6 +23,8 @@ public class MenuManager : MonoBehaviour
     public DiaryManager DM;
     private ElliotSoundSystem ESS;
     public CinematicManager CM;
+    public BonbonUseManager BM;
+    public TutoManager TM;
 
     [Header("BlackScreen")]
 
@@ -234,7 +236,7 @@ public class MenuManager : MonoBehaviour
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
         //Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
 
-        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic())
+        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto())
         {
             SaveParameter.current.canUseInputs = false;
             //Debug.Log("Stuck");
@@ -266,6 +268,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
             DIALOGUE_TextContent.text = DialogueCurrentText;
+            
         }
         else
         {
@@ -975,6 +978,7 @@ public class MenuManager : MonoBehaviour
                 SETTINGS_DiffNames[i].SetActive(false);
             }
         }
+        BM.UpdateValues();
     }
 
     public void SETTINGS_TryUpDifficulty()
@@ -1009,9 +1013,9 @@ public class MenuManager : MonoBehaviour
 
     public void OpenOrKillMainMenu()
     {
-        if (!isDialogueOn)
+        if (!isDialogueOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf && !CM.inCinematic() && !TM.isInTuto())// Verif si autre UI n'est pas deja affichée
         {
-            if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
+            if (!MenuOn )
             {
                 ESS.PlaySound(ESS.UI_CARNET_OuvertureCarnet, ESS.Asource_Interface, 0.8f, false);
                 SaveParameter.current.canUseInputs = false;
@@ -1233,6 +1237,13 @@ public class MenuManager : MonoBehaviour
         if (isDialogueOn)
         {
             ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            if (isWritingDialogue)
+            {
+                isWritingDialogue = false;
+                DIALOGUE_TextContent.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent;
+                return;
+            }
+
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
             {
                 ConvCurrentIndex++;
@@ -1361,5 +1372,10 @@ public class MenuManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         isUnfadingForDialogue = false;
+    }
+
+    public bool isCarnetOn()
+    {
+        return MenuOn;
     }
 }

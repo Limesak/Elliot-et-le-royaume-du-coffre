@@ -229,8 +229,12 @@ public class DiaryManager : MonoBehaviour
 
         if (s.Contains(CHAR_missionNhintNhint + ""))
         {
+            
             string[] TMPhints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
-            res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint));
+            Debug.Log("s="+s);
+            Debug.Log("TMPhints.Length=" + TMPhints.Length);
+            Debug.Log("TMPhints[0]=" + TMPhints[0]);
+            res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint)- s.IndexOf(CHAR_noteNmission) -1);
             for (int i = 0; i < TMPhints.Length; i++)
             {
                 res = res + "\n" +"¤"+ TMPhints[i];
@@ -334,5 +338,16 @@ public class DiaryManager : MonoBehaviour
     {
         MISSION_content = content;
         MISSION_hints = new string[0];
+    }
+
+    public void AddHint(string content)
+    {
+        string[] newList = new string[MISSION_hints.Length + 1];
+        for (int i = 0; i < MISSION_hints.Length; i++)
+        {
+            newList[i] = MISSION_hints[i];
+        }
+        newList[MISSION_hints.Length] = content;
+        MISSION_hints = newList;
     }
 }

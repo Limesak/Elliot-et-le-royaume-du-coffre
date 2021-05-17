@@ -15,6 +15,7 @@ public class Poussierin : MonoBehaviour
     public NavMeshAgent NavAgent;
     public LockableObject LO;
     public RelevantEntity RE;
+    public SoundManager_Poussierin SM;
 
     public GameObject Prefab_Piece;
     public GameObject Prefab_Bonbon;
@@ -321,6 +322,7 @@ public class Poussierin : MonoBehaviour
             {
                 Anim.SetTrigger("hit");
                 isAttacking = false;
+                SM.PlaySound(SM.OneOf(SM.VOCAL_Hit), SM.Asource_Effects, 1, true);
             }
             else if(HP <= 0 && !isDead)
             {
@@ -343,6 +345,7 @@ public class Poussierin : MonoBehaviour
             }
             LO.Die();
             transform.DOScale(transform.localScale*0.95f,2f).OnComplete(() => { DiePartTwo(); });
+            SM.PlaySound(SM.OneOf(SM.VOCAL_Die), SM.Asource_Effects, 1, true);
         }
     }
 
