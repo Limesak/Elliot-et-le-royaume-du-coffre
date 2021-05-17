@@ -236,6 +236,10 @@ public class MenuManager : MonoBehaviour
         {
             SaveParameter.current.canUseInputs = false;
             //Debug.Log("Stuck");
+            if (MenuOn && (Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto()))
+            {
+                CloseMainMenu();
+            }
         }
         else
         {
