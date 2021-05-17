@@ -170,7 +170,7 @@ public class MenuManager : MonoBehaviour
         DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
         CM = GameObject.FindGameObjectWithTag("Player").GetComponent<CinematicManager>();
         BM = GameObject.FindGameObjectWithTag("Player").GetComponent<BonbonUseManager>();
-        TM = GameObject.FindGameObjectWithTag("Player").GetComponent<TutoManager>();
+        TM = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<TutoManager>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
         BlackScreenForDialogue.gameObject.SetActive(true);
