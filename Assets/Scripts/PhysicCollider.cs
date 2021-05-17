@@ -26,7 +26,7 @@ public class PhysicCollider : MonoBehaviour
         {
             Vector3 pos = transform.position;
             Vector3 dir = (other.gameObject.transform.position - this.transform.position).normalized;
-            dir.y = 1;
+            dir.y = 0.2f;
             other.gameObject.GetComponent<Rigidbody>().AddForce(dir * Force, ForceMode.Impulse);
             Debug.Log("Push");
         }

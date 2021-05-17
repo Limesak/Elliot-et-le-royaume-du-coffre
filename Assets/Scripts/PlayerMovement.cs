@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
     public ScreenShake screenShakeScript;
     public ScreenShake screenShakeScriptLock;
 
+    private bool isBlocking;
+
     void Start()
     {
         GravityPowerStable = GravityPower;
@@ -112,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
             MovementsControls.Player.Jump.canceled += ctx => CancelJump();
             MovementsControls.Player.Sprint.performed += ctx => TrySprint();
             MovementsControls.Player.Sprint.canceled += ctx => CancelSprint();
+            MovementsControls.Player.Block.performed += ctx => TryToBlock();
+            MovementsControls.Player.Block.canceled += ctx => CancelBlock();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
@@ -119,6 +123,8 @@ public class PlayerMovement : MonoBehaviour
             MovementsControls.Player1.Jump.canceled += ctx => CancelJump();
             MovementsControls.Player1.Sprint.performed += ctx => TrySprint();
             //MovementsControls.Player1.Sprint.canceled += ctx => CancelSprint();
+            MovementsControls.Player1.Block.performed += ctx => TryToBlock();
+            MovementsControls.Player1.Block.canceled += ctx => CancelBlock();
         }
     }
 
@@ -129,12 +135,14 @@ public class PlayerMovement : MonoBehaviour
             MovementsControls.Player.Move.Enable();
             MovementsControls.Player.Sprint.Enable();
             MovementsControls.Player.Jump.Enable();
+            MovementsControls.Player.Block.Enable();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Move.Enable();
             MovementsControls.Player1.Sprint.Enable();
             MovementsControls.Player1.Jump.Enable();
+            MovementsControls.Player1.Block.Enable();
         }
         
     }
@@ -146,12 +154,14 @@ public class PlayerMovement : MonoBehaviour
             MovementsControls.Player.Move.Disable();
             MovementsControls.Player.Sprint.Disable();
             MovementsControls.Player.Jump.Disable();
+            MovementsControls.Player.Block.Disable();
         }
         else if (SaveParameter.current.InputMode == 1)
         {
             MovementsControls.Player1.Move.Disable();
             MovementsControls.Player1.Sprint.Disable();
             MovementsControls.Player1.Jump.Disable();
+            MovementsControls.Player1.Block.Disable();
         }
         
     }
@@ -367,7 +377,22 @@ public class PlayerMovement : MonoBehaviour
 
             if (SaveParameter.current.canUseRotation)
             {
-                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                
+
+                if (isBlocking && LockMan.GetLockedObject()!= null)
+                {
+                    transform.LookAt(new Vector3(LockMan.GetLockedObject().transform.position.x, transform.position.y, LockMan.GetLockedObject().transform.position.z));
+                    AM.SetXYwalkVelues(Direction.x, Direction.z);
+                }
+                else if (isBlocking)
+                {
+                    transform.LookAt(new Vector3(LockMan.PointOfScan.transform.position.x, transform.position.y, LockMan.PointOfScan.transform.position.z));
+                    AM.SetXYwalkVelues(Direction.x, Direction.z);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                }
             }
             
 
@@ -393,6 +418,17 @@ public class PlayerMovement : MonoBehaviour
                         if (AUM.GetAttacking())
                         {
                             AUM.CancelAttack();
+                        }
+                    }
+                    else if (isBlocking)
+                    {
+                        if (!AUM.GetAttacking())
+                        {
+                            var emission = WalkDustCloud.emission;
+                            emission.rateOverDistance = 3;
+
+                            controller.Move(moveDir * Direction.magnitude * (currentSpeed*0.3f) * Time.deltaTime);
+                            isSprinting = false;
                         }
                     }
                     else
@@ -442,6 +478,17 @@ public class PlayerMovement : MonoBehaviour
                 isSprinting = false;
             }
             isMoving = false ;
+
+            if (isBlocking && LockMan.GetLockedObject() != null)
+            {
+                transform.LookAt(new Vector3(LockMan.GetLockedObject().transform.position.x, transform.position.y, LockMan.GetLockedObject().transform.position.z));
+                AM.SetXYwalkVelues(Direction.x, Direction.z);
+            }
+            else if (isBlocking)
+            {
+                transform.LookAt(new Vector3(LockMan.PointOfScan.transform.position.x, transform.position.y, LockMan.PointOfScan.transform.position.z));
+                AM.SetXYwalkVelues(Direction.x, Direction.z);
+            }
         }
     }
 
@@ -483,7 +530,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMan.isLock)
         {
-            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs && LM.isAlive())
+            if (DashLastTime + DashCoolDown <= Time.time && wasOnGround && SaveParameter.current.canUseInputs && LM.isAlive() && IsAlmostGrounded())
             {
                 if (AUM.GetAttacking())
                 {
@@ -497,7 +544,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs && LM.isAlive())
+            if ((lastTimeOnGround + CoyoteTime >= Time.time || IsAlmostGrounded()) && SaveParameter.current.canUseInputs && LM.isAlive() && !isBlocking)
             {
                 if (!isSprinting)
                 {
@@ -648,6 +695,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
+        if (AUM.GetAttacking())
+        {
+            AUM.CancelAttack();
+        }
         //Debug.Log("Jump with dir = " + dir);
         Vector2 inputVector = Vector2.zero;
         if (SaveParameter.current.InputMode == 0)
@@ -666,6 +717,7 @@ public class PlayerMovement : MonoBehaviour
             GravityPower = 5;
         }
         ESS.PlaySound(ESS.MOUVEMENT_Dash, ESS.Asource_Effects, 0.5f, false);
+        AM.Dash();
     }
 
     public void IncJump(Vector3 dir)
@@ -763,4 +815,35 @@ public class PlayerMovement : MonoBehaviour
         return isJumping;
     }
 
+    public bool isCurrentlyBlocking()
+    {
+        return isBlocking;
+    }
+
+    public void TryToBlock()
+    {
+        if (IsAlmostGrounded() && SaveParameter.current.canUseInputs && LM.isAlive()  && !isSprinting  && HM.CurrentShield != HandManager.ShieldType.Empty)
+        {
+            if (AUM.GetAttacking())
+            {
+                AUM.CancelAttack();
+            }
+            HM.CurrentHands = HandManager.Holding.SwordShield;
+            HM.UpdateHands();
+            isBlocking = true;
+            AM.SetBlocking(true);
+            Debug.Log("Blocking");
+        }
+        else
+        {
+            Debug.Log("Can't Block");
+        }
+    }
+
+    public void CancelBlock()
+    {
+        isBlocking = false;
+        AM.SetBlocking(false);
+        Debug.Log("StopBlocking");
+    }
 }

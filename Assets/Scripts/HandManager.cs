@@ -100,7 +100,7 @@ public class HandManager : MonoBehaviour
             Sword_Butter.SetActive(false);
             Sword_Pin.SetActive(false);
             Sword_Bone.SetActive(false);
-            //Shield_Wood.SetActive(false);
+            Shield_Wood.SetActive(false);
             //Utility_Wand.SetActive(false);
             //Special_Bucket.SetActive(false);
         }
@@ -137,11 +137,11 @@ public class HandManager : MonoBehaviour
 
             if(CurrentShield == ShieldType.Empty)
             {
-                //Shield_Wood.SetActive(false);
+                Shield_Wood.SetActive(false);
             }
             else if (CurrentShield == ShieldType.Wood)
             {
-                //Shield_Wood.SetActive(true);
+                Shield_Wood.SetActive(true);
             }
 
             //Utility_Wand.SetActive(false);
@@ -153,7 +153,7 @@ public class HandManager : MonoBehaviour
             Sword_Butter.SetActive(false);
             Sword_Pin.SetActive(false);
             Sword_Bone.SetActive(false);
-            //Shield_Wood.SetActive(false);
+            Shield_Wood.SetActive(false);
             //Utility_Wand.SetActive(false);
             //Special_Bucket.SetActive(true);
         }
@@ -163,7 +163,7 @@ public class HandManager : MonoBehaviour
             Sword_Butter.SetActive(false);
             Sword_Pin.SetActive(false);
             Sword_Bone.SetActive(false);
-            //Shield_Wood.SetActive(false);
+            Shield_Wood.SetActive(false);
             //Utility_Wand.SetActive(true);
             //Special_Bucket.SetActive(false);
         }
