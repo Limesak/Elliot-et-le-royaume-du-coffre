@@ -8,7 +8,7 @@ public class PhysicCollider : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collide");
+        //Debug.Log("Collide");
         if (collision.gameObject.tag == "PhysicEntity")
         {
             Vector3 pos = transform.position;
@@ -21,7 +21,7 @@ public class PhysicCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collide");
+        //Debug.Log("Collide");
         if (other.gameObject.tag == "PhysicEntity")
         {
             Vector3 pos = transform.position;

@@ -55,7 +55,7 @@ public class DiaryManager : MonoBehaviour
 
             if (SaveData.current.Diary.Length == 0)
             {
-                MISSION_content = "TODO: Ecrire le contenu de la première mission dans le script DiaryManager.cs dans la function ResetDiary()";//Ecrire mission 1 ici !
+                MISSION_content = "Je devrai explorer les environs.";//Ecrire mission 1 ici !
                 MISSION_hints = new string[0];//Ajouter indice ici si première mission en a besoin (mais je trouve ca pas logique)
             }
             else
@@ -229,8 +229,12 @@ public class DiaryManager : MonoBehaviour
 
         if (s.Contains(CHAR_missionNhintNhint + ""))
         {
+            
             string[] TMPhints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
-            res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint));
+            Debug.Log("s="+s);
+            Debug.Log("TMPhints.Length=" + TMPhints.Length);
+            Debug.Log("TMPhints[0]=" + TMPhints[0]);
+            res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint)- s.IndexOf(CHAR_noteNmission) -1);
             for (int i = 0; i < TMPhints.Length; i++)
             {
                 res = res + "\n" +"¤"+ TMPhints[i];
@@ -328,5 +332,22 @@ public class DiaryManager : MonoBehaviour
         }
         newList[BUFFER_list.Length] =content;
         BUFFER_list = newList;
+    }
+
+    public void ChangeTheMission(string content)
+    {
+        MISSION_content = content;
+        MISSION_hints = new string[0];
+    }
+
+    public void AddHint(string content)
+    {
+        string[] newList = new string[MISSION_hints.Length + 1];
+        for (int i = 0; i < MISSION_hints.Length; i++)
+        {
+            newList[i] = MISSION_hints[i];
+        }
+        newList[MISSION_hints.Length] = content;
+        MISSION_hints = newList;
     }
 }

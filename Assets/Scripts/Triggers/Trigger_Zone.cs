@@ -6,8 +6,8 @@ public class Trigger_Zone : Trigger
 {
     public bool DestroyOnUse;
 
-    public float coolDown;
-    private float lastUse;
+    public float coolDownSpecialZone;
+    private float lastUseSpecialZone;
 
 
     void Start()
@@ -17,11 +17,12 @@ public class Trigger_Zone : Trigger
 
     public sealed override void Triggered()
     {
-        if (lastUse + coolDown <= Time.time)
+        if (lastUseSpecialZone + coolDownSpecialZone <= Time.time)
         {
             foreach (TriggerReceptor tr in this.TR)
             {
                 tr.Recept();
+                //Debug.Log("Activated "+ tr.gameObject.name);
             }
 
 
@@ -29,6 +30,7 @@ public class Trigger_Zone : Trigger
             {
                 Destroy(gameObject);
             }
+            lastUseSpecialZone = Time.time;
         }
             
     }
@@ -37,7 +39,27 @@ public class Trigger_Zone : Trigger
     {
         if(other.gameObject.tag == "Player")
         {
-            Triggered();
+            LocalTriggered();
+        }
+    }
+
+    private void LocalTriggered()
+    {
+        if (lastUseSpecialZone + coolDownSpecialZone <= Time.time)
+        {
+            foreach (TriggerReceptor tr in this.TR)
+            {
+                Debug.Log("Activated " + tr.gameObject.name);
+                tr.Recept();
+                
+            }
+
+
+            if (DestroyOnUse)
+            {
+                Destroy(gameObject);
+            }
+            lastUseSpecialZone = Time.time;
         }
     }
 }

@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
     public enum Character { None, Elliot, LecheCuillere, Poussierin };
     public enum TypeOfPolaroid { Bestiaire, Lieux, Souvenirs };
     public enum WIT { None, Left, Both, Right };
-    public enum DialogueActionButton { None, Next, Pass, Quit , Branch};
+    public enum DialogueActionButton { None, Next, Pass, Quit , Branch, CinematicNextStep};
     Movements MovementsControls;
 
     [Header("Accessor")]
@@ -22,6 +22,9 @@ public class MenuManager : MonoBehaviour
     public HandManager HM;
     public DiaryManager DM;
     private ElliotSoundSystem ESS;
+    public CinematicManager CM;
+    public BonbonUseManager BM;
+    public TutoManager TM;
 
     [Header("BlackScreen")]
 
@@ -122,6 +125,9 @@ public class MenuManager : MonoBehaviour
     public Text DIALOGUE_TextContent;
     public float BlipBloupCooldown;
     private float lastBlipBloup;
+    public Image BlackScreenForDialogue;
+    public float MaxAlphaValue;
+    private bool isUnfadingForDialogue;
 
     [Header("DIALOGUES Scrolls")]
     public GameObject CLOSED_SCROLL_HIDDEN_POS;
@@ -162,9 +168,14 @@ public class MenuManager : MonoBehaviour
         PM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         HM = GameObject.FindGameObjectWithTag("Player").GetComponent<HandManager>();
         DM = GameObject.FindGameObjectWithTag("Player").GetComponent<DiaryManager>();
+        CM = GameObject.FindGameObjectWithTag("Player").GetComponent<CinematicManager>();
+        BM = GameObject.FindGameObjectWithTag("Player").GetComponent<BonbonUseManager>();
         BlackScreen.gameObject.SetActive(true);
         BlackScreen.color = new Color(0, 0, 0, 1);
+        BlackScreenForDialogue.gameObject.SetActive(true);
+        BlackScreenForDialogue.color = new Color(0, 0, 0, 0);
         isUnfading = false;
+        isUnfadingForDialogue = false;
         Carnet_GLOBAL.transform.localPosition = Carnet_HiddenPos.localPosition;
         Carnet_GLOBAL.transform.localScale = Carnet_HiddenPos.localScale;
         Carnet_OPEN.SetActive(false);
@@ -224,7 +235,7 @@ public class MenuManager : MonoBehaviour
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
         //Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
 
-        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn)
+        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto())
         {
             SaveParameter.current.canUseInputs = false;
             //Debug.Log("Stuck");
@@ -252,6 +263,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
             DIALOGUE_TextContent.text = DialogueCurrentText;
+            
         }
         else
         {
@@ -321,7 +333,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlayNewSave");
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
-        SaveData.current.currentScene = 1;
+        SaveData.current.currentScene = 5;
         SaveLoad.Save(SaveData.current);
         StartCoroutine(FadeNLoad());
     }
@@ -961,6 +973,7 @@ public class MenuManager : MonoBehaviour
                 SETTINGS_DiffNames[i].SetActive(false);
             }
         }
+        BM.UpdateValues();
     }
 
     public void SETTINGS_TryUpDifficulty()
@@ -995,9 +1008,9 @@ public class MenuManager : MonoBehaviour
 
     public void OpenOrKillMainMenu()
     {
-        if (!isDialogueOn)
+        if (!isDialogueOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf && !CM.inCinematic() && !TM.isInTuto())// Verif si autre UI n'est pas deja affichée
         {
-            if (!MenuOn && !Menu_ContinueOuNouvelle.activeSelf && !Menu_EcraserOuAnnuler.activeSelf)
+            if (!MenuOn )
             {
                 ESS.PlaySound(ESS.UI_CARNET_OuvertureCarnet, ESS.Asource_Interface, 0.8f, false);
                 SaveParameter.current.canUseInputs = false;
@@ -1092,6 +1105,7 @@ public class MenuManager : MonoBehaviour
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        StartCoroutine(FadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
@@ -1193,6 +1207,7 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_KILLUI()
     {
+        StartCoroutine(UnfadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.canUseInputs = true;
         isDialogueOn = false;
@@ -1217,6 +1232,13 @@ public class MenuManager : MonoBehaviour
         if (isDialogueOn)
         {
             ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            if (isWritingDialogue)
+            {
+                isWritingDialogue = false;
+                DIALOGUE_TextContent.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent;
+                return;
+            }
+
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
             {
                 ConvCurrentIndex++;
@@ -1227,6 +1249,11 @@ public class MenuManager : MonoBehaviour
             else if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Quit)
             {
                 DIALOGUE_KILLUI();
+            }
+            else if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.CinematicNextStep)
+            {
+                DIALOGUE_KILLUI();
+                CM.LaunchCurrentStep();
             }
         }
         
@@ -1247,8 +1274,10 @@ public class MenuManager : MonoBehaviour
 
     // ---------------------   BLACK SCREEN   --------------------------------------------------------
 
-    IEnumerator Fade()
+    public IEnumerator Fade()
     {
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 0);
         while (BlackScreen.color.a < 1)
         {
             if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
@@ -1265,7 +1294,8 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator FadeNLoad()
     {
-        
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 0);
         while (BlackScreen.color.a < 1)
         {
             if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
@@ -1281,8 +1311,10 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
 
-    IEnumerator Unfade()
+    public IEnumerator Unfade()
     {
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 1);
         while (BlackScreen.color.a > 0)
         {
             isUnfading = true;
@@ -1297,5 +1329,48 @@ public class MenuManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         isUnfading = false;
+    }
+
+    public IEnumerator FadeForDialogue()
+    {
+        BlackScreenForDialogue.gameObject.SetActive(true);
+        BlackScreenForDialogue.color = new Color(0, 0, 0, 0);
+        while (BlackScreenForDialogue.color.a < MaxAlphaValue)
+        {
+            if (BlackScreenForDialogue.color.a + Speed * Time.deltaTime >= MaxAlphaValue)
+            {
+                BlackScreenForDialogue.color = new Color(0, 0, 0, MaxAlphaValue);
+            }
+            else
+            {
+                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a + Speed * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator UnfadeForDialogue()
+    {
+        BlackScreenForDialogue.gameObject.SetActive(true);
+        BlackScreenForDialogue.color = new Color(0, 0, 0, MaxAlphaValue);
+        while (BlackScreenForDialogue.color.a > 0)
+        {
+            isUnfadingForDialogue = true;
+            if (BlackScreenForDialogue.color.a + Speed * Time.deltaTime <= 0)
+            {
+                BlackScreenForDialogue.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a - Speed * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        isUnfadingForDialogue = false;
+    }
+
+    public bool isCarnetOn()
+    {
+        return MenuOn;
     }
 }
