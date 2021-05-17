@@ -74,11 +74,6 @@ public class SaveData
     //Challenge
     public int CurrentDifficulty;
 
-    //Tuto
-    public bool TutoDone_Deplacement;
-    public bool TutoDone_Equiper;
-    public bool TutoDone_Sword;
-
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -141,10 +136,6 @@ public class SaveData
         }
 
         CurrentDifficulty = 1;
-
-        TutoDone_Deplacement = false;
-        TutoDone_Equiper = false;
-        TutoDone_Sword = false;
 
         Debug.Log("SaveData reseted");
     }
