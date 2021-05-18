@@ -28,6 +28,10 @@ public class Trigger_Zone : Trigger
 
             if (DestroyOnUse)
             {
+                if (RE != null)
+                {
+                    RE.NotRelevantAnymore();
+                }
                 Destroy(gameObject);
             }
             lastUseSpecialZone = Time.time;
@@ -57,6 +61,10 @@ public class Trigger_Zone : Trigger
 
             if (DestroyOnUse)
             {
+                if (RE != null)
+                {
+                    RE.NotRelevantAnymore();
+                }
                 Destroy(gameObject);
             }
             lastUseSpecialZone = Time.time;

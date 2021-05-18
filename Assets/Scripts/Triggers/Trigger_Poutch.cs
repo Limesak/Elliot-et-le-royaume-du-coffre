@@ -31,6 +31,10 @@ public class Trigger_Poutch : Trigger
 
         if (DestroyOnUse)
         {
+            if (RE != null)
+            {
+                RE.NotRelevantAnymore();
+            }
             Destroy(gameObject);
         }
 
