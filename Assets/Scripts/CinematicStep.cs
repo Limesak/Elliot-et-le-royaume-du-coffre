@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CinematicStep : MonoBehaviour
 {
-    public enum StepType { JustWait, MoveCamera,QuitCamera, LaunchCinematicScript,PopDialogue, Fade, Unfade,EndCinematic, AddLineToDiaryBuffer , ChangeMission};
+    public enum StepType { JustWait, MoveCamera,QuitCamera, LaunchCinematicScript,PopDialogue, Fade, Unfade,EndCinematic, AddLineToDiaryBuffer , ChangeMission, AddHint};
 
     [Header("Global infos")]
     public StepType Type;
@@ -21,5 +21,7 @@ public class CinematicStep : MonoBehaviour
     public string BufferLine;
     [Header("ChangeMission")]
     public string MissionLine;
+    [Header("AddHint")]
+    public string HintLine;
 
 }

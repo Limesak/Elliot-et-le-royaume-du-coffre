@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         isDiving = false;
         isMoving = false;
         ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
+        
     }
 
     void Awake()
@@ -473,6 +474,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (!SaveParameter.current.canUseInputs)
+            {
+                isSprinting = false;
+            }
+
             if (SaveParameter.current.InputMode == 1)
             {
                 isSprinting = false;
@@ -494,13 +500,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
+        if (AUM.GetAttacking())
+        {
+            AUM.CancelAttack();
+        }
         if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs && LM.isAlive())
         {
             isJumping = true;
-            if (AUM.GetAttacking())
-            {
-                AUM.CancelAttack();
-            }
+            
             if (lastTimeOnGround + CoyoteTime >= Time.time)
             {
                 Jump();
