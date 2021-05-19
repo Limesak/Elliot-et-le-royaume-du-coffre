@@ -15,6 +15,7 @@ public class ValueChecker : MonoBehaviour
     private bool locked;
     private MenuManager MM;
     public CinematicCentralizer CC;
+    public RelevantEntity RE;
 
     void Start()
     {
@@ -71,6 +72,11 @@ public class ValueChecker : MonoBehaviour
         else if (Type == LookType.TutoEpeeDone)
         {
             CC.Recept();
+        }
+
+        if(RE != null)
+        {
+            RE.NotRelevantAnymore();
         }
         Destroy(gameObject);
     }

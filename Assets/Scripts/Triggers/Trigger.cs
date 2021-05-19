@@ -7,6 +7,7 @@ public class Trigger : MonoBehaviour
     public TriggerReceptor[] TR;
     public float Cooldown;
     private float lastUse;
+    public RelevantEntity RE;
 
     void Start()
     {

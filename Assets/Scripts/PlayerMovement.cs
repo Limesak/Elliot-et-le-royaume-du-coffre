@@ -601,7 +601,7 @@ public class PlayerMovement : MonoBehaviour
         //return Physics.Raycast(transform.position, -Vector3.up, distToGround*2);
 
         RaycastHit hit;
-        return Physics.SphereCast(transform.position, 0.52f, -Vector3.up, out hit, distToGround * 1.6f);
+        return Physics.SphereCast(transform.position, 0.49f, -Vector3.up, out hit, distToGround * 1.6f);
     }
 
     public bool IsPossiblyStuck()
