@@ -8,6 +8,7 @@ public class AnimEventTransmitter : MonoBehaviour
     public AttackUseManager AM;
     private ElliotSoundSystem ESS;
     private float lastStepDate;
+    public PlayerMovement PM;
 
     private void Start()
     {
@@ -93,5 +94,10 @@ public class AnimEventTransmitter : MonoBehaviour
     public void SOUND_SwingAttackAir()
     {
         ESS.PlaySound(ESS.COMBAT_AttaqueAerienne, ESS.Asource_Effects, 0.8f, false);
+    }
+
+    public void HOP_1_forward()
+    {
+        PM.SetAerianDir(transform.forward*30f + new Vector3(0,4,0));
     }
 }
