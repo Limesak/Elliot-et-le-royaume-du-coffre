@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TR: []
-  Cooldown: 0
   animTrigger: {fileID: 9142303990029625373}
   canBeUnset: 0
 --- !u!1 &2347507728011358983
@@ -104,7 +103,7 @@ Animator:
   m_GameObject: {fileID: 2347507728011358983}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7b432e9d46c208545981de6d457a5d85, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
