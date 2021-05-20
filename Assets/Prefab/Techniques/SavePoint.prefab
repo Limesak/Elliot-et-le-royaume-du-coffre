@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5594745419136913593}
   - component: {fileID: 5594745419136913592}
   - component: {fileID: 5594745419136913595}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,6 +179,7 @@ MonoBehaviour:
   CanUseColor: {fileID: 2100000, guid: 66061fee4378be148ad7e73c80f6b4be, type: 2}
   CantUseColor: {fileID: 2100000, guid: 54329cfe51f8e004883d79a1298cba68, type: 2}
   cooldown: 3
+  NM: {fileID: 0}
 --- !u!1 &5594745420172465153
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +192,7 @@ GameObject:
   - component: {fileID: 5594745420172465181}
   - component: {fileID: 5594745420172465180}
   - component: {fileID: 5594745420172465183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4801521229303321981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "D\xE9cors"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +318,7 @@ GameObject:
   - component: {fileID: 3864599357796956367}
   - component: {fileID: 6243585892487495071}
   - component: {fileID: 3874380182937088136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
