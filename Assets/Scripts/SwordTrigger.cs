@@ -69,7 +69,7 @@ public class SwordTrigger : MonoBehaviour
             if (lastHitDate + 0.1f < Time.time)
             {
                 lastHitDate = Time.time;
-                ESS.PlaySound(ESS.COMBAT_TapeTriggerAvecEpee, ESS.Asource_Effects, 0.4f, false);
+                ESS.PlaySound(ESS.COMBAT_TapeTriggerAvecEpee, ESS.Asource_Effects, 0.15f, false);
             }
             
         }

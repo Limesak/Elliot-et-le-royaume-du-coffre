@@ -1110,6 +1110,7 @@ public class MenuManager : MonoBehaviour
     }
     public void DIALOGUE_InitDialogueP3()
     {
+        isUnfadingForDialogue = false;
         StartCoroutine(FadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
@@ -1212,6 +1213,7 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_KILLUI()
     {
+        isUnfadingForDialogue = true;
         StartCoroutine(UnfadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.canUseInputs = true;
@@ -1340,7 +1342,7 @@ public class MenuManager : MonoBehaviour
     {
         BlackScreenForDialogue.gameObject.SetActive(true);
         BlackScreenForDialogue.color = new Color(0, 0, 0, 0);
-        while (BlackScreenForDialogue.color.a < MaxAlphaValue)
+        while (BlackScreenForDialogue.color.a < MaxAlphaValue || isUnfadingForDialogue)
         {
             if (BlackScreenForDialogue.color.a + Speed * Time.deltaTime >= MaxAlphaValue)
             {
@@ -1348,7 +1350,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a + Speed * Time.deltaTime);
+                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a + Speed*2 * Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -1367,7 +1369,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a - Speed * Time.deltaTime);
+                BlackScreenForDialogue.color = new Color(0, 0, 0, BlackScreenForDialogue.color.a - Speed*2 * Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
         }

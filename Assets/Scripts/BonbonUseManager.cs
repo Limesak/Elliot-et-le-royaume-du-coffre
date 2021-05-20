@@ -15,6 +15,8 @@ public class BonbonUseManager : MonoBehaviour
     public PlayerMovement PM;
     public ParticleSystem UsePS;
     public GameObject UI;
+    public GameObject UI_CanUse;
+    public GameObject UI_CantUse;
     public Text UItext;
     public Image UIjaugeCD;
     public float Cooldown;
@@ -77,7 +79,19 @@ public class BonbonUseManager : MonoBehaviour
             if(lastUseDate + Cooldown <= Time.time)
             {
                 UIjaugeCD.gameObject.SetActive(false);
+
                 reloading = false;
+                
+                if (SaveData.current.CPT_Candy > 0)
+                {
+                    UI_CantUse.SetActive(false);
+                    UI_CanUse.SetActive(true);
+                }
+                else
+                {
+                    UI_CantUse.SetActive(true);
+                    UI_CanUse.SetActive(false);
+                }
             }
         }
     }
@@ -95,6 +109,9 @@ public class BonbonUseManager : MonoBehaviour
             {
                 reloading = true;
                 UIjaugeCD.gameObject.SetActive(true);
+                UI_CanUse.SetActive(false);
+                UI_CantUse.SetActive(true);
+                UI_CantUse.transform.DOPunchScale(UI_CantUse.transform.localScale*1.2f, 0.4f, 0,0).OnComplete(() => { UI_CantUse.SetActive(false); });
             }
 
             UpdateValues();
@@ -109,7 +126,22 @@ public class BonbonUseManager : MonoBehaviour
             showingUI = true;
             if (!reloading)
             {
-                UIjaugeCD.gameObject.SetActive(false);
+                if (SaveData.current.CPT_Candy > 0)
+                {
+                    UIjaugeCD.gameObject.SetActive(false);
+                    UI_CantUse.SetActive(false);
+                    UI_CanUse.SetActive(true);
+                }
+                else
+                {
+                    UIjaugeCD.gameObject.SetActive(false);
+                    UI_CantUse.SetActive(true);
+                    UI_CanUse.SetActive(false);
+                }
+            }
+            else
+            {
+                UI_CanUse.SetActive(false);
             }
         }
         else
