@@ -36,17 +36,18 @@ public class HandManager : MonoBehaviour
     [Header("BACK")]
     [SerializeField]
     private GameObject Back_Cape;
+    [Header("AMU")]
+    [SerializeField]
+    private GameObject Amu_Contre;
+    [SerializeField]
+    private GameObject Amu_Envol;
+    [SerializeField]
+    private GameObject Amu_Fendoir;
 
     void Start()
     {
         UpdateHands();
         UpdateClothes();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void UpdateClothes()
@@ -68,6 +69,34 @@ public class HandManager : MonoBehaviour
         {
             Back_Cape.SetActive(false);
         }
+
+        if (SaveData.current.CurrentItemBACK == 4)
+        {
+            Amu_Contre.SetActive(true);
+        }
+        else
+        {
+            Amu_Contre.SetActive(false);
+        }
+
+        if (SaveData.current.CurrentItemBACK == 5)
+        {
+            Amu_Envol.SetActive(true);
+        }
+        else
+        {
+            Amu_Envol.SetActive(false);
+        }
+
+        if (SaveData.current.CurrentItemBACK == 6)
+        {
+            Amu_Fendoir.SetActive(true);
+        }
+        else
+        {
+            Amu_Fendoir.SetActive(false);
+        }
+
     }
 
     public void UpdateHands()

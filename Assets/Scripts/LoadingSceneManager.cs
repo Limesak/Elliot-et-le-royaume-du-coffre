@@ -10,6 +10,8 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public Image Full;
     public Image Back;
+    public GameObject Head;
+    public float speedOfRotation;
     public Text SceneName;
 
     public GameObject Button;
@@ -61,6 +63,11 @@ public class LoadingSceneManager : MonoBehaviour
         if (canGo)
         {
             progression.allowSceneActivation = true;
+            Head.transform.eulerAngles = Vector3.zero;
+        }
+        else
+        {
+            Head.transform.eulerAngles = new Vector3(Head.transform.eulerAngles.x, Head.transform.eulerAngles.y , Head.transform.eulerAngles.z + (speedOfRotation * Time.deltaTime));
         }
 
         while (!progression.isDone)

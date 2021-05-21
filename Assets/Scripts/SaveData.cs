@@ -41,6 +41,7 @@ public class SaveData
     public int CurrentItemBACK;
     public int CurrentItemSHIELD;
     public int CurrentItemSWORD;
+    public int CurrentItemAMU;
 
     //Diary
     public string[] Diary;
@@ -92,8 +93,9 @@ public class SaveData
         CurrentItemBACK = -1;
         CurrentItemSHIELD = -1;
         CurrentItemSWORD = -1;
+        CurrentItemAMU = -1;
 
-        UnlockList = new bool[4];
+        UnlockList = new bool[7];
         for(int i = 0; i< UnlockList.Length; i++)
         {
             UnlockList[i] = false;//True pour debug   &  False for build
