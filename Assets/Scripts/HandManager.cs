@@ -70,7 +70,7 @@ public class HandManager : MonoBehaviour
             Back_Cape.SetActive(false);
         }
 
-        if (SaveData.current.CurrentItemBACK == 4)
+        if (SaveData.current.CurrentItemAMU == 4)
         {
             Amu_Contre.SetActive(true);
         }
@@ -79,7 +79,7 @@ public class HandManager : MonoBehaviour
             Amu_Contre.SetActive(false);
         }
 
-        if (SaveData.current.CurrentItemBACK == 5)
+        if (SaveData.current.CurrentItemAMU == 5)
         {
             Amu_Envol.SetActive(true);
         }
@@ -88,7 +88,7 @@ public class HandManager : MonoBehaviour
             Amu_Envol.SetActive(false);
         }
 
-        if (SaveData.current.CurrentItemBACK == 6)
+        if (SaveData.current.CurrentItemAMU == 6)
         {
             Amu_Fendoir.SetActive(true);
         }

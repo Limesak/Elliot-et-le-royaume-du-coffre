@@ -135,4 +135,9 @@ public class AnimationManager : MonoBehaviour
         anim.SetTrigger("die");
     }
 
+    public void ForceCancelAttack()
+    {
+        anim.SetTrigger("ForceCancelAttack");
+    }
+
 }
