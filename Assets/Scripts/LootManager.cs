@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootManager : MonoBehaviour
 {
-    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet };
+    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet , Amu_Contre, Amu_Envol, Amu_Fendoir};
 
     public DiaryManager DM;
     public BonbonUseManager BM;
@@ -74,6 +74,27 @@ public class LootManager : MonoBehaviour
                 SaveData.current.UnlockList[3] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Bouclier en bois");
+                break;
+            case LootType.Amu_Contre:
+                //Debug.Log("WoodShield");
+                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de Amu_Contre dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                SaveData.current.UnlockList[4] = true;
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                NM.NewNotif("Ramassé: Amulette Contre");
+                break;
+            case LootType.Amu_Envol:
+                //Debug.Log("WoodShield");
+                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de Amu_Envol dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                SaveData.current.UnlockList[5] = true;
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                NM.NewNotif("Ramassé: Amulette Envol");
+                break;
+            case LootType.Amu_Fendoir:
+                //Debug.Log("WoodShield");
+                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de Amu_Fendoir dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                SaveData.current.UnlockList[6] = true;
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                NM.NewNotif("Ramassé: Amulette Fendoir");
                 break;
             default:
                 //Debug.Log("NOTHING");

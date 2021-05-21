@@ -79,6 +79,7 @@ public class MenuManager : MonoBehaviour
     public GameObject SpotBack;
     public GameObject SpotShield;
     public GameObject SpotSword;
+    public GameObject SpotAmu;
     public GameObject[] SpotsOFF;
     public GameObject[] Buttons;
     public GameObject[] Illus;
@@ -575,6 +576,19 @@ public class MenuManager : MonoBehaviour
                         Illus[i].SetActive(false);
                     }
                 }
+                else if (i == 4 || i == 5 || i == 6)//AMULETTES
+                {
+                    if (i == SaveData.current.CurrentItemAMU)
+                    {
+                        Buttons[i].transform.localPosition = SpotAmu.transform.localPosition;
+                        Illus[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Buttons[i].transform.localPosition = SpotsOFF[i].transform.localPosition;
+                        Illus[i].SetActive(false);
+                    }
+                }
             }
             else
             {
@@ -687,6 +701,32 @@ public class MenuManager : MonoBehaviour
                     Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemSHIELD = index;
                     Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Illus[index].SetActive(true);
+                }
+            }
+        }
+        else if (index == 4 || index == 5 || index == 6)//AMULETTES
+        {
+            if (index == SaveData.current.CurrentItemAMU)
+            {
+                SaveData.current.CurrentItemAMU = -1;
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Illus[index].SetActive(false);
+            }
+            else
+            {
+                if (SaveData.current.CurrentItemAMU == -1)
+                {
+                    SaveData.current.CurrentItemAMU = index;
+                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Illus[index].SetActive(true);
+                }
+                else
+                {
+                    Illus[SaveData.current.CurrentItemAMU].SetActive(false);
+                    Buttons[SaveData.current.CurrentItemAMU].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemAMU].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    SaveData.current.CurrentItemAMU = index;
+                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
