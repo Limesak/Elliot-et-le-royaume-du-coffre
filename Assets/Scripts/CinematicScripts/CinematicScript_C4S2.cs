@@ -20,16 +20,21 @@ public class CinematicScript_C4S2 : CinematicScript
     public sealed override void ExecuteScript()
     {
         StartCoroutine(Step1_AferWaitingX(0.2f));
-
+        StartCoroutine(Step2_AferWaitingX(ESS.STORY_RampeCasse.length+0.2f));
     }
 
     IEnumerator Step1_AferWaitingX(float X)
     {
         yield return new WaitForSeconds(X);
-        LUTIN_PERMANENT.SetActive(true);
         LUTIN_CINEMATIC.SetActive(false);
         Rampe.SetActive(false);
         NewRampe.SetActive(true);
         ESS.PlaySound(ESS.STORY_RampeCasse, ESS.Asource_Effects, 1f, false);
+    }
+
+    IEnumerator Step2_AferWaitingX(float X)
+    {
+        yield return new WaitForSeconds(X);
+        LUTIN_PERMANENT.SetActive(true);
     }
 }
