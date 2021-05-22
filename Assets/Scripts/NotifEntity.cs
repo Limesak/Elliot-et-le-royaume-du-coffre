@@ -30,6 +30,6 @@ public class NotifEntity : MonoBehaviour
     {
         nbOfOffset++;
         transform.DOKill();
-        transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(0, - OffSet* nbOfOffset, 0), 0.3f);
+        transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(transform.localPosition.x, - (OffSet* nbOfOffset), 0), 0.3f);
     }
 }
