@@ -1302,6 +1302,14 @@ public class MenuManager : MonoBehaviour
                 DIALOGUE_KILLUI();
                 CM.LaunchCurrentStep();
             }
+            else if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Branch)
+            {
+                BranchCurrentIndex = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].branchIndex;
+                ConvCurrentIndex = 0;
+                DIALOGUE_UpdateCharacter();
+                DIALOGUE_UpdateText();
+                DIALOGUE_UpdateButton();
+            }
         }
         
     }
@@ -1311,9 +1319,17 @@ public class MenuManager : MonoBehaviour
         if (isDialogueOn)
         {
             ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
-            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Quit)
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonB == DialogueActionButton.Quit)
             {
                 DIALOGUE_KILLUI();
+            }
+            else if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonB == DialogueActionButton.Branch)
+            {
+                BranchCurrentIndex = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].branchIndex;
+                ConvCurrentIndex = 0;
+                DIALOGUE_UpdateCharacter();
+                DIALOGUE_UpdateText();
+                DIALOGUE_UpdateButton();
             }
         }
     }

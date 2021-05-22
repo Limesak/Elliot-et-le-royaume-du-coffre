@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ValueChecker : MonoBehaviour
 {
-    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone};
+    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone, PoupouAreneDead};
     public enum TutoType { None, DeplacementCamera, EquiperObjet, UtiliserEpee };
 
     [Header("Global infos")]
@@ -16,6 +16,7 @@ public class ValueChecker : MonoBehaviour
     private MenuManager MM;
     public CinematicCentralizer CC;
     public RelevantEntity RE;
+    public GameObject ObjectToPop;
 
     void Start()
     {
@@ -48,6 +49,11 @@ public class ValueChecker : MonoBehaviour
                 StartCoroutine(Step1_AferWaitingX(waitDuration));
                 locked = true;
             }
+            else if (Type == LookType.PoupouAreneDead && SaveData.current.Achievements_AreneTuto)
+            {
+                StartCoroutine(Step1_AferWaitingX(waitDuration));
+                locked = true;
+            }
         }
         
     }
@@ -73,8 +79,12 @@ public class ValueChecker : MonoBehaviour
         {
             CC.Recept();
         }
+        else if (Type == LookType.PoupouAreneDead)
+        {
+            ObjectToPop.SetActive(true);
+        }
 
-        if(RE != null)
+        if (RE != null)
         {
             RE.NotRelevantAnymore();
         }

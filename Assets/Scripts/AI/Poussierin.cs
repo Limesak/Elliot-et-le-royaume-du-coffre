@@ -27,6 +27,9 @@ public class Poussierin : MonoBehaviour
     private int HP;//HPmax
     private bool isDead;//false
 
+    [Header("Achivements")]
+    public bool AreneTuto;
+
     [Header("Animation")]
     public int CurrentAnimVersion;
     public float MoveEyeCooldown;
@@ -335,6 +338,10 @@ public class Poussierin : MonoBehaviour
     {
         if (!isDead)
         {
+            if (AreneTuto)
+            {
+                SaveData.current.Achievements_AreneTuto = true;
+            }
             isDead = true;
             Anim.SetTrigger("die");
             StopWalking();
