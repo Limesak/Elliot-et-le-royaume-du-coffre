@@ -341,6 +341,8 @@ public class Poussierin : MonoBehaviour
             if (AreneTuto)
             {
                 SaveData.current.Achievements_AreneTuto = true;
+                PLAYER.GetComponent<DiaryManager>().ChangeTheMission("Rejoindre Lèche Cuillère.");
+                PLAYER.GetComponent<DiaryManager>().AddBufferEntry("J'ai combattu et vaincu mon premier poussierin !");
             }
             isDead = true;
             Anim.SetTrigger("die");
