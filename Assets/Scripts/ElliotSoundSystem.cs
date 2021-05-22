@@ -48,6 +48,8 @@ public class ElliotSoundSystem : MonoBehaviour
     public AudioClip UI_LOOT_RamasseCle;
     public AudioClip UI_LOOT_RamasseEquipement;
 
+    public AudioClip STORY_RampeCasse;
+
     void Start()
     {
         

@@ -80,6 +80,9 @@ public class SaveData
     public bool TutoDone_Equiper;
     public bool TutoDone_Sword;
 
+    //Progression
+    public bool Achievements_AreneTuto;
+
     public void ResetValueToDefault()
     {
         spawnInt = 0;
@@ -147,6 +150,8 @@ public class SaveData
         TutoDone_Deplacement = false;
         TutoDone_Equiper = false;
         TutoDone_Sword = false;
+
+        Achievements_AreneTuto = false;
 
         Debug.Log("SaveData reseted");
     }

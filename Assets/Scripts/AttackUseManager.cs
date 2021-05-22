@@ -189,5 +189,6 @@ public class AttackUseManager : MonoBehaviour
         isAttacking = false;
         ST.canDamage = false;
         SetComboing(false);
+        AM.ForceCancelAttack();
     }
 }

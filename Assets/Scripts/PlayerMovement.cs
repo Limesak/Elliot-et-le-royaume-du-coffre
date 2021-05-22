@@ -504,28 +504,32 @@ public class PlayerMovement : MonoBehaviour
         {
             AUM.CancelAttack();
         }
-        if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs && LM.isAlive())
+        else
         {
-            isJumping = true;
-            
-            if (lastTimeOnGround + CoyoteTime >= Time.time)
+            if (lastTimeJump + JumpCD <= Time.time && SaveParameter.current.canUseInputs && LM.isAlive())
             {
-                Jump();
-                lastTimeJump = Time.time;
-            }
-            else if (wasOnGround)
-            {
-                UpdateSlope();
-                IncJump(hitNormal.normalized);
-                lastTimeJump = Time.time;
-            }
-            else if(DoubleJumpAvailable && !isDiving && SaveData.current.CurrentItemBACK==1)
-            {
-                DoubleJump();
-                DoubleJumpAvailable = false;
-                lastTimeJump = Time.time;
+                isJumping = true;
+
+                if (lastTimeOnGround + CoyoteTime >= Time.time)
+                {
+                    Jump();
+                    lastTimeJump = Time.time;
+                }
+                else if (wasOnGround)
+                {
+                    UpdateSlope();
+                    IncJump(hitNormal.normalized);
+                    lastTimeJump = Time.time;
+                }
+                else if (DoubleJumpAvailable && !isDiving && SaveData.current.CurrentItemBACK == 1)
+                {
+                    DoubleJump();
+                    DoubleJumpAvailable = false;
+                    lastTimeJump = Time.time;
+                }
             }
         }
+        
     }
 
     public void CancelJump()
