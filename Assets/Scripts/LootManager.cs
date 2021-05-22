@@ -12,6 +12,8 @@ public class LootManager : MonoBehaviour
 
     private ElliotSoundSystem ESS;
 
+    private float lastLootDate;
+
     void Start()
     {
         ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
@@ -100,5 +102,11 @@ public class LootManager : MonoBehaviour
                 //Debug.Log("NOTHING");
                 break;
         }
+        lastLootDate = Time.time;
+    }
+
+    public float lastLootedDate()
+    {
+        return lastLootDate;
     }
 }
