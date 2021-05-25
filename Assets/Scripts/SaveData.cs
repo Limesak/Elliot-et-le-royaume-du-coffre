@@ -82,6 +82,8 @@ public class SaveData
 
     //Progression
     public bool Achievements_AreneTuto;
+    public bool Achievements_CureDentTuto;
+    public bool Achievements_ConfitureKey;
     public int LecheCuillereTutoSpot;
 
     public void ResetValueToDefault()
@@ -153,6 +155,8 @@ public class SaveData
         TutoDone_Sword = false;
 
         Achievements_AreneTuto = false;
+        Achievements_CureDentTuto = false;
+        Achievements_ConfitureKey = false;
         LecheCuillereTutoSpot = 0;
 
         Debug.Log("SaveData reseted");

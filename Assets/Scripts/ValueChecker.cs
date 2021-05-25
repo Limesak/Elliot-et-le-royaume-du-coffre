@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ValueChecker : MonoBehaviour
 {
-    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone, PoupouAreneDead};
+    public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone, PoupouAreneDead, ReadRelevantEntity};
     public enum TutoType { None, DeplacementCamera, EquiperObjet, UtiliserEpee };
+    public enum ValueType { None, CureDentTuto };
 
     [Header("Global infos")]
     public LookType Type;
     public TutoType Tuto;
+    public ValueType Value;
     public float waitDuration;
     private TutoManager TM;
     private bool locked;
@@ -17,6 +19,7 @@ public class ValueChecker : MonoBehaviour
     public CinematicCentralizer CC;
     public RelevantEntity RE;
     public GameObject ObjectToPop;
+    public string RelevantEntityName;
 
     void Start()
     {
@@ -54,6 +57,11 @@ public class ValueChecker : MonoBehaviour
                 StartCoroutine(Step1_AferWaitingX(waitDuration));
                 locked = true;
             }
+            else if (Type == LookType.ReadRelevantEntity && SaveData.current.RELEVANT_KeyList.Contains(RelevantEntityName))
+            {
+                StartCoroutine(Step1_AferWaitingX(waitDuration));
+                locked = true;
+            }
         }
         
     }
@@ -82,6 +90,10 @@ public class ValueChecker : MonoBehaviour
         else if (Type == LookType.PoupouAreneDead)
         {
             ObjectToPop.SetActive(true);
+        }
+        else if (Value == ValueType.CureDentTuto)
+        {
+            SaveData.current.Achievements_CureDentTuto = true;
         }
 
         if (RE != null)
