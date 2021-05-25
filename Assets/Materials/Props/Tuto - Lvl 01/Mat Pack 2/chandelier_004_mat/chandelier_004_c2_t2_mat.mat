@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: chandelier_004_c2_t2_mat
   m_Shader: {fileID: 4800000, guid: 8a07d6f761da17246ac686961e85686c, type: 3}
-  m_ShaderKeywords: _USEEMISSION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -90,7 +90,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UseAlphaClipping: 0
-    - _UseEmission: 1
+    - _UseEmission: 0
     - _UseOcclusion: 0
     - _UseOpacity: 0
     - _WorkflowMode: 1
@@ -100,7 +100,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
     - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
-    - _IndirectLightMinColor: {r: 0.2735848, g: 0.2735848, b: 0.2735848, a: 1}
+    - _IndirectLightMinColor: {r: 0, g: 0, b: 0, a: 1}
     - _OcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
