@@ -12,7 +12,7 @@ public class CinematicScript_C3S1 : CinematicScript
     public sealed override void ExecuteScript()
     {
         StartCoroutine(Step1_AferWaitingX(0.2f));
-        StartCoroutine(Step2_AferWaitingX(8f));
+        StartCoroutine(Step2_AferWaitingX(6f));
     }
 
     IEnumerator Step1_AferWaitingX(float X)

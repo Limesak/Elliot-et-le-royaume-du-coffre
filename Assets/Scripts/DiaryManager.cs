@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DiaryManager : MonoBehaviour
 {
+    [Header("Accessors")]
+    public NotifManager NM;
+
     [Header("Compteurs")]
     private int CPT_money;
     private int CPT_candy;
@@ -28,10 +31,6 @@ public class DiaryManager : MonoBehaviour
         ResetDiary();
     }
 
-    void Update()
-    {
-        
-    }
 
     public void ResetDiary()
     {
@@ -65,8 +64,29 @@ public class DiaryManager : MonoBehaviour
                 string s = SaveData.current.Diary[SaveData.current.Diary.Length - 1];
                 if (s.Contains(CHAR_missionNhintNhint + ""))
                 {
-                    MISSION_content = s.Substring(s.IndexOf(CHAR_noteNmission)+1, s.IndexOf(CHAR_missionNhintNhint));
+                    MISSION_content = s.Substring(s.IndexOf(CHAR_noteNmission)+1, s.IndexOf(CHAR_missionNhintNhint)- s.IndexOf(CHAR_noteNmission)-1);
                     MISSION_hints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "")+1).Split(CHAR_missionNhintNhint);
+                    //Debug.Log("s = " + s);
+                    //Debug.Log("MISSION_hints[0] = " + MISSION_hints[0]);
+                    //Debug.Log("MISSION_hints.Length = " + MISSION_hints.Length);
+                    /*
+                    string[] tmpHint = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
+                    MISSION_hints = new string[0];
+                    for(int j = 0; j < tmpHint.Length; j++)
+                    {
+                        if (tmpHint[j] != "")
+                        {
+                            string[] newList = new string[MISSION_hints.Length + 1];
+                            for (int i = 0; i < MISSION_hints.Length; i++)
+                            {
+                                newList[i] = MISSION_hints[i];
+                            }
+                            newList[MISSION_hints.Length] = tmpHint[j];
+                            MISSION_hints = newList;
+                            Debug.Log("tmpHint[" + j + "] = " + tmpHint[j]);
+                        }
+                    }*/
+
                 }
                 else
                 {
@@ -219,7 +239,7 @@ public class DiaryManager : MonoBehaviour
         string res = "";
         string s = "";
 
-        if (index < SaveData.current.Diary.Length)
+        if (index < SaveData.current.Diary.Length && index >=0)
         {
             s = SaveData.current.Diary[index];
 
@@ -233,9 +253,6 @@ public class DiaryManager : MonoBehaviour
         {
             
             string[] TMPhints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
-            Debug.Log("s="+s);
-            Debug.Log("TMPhints.Length=" + TMPhints.Length);
-            Debug.Log("TMPhints[0]=" + TMPhints[0]);
             res = s.Substring(s.IndexOf(CHAR_noteNmission) + 1, s.IndexOf(CHAR_missionNhintNhint)- s.IndexOf(CHAR_noteNmission) -1);
             for (int i = 0; i < TMPhints.Length; i++)
             {
@@ -293,16 +310,56 @@ public class DiaryManager : MonoBehaviour
     public void SaveInSaveData()
     {
         //Faire le morceau de code dans Interactable_SavePoint
-        string[] newDiary = new string[SaveData.current.Diary.Length+1];
-        for(int i=0; i< SaveData.current.Diary.Length; i++)
+        if(BUFFER_list.Length > 0 || DidCollect() || DidKill() || CheckIfNewHintOrMission())
         {
-            newDiary[i] = SaveData.current.Diary[i];
-        }
-        newDiary[SaveData.current.Diary.Length] = MakeMeString();
+            string[] newDiary = new string[SaveData.current.Diary.Length + 1];
+            for (int i = 0; i < SaveData.current.Diary.Length; i++)
+            {
+                newDiary[i] = SaveData.current.Diary[i];
+            }
+            newDiary[SaveData.current.Diary.Length] = MakeMeString();
 
-        SaveData.current.Diary = newDiary;
-        SaveData.current.hasBeenTMP = false;
-        ResetDiary();
+            SaveData.current.Diary = newDiary;
+            SaveData.current.hasBeenTMP = false;
+            ResetDiary();
+        }
+    }
+
+    private bool CheckIfNewHintOrMission()
+    {
+        bool res = false;
+        string s = new string(SaveData.current.Diary[SaveData.current.Diary.Length - 1].ToCharArray() );
+        if (!s.Contains(MISSION_content))
+        {
+            res = true;
+            Debug.Log("Mission Changed so reset");
+            return res;
+        }
+
+        if (s.Contains(CHAR_missionNhintNhint + ""))
+        {
+            string[] TMPhints = s.Substring(s.IndexOf(CHAR_missionNhintNhint + "") + 1).Split(CHAR_missionNhintNhint);
+            if (TMPhints.Length != MISSION_hints.Length)
+            {
+                res = true;
+                Debug.Log("Hint Changed so reset");
+                return res;
+            }
+            else
+            {
+                Debug.Log("Hint last day : " + TMPhints.Length);
+            }
+        }
+        else
+        {
+            if (MISSION_hints.Length>0)
+            {
+                res = true;
+                Debug.Log("Hint Changed so reset");
+                return res;
+            }
+        }
+        return res;
     }
 
     public void AddAKill(int indexType)
@@ -334,16 +391,25 @@ public class DiaryManager : MonoBehaviour
         }
         newList[BUFFER_list.Length] =content;
         BUFFER_list = newList;
+        NM.NewNotif("Note ajouté au carnet!");
     }
 
     public void ChangeTheMission(string content)
     {
         MISSION_content = content;
         MISSION_hints = new string[0];
+        NM.NewNotif("Mission mise à jour!");
     }
 
     public void AddHint(string content)
     {
+        foreach(string s in MISSION_hints)
+        {
+            if(content== s || content =="")
+            {
+                return;
+            }
+        }
         string[] newList = new string[MISSION_hints.Length + 1];
         for (int i = 0; i < MISSION_hints.Length; i++)
         {
@@ -351,5 +417,6 @@ public class DiaryManager : MonoBehaviour
         }
         newList[MISSION_hints.Length] = content;
         MISSION_hints = newList;
+        NM.NewNotif("Indice ajouté!");
     }
 }

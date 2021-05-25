@@ -27,4 +27,10 @@ public class ConversationLineInfo : MonoBehaviour
     [Header("Branch infos")]
     [Tooltip("Put the index of the desired branch from the ConversationInfo Branch Table if one of the buttonAction is Branch, takomprimacouille")]
     public int branchIndex;
+    [Header("ChangeMission")]
+    public bool doChangeTheMission;
+    public string NewMission;
+    [Header("AddHint")]
+    public bool doAddHint;
+    public string NewHint;
 }

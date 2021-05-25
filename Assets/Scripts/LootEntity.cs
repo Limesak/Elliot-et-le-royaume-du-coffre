@@ -27,7 +27,7 @@ public class LootEntity : MonoBehaviour
 
     private void CheckForPlayer()
     {
-        if(Vector3.Distance(transform.position, LM.gameObject.transform.position) <= DetectionRadius && Time.time > LM.lastLootedDate() + 0.1f)
+        if(Vector3.Distance(transform.position, LM.gameObject.transform.position) <= DetectionRadius && Time.time > LM.lastLootedDate() + 0.12f)
         {
             LM.Loot(Type);
             if (RE != null)

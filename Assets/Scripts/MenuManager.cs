@@ -1256,19 +1256,21 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_KILLUI()
     {
+        foreach (DialogueCharaInfo dci in CharactersOnLeft)
+        {
+            dci.StopTalking();
+            dci.PutToSleep();
+        }
+        foreach (DialogueCharaInfo dci in CharactersOnRight)
+        {
+            dci.StopTalking();
+            dci.PutToSleep();
+        }
         isUnfadingForDialogue = true;
         StartCoroutine(UnfadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.8f, false);
         SaveParameter.current.canUseInputs = true;
         isDialogueOn = false;
-        foreach (DialogueCharaInfo dci in CharactersOnRight)
-        {
-            dci.PutToSleep();
-        }
-        foreach (DialogueCharaInfo dci in CharactersOnLeft)
-        {
-            dci.PutToSleep();
-        }
 
         DIALOGUE_ButtonA.SetActive(false);
         DIALOGUE_ButtonB.SetActive(false);
@@ -1281,12 +1283,23 @@ public class MenuManager : MonoBehaviour
     {
         if (isDialogueOn)
         {
+            
             ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
             if (isWritingDialogue)
             {
                 isWritingDialogue = false;
                 DIALOGUE_TextContent.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].LineContent;
                 return;
+            }
+
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].doChangeTheMission)
+            {
+                DM.ChangeTheMission(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].NewMission);
+            }
+
+            if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].doAddHint)
+            {
+                DM.AddHint(CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].NewHint);
             }
 
             if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ActionButtonA == DialogueActionButton.Next)
