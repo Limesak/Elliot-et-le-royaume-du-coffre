@@ -1077,7 +1077,7 @@ public class MenuManager : MonoBehaviour
                 {
                     Carnet_GLOBAL.transform.DOKill();
                     Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
-                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.4f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.6f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
                 }
             }
             else

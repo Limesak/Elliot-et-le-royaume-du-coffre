@@ -27693,7 +27693,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -28148,8 +28148,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 26407
-        atime1: 65535
-        atime2: 0
+        atime1: 46453
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -28157,7 +28157,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 3
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -52620,6 +52620,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5299395207707767065}
     m_Modifications:
+    - target: {fileID: 1192732684463277227, guid: 7d17016ea4a19e949985f6ea06ab3801,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5132628435807250188, guid: 7d17016ea4a19e949985f6ea06ab3801,
         type: 3}
       propertyPath: m_Name

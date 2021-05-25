@@ -10,6 +10,7 @@ public class CinematicScript_C4S2 : CinematicScript
     public GameObject NewRampe;
     public GameObject LUTIN_PERMANENT;
     public GameObject LUTIN_CINEMATIC;
+    public GameObject VCFT;
     private ElliotSoundSystem ESS;
 
     private void Start()
@@ -36,5 +37,6 @@ public class CinematicScript_C4S2 : CinematicScript
     {
         yield return new WaitForSeconds(X);
         LUTIN_PERMANENT.SetActive(true);
+        VCFT.SetActive(true);
     }
 }

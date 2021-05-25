@@ -12,9 +12,16 @@ public class LecheCuillerePermanent : MonoBehaviour
     public SoundManager_LecheCuillere SM;
     public GameObject[] Spots;
     private bool isWalking;
+    private GameObject PLAYER;
+
+    [Header("Conv")]
+    public ConversationInfo ConvCureDent;
+    public ConversationInfo ConvPorteSortieEnPoche;
+    public ConversationInfo ConvPorteSortiePasTrouvee;
 
     void Start()
     {
+        PLAYER = GameObject.FindGameObjectWithTag("Player");
         isWalking = false;
         if (SaveData.current.LecheCuillereTutoSpot == -1)
         {
@@ -27,11 +34,11 @@ public class LecheCuillerePermanent : MonoBehaviour
         }
         else
         {
-            gameObject.transform.position = Spots[SaveData.current.LecheCuillereTutoSpot].transform.position;
+            //gameObject.transform.position = Spots[SaveData.current.LecheCuillereTutoSpot].transform.position;
+            NavAgentLutin.Warp(Spots[SaveData.current.LecheCuillereTutoSpot].transform.position);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isWalking && Vector3.Distance(transform.position, Spots[SaveData.current.LecheCuillereTutoSpot].transform.position) <=1f)
@@ -45,6 +52,16 @@ public class LecheCuillerePermanent : MonoBehaviour
         {
             GoToSpot();
         }
+
+        if (!isWalking && !LA.dontLook &&Vector3.Distance(transform.position, PLAYER.transform.position) > 7f)
+        {
+            LA.dontLook = true;
+        }
+
+        if(SaveData.current.LecheCuillereTutoSpot == 1 && SaveData.current.Achievements_CureDentTuto)
+        {
+            SaveData.current.LecheCuillereTutoSpot = 2;
+        }
     }
 
     void GoToSpot()
@@ -53,5 +70,27 @@ public class LecheCuillerePermanent : MonoBehaviour
         AnimLutin.SetTrigger("Walk");
         NavAgentLutin.SetDestination(Spots[SaveData.current.LecheCuillereTutoSpot].transform.position);
         isWalking = true;
+    }
+
+    public void TryToInteract( MenuManager MM)
+    {
+        if (!isWalking && !MM.isInDialogue())
+        {
+            if(SaveData.current.LecheCuillereTutoSpot == 1)
+            {
+                MM.DIALOGUE_OpenDialogue(ConvCureDent);
+                LA.dontLook = false;
+            }
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.Achievements_ConfitureKey)
+            {
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortieEnPoche);
+                LA.dontLook = false;
+            }
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.Achievements_ConfitureKey)
+            {
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortiePasTrouvee);
+                LA.dontLook = false;
+            }
+        }
     }
 }
