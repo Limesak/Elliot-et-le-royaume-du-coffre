@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootManager : MonoBehaviour
 {
-    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet , Amu_Contre, Amu_Envol, Amu_Fendoir};
+    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet , Amu_Contre, Amu_Envol, Amu_Fendoir, CleConfiture};
 
     public DiaryManager DM;
     public BonbonUseManager BM;
@@ -97,6 +97,13 @@ public class LootManager : MonoBehaviour
                 SaveData.current.UnlockList[6] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Amulette Fendoir");
+                break;
+            case LootType.CleConfiture:
+                //Debug.Log("WoodShield");
+                DM.AddBufferEntry("J'ai trouvé une clé qui sent la confiture ! Elle devrait me permettre de sortir de cette marmite.");// Changer la ligne de buffer ici  <--
+                SaveData.current.Achievements_ConfitureKey= true;
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                NM.NewNotif("Ramassé: Clé confiture");
                 break;
             default:
                 //Debug.Log("NOTHING");

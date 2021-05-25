@@ -24,6 +24,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     void Start()
     {
+        canAppear = false;
         Button.SetActive(false);
         for (int i = 0; i < Illus.Length; i++)
         {
@@ -52,6 +53,15 @@ public class LoadingSceneManager : MonoBehaviour
             Button.SetActive(true);
             EventSystem.current.SetSelectedGameObject(Button);
         }
+
+        if (!canAppear)
+        {
+            Head.transform.eulerAngles = new Vector3(Head.transform.eulerAngles.x, Head.transform.eulerAngles.y, Head.transform.eulerAngles.z - (speedOfRotation * Time.deltaTime));
+        }
+        else
+        {
+            Head.transform.eulerAngles = Vector3.zero;
+        }
     }
 
     IEnumerator LoadAsync()
@@ -63,12 +73,8 @@ public class LoadingSceneManager : MonoBehaviour
         if (canGo)
         {
             progression.allowSceneActivation = true;
-            Head.transform.eulerAngles = Vector3.zero;
         }
-        else
-        {
-            Head.transform.eulerAngles = new Vector3(Head.transform.eulerAngles.x, Head.transform.eulerAngles.y , Head.transform.eulerAngles.z + (speedOfRotation * Time.deltaTime));
-        }
+
 
         while (!progression.isDone)
         {

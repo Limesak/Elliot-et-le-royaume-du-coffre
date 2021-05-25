@@ -109,11 +109,9 @@ public class CinematicManager : MonoBehaviour
                 break;
             case CinematicStep.StepType.ChangeMission:
                 DM.ChangeTheMission(CurrentCinematic[CurrentIndex].MissionLine);
-                NM.NewNotif("Mission mise à jour!");
                 break;
             case CinematicStep.StepType.AddHint:
                 DM.AddHint(CurrentCinematic[CurrentIndex].HintLine);
-                NM.NewNotif("Indice ajouté!");
                 break;
             default:
                 //Debug.Log("NOTHING");
