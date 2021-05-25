@@ -1171,7 +1171,10 @@ public class MenuManager : MonoBehaviour
 
     public void DIALOGUE_UpdateButton()
     {
-        DIALOGUE_ButtonA.SetActive(true);
+        if (!DIALOGUE_ButtonA.activeSelf)
+        {
+            DIALOGUE_ButtonA.SetActive(true);
+        }
         DIALOGUE_ButtonAtext.text = CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].ButtonAContent;
         if (CurrentConv.Branch[BranchCurrentIndex].Lines[ConvCurrentIndex].isButtonBPresent)
         {
