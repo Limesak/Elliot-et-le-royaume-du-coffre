@@ -58,9 +58,10 @@ public class LecheCuillerePermanent : MonoBehaviour
             LA.dontLook = true;
         }
 
-        if(SaveData.current.LecheCuillereTutoSpot == 1 && SaveData.current.Achievements_CureDentTuto)
+        if(SaveData.current.Achievements_CureDentTuto && SaveData.current.LecheCuillereTutoSpot != 2)
         {
             SaveData.current.LecheCuillereTutoSpot = 2;
+            GoToSpot();
         }
     }
 

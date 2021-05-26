@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     private GameObject Player;
     private bool PlayerInRange;
     public string TextDescription;
-    public CadenasGobelin[] PossibleLock;
+    public Interactable_Cadenas[] PossibleLock;
     public bool used;
 
     public MenuManager MM;
@@ -57,13 +57,17 @@ public class Interactable : MonoBehaviour
     {
         bool res = true;
 
-        for (int i = 0; i < PossibleLock.Length; i++)
+        if(PossibleLock != null)
         {
-            if (PossibleLock[i] != null)
+            for (int i = 0; i < PossibleLock.Length; i++)
             {
-                res = false;
+                if (PossibleLock[i] != null)
+                {
+                    res = false;
+                }
             }
         }
+        
 
         if (used)
         {

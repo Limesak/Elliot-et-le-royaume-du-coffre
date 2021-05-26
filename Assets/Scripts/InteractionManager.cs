@@ -84,7 +84,11 @@ public class InteractionManager : MonoBehaviour
         bool res = false;
         foreach(Interactable i in PossibleInteraction)
         {
-            res = true;
+            if(i != null)
+            {
+                res = true;
+            }
+            
         }
         return res;
     }
@@ -97,7 +101,7 @@ public class InteractionManager : MonoBehaviour
             Interactable res = null;
             foreach (Interactable i in PossibleInteraction)
             {
-                if(Vector3.Distance(transform.position, i.transform.position) < minDist)
+                if(i !=null && Vector3.Distance(transform.position, i.transform.position) < minDist)
                 {
                     minDist = Vector3.Distance(transform.position, i.transform.position);
                     res = i;
