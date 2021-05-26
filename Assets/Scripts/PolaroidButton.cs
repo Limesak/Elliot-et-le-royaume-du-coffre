@@ -16,6 +16,7 @@ public class PolaroidButton : MonoBehaviour
     public Transform POS_Mid;
     public Transform POS_After;
     private UnityEngine.EventSystems.EventSystem ES;
+    public SlideSheetOnSelect SSOS;
 
     void Start()
     {
@@ -24,6 +25,9 @@ public class PolaroidButton : MonoBehaviour
         {
             CheckUnknown();
         }
+
+        
+        
         
     }
 
@@ -58,10 +62,7 @@ public class PolaroidButton : MonoBehaviour
             }
 
         }
-        if (!isFiller)
-        {
-            CheckUnknown();
-        }
+
     }
 
     public void CheckUnknown()
@@ -99,38 +100,86 @@ public class PolaroidButton : MonoBehaviour
                 UnknownIllu.SetActive(true);
             }
         }
+
+        if (SSOS != null)
+        {
+            if (Type == MenuManager.TypeOfPolaroid.Bestiaire)
+            {
+                if (SaveData.current.Codex_Bestiaire_unlockList[index])
+                {
+                    SSOS.SetDontSlideSheet(false);
+                }
+                else
+                {
+                    SSOS.SetDontSlideSheet(true);
+                }
+            }
+            else if (Type == MenuManager.TypeOfPolaroid.Lieux)
+            {
+                if (SaveData.current.Codex_Lieux_unlockList[index])
+                {
+                    SSOS.SetDontSlideSheet(false);
+                }
+                else
+                {
+                    SSOS.SetDontSlideSheet(true);
+                }
+            }
+            else if (Type == MenuManager.TypeOfPolaroid.Souvenirs)
+            {
+                if (SaveData.current.Codex_Souvenirs_unlockList[index])
+                {
+                    SSOS.SetDontSlideSheet(false);
+                }
+                else
+                {
+                    SSOS.SetDontSlideSheet(true);
+                }
+            }
+        }
     }
 
     public void GoMid()
     {
         transform.DOKill();
         transform.DOLocalMove(POS_Mid.localPosition,0.1f);
+        //CheckUnknown();
     }
 
     public void GoLeft()
     {
         transform.DOKill();
         transform.DOLocalMove(POS_Before.localPosition, 0.1f);
+        //CheckUnknown();
     }
 
     public void GoRight()
     {
         transform.DOKill();
         transform.DOLocalMove(POS_After.localPosition, 0.1f);
+        //CheckUnknown();
     }
 
     public void PopMid()
     {
         transform.localPosition = POS_Mid.localPosition;
+        //CheckUnknown();
     }
 
     public void PopLeft()
     {
         transform.localPosition = POS_Before.localPosition;
+        //CheckUnknown();
     }
 
     public void PopRight()
     {
         transform.localPosition = POS_After.localPosition;
+        //CheckUnknown();
+    }
+
+    private void OnEnable()
+    {
+        CheckUnknown();
     }
 }

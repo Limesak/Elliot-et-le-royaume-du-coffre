@@ -21,6 +21,8 @@ public class SlideSheetOnSelect : MonoBehaviour
 
     private ElliotSoundSystem ESS;
 
+    public bool DontSlideSheet;
+
 
     void Start()
     {
@@ -38,9 +40,9 @@ public class SlideSheetOnSelect : MonoBehaviour
     void Update()
     {
 
-        if (ES.currentSelectedGameObject == this.gameObject)
+        if (ES.currentSelectedGameObject == this.gameObject && !DontSlideSheet)
         {
-            if (!Slided)
+            if (!Slided )
             {
                 transform.DOKill();
                 Slided = true;
@@ -77,5 +79,39 @@ public class SlideSheetOnSelect : MonoBehaviour
                 }
             }
         }
+
+        if (GrowOnSelect && DontSlideSheet)
+        {
+            if (ES.currentSelectedGameObject == this.gameObject )
+            {
+                if (GrowOnSelect)
+                {
+                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
+                }
+            }
+            else
+            {
+                if (GrowOnSelect)
+                {
+                    transform.DOScale(new Vector3(1, 1, 1), 0.2f);
+                }
+            }
+        }
+        
+    }
+
+    public void GoBackToNormalSize()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void SetDontSlideSheet(bool b)
+    {
+        DontSlideSheet = b;
+        if (!b)
+        {
+            MySheet.transform.localPosition = ORIGIN;
+        }
+        Slided = false;
     }
 }

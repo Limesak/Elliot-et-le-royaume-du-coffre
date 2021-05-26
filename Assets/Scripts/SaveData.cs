@@ -63,6 +63,7 @@ public class SaveData
     public int CPT_Candy;
     public bool haveDiscoveredYellowKey;
     public int CPT_YellowKey;
+    public bool[] ItemSacocheUnique;
 
     //Relevant shits
     public string RELEVANT_KeyList;
@@ -83,7 +84,6 @@ public class SaveData
     //Progression
     public bool Achievements_AreneTuto;
     public bool Achievements_CureDentTuto;
-    public bool Achievements_ConfitureKey;
     public int LecheCuillereTutoSpot;
 
     public void ResetValueToDefault()
@@ -130,22 +130,28 @@ public class SaveData
         CPT_Candy = 0;// 0 for build
         CPT_YellowKey = 0;// 0 for build
 
+        ItemSacocheUnique = new bool[1];
+        for (int i = 0; i < ItemSacocheUnique.Length; i++)
+        {
+            ItemSacocheUnique[i] = false;//True pour debug   &  False for build
+        }
+
         RELEVANT_KeyList = "";
 
         Codex_Bestiaire_unlockList = new bool[3];
         for (int i = 0; i < Codex_Bestiaire_unlockList.Length; i++)
         {
-            Codex_Bestiaire_unlockList[i] = true;//True pour debug   &  False for build
+            Codex_Bestiaire_unlockList[i] = false;//True pour debug   &  False for build
         }
         Codex_Lieux_unlockList = new bool[3];
         for (int i = 0; i < Codex_Lieux_unlockList.Length; i++)
         {
-            Codex_Lieux_unlockList[i] = true;//True pour debug   &  False for build
+            Codex_Lieux_unlockList[i] = false;//True pour debug   &  False for build
         }
         Codex_Souvenirs_unlockList = new bool[3];
         for (int i = 0; i < Codex_Souvenirs_unlockList.Length; i++)
         {
-            Codex_Souvenirs_unlockList[i] = true;//True pour debug   &  False for build
+            Codex_Souvenirs_unlockList[i] = false;//True pour debug   &  False for build
         }
 
         CurrentDifficulty = 1;
@@ -156,7 +162,6 @@ public class SaveData
 
         Achievements_AreneTuto = false;
         Achievements_CureDentTuto = false;
-        Achievements_ConfitureKey = false;
         LecheCuillereTutoSpot = 0;
 
         Debug.Log("SaveData reseted");

@@ -81,12 +81,12 @@ public class LecheCuillerePermanent : MonoBehaviour
                 MM.DIALOGUE_OpenDialogue(ConvCureDent);
                 LA.dontLook = false;
             }
-            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.Achievements_ConfitureKey)
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.ItemSacocheUnique[0])
             {
                 MM.DIALOGUE_OpenDialogue(ConvPorteSortieEnPoche);
                 LA.dontLook = false;
             }
-            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.Achievements_ConfitureKey)
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.ItemSacocheUnique[0])
             {
                 MM.DIALOGUE_OpenDialogue(ConvPorteSortiePasTrouvee);
                 LA.dontLook = false;
