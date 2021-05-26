@@ -19,6 +19,7 @@ public class Poussierin : MonoBehaviour
 
     public GameObject Prefab_Piece;
     public GameObject Prefab_Bonbon;
+    public GameObject Prefab_CleJaune;
 
     [Header("Global Info")]
     public int TableIndex;
@@ -396,36 +397,42 @@ public class Poussierin : MonoBehaviour
         }
 
         float rdm2 = Random.Range(0, 100);
+        bool hadSpawnBonbon = false;
         switch (SaveData.current.CurrentDifficulty)
         {
             case 0:
                 if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 1 && rdm2 > 30)
                 {
                     Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    hadSpawnBonbon = true;
                 }
                 break;
             case 1:
                 if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 50)
                 {
                     Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    hadSpawnBonbon = true;
                 }
                 break;
             case 2:
                 if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 50)
                 {
                     Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    hadSpawnBonbon = true;
                 }
                 break;
             case 3:
                 if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() >= 2 && rdm2 > 70)
                 {
                     Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    hadSpawnBonbon = true;
                 }
                 break;
             case 4:
                 if (PLAYER.GetComponent<LifeManager>().GetCurrentIndex() == 3 && rdm2 > 70)
                 {
                     Instantiate(Prefab_Bonbon, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    hadSpawnBonbon = true;
                 }
                 break;
             default:
@@ -433,7 +440,25 @@ public class Poussierin : MonoBehaviour
                 break;
         }
 
-        
+        float rdm3 = Random.Range(0, 100);
+        if (!hadSpawnBonbon)
+        {
+            if (SaveData.current.CPT_YellowKey == 0)
+            {
+                if (rdm3 > 80)
+                {
+                    Instantiate(Prefab_CleJaune, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (rdm3 > 90)
+                {
+                    Instantiate(Prefab_CleJaune, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                }
+            }
+        }
+
         SpawnedHead.GetComponent<MeshRenderer>().material = HeadMR.material;
         Destroy(gameObject);
     }

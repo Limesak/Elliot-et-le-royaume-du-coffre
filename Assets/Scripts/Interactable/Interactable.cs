@@ -9,6 +9,8 @@ public class Interactable : MonoBehaviour
     private GameObject Player;
     private bool PlayerInRange;
     public string TextDescription;
+    public CadenasGobelin[] PossibleLock;
+    public bool used;
 
     public MenuManager MM;
 
@@ -43,12 +45,32 @@ public class Interactable : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(Player.transform.position, CenterOfInteraction.position) <= radius)
+            if (Vector3.Distance(Player.transform.position, CenterOfInteraction.position) <= radius && CanInteract())
             {
                 PlayerInRange = true;
                 Player.GetComponent<InteractionManager>().AddInteraction(this);
             }
         }
+    }
+
+    public bool CanInteract()
+    {
+        bool res = true;
+
+        for (int i = 0; i < PossibleLock.Length; i++)
+        {
+            if (PossibleLock[i] != null)
+            {
+                res = false;
+            }
+        }
+
+        if (used)
+        {
+            res = false;
+        }
+
+        return res;
     }
 
     public virtual void Interact()

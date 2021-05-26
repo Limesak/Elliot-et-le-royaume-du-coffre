@@ -9,8 +9,6 @@ public class Interactable_SceneTransitionZone : Interactable
     public int SceneIndex;
     public int NextSpawnInt;
 
-    private bool used;
-
     void Start()
     {
         InitVariables();
