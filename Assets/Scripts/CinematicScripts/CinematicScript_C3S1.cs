@@ -28,5 +28,6 @@ public class CinematicScript_C3S1 : CinematicScript
     {
         yield return new WaitForSeconds(X);
         Barrière.SetActive(false);
+        
     }
 }

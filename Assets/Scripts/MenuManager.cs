@@ -89,6 +89,9 @@ public class MenuManager : MonoBehaviour
     public GameObject POCHE_Money;
     public GameObject POCHE_Candy;
     public GameObject POCHE_YellowKey;
+    public GameObject[] SACOCHE_Items;
+    private int SACOCHE_CurrentIndex;
+    public Text SACOCHE_ItemName;
 
     [Header("Main Menus CODEX")]
     public int CODEX_Bestiaire_CurrentIndex;
@@ -158,6 +161,7 @@ public class MenuManager : MonoBehaviour
         DialogueCurrentText = "";
         isWritingDialogue = false;
         SETTINGS_CurrentIndex = -1;
+        SACOCHE_CurrentIndex = -1;
 
         ReturnButton.SetActive(false);
         GoBef.interactable = false;
@@ -418,6 +422,7 @@ public class MenuManager : MonoBehaviour
         else if(index == 3)
         {
             UNIQUES_PopItems();
+            UNIQUES_PopSacoche();
         }
         else if (index == 4)
         {
@@ -771,6 +776,115 @@ public class MenuManager : MonoBehaviour
         else
         {
             POCHE_YellowKey.SetActive(false);
+        }
+    }
+
+    public void UNIQUES_PopSacoche()
+    {
+        int lastindex = -1;
+        for (int i = 0; i < SaveData.current.ItemSacocheUnique.Length; i++)
+        {
+            if (SaveData.current.ItemSacocheUnique[i])
+            {
+                lastindex = i;
+                Debug.Log("ItemSacoche en poche a index :" + i);
+            }
+        }
+
+        SACOCHE_CurrentIndex = lastindex;
+
+        if (SACOCHE_CurrentIndex != -1)
+        {
+            for(int i = 0; i < SACOCHE_Items.Length; i++)
+            {
+                if (i== SACOCHE_CurrentIndex)
+                {
+                    SACOCHE_Items[i].SetActive(true);
+                }
+                else
+                {
+                    SACOCHE_Items[i].SetActive(false);
+                }
+            }
+
+            switch (SACOCHE_CurrentIndex)
+            {
+                case 0:
+                    SACOCHE_ItemName.text = "La clé confiture";
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("Nothing for ya");
+            for (int i = 0; i < SACOCHE_Items.Length; i++)
+            {
+                SACOCHE_Items[i].SetActive(false);
+            }
+            SACOCHE_ItemName.text = "Vide";
+        }
+    }
+
+    public void UNIQUES_NextItemSacoche()
+    {
+        if (SACOCHE_CurrentIndex < SaveData.current.ItemSacocheUnique.Length - 1)
+        {
+            int lastIndex = SACOCHE_CurrentIndex;
+            for(int i = SaveData.current.ItemSacocheUnique.Length - 1; i> SACOCHE_CurrentIndex; i--)
+            {
+                if (SaveData.current.ItemSacocheUnique[i])
+                {
+                    lastIndex = i;
+                }
+            }
+
+            if (lastIndex!= SACOCHE_CurrentIndex)
+            {
+                SACOCHE_CurrentIndex = lastIndex;
+                ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            }
+            else
+            {
+                ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
+            }
+            
+            
+            UNIQUES_PopSacoche();
+        }
+        else
+        {
+            ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
+        }
+    }
+
+    public void UNIQUES_PreviousItemSacoche()
+    {
+        if (SACOCHE_CurrentIndex > 0)
+        {
+            int lastIndex = SACOCHE_CurrentIndex;
+            for (int i = 0; i < SACOCHE_CurrentIndex; i++)
+            {
+                if (SaveData.current.ItemSacocheUnique[i])
+                {
+                    lastIndex = i;
+                }
+            }
+
+            if (lastIndex != SACOCHE_CurrentIndex)
+            {
+                SACOCHE_CurrentIndex = lastIndex;
+                ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
+            }
+            else
+            {
+                ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
+            }
+
+            UNIQUES_PopSacoche();
+        }
+        else
+        {
+            ESS.PlaySound(ESS.UI_Annuler, ESS.Asource_Interface, 0.8f, false);
         }
     }
 

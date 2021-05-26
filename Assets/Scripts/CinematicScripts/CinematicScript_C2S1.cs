@@ -30,5 +30,7 @@ public class CinematicScript_C2S1 : CinematicScript
         yield return new WaitForSeconds(X);
         //Do stuffs
         AnimLutin.SetBool("isInPanic", false);
+        SaveData.current.Codex_Bestiaire_unlockList[0] = true;
+        GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<NotifManager>().NewNotif("Nouvelle fiche codex!");
     }
 }

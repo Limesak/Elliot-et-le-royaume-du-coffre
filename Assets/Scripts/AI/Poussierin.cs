@@ -343,6 +343,8 @@ public class Poussierin : MonoBehaviour
                 SaveData.current.Achievements_AreneTuto = true;
                 PLAYER.GetComponent<DiaryManager>().ChangeTheMission("Rejoindre Lèche Cuillère.");
                 PLAYER.GetComponent<DiaryManager>().AddBufferEntry("J'ai combattu et vaincu mon premier poussierin !");
+                SaveData.current.Codex_Bestiaire_unlockList[1] = true;
+                PLAYER.GetComponentInChildren<NotifManager>().NewNotif("Nouvelle fiche codex!");
             }
             isDead = true;
             Anim.SetTrigger("die");
