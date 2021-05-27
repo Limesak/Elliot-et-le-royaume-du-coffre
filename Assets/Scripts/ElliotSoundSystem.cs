@@ -18,6 +18,7 @@ public class ElliotSoundSystem : MonoBehaviour
     public AudioClip COMBAT_Meurt;
     public AudioClip[] COMBAT_TapeEnnemiAvecEpee;
     public AudioClip COMBAT_TapeTriggerAvecEpee;
+    public AudioClip[] COMBAT_TapeCuredentsAvecEpee;
     public AudioClip COMBAT_Soin;
     public AudioClip COMBAT_MangerBonbon;
     public AudioClip[] COMBAT_HitBouclier;

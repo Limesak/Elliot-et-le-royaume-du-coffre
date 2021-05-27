@@ -13,6 +13,7 @@ public class ChangeValueOnRecept : TriggerReceptor
         {
             case ValueType.LecheCuillereOut:
                 SaveData.current.Achievements_OutMarmite=true;
+                Debug.Log("OutMarmite");
                 break;
         }
     }

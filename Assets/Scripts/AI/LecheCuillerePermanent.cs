@@ -37,6 +37,11 @@ public class LecheCuillerePermanent : MonoBehaviour
             //gameObject.transform.position = Spots[SaveData.current.LecheCuillereTutoSpot].transform.position;
             NavAgentLutin.Warp(Spots[SaveData.current.LecheCuillereTutoSpot].transform.position);
         }
+
+        if (SaveData.current.Achievements_OutMarmite)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()

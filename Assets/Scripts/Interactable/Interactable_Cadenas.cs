@@ -27,7 +27,7 @@ public class Interactable_Cadenas : Interactable
         {
             Unlock();
         }
-        else
+        else if (!used)
         {
             TryButLock();
         }

@@ -73,6 +73,19 @@ public class SwordTrigger : MonoBehaviour
             }
             
         }
+
+        if (canDamage && other.gameObject.GetComponent<CuredentsManager>() && !other.gameObject.GetComponent<CuredentsManager>().used)
+        {
+            other.gameObject.GetComponent<CuredentsManager>().Break();
+            screenShakeScript.setShake(HitShakeForce, HitShakeDuration, false);
+            screenShakeScriptLock.setShake(HitShakeForce, HitShakeDuration, false);
+            if (lastHitDate + 0.1f < Time.time)
+            {
+                lastHitDate = Time.time;
+                ESS.PlaySound(ESS.OneOf(ESS.COMBAT_TapeCuredentsAvecEpee), ESS.Asource_Effects, 0.6f, false);
+            }
+
+        }
     }
 
     private int CurrentDamage()
