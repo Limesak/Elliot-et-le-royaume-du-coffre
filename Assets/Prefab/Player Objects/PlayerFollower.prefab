@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206079390555685775}
   - component: {fileID: 206079390555685774}
+  - component: {fileID: 1794182905}
   m_Layer: 0
   m_Name: PlayerFollower
   m_TagString: PlayerFollower
@@ -40,7 +41,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206079390555685769}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f14e1ab9e4d17714ebfbcc5879baad29, type: 3}
   m_Name: 
@@ -49,6 +50,22 @@ MonoBehaviour:
   maxHeightGap: 7.5
   speed: 4
   maxDistFollow: 0.3
+--- !u!114 &1794182905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206079390555685769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72c92790211e9f4d93e284f3690465c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BorderRadius_NoMoveZone: 1
+  BorderRadius_MoveCloserNormal: 1.5
+  BorderRadius_MoveCloserQuick: 15
+  Speed_Normal: 1
 --- !u!1 &206079390586036113
 GameObject:
   m_ObjectHideFlags: 0
