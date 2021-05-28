@@ -810,7 +810,7 @@ public class MenuManager : MonoBehaviour
             switch (SACOCHE_CurrentIndex)
             {
                 case 0:
-                    SACOCHE_ItemName.text = "La clé confiture";
+                    SACOCHE_ItemName.text = "La clé cuillère";
                     break;
             }
         }
