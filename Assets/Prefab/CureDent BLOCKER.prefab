@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3993886276742995371}
   - component: {fileID: 2083953938571137447}
   - component: {fileID: 2083953938571137446}
+  - component: {fileID: 701249351292473741}
   m_Layer: 8
   m_Name: Cylinder.004
   m_TagString: Untagged
@@ -110,6 +111,22 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!208 &701249351292473741
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083953938571137444}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.7370002, y: 10.098001, z: 17.919}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.975, y: 3.8980002, z: 2.9390001}
+  m_TimeToStationary: 0.5
 --- !u!1 &3879553209139614408
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +140,7 @@ GameObject:
   - component: {fileID: 8889277613104556325}
   - component: {fileID: 3879553209139614411}
   - component: {fileID: 3879553209139614410}
+  - component: {fileID: 3693496629019217601}
   m_Layer: 8
   m_Name: Cylinder.002
   m_TagString: Untagged
@@ -220,6 +238,22 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!208 &3693496629019217601
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3879553209139614408}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.513, y: 14.792001, z: 19.028002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.351, y: 0.507, z: -1.4920001}
+  m_TimeToStationary: 0.5
 --- !u!1 &6870660781577993656
 GameObject:
   m_ObjectHideFlags: 0
@@ -5256,6 +5290,7 @@ GameObject:
   - component: {fileID: 1798278302172323431}
   - component: {fileID: 8063462436755264203}
   - component: {fileID: 8063462436755264202}
+  - component: {fileID: 3801004932113179345}
   m_Layer: 8
   m_Name: Cylinder.003
   m_TagString: Untagged
@@ -5353,3 +5388,19 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!208 &3801004932113179345
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063462436755264200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.1030002, y: 15.439001, z: 19.805}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.518, y: -1.294, z: 0.93700004}
+  m_TimeToStationary: 0.5
