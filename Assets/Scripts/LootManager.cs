@@ -102,7 +102,7 @@ public class LootManager : MonoBehaviour
                 //Debug.Log("WoodShield");
                 DM.AddBufferEntry("J'ai trouvé une clé qui sent la confiture ! Elle devrait me permettre de sortir de cette marmite.");// Changer la ligne de buffer ici  <--
                 SaveData.current.ItemSacocheUnique[0] = true;
-                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                ESS.PlaySound(ESS.UI_LOOT_RamasseCle, ESS.Asource_Effects, 0.8f, false);
                 NM.NewNotif("Ramassé: Clé cuillère");
                 break;
             default:
