@@ -58,7 +58,7 @@ public class AnimEventTransmitter : MonoBehaviour
 
     public void SOUND_StepMarche()
     {
-        if (lastStepDate + 0.1f <= Time.time)
+        if (lastStepDate + 0.1f <= Time.time && PM.IsAlmostGrounded())
         {
             lastStepDate = Time.time;
             ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasMarche), ESS.Asource_Effects, 0.2f, false);
@@ -68,7 +68,11 @@ public class AnimEventTransmitter : MonoBehaviour
 
     public void SOUND_StepSprint()
     {
-        ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasSprint), ESS.Asource_Effects, 0.3f, false);
+        if (PM.IsAlmostGrounded())
+        {
+            ESS.PlaySound(ESS.OneOf(ESS.MOUVEMENT_BruitDePasSprint), ESS.Asource_Effects, 0.3f, false);
+        }
+        
     }
 
     public void SOUND_SwingAttack1()
