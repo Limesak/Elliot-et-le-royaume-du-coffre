@@ -180,9 +180,19 @@ public class Poussierin : MonoBehaviour
                                 }
                                 else // Not close enough to hit
                                 {
-                                    GoTo(PLAYER.transform.position);
-                                    LookAt(NavAgent.steeringTarget);
-                                    ModelEye.transform.LookAt(NavAgent.steeringTarget);
+                                    NavMeshPath navMeshPath = new NavMeshPath();
+                                    if (NavAgent.CalculatePath(PLAYER.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+                                    {
+                                        GoTo(PLAYER.transform.position);
+                                        LookAt(NavAgent.steeringTarget);
+                                        ModelEye.transform.LookAt(NavAgent.steeringTarget);
+                                    }
+                                    else
+                                    {
+                                        isOnPoint = false;
+                                        isAgressive = false;
+                                        FindNewWanderingPoint();
+                                    }
 
                                     //AVANCER VERS LE JOUEUR
                                 }
@@ -203,6 +213,7 @@ public class Poussierin : MonoBehaviour
                                         isAgressive = false;
                                         FindNewWanderingPoint();
                                     }
+
                                 }
                                 else//Not on lastPos yet
                                 {
@@ -230,7 +241,8 @@ public class Poussierin : MonoBehaviour
             {
                 if (lastTimeDamageTaken + StunDuration <= Time.time)//Not stun    isFree
                 {
-                    if (CanSeePlayer())
+                    NavMeshPath navMeshPath = new NavMeshPath();
+                    if (CanSeePlayer() && NavAgent.CalculatePath(PLAYER.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
                     {
                         StopWalking();
                         Taunt();
