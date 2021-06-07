@@ -269,7 +269,7 @@ public class MenuManager : MonoBehaviour
                 if (lastBlipBloup + BlipBloupCooldown < Time.time)
                 {
                     lastBlipBloup = Time.time;
-                    ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_BlipBloup), ESS.Asource_Interface, 0.8f, false);
+                    ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_BlipBloup), ESS.Asource_Interface, 0.45f, false);
                 }
             }
             DIALOGUE_TextContent.text = DialogueCurrentText;

@@ -37,7 +37,7 @@ public class Interactable_Cadenas : Interactable
     private void Unlock()
     {
         used = true;
-        SaveData.current.RELEVANT_KeyList = SaveData.current.RELEVANT_KeyList + RE.Key + "|";
+        RE.NotRelevantAnymore();
         Asource_Openning.Play();
         Model_Base.transform.DOLocalMove(Model_Base.transform.localPosition - new Vector3(0,0.3f,0),0.5f);
         Model_Anneau.transform.DOLocalMove(Model_Anneau.transform.localPosition + new Vector3(0, 0.3f, 0), 0.5f).OnComplete(() => { UnlockPart2(); });

@@ -80,6 +80,7 @@ public class SaveData
     public bool TutoDone_Deplacement;
     public bool TutoDone_Equiper;
     public bool TutoDone_Sword;
+    public bool TutoDone_Course;
 
     //Progression
     public bool Achievements_AreneTuto;
@@ -160,6 +161,7 @@ public class SaveData
         TutoDone_Deplacement = false;
         TutoDone_Equiper = false;
         TutoDone_Sword = false;
+        TutoDone_Course = false;
 
         Achievements_AreneTuto = false;
         Achievements_CureDentTuto = false;
