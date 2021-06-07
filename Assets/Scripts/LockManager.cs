@@ -32,7 +32,7 @@ public class LockManager : MonoBehaviour
     {
         if(isLock && LockedObject == null)
         {
-            isLock = false;
+            Unlock();
         }
     }
 

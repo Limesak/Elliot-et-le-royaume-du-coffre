@@ -20,6 +20,7 @@ public class TutoManager : MonoBehaviour
     public GameObject TUTO_DeplacemenNCamera;
     public GameObject TUTO_EquiperObjet;
     public GameObject TUTO_Epee;
+    public GameObject TUTO_Course;
 
     private GameObject[] FourreToutList;
     private bool isOn;
@@ -30,7 +31,7 @@ public class TutoManager : MonoBehaviour
     void Start()
     {
         ESS = GameObject.FindGameObjectWithTag("ElliotSoundSystem").GetComponent<ElliotSoundSystem>();
-        FourreToutList = new GameObject[] { TUTO_DeplacemenNCamera, TUTO_EquiperObjet, TUTO_Epee };
+        FourreToutList = new GameObject[] { TUTO_DeplacemenNCamera, TUTO_EquiperObjet, TUTO_Epee , TUTO_Course };
         Button.SetActive(false);
         isOn = false;
         for (int i = 0; i < FourreToutList.Length; i++)
@@ -61,6 +62,10 @@ public class TutoManager : MonoBehaviour
                 else if (FourreToutList[i] == TUTO_Epee)
                 {
                     SaveData.current.TutoDone_Sword = true;
+                }
+                else if (FourreToutList[i] == TUTO_Course)
+                {
+                    SaveData.current.TutoDone_Course = true;
                 }
 
                 ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.4f, false);

@@ -27,7 +27,7 @@ public class CuredentsManager : MonoBehaviour
         if (!used)
         {
             used = true;
-            SaveData.current.RELEVANT_KeyList = SaveData.current.RELEVANT_KeyList + RE.Key + "|";
+            RE.NotRelevantAnymore();
             PS.Play();
             Destroy(MainRB);
             Destroy(MainColl);

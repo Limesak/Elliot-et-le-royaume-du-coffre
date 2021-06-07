@@ -38,7 +38,7 @@ public class Interactable_LootChest : Interactable
         if (!used)
         {
             used = true;
-            SaveData.current.RELEVANT_KeyList = SaveData.current.RELEVANT_KeyList + RE.Key + "|";
+            RE.NotRelevantAnymore();
             AsourceSimple.Play();
             AsourceEffect.Play();
             Joint.DOLocalRotate(new Vector3(-70, 0, 0), 1.6f).OnComplete(() => { OpenningPart2(); });

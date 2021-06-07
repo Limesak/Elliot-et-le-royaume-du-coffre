@@ -127,17 +127,17 @@ MonoBehaviour:
   isOnPoint: 0
   minDistToCheckAngle: 0.3
   minDistToDetect: 30
-  maxSearchDuration: 10
+  maxSearchDuration: 3
   maxDistFromPoints: 50
   Eye: {fileID: 1468116364210075931}
   ModelEye: {fileID: 8758784868369711044}
   TauntDuration: 2
-  MinDistToHit: 3
+  MinDistToHit: 2.5
   DamageHorizontalAttack: 15
   DamageVerticalAttack: 45
   AttackBaseCooldown: 2
   AttackMaxAdditionnalCooldown: 2
-  StunDuration: 1.3
+  StunDuration: 1
   speedOfRotation: 5
   radiusOfCombatEvolution: 3
   YLookingOffset: -2.75

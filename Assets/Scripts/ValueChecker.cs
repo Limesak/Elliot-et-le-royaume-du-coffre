@@ -5,7 +5,7 @@ using UnityEngine;
 public class ValueChecker : MonoBehaviour
 {
     public enum LookType { SwordEquiped, SwordLooted, WaitAfterX, TutoEpeeDone, PoupouAreneDead, ReadRelevantEntity};
-    public enum TutoType { None, DeplacementCamera, EquiperObjet, UtiliserEpee };
+    public enum TutoType { None, DeplacementCamera, EquiperObjet, UtiliserEpee, Course };
     public enum ValueType { None, CureDentTuto };
 
     [Header("Global infos")]
@@ -74,6 +74,10 @@ public class ValueChecker : MonoBehaviour
         if(Tuto == TutoType.DeplacementCamera)
         {
             TM.Open(TM.TUTO_DeplacemenNCamera);
+        }
+        else if (Tuto == TutoType.Course)
+        {
+            TM.Open(TM.TUTO_Course);
         }
         else if (Tuto == TutoType.EquiperObjet)
         {
