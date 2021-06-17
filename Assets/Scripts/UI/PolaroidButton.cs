@@ -142,21 +142,21 @@ public class PolaroidButton : MonoBehaviour
     public void GoMid()
     {
         transform.DOKill();
-        transform.DOLocalMove(POS_Mid.localPosition,0.1f);
+        transform.DOLocalMove(POS_Mid.localPosition,0.01f);
         //CheckUnknown();
     }
 
     public void GoLeft()
     {
         transform.DOKill();
-        transform.DOLocalMove(POS_Before.localPosition, 0.1f);
+        transform.DOLocalMove(POS_Before.localPosition, 0.01f);
         //CheckUnknown();
     }
 
     public void GoRight()
     {
         transform.DOKill();
-        transform.DOLocalMove(POS_After.localPosition, 0.1f);
+        transform.DOLocalMove(POS_After.localPosition, 0.01f);
         //CheckUnknown();
     }
 

@@ -240,8 +240,17 @@ public class MenuManager : MonoBehaviour
     {
         //Debug.Log("Last button: " + EventSystem.current.currentSelectedGameObject);
         //Debug.Log("Can use inputs: " + SaveParameter.current.canUseInputs);
+        if (MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || TM.isInTuto())
+        {
+            Time.timeScale = 0.1f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
 
-        if(MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto())
+
+        if (MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto())
         {
             SaveParameter.current.canUseInputs = false;
             //Debug.Log("Stuck");
@@ -611,7 +620,7 @@ public class MenuManager : MonoBehaviour
             if(index == SaveData.current.CurrentItemHEAD)
             {
                 SaveData.current.CurrentItemHEAD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -619,15 +628,15 @@ public class MenuManager : MonoBehaviour
                 if(SaveData.current.CurrentItemHEAD == -1)
                 {
                     SaveData.current.CurrentItemHEAD = index;
-                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemHEAD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemHEAD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemHEAD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[SaveData.current.CurrentItemHEAD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemHEAD].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemHEAD = index;
-                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotHead.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -637,7 +646,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemBACK)
             {
                 SaveData.current.CurrentItemBACK = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -645,15 +654,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemBACK == -1)
                 {
                     SaveData.current.CurrentItemBACK = index;
-                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemBACK].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemBACK].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemBACK].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[SaveData.current.CurrentItemBACK].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemBACK].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemBACK = index;
-                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotBack.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -663,7 +672,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemSWORD)
             {
                 SaveData.current.CurrentItemSWORD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -671,15 +680,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemSWORD == -1)
                 {
                     SaveData.current.CurrentItemSWORD = index;
-                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemSWORD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemSWORD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSWORD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[SaveData.current.CurrentItemSWORD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSWORD].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemSWORD = index;
-                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotSword.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -689,7 +698,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemSHIELD)
             {
                 SaveData.current.CurrentItemSHIELD = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -697,15 +706,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemSHIELD == -1)
                 {
                     SaveData.current.CurrentItemSHIELD = index;
-                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemSHIELD].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[SaveData.current.CurrentItemSHIELD].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemSHIELD].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemSHIELD = index;
-                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotShield.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -715,7 +724,7 @@ public class MenuManager : MonoBehaviour
             if (index == SaveData.current.CurrentItemAMU)
             {
                 SaveData.current.CurrentItemAMU = -1;
-                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                Buttons[index].transform.DOLocalMove(SpotsOFF[index].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                 Illus[index].SetActive(false);
             }
             else
@@ -723,15 +732,15 @@ public class MenuManager : MonoBehaviour
                 if (SaveData.current.CurrentItemAMU == -1)
                 {
                     SaveData.current.CurrentItemAMU = index;
-                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
                 else
                 {
                     Illus[SaveData.current.CurrentItemAMU].SetActive(false);
-                    Buttons[SaveData.current.CurrentItemAMU].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemAMU].transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[SaveData.current.CurrentItemAMU].transform.DOLocalMove(SpotsOFF[SaveData.current.CurrentItemAMU].transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     SaveData.current.CurrentItemAMU = index;
-                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.3f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
+                    Buttons[index].transform.DOLocalMove(SpotAmu.transform.localPosition, 0.03f).OnComplete(() => { ESS.PlaySound(ESS.UI_CARNET_ScotchPose, ESS.Asource_Interface, 0.8f, false); });
                     Illus[index].SetActive(true);
                 }
             }
@@ -1105,19 +1114,19 @@ public class MenuManager : MonoBehaviour
                 if (EventSystem.current.currentSelectedGameObject == SETTINGS_DiffiButtons[0] || EventSystem.current.currentSelectedGameObject == SETTINGS_DiffiButtons[1])
                 {
                     SETTINGS_DiffCards[j].transform.DOKill();
-                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_OpenDiffCardPOS.transform.localPosition, 0.2f);
+                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_OpenDiffCardPOS.transform.localPosition, 0.02f);
                     ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.1f, false);
                 }
                 else
                 {
                     SETTINGS_DiffCards[j].transform.DOKill();
-                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.2f);
+                    SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.02f);
                 }
             }
             else
             {
                 SETTINGS_DiffCards[j].transform.DOKill();
-                SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.2f);
+                SETTINGS_DiffCards[j].transform.DOLocalMove(SETTINGS_CloseDiffCardPOS.transform.localPosition, 0.02f);
             }
         }
 
@@ -1184,14 +1193,14 @@ public class MenuManager : MonoBehaviour
                     }
                     EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu);
                     Carnet_GLOBAL.transform.DOKill();
-                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.19f);
-                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.2f);
+                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.019f);
+                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.02f);
                 }
                 else
                 {
                     Carnet_GLOBAL.transform.DOKill();
-                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.39f);
-                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.6f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
+                    Carnet_GLOBAL.transform.DOScale(Carnet_ORIGIN_scale, 0.039f);
+                    Carnet_GLOBAL.transform.DOLocalMove(Carnet_ORIGIN, 0.06f).OnComplete(() => { Carnet_OPEN.SetActive(true); OpenPage(0); EventSystem.current.SetSelectedGameObject(ButtonFirstMainMenu); });
                 }
             }
             else
@@ -1200,8 +1209,8 @@ public class MenuManager : MonoBehaviour
                 SaveParameter.current.canUseInputs = true;
                 MenuOn = false;
                 Carnet_GLOBAL.transform.DOKill();
-                Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.19f);
-                Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.2f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+                Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.019f);
+                Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.02f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
             }
         }
         
@@ -1216,7 +1225,7 @@ public class MenuManager : MonoBehaviour
         MenuOn = false;
         Carnet_GLOBAL.transform.DOKill();
         Carnet_GLOBAL.transform.DOScale(Carnet_HiddenPos.localScale, 0.29f);
-        Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.3f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
+        Carnet_GLOBAL.transform.DOLocalMove(Carnet_HiddenPos.localPosition, 0.03f).OnComplete(() => { Carnet_GLOBAL.SetActive(false); });
     }
 
     public void QuitAllMenu()
@@ -1251,7 +1260,7 @@ public class MenuManager : MonoBehaviour
     {
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
         ClosedScroll.SetActive(true);
-        ClosedScroll.transform.DOLocalMove(CLOSED_SCROLL_ORIGIN, 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP2(); });
+        ClosedScroll.transform.DOLocalMove(CLOSED_SCROLL_ORIGIN, 0.02f).OnComplete(() => { DIALOGUE_InitDialogueP2(); });
     }
 
     public void DIALOGUE_InitDialogueP2()
@@ -1260,14 +1269,14 @@ public class MenuManager : MonoBehaviour
         ClosedScroll.transform.localPosition = CLOSED_SCROLL_HIDDEN_POS.transform.localPosition;
         ClosedScroll.SetActive(false);
         RollingScroll.SetActive(true);
-        RollingScroll.transform.DOScale(new Vector3(RollingScroll.transform.localScale.x+0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z), 0.2f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
+        RollingScroll.transform.DOScale(new Vector3(RollingScroll.transform.localScale.x+0.03f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z), 0.02f).OnComplete(() => { DIALOGUE_InitDialogueP3(); });
     }
     public void DIALOGUE_InitDialogueP3()
     {
         isUnfadingForDialogue = false;
         StartCoroutine(FadeForDialogue());
         ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.8f, false);
-        RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.3f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
+        RollingScroll.transform.localScale = new Vector3(RollingScroll.transform.localScale.x - 0.03f, RollingScroll.transform.localScale.y, RollingScroll.transform.localScale.z);
         RollingScroll.SetActive(false);
         FlatScroll.SetActive(true);
         FlatScroll.transform.localPosition = FLAT_SCROLL_ORIGIN;
@@ -1389,7 +1398,7 @@ public class MenuManager : MonoBehaviour
         DIALOGUE_ButtonA.SetActive(false);
         DIALOGUE_ButtonB.SetActive(false);
 
-        FlatScroll.transform.DOLocalMove(FLAT_SCROLL_HIDDEN_POS.transform.localPosition, 0.3f).OnComplete(() => { FlatScroll.SetActive(false);   }); ;
+        FlatScroll.transform.DOLocalMove(FLAT_SCROLL_HIDDEN_POS.transform.localPosition, 0.03f).OnComplete(() => { FlatScroll.SetActive(false);   }); ;
     }
 
 

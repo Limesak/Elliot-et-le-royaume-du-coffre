@@ -46,16 +46,16 @@ public class SlideSheetOnSelect : MonoBehaviour
             {
                 transform.DOKill();
                 Slided = true;
-                MySheet.transform.DOLocalMove(SlidePos.localPosition, 0.2f);
+                MySheet.transform.DOLocalMove(SlidePos.localPosition, 0.02f);
                 ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.3f, false);
                 if (!dontShowRing)
                 {
-                    Ring.transform.DOScale(ScaleOrigin, 0.1f);
+                    Ring.transform.DOScale(ScaleOrigin, 0.01f);
                     ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_CrayonEcrit), ESS.Asource_Interface, 0.1f, false);
                 }
                 if (GrowOnSelect)
                 {
-                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
+                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.02f);
                 }
             }
 
@@ -66,12 +66,12 @@ public class SlideSheetOnSelect : MonoBehaviour
             {
                 transform.DOKill();
                 Slided = false;
-                MySheet.transform.DOLocalMove(ORIGIN, 0.2f);
+                MySheet.transform.DOLocalMove(ORIGIN, 0.02f);
                 ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.1f, false);
                 if (!dontShowRing)
                 {
-                    Ring.transform.DOScale(Vector3.zero, 0.1f);
-                    Ring.transform.DOScale(Vector3.zero, 0.1f);
+                    Ring.transform.DOScale(Vector3.zero, 0.01f);
+                    Ring.transform.DOScale(Vector3.zero, 0.01f);
                 }
                 if (GrowOnSelect)
                 {
@@ -86,14 +86,14 @@ public class SlideSheetOnSelect : MonoBehaviour
             {
                 if (GrowOnSelect)
                 {
-                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
+                    transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.02f);
                 }
             }
             else
             {
                 if (GrowOnSelect)
                 {
-                    transform.DOScale(new Vector3(1, 1, 1), 0.2f);
+                    transform.DOScale(new Vector3(1, 1, 1), 0.02f);
                 }
             }
         }

@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     public float sprintAcceleration;
     public float SprintStaminaCost;
+    public float DashStaminaCost;
     private bool isSprinting;
     private bool isMoving;
 
@@ -706,29 +707,35 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
-        if (AUM.GetAttacking())
-        {
-            AUM.CancelAttack();
-        }
-        //Debug.Log("Jump with dir = " + dir);
-        Vector2 inputVector = Vector2.zero;
-        if (SaveParameter.current.InputMode == 0)
-        {
-            inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
-        }
-        else if (SaveParameter.current.InputMode == 1)
-        {
-            inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
-        }
-        Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
-        if (Direction.magnitude >= 0.1f)
+        if ( SM.UseXamount(DashStaminaCost))
         {
 
-            AerianDir = transform.forward * DashForce;
-            GravityPower = 5;
+            if (AUM.GetAttacking())
+            {
+                AUM.CancelAttack();
+            }
+            //Debug.Log("Jump with dir = " + dir);
+            Vector2 inputVector = Vector2.zero;
+            if (SaveParameter.current.InputMode == 0)
+            {
+                inputVector = MovementsControls.Player.Move.ReadValue<Vector2>();
+            }
+            else if (SaveParameter.current.InputMode == 1)
+            {
+                inputVector = MovementsControls.Player1.Move.ReadValue<Vector2>();
+            }
+            Vector3 Direction = new Vector3(inputVector.x, 0, inputVector.y);
+            if (Direction.magnitude >= 0.1f)
+            {
+
+                AerianDir = transform.forward * DashForce;
+                GravityPower = 5;
+            }
+            ESS.PlaySound(ESS.MOUVEMENT_Dash, ESS.Asource_Effects, 0.5f, false);
+            AM.Dash();
         }
-        ESS.PlaySound(ESS.MOUVEMENT_Dash, ESS.Asource_Effects, 0.5f, false);
-        AM.Dash();
+
+        
     }
 
     public void IncJump(Vector3 dir)

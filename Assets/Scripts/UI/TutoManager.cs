@@ -69,7 +69,7 @@ public class TutoManager : MonoBehaviour
                 }
 
                 ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.4f, false);
-                FourreToutList[i].transform.DOLocalMove(PosClose.transform.localPosition, 0.3f).OnComplete(() => { FourreToutList[i].SetActive(false); });
+                FourreToutList[i].transform.DOLocalMove(PosClose.transform.localPosition, 0.03f).OnComplete(() => { FourreToutList[i].SetActive(false); });
             }
         }
         Button.SetActive(false);
@@ -83,7 +83,7 @@ public class TutoManager : MonoBehaviour
         {
             fiche.SetActive(true);
             fiche.transform.localPosition = PosClose.transform.localPosition;
-            fiche.transform.DOLocalMove(PosOpen.transform.localPosition, 0.3f);
+            fiche.transform.DOLocalMove(PosOpen.transform.localPosition, 0.03f);
             ESS.PlaySound(ESS.OneOf(ESS.UI_CARNET_PageTournee), ESS.Asource_Interface, 0.4f, false);
             Button.SetActive(true);
             EventSystem.current.SetSelectedGameObject(Button);

@@ -50,7 +50,7 @@ public class SaveParameter
 
         MixerVolume_Master = 1;
         MixerVolume_Musique = 1;
-        MixerVolume_Interface = 1;
+        MixerVolume_Interface = 0.7f;
         MixerVolume_Effets = 1;
     }
 }

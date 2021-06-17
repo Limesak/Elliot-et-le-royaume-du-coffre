@@ -45,9 +45,9 @@ public class SlidingButton : MonoBehaviour
                 transform.DOKill();
                 Banderole.transform.DOKill();
                 Slided = true;
-                transform.DOLocalMove(SlidePos.localPosition, 0.2f);
+                transform.DOLocalMove(SlidePos.localPosition, 0.02f);
                 ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminDeroule), ESS.Asource_Interface, 0.4f, false);
-                Banderole.transform.DOLocalMove(SlidePosBanderole.localPosition, 0.2f);
+                Banderole.transform.DOLocalMove(SlidePosBanderole.localPosition, 0.02f);
             }
             
         }
@@ -58,9 +58,9 @@ public class SlidingButton : MonoBehaviour
                 transform.DOKill();
                 Banderole.transform.DOKill();
                 Slided = false;
-                transform.DOLocalMove(ORIGIN, 0.2f);
+                transform.DOLocalMove(ORIGIN, 0.02f);
                 ESS.PlaySound(ESS.OneOf(ESS.UI_DIALOGUE_ParcheminEnroule), ESS.Asource_Interface, 0.1f, false);
-                Banderole.transform.DOLocalMove(ORIGINbanderole, 0.2f);
+                Banderole.transform.DOLocalMove(ORIGINbanderole, 0.02f);
             }
         }
     }
