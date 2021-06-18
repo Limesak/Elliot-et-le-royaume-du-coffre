@@ -23,13 +23,13 @@ public class NotifEntity : MonoBehaviour
     {
         yield return new WaitForSeconds(X);
         //Do stuffs
-        Etiquette.transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(1000,0,0), 0.6f).OnComplete(() => { Destroy(gameObject); });
+        Etiquette.transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(1000,0,0), 0.06f).OnComplete(() => { Destroy(gameObject); });
     }
 
     public void GoDown()
     {
         nbOfOffset++;
         transform.DOKill();
-        transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(transform.localPosition.x, - (OffSet* nbOfOffset), 0), 0.3f);
+        transform.DOLocalMove(Etiquette.transform.localPosition + new Vector3(transform.localPosition.x, - (OffSet* nbOfOffset), 0), 0.03f);
     }
 }

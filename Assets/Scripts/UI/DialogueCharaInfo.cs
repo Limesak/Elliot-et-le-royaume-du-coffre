@@ -10,6 +10,8 @@ public class DialogueCharaInfo : MonoBehaviour
     public GameObject[] Emotions;
 
     public GameObject HIDDEN_POINT;
+    public GameObject MovablePart;
+
     private Vector3 ORIGIN_POINT;
 
     private bool isTalking;
@@ -52,7 +54,7 @@ public class DialogueCharaInfo : MonoBehaviour
         if (isTalking && !inWork)
         {
             initTalking = false;
-            transform.DOPunchPosition(Vector3.up*25f,0.5f,1,0.5f).OnComplete(() => { inWork = false; RecursiveTalk(); });
+            MovablePart.transform.DOPunchPosition(Vector3.up*25f,0.5f,1,0.5f).OnComplete(() => { inWork = false; RecursiveTalk(); });
         }
     }
 
@@ -79,6 +81,7 @@ public class DialogueCharaInfo : MonoBehaviour
 
     public void PutToSleep()
     {
+        MovablePart.transform.DOKill();
         transform.DOKill();
         transform.DOLocalMove(HIDDEN_POINT.transform.localPosition, 0.1f+Random.Range(0,0.5f)).OnComplete(() => { gameObject.SetActive(false); });
     }

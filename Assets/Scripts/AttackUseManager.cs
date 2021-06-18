@@ -7,6 +7,7 @@ public class AttackUseManager : MonoBehaviour
     Movements MovementsControls;
     public PlayerMovement PM;
     public AnimationManager AM;
+    public LockManager LM;
     
     public HandManager HM;
     public GameObject Debug_ComboTimeSign;
@@ -22,6 +23,9 @@ public class AttackUseManager : MonoBehaviour
     private int comboIndex;
     private int CurrentAttackID;
     private bool isComboing;
+    private float lastFocusedAction;
+    private GameObject lastFocusTarget;
+    public float rotationSpeed;
 
     void Awake()
     {
@@ -96,6 +100,11 @@ public class AttackUseManager : MonoBehaviour
 
         Debug_AttrackingSign.SetActive(isAttacking);
         */
+
+        if (lastFocusedAction + 0.2f >= Time.time)
+        {
+            FaceTarget();
+        }
     }
 
     private void CheckStart()
@@ -122,6 +131,14 @@ public class AttackUseManager : MonoBehaviour
                 isAttacking = true;
                 comboIndex = 1;
                 AM.LaunchAttack();
+
+                GameObject LOtmp = LM.GetLockedObject();
+                if (LOtmp != null)
+                {
+                    lastFocusTarget = LOtmp;
+                    lastFocusedAction = Time.time;
+                    FaceTarget();
+                }
             }
             else if (isComboing && PM.IsAlmostGrounded() && ComboLastDate + AttackCD_doingCombo >= Time.time && ComboLastDate + ComboMinTimingWindows <= Time.time && comboIndex>=1 && comboIndex <=3)
             {
@@ -145,6 +162,14 @@ public class AttackUseManager : MonoBehaviour
                 {
                     comboIndex = 4;
                     AM.LaunchAttackCombo4();
+                }
+
+                GameObject LOtmp = LM.GetLockedObject();
+                if (LOtmp != null)
+                {
+                    lastFocusTarget = LOtmp;
+                    lastFocusedAction = Time.time;
+                    FaceTarget();
                 }
             }
         }
@@ -190,5 +215,12 @@ public class AttackUseManager : MonoBehaviour
         ST.canDamage = false;
         SetComboing(false);
         AM.ForceCancelAttack();
+    }
+
+    public void FaceTarget()
+    {
+        Vector3 direction = (lastFocusTarget.transform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 }

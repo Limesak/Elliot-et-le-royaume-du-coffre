@@ -20,7 +20,7 @@ public class CustomSliderButton : MonoBehaviour
             {
                 transform.DOKill();
                 Selected = true;
-                transform.DOScale(new Vector3(1,1.3f,1), 0.1f);
+                transform.DOScale(new Vector3(1,1.3f,1), 0.01f);
             }
 
         }
@@ -30,7 +30,7 @@ public class CustomSliderButton : MonoBehaviour
             {
                 transform.DOKill();
                 Selected = false;
-                transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+                transform.DOScale(new Vector3(1, 1, 1), 0.01f);
             }
         }
     }

@@ -384,21 +384,14 @@ public class Poussierin : MonoBehaviour
         float rdm = Random.Range(0, 100);
         if (rdm > 95)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
-            }
-        }
-        else if(rdm > 80)
-        {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
             }
         }
         else if (rdm > 50)
         {
-            for(int i = 0; i< 3; i++)
+            for(int i = 0; i< 2; i++)
             {
                 Instantiate(Prefab_Piece, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1 + Random.Range(-0.1f, 0.2f), Random.Range(-0.5f, 0.5f)), Quaternion.identity);
             }
