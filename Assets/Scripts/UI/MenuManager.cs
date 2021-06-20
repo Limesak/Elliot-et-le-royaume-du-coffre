@@ -1068,6 +1068,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_GoBackToMainMenu()
     {
+        QuitAllMenu();
         ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         SaveData.current.ResetValueToDefault();
         BlackScreen.gameObject.SetActive(true);
@@ -1086,6 +1087,7 @@ public class MenuManager : MonoBehaviour
 
     public void SETTINGS_GoQuitGame()
     {
+        QuitAllMenu();
         ESS.PlaySound(ESS.UI_Valider, ESS.Asource_Interface, 0.8f, false);
         Application.Quit();
     }
