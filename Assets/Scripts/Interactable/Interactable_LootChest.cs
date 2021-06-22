@@ -41,7 +41,7 @@ public class Interactable_LootChest : Interactable
             RE.NotRelevantAnymore();
             AsourceSimple.Play();
             AsourceEffect.Play();
-            Joint.DOLocalRotate(new Vector3(-70, 0, 0), 1.6f).OnComplete(() => { OpenningPart2(); });
+            Joint.DOLocalRotate(new Vector3(0, 0, -70), 1.6f).OnComplete(() => { OpenningPart2(); });
         }
     }
 
