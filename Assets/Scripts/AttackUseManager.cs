@@ -76,6 +76,7 @@ public class AttackUseManager : MonoBehaviour
         CurrentAttackID = 0;
         Debug_ComboTimeSign.SetActive(false);
         Debug_AttrackingSign.SetActive(false);
+        lastFocusedAction = -99999;
     }
 
     // Update is called once per frame
