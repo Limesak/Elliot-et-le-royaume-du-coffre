@@ -131,9 +131,13 @@ public class DiaryManager : MonoBehaviour
                     }
                     else if (i == 1)
                     {
-                        res = res  +CPT_kills[i] + " REMPLACERLENOMDUMOB ";
+                        res = res  +CPT_kills[i] + " magifoliens novices ";
                     }
-                    
+                    else if (i == 2)
+                    {
+                        res = res + CPT_kills[i] + " magifoliens invocateurs ";
+                    }
+
                 }
             }
 
