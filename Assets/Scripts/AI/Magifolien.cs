@@ -90,6 +90,8 @@ public class Magifolien : MonoBehaviour
     public float HitPushForce;
     public float ForceFriction;
 
+    public GameObject DebugPosAccessing;
+
     void Start()
     {
         HP = HPmax;
@@ -99,6 +101,7 @@ public class Magifolien : MonoBehaviour
         currentPushDirection = Vector3.zero;
         PLAYER = GameObject.FindGameObjectWithTag("Player");
         transform.localScale = transform.localScale * Random.Range(0.85f, 1.2f);
+        LastFlightDate = -FlightCooldown-5;
     }
 
     void Update()
@@ -110,7 +113,7 @@ public class Magifolien : MonoBehaviour
         }
         if (!isDead)
         {
-            if (isAgressive)
+            if (isAgressive && LastFlightDate + 5 <= Time.time)
             {
                 if (lastTimeDamageTaken + StunDuration <= Time.time)//Not stun    isFree
                 {
@@ -126,7 +129,7 @@ public class Magifolien : MonoBehaviour
                         {
                             if (CanSeePlayer())
                             {
-                                if (Vector3.Distance(transform.position, PLAYER.transform.position) <= MinDistToHit && Vector3.Distance(transform.position, PLAYER.transform.position) >= MaxDistBeforeFlight)// Close enought to hit
+                                if (Vector3.Distance(transform.position, PLAYER.transform.position) <= MinDistToHit && Vector3.Distance(transform.position, PLAYER.transform.position) >= MaxDistBeforeFlight && LastFlightDate + 5 <= Time.time)// Close enought to hit
                                 {
                                     if (lastAttackDate + CurrentAdditionalAttackCooldown + AttackBaseCooldown <= Time.time)// can hit
                                     {
@@ -145,6 +148,7 @@ public class Magifolien : MonoBehaviour
                                 {
                                     if (LastFlightDate + FlightCooldown <= Time.time)
                                     {
+                                        Debug.Log("Start flight");
                                         LastFlightDate = Time.time;
                                         StopWalking();
                                         if (lastTimePlayerSeen + maxSearchDuration <= Time.time)
@@ -217,7 +221,7 @@ public class Magifolien : MonoBehaviour
                 if (lastTimeDamageTaken + StunDuration <= Time.time)//Not stun    isFree
                 {
                     NavMeshPath navMeshPath = new NavMeshPath();
-                    if (CanSeePlayer() /*&& NavAgent.CalculatePath(PLAYER.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete*/)
+                    if (CanSeePlayer() && LastFlightDate + 5 <= Time.time/*&& NavAgent.CalculatePath(PLAYER.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete*/)
                     {
                         StopWalking();
                         Taunt();
@@ -485,6 +489,7 @@ public class Magifolien : MonoBehaviour
             Anim.SetBool("isRunning", true);
             NavAgent.speed = SPEED;
             NavAgent.destination = Position;
+            DebugPosAccessing.transform.position = Position;
         }
     }
 
