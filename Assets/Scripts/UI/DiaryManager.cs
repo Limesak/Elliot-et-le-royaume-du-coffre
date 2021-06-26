@@ -50,7 +50,7 @@ public class DiaryManager : MonoBehaviour
             CPT_money = 0;
             CPT_candy = 0;
             CPT_yellowKey = 0;
-            CPT_kills = new int[1];
+            CPT_kills = new int[2];
             CPT_currentIntro = Random.Range(0, CPT_Intros.Length);
             BUFFER_list = new string[0];
 
@@ -131,9 +131,13 @@ public class DiaryManager : MonoBehaviour
                     }
                     else if (i == 1)
                     {
-                        res = res  +CPT_kills[i] + " REMPLACERLENOMDUMOB ";
+                        res = res  +CPT_kills[i] + " magifoliens novices ";
                     }
-                    
+                    else if (i == 2)
+                    {
+                        res = res + CPT_kills[i] + " magifoliens invocateurs ";
+                    }
+
                 }
             }
 
