@@ -90,7 +90,7 @@ public class Magifolien : MonoBehaviour
     public float HitPushForce;
     public float ForceFriction;
 
-    public GameObject DebugPosAccessing;
+    //public GameObject DebugPosAccessing;
 
     void Start()
     {
@@ -489,7 +489,7 @@ public class Magifolien : MonoBehaviour
             Anim.SetBool("isRunning", true);
             NavAgent.speed = SPEED;
             NavAgent.destination = Position;
-            DebugPosAccessing.transform.position = Position;
+            //DebugPosAccessing.transform.position = Position;
         }
     }
 
