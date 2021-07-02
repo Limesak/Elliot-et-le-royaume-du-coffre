@@ -112,6 +112,7 @@ public class Poussierin : MonoBehaviour
         HeadMR.material = HeadSkins[Random.Range(0,HeadSkins.Length)];
         BodyMR.material = BodySkins[Random.Range(0, BodySkins.Length)];
         transform.localScale = transform.localScale * Random.Range(0.85f, 1.2f);
+        lastTimeDamageTaken = Time.time + 5;
     }
 
     void Update()
