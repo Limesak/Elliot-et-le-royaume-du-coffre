@@ -25,10 +25,11 @@ Material:
   m_ShaderKeywords: _USEEMISSION_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -70,12 +71,12 @@ Material:
     - _AlphaValue: 1
     - _Blend: 0
     - _BumpScale: 1
-    - _CelShadeMidPoint: 0
+    - _CelShadeMidPoint: -0.07
     - _CelShadeSoftness: 0
     - _Cull: 2
     - _Cutoff: 0.431
     - _DirectLightMultiplier: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissionMulByBaseColor: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -89,25 +90,26 @@ Material:
     - _OcclusionRemapEnd: 1
     - _OcclusionRemapStart: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 2.09
+    - _OutlineWidth: 2.2
     - _OutlineZOffset: 1
     - _OutlineZOffsetMaskRemapEnd: 1
     - _OutlineZOffsetMaskRemapStart: 1
     - _QueueOffset: 0
-    - _ReceiveShadowMappingAmount: 0.329
-    - _ReceiveShadowMappingPosOffset: 28.7
+    - _ReceiveShadowMappingAmount: 0.426
+    - _ReceiveShadowMappingPosOffset: 1.7
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _UseAlphaClipping: 0
     - _UseEmission: 1
     - _UseOcclusion: 0
     - _UseOpacity: 0
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 0.5520116, g: 0.38642952, b: 0.20507877, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
