@@ -26144,7 +26144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 112, y: -45}
+  m_AnchoredPosition: {x: -933, y: -45}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5299395207675208858
@@ -42183,7 +42183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 2
-  CurrentIndex: 0
+  CurrentIndex: 1
   TextBackZone: {fileID: 3853390319244905483}
   TextDisplay: {fileID: 628561387537058338}
   ColorIn: {r: 0.9150943, g: 0.90600795, b: 0.6517889, a: 1}
@@ -50611,32 +50611,32 @@ PrefabInstance:
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: -0.009108663
+      value: 0.01640512
       objectReference: {fileID: 0}
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.3364278
+      value: 0.7220399
       objectReference: {fileID: 0}
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.74726236
+      value: 0.38762882
       objectReference: {fileID: 0}
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: -0.30939245
+      value: -0.6950045
       objectReference: {fileID: 0}
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: 0.075451255
+      value: 0.44875595
       objectReference: {fileID: 0}
     - target: {fileID: 4514980909153089093, guid: e048408a92b8fe84c8fb723410f2d83b,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.5482633
+      value: 0.505422
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e048408a92b8fe84c8fb723410f2d83b, type: 3}
