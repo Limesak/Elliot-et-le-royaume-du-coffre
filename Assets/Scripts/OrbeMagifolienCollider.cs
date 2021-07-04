@@ -27,7 +27,12 @@ public class OrbeMagifolienCollider : MonoBehaviour
     }
     */
 
-        
+    private void Update()
+    {
+        transform.LookAt(OM.GetTarget());
+    }
+
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<LifeManager>())
