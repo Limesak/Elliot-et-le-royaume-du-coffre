@@ -352,7 +352,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlayNewSave");
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
-        SaveData.current.currentScene = 5;
+        SaveData.current.currentScene = 6;
         SaveLoad.Save(SaveData.current);
         StartCoroutine(FadeNLoad());
     }
