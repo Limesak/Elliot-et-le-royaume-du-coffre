@@ -1740,6 +1740,16 @@ PrefabInstance:
       propertyPath: Key
       value: Cadena_Gobelin_Tuto1
       objectReference: {fileID: 0}
+    - target: {fileID: 3837430286525421015, guid: d934bcf14ea28e44e97c3c48a393593a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4548c2bf3ce0ad54a8128cc5a0af3c45, type: 2}
+    - target: {fileID: 5651676560296036572, guid: d934bcf14ea28e44e97c3c48a393593a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4548c2bf3ce0ad54a8128cc5a0af3c45, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d934bcf14ea28e44e97c3c48a393593a, type: 3}
 --- !u!4 &5445273592781217718 stripped
