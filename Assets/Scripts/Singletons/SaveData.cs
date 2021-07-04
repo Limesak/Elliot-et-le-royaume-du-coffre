@@ -91,7 +91,7 @@ public class SaveData
     public void ResetValueToDefault()
     {
         spawnInt = 0;
-        currentScene = 0;
+        currentScene = 1;
         LifeCellule_1 = 25;
         LifeCellule_2 = 25;
         LifeCellule_3 = 25;
