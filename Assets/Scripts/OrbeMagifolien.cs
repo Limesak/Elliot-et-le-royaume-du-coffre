@@ -25,7 +25,7 @@ public class OrbeMagifolien : MonoBehaviour
     {
 
         transform.position = transform.position + dir * ProjectileSpeed * Time.deltaTime;
-        transform.LookAt(Target);
+        //transform.LookAt(Target);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + RotationSpeed * Time.deltaTime,0, 0);
 
         float sinValue = Mathf.Sin(Vector3.Distance(transform.position, Target)) * MaxDistanceFromAxes;
@@ -33,5 +33,10 @@ public class OrbeMagifolien : MonoBehaviour
 
         ActualOrbe.transform.localPosition = new Vector3(sinValue, cosValue, sinValue);
 
+    }
+
+    public Vector3 GetTarget()
+    {
+        return Target;
     }
 }
