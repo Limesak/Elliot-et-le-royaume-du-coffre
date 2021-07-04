@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Intro_Phase : MonoBehaviour
 {
-    public enum Type { None, MoveObject, PlaySound, Fade, Unfade, Pop, Depop, ChangeCamTarget,GoToMenu };
+    public enum Type { None, MoveObject, PlaySound, Fade, Unfade, Pop, Depop, ChangeCamTarget,GoToMenu, FadeAudioNVideo };
 
     public Type ActualType;
     public float Date;
