@@ -39,4 +39,9 @@ public class OrbeMagifolien : MonoBehaviour
     {
         return Target;
     }
+
+    public Vector3 GetDir()
+    {
+        return dir;
+    }
 }
