@@ -821,6 +821,9 @@ public class MenuManager : MonoBehaviour
                 case 0:
                     SACOCHE_ItemName.text = "La clé cuillère";
                     break;
+                case 1:
+                    SACOCHE_ItemName.text = "Pot de confiture";
+                    break;
             }
         }
         else
