@@ -471,7 +471,7 @@ MonoBehaviour:
     type: 3}
   TableIndex: 1
   RespawnAfterReload: 0
-  HPmax: 5
+  HPmax: 4
   FirstMagifolien: 0
   FirstInvocateur: 0
   PREFAB_Hit: {fileID: 6308170016303996140, guid: ab8cc3e2708be0b4888f01889906ebc3,
@@ -489,13 +489,13 @@ MonoBehaviour:
   MaxAngleVerifiedOnSpot: 6
   isOnPoint: 0
   minDistToCheckAngle: 0.3
-  minDistToDetect: 50
+  minDistToDetect: 70
   maxSearchDuration: 3
-  maxDistFromPoints: 50
+  maxDistFromPoints: 70
   Eye: {fileID: 5613602967399922127}
   TauntDuration: 2
-  MinDistToHit: 50
-  MaxDistBeforeFlight: 3
+  MinDistToHit: 70
+  MaxDistBeforeFlight: 5
   FlightCooldown: 30
   OrbeMagique: {fileID: 6475462185903112734, guid: 94a4bfbeb075a7e489c593a669a8b122,
     type: 3}
