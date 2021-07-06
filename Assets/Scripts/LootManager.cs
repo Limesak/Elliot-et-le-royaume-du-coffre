@@ -51,14 +51,14 @@ public class LootManager : MonoBehaviour
                 break;
             case LootType.Bucket:
                 //Debug.Log("Bucket");
-                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de BUCKET dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                DM.AddBufferEntry("Je sais que ce sceau n'est pas un casque, mais c'est toujours mieux que rien!");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[0] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Sceau casque");
                 break;
             case LootType.Cape:
                 //Debug.Log("Cape");
-                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de CAPE dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                DM.AddBufferEntry("Cette cape à l'aire de se prendre au vent quand je saute.");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[1] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Cape");
@@ -72,7 +72,7 @@ public class LootManager : MonoBehaviour
                 break;
             case LootType.WoodShield:
                 //Debug.Log("WoodShield");
-                DM.AddBufferEntry("***Ajouter ligne de buffer pour déblocage de WOODSHIELD dans script LootManager.cs***");// Changer la ligne de buffer ici  <--
+                DM.AddBufferEntry("En ouvrant un coffre j'ai découvert un bouclier en bois, il devrai pouvoir me proteger des coups si je l'équipe.");// Changer la ligne de buffer ici  <--
                 SaveData.current.UnlockList[3] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Bouclier en bois");
