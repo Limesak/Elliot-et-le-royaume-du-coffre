@@ -111,6 +111,8 @@ public class LootManager : MonoBehaviour
                 SaveData.current.ItemSacocheUnique[1] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
                 NM.NewNotif("Ramassé: Pot de confiture");
+                SaveData.current.Codex_Souvenirs_unlockList[0] = true;
+                NM.NewNotif("Nouvelle fiche codex!");
                 break;
             default:
                 //Debug.Log("NOTHING");
