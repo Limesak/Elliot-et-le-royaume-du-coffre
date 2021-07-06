@@ -16,8 +16,10 @@ public class LecheCuillerePermanent : MonoBehaviour
 
     [Header("Conv")]
     public ConversationInfo ConvCureDent;
-    public ConversationInfo ConvPorteSortieEnPoche;
-    public ConversationInfo ConvPorteSortiePasTrouvee;
+    public ConversationInfo ConvPorteSortieNothing;
+    public ConversationInfo ConvPorteSortieKey;
+    public ConversationInfo ConvPorteSortiePot;
+    public ConversationInfo ConvPorteSortieKeyPot;
 
     void Start()
     {
@@ -87,14 +89,24 @@ public class LecheCuillerePermanent : MonoBehaviour
                 MM.DIALOGUE_OpenDialogue(ConvCureDent);
                 LA.dontLook = false;
             }
-            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.ItemSacocheUnique[0])
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.ItemSacocheUnique[0] && SaveData.current.ItemSacocheUnique[1])
             {
-                MM.DIALOGUE_OpenDialogue(ConvPorteSortieEnPoche);
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortieKeyPot);
                 LA.dontLook = false;
             }
-            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.ItemSacocheUnique[0])
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.ItemSacocheUnique[0] && SaveData.current.ItemSacocheUnique[1])
             {
-                MM.DIALOGUE_OpenDialogue(ConvPorteSortiePasTrouvee);
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortiePot);
+                LA.dontLook = false;
+            }
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && SaveData.current.ItemSacocheUnique[0] && !SaveData.current.ItemSacocheUnique[1])
+            {
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortieKey);
+                LA.dontLook = false;
+            }
+            else if (SaveData.current.LecheCuillereTutoSpot == 2 && !SaveData.current.ItemSacocheUnique[0] && !SaveData.current.ItemSacocheUnique[1])
+            {
+                MM.DIALOGUE_OpenDialogue(ConvPorteSortieNothing);
                 LA.dontLook = false;
             }
         }
