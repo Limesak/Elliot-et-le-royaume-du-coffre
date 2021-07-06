@@ -12,11 +12,14 @@ public class Interactable_SavePoint : Interactable
     public float cooldown;
     private float lastUse;
     public NotifManager NM;
+    public ParticleSystem PS;
+    public GameObject Lights;
 
     public sealed override void CustomStart()
     {
         lastUse = -9999;
         NM = GameObject.FindGameObjectWithTag("CanvasUI").GetComponent<NotifManager>();
+        Lights.SetActive(false);
     }
 
     public sealed override void Interact()
@@ -47,6 +50,7 @@ public class Interactable_SavePoint : Interactable
             SaveData.current.spawnInt = spawnIndex;
             SaveData.current.currentScene = SceneManager.GetActiveScene().buildIndex;
             SaveLoad.Save(SaveData.current);
+            PS.Play();
             NM.NewNotif("Progression sauvegardée!");
         }
         
@@ -56,11 +60,11 @@ public class Interactable_SavePoint : Interactable
     {
         if (lastUse + cooldown <= Time.time)
         {
-            ColorIndicator.material.color = CanUseColor.color;
+            Lights.SetActive(false);
         }
         else
         {
-            ColorIndicator.material.color = CantUseColor.color;
+            Lights.SetActive(true);
         }
     }
 }
