@@ -324,16 +324,14 @@ public class Magifolien : MonoBehaviour
     {
         if (!isDead)
         {
-            /*
-            if (AreneTuto)
+            
+            if (!SaveData.current.Codex_Bestiaire_unlockList[2])
             {
-                SaveData.current.Achievements_AreneTuto = true;
-                PLAYER.GetComponent<DiaryManager>().ChangeTheMission("Rejoindre Lèche Cuillère.");
-                PLAYER.GetComponent<DiaryManager>().AddBufferEntry("J'ai combattu et vaincu mon premier poussierin !");
-                SaveData.current.Codex_Bestiaire_unlockList[1] = true;
+                PLAYER.GetComponent<DiaryManager>().AddBufferEntry("J'ai combattu et vaincu mon premier magifolien !");
+                SaveData.current.Codex_Bestiaire_unlockList[2] = true;
                 PLAYER.GetComponentInChildren<NotifManager>().NewNotif("Nouvelle fiche codex!");
             }
-            */
+            
             isDead = true;
             Anim.SetTrigger("Die");
             StopWalking();
