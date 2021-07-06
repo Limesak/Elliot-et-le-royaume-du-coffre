@@ -30,7 +30,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.haveDiscoveredMoney = true;
                 SaveData.current.CPT_Money += 1;
                 ESS.PlaySound(ESS.OneOf(ESS.UI_LOOT_RamassePiece), ESS.Asource_Effects, 0.8f, false);
-                NM.NewNotif("Ecu du père Leprechaun x"+ SaveData.current.CPT_Money);
+                NM.NewNotif("Ecu du père Leprechaun");
                 break;
             case LootType.Bonbon:
                 //Debug.Log("Bonbon");
@@ -39,7 +39,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.CPT_Candy += 1;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseBonbon, ESS.Asource_Effects, 0.8f, false);
                 BM.UpdateValues();
-                NM.NewNotif("Bonbon santé ensorcelé x"+ SaveData.current.CPT_Candy);
+                NM.NewNotif("Bonbon santé ensorcelé");
                 break;
             case LootType.CleJaune:
                 //Debug.Log("CleJaune");
@@ -47,7 +47,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.haveDiscoveredYellowKey = true;
                 SaveData.current.CPT_YellowKey += 1;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseCle, ESS.Asource_Effects, 0.8f, false);
-                NM.NewNotif("Clé de gobelin jaune x"+ SaveData.current.CPT_YellowKey);
+                NM.NewNotif("Clé de gobelin jaune");
                 break;
             case LootType.Bucket:
                 //Debug.Log("Bucket");
