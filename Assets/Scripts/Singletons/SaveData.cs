@@ -91,7 +91,7 @@ public class SaveData
     public void ResetValueToDefault()
     {
         spawnInt = 0;
-        currentScene = 0;
+        currentScene = 1;
         LifeCellule_1 = 25;
         LifeCellule_2 = 25;
         LifeCellule_3 = 25;
@@ -132,7 +132,7 @@ public class SaveData
         CPT_Candy = 0;// 0 for build
         CPT_YellowKey = 0;// 0 for build
 
-        ItemSacocheUnique = new bool[1];
+        ItemSacocheUnique = new bool[2];
         for (int i = 0; i < ItemSacocheUnique.Length; i++)
         {
             ItemSacocheUnique[i] = false;//True pour debug   &  False for build

@@ -352,7 +352,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("PlayNewSave");
         QuitAllMenu();
         SaveData.current.ResetValueToDefault();
-        SaveData.current.currentScene = 5;
+        SaveData.current.currentScene = 6;
         SaveLoad.Save(SaveData.current);
         StartCoroutine(FadeNLoad());
     }
@@ -820,6 +820,9 @@ public class MenuManager : MonoBehaviour
             {
                 case 0:
                     SACOCHE_ItemName.text = "La clé cuillère";
+                    break;
+                case 1:
+                    SACOCHE_ItemName.text = "Pot de confiture";
                     break;
             }
         }

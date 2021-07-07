@@ -712,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &182643237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1613,6 +1613,7 @@ MonoBehaviour:
   BlackScreen: {fileID: 1822626013}
   Speed: 1
   timer: {fileID: 1900387061}
+  AsourceMusique: {fileID: 1117436364627687153}
 --- !u!4 &541164827
 Transform:
   m_ObjectHideFlags: 0
@@ -3539,7 +3540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438edee9c00ac8d45a2bb595260bdacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActualType: 3
+  ActualType: 9
   Date: 70
   Done: 0
   Ref1: {fileID: 1444175937}
@@ -4239,7 +4240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

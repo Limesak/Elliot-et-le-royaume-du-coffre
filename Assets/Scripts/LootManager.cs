@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootManager : MonoBehaviour
 {
-    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet , Amu_Contre, Amu_Envol, Amu_Fendoir, CleConfiture};
+    public enum LootType { None, Piece, Bonbon, CleJaune, WoodSword, WoodShield, Cape, Bucket, Maillet , Amu_Contre, Amu_Envol, Amu_Fendoir, CleConfiture, PotDeConfiture};
 
     public DiaryManager DM;
     public BonbonUseManager BM;
@@ -30,7 +30,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.haveDiscoveredMoney = true;
                 SaveData.current.CPT_Money += 1;
                 ESS.PlaySound(ESS.OneOf(ESS.UI_LOOT_RamassePiece), ESS.Asource_Effects, 0.8f, false);
-                NM.NewNotif("Ecu du père Leprechaun x"+ SaveData.current.CPT_Money);
+                NM.NewNotif("Ecu du père Leprechaun");
                 break;
             case LootType.Bonbon:
                 //Debug.Log("Bonbon");
@@ -39,7 +39,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.CPT_Candy += 1;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseBonbon, ESS.Asource_Effects, 0.8f, false);
                 BM.UpdateValues();
-                NM.NewNotif("Bonbon santé ensorcelé x"+ SaveData.current.CPT_Candy);
+                NM.NewNotif("Bonbon santé ensorcelé");
                 break;
             case LootType.CleJaune:
                 //Debug.Log("CleJaune");
@@ -47,7 +47,7 @@ public class LootManager : MonoBehaviour
                 SaveData.current.haveDiscoveredYellowKey = true;
                 SaveData.current.CPT_YellowKey += 1;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseCle, ESS.Asource_Effects, 0.8f, false);
-                NM.NewNotif("Clé de gobelin jaune x"+ SaveData.current.CPT_YellowKey);
+                NM.NewNotif("Clé de gobelin jaune");
                 break;
             case LootType.Bucket:
                 //Debug.Log("Bucket");
@@ -104,6 +104,13 @@ public class LootManager : MonoBehaviour
                 SaveData.current.ItemSacocheUnique[0] = true;
                 ESS.PlaySound(ESS.UI_LOOT_RamasseCle, ESS.Asource_Effects, 0.8f, false);
                 NM.NewNotif("Ramassé: Clé cuillère");
+                break;
+            case LootType.PotDeConfiture:
+                //Debug.Log("WoodShield");
+                DM.AddBufferEntry("J'ai trouver un pot de confiture, Lechecuièllere en voudra surement !");// Changer la ligne de buffer ici  <--
+                SaveData.current.ItemSacocheUnique[1] = true;
+                ESS.PlaySound(ESS.UI_LOOT_RamasseEquipement, ESS.Asource_Effects, 0.7f, false);
+                NM.NewNotif("Ramassé: Pot de confiture");
                 break;
             default:
                 //Debug.Log("NOTHING");

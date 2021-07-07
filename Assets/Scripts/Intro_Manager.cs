@@ -16,6 +16,7 @@ public class Intro_Manager : MonoBehaviour
     public Image BlackScreen;
     public float Speed;
     public Text timer;
+    public AudioSource AsourceMusique;
 
     void Start()
     {
@@ -80,6 +81,11 @@ public class Intro_Manager : MonoBehaviour
             Speed = ip.FloatRef;
             StartCoroutine(Unfade());
         }
+        else if (ip.ActualType == Intro_Phase.Type.FadeAudioNVideo)
+        {
+            Speed = ip.FloatRef;
+            StartCoroutine(FadeAudioNVideo());
+        }
     }
 
     public IEnumerator Fade()
@@ -114,6 +120,26 @@ public class Intro_Manager : MonoBehaviour
             {
                 BlackScreen.color = new Color(0, 0, 0, BlackScreen.color.a - Speed * Time.deltaTime);
             }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator FadeAudioNVideo()
+    {
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.color = new Color(0, 0, 0, 0);
+        while (BlackScreen.color.a < 1)
+        {
+            if (BlackScreen.color.a + Speed * Time.deltaTime >= 1)
+            {
+                BlackScreen.color = new Color(0, 0, 0, 1);
+            }
+            else
+            {
+                BlackScreen.color = new Color(0, 0, 0, BlackScreen.color.a + Speed * Time.deltaTime);
+            }
+            AsourceMusique.volume = 1 - BlackScreen.color.a;
+
             yield return new WaitForEndOfFrame();
         }
     }
