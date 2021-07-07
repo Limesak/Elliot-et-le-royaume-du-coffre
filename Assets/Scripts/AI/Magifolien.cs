@@ -27,6 +27,8 @@ public class Magifolien : MonoBehaviour
     public int HPmax;
     private int HP;//HPmax
     private bool isDead;//false
+    
+    
 
     [Header("Achivements")]
     public bool FirstMagifolien;
@@ -90,6 +92,16 @@ public class Magifolien : MonoBehaviour
     public float HitPushForce;
     public float ForceFriction;
 
+    [Header("Invocateur shits")]
+    public bool isInvocator;
+    public float TeleportCooldown;
+    private float lastTeleportDate;
+    public GameObject InvocPoupou;
+    public GameObject TeleportPS;
+    public int CurrentSpot;
+    public AISpot[] Spots;
+    public int OldSpot;
+
     //public GameObject DebugPosAccessing;
 
     void Start()
@@ -146,7 +158,22 @@ public class Magifolien : MonoBehaviour
                                 }
                                 else if (Vector3.Distance(transform.position, PLAYER.transform.position) <= MaxDistBeforeFlight)
                                 {
-                                    if (LastFlightDate + FlightCooldown <= Time.time)
+                                    if(isInvocator && lastTeleportDate + TeleportCooldown <= Time.time)
+                                    {
+                                        lastTeleportDate = Time.time;
+
+                                        OldSpot = CurrentSpot; 
+
+                                        int newSpot = CurrentSpot;
+                                        while (newSpot == CurrentSpot)
+                                        {
+                                            newSpot = Random.Range(0, Spots.Length);
+                                        }
+                                        CurrentSpot = newSpot;
+
+                                        Anim.SetTrigger("AttackUp");
+                                    }
+                                    else if (LastFlightDate + FlightCooldown <= Time.time)
                                     {
                                         Debug.Log("Start flight");
                                         LastFlightDate = Time.time;
