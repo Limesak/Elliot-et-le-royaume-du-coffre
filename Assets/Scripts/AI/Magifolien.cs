@@ -15,7 +15,7 @@ public class Magifolien : MonoBehaviour
     public NavMeshAgent NavAgent;
     public LockableObject LO;
     public RelevantEntity RE;
-    public SoundManager_Poussierin SM;
+    public SoundManager_Magifolien SM;
 
     public GameObject Prefab_Piece;
     public GameObject Prefab_Bonbon;
@@ -160,6 +160,7 @@ public class Magifolien : MonoBehaviour
                                 {
                                     if(isInvocator && lastTeleportDate + TeleportCooldown <= Time.time)
                                     {
+                                        SM.PlaySound(SM.VOCAL_Attaque2, SM.Asource_Effects, 0.7f, true);
                                         lastTeleportDate = Time.time;
 
                                         OldSpot = CurrentSpot; 
@@ -338,7 +339,7 @@ public class Magifolien : MonoBehaviour
             {
                 Anim.SetTrigger("Hit");
                 isAttacking = false;
-                //SM.PlaySound(SM.OneOf(SM.VOCAL_Hit), SM.Asource_Effects, 1, true);
+                SM.PlaySound(SM.OneOf(SM.VOCAL_Hit), SM.Asource_Effects, 1, true);
             }
             else if (HP <= 0 && !isDead)
             {
@@ -362,14 +363,23 @@ public class Magifolien : MonoBehaviour
             isDead = true;
             Anim.SetTrigger("Die");
             StopWalking();
-            PLAYER.GetComponent<DiaryManager>().AddAKill(1);
+
+            if (isInvocator)
+            {
+                PLAYER.GetComponent<DiaryManager>().AddAKill(2);
+            }
+            else
+            {
+                PLAYER.GetComponent<DiaryManager>().AddAKill(1);
+            }
+            
             if (RE != null && !RespawnAfterReload)
             {
                 RE.NotRelevantAnymore();
             }
             LO.Die();
             transform.DOScale(transform.localScale * 0.95f, 2f).OnComplete(() => { DiePartTwo(); });
-            //SM.PlaySound(SM.OneOf(SM.VOCAL_Die), SM.Asource_Effects, 1, true);
+            SM.PlaySound(SM.OneOf(SM.VOCAL_Die), SM.Asource_Effects, 1, true);
         }
     }
 

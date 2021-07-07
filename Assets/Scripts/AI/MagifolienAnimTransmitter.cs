@@ -8,6 +8,17 @@ public class MagifolienAnimTransmitter : MonoBehaviour
     public ParticleSystem PS_Sort1;
     public GameObject PrefabSort1;
     public Transform BaguetteBarrel;
+    public SoundManager_Magifolien SM;
+
+    public void MakeStepSound()
+    {
+        SM.PlaySound(SM.OneOf(SM.MOUVEMENT_Steps), SM.Asource_Effects, 0.15f, false);
+    }
+
+    public void MakeSort1Sound()
+    {
+        SM.PlaySound(SM.VOCAL_Attaque1, SM.Asource_Effects, 0.5f, false);
+    }
 
     public void CanWalk()
     {

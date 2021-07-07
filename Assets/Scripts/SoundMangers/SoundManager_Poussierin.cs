@@ -17,17 +17,6 @@ public class SoundManager_Poussierin : MonoBehaviour
     public AudioClip[] MOUVEMENT_StepsWalk;
     public AudioClip[] MOUVEMENT_StepsSprint;
 
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void PlaySound(AudioClip clip, AudioSource source, float power, bool ResetBefore)
     {
         if (power < 0)
