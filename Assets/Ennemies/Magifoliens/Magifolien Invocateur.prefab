@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 722167411634217147}
   - component: {fileID: 722167411634217144}
   - component: {fileID: 5428288445526906960}
+  - component: {fileID: 6171134854588410287}
   m_Layer: 0
   m_Name: Magifolien Invocateur
   m_TagString: Untagged
@@ -553,7 +554,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -645,7 +646,7 @@ MonoBehaviour:
   NavAgent: {fileID: 722167411634217092}
   LO: {fileID: 722167411634217093}
   RE: {fileID: 722167411634217146}
-  SM: {fileID: 0}
+  SM: {fileID: 6171134854588410287}
   Prefab_Piece: {fileID: 1360102413889638702, guid: cc3e7fb704b7d1740af8e3f016bd6d23,
     type: 3}
   Prefab_Bonbon: {fileID: 2821921775388347471, guid: 03ff4f0df76f8214c8b153b762fea812,
@@ -711,6 +712,37 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 1.7, z: 0}
+--- !u!114 &6171134854588410287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722167411634217145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f920db3dd2f80b942afdbe9637e90dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Asource_Effects: {fileID: 722167411634217147}
+  VOCAL_Attaque1: {fileID: 8300000, guid: d63bf489b03d7d843ac64d8c04bb081b, type: 3}
+  VOCAL_Attaque2: {fileID: 8300000, guid: 87a99542157e2e943a0d0e9a29de59d8, type: 3}
+  VOCAL_Die:
+  - {fileID: 8300000, guid: 16930449810654643a5e3888c7ac9ed0, type: 3}
+  - {fileID: 8300000, guid: 9108a0b1e7a473f409268515ddd58cf0, type: 3}
+  VOCAL_Hit:
+  - {fileID: 8300000, guid: 8a235037721593f4492c2a66bb37889d, type: 3}
+  MOUVEMENT_Steps:
+  - {fileID: 8300000, guid: 3517d11e39724154f8db113054aa7cd3, type: 3}
+  - {fileID: 8300000, guid: 0a7e148cd733bd049a5b9dad49825fb7, type: 3}
+  - {fileID: 8300000, guid: 7baed2d6fa1c0bb4293fbe47c55b1fc4, type: 3}
+  - {fileID: 8300000, guid: 6589ff82d409a7d429689877d4a006c7, type: 3}
+  - {fileID: 8300000, guid: ca6f360c7a07e3b4fa3558a9c2b0aed2, type: 3}
+  - {fileID: 8300000, guid: b0bbd3934c715da4bbcf1f7efa4af13a, type: 3}
+  - {fileID: 8300000, guid: 6e79552aba83e664e842bfa32608d532, type: 3}
+  - {fileID: 8300000, guid: eb1f7629761d5894ebc841660d9fcdcb, type: 3}
+  - {fileID: 8300000, guid: f20f93481712d6148aa6d680e9e94cf9, type: 3}
+  - {fileID: 8300000, guid: eab6b03e637b68347bb21a4e8eca8bf4, type: 3}
 --- !u!1 &878152894087417556
 GameObject:
   m_ObjectHideFlags: 0
@@ -4747,6 +4779,7 @@ MonoBehaviour:
   PrefabSort1: {fileID: 6475462185903112734, guid: 94a4bfbeb075a7e489c593a669a8b122,
     type: 3}
   BaguetteBarrel: {fileID: 4434587539636197668}
+  SM: {fileID: 6171134854588410287}
 --- !u!1 &8594551370129374062
 GameObject:
   m_ObjectHideFlags: 0

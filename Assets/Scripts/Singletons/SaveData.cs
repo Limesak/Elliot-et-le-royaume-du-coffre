@@ -114,7 +114,7 @@ public class SaveData
         TMP_CPTmoney = 0;
         TMP_CPTYellowKey = 0;
         TMP_CPTcandy = 0;
-        TMP_CPTkills = new int[1];//A changer si nombre de mobs est modifié
+        TMP_CPTkills = new int[3];//A changer si nombre de mobs est modifié
         for (int i = 0; i < TMP_CPTkills.Length; i++)
         {
             TMP_CPTkills[i] = 0;
