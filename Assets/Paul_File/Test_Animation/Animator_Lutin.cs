@@ -23,7 +23,7 @@ public class Animator_Lutin : MonoBehaviour
         if (walk) anim.SetBool("walk", true); else anim.SetBool("walk", false);
         if (run) anim.SetBool("run", true); else anim.SetBool("run", false);
         if (surprise) anim.SetBool("surprise", true); else anim.SetBool("surprise", false);
-        if (give) anim.SetBool("surprise", true); else anim.SetBool("give", false);
+        if (give) anim.SetBool("give", true); else anim.SetBool("give", false);
 
     }
 }
