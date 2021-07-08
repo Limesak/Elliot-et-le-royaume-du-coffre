@@ -46,6 +46,8 @@ public class MenuManager : MonoBehaviour
     public GameObject Menu_QuitterOuRester;
     public GameObject Menu_ChambreOuRester;
 
+    public GameObject UIslideForBars;
+
     [Header("Main Menus")]
 
     public GameObject Carnet_GLOBAL;
@@ -253,6 +255,7 @@ public class MenuManager : MonoBehaviour
         if (MenuOn || Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto())
         {
             SaveParameter.current.canUseInputs = false;
+            UIslideForBars.transform.localPosition = new Vector3(0, -300, 0);
             //Debug.Log("Stuck");
             if (MenuOn && (Menu_ContinueOuNouvelle.activeSelf || Menu_EcraserOuAnnuler.activeSelf || Menu_QuitterOuRester.activeSelf || Menu_ChambreOuRester.activeSelf || isDialogueOn || CM.inCinematic() || TM.isInTuto()))
             {
@@ -262,6 +265,7 @@ public class MenuManager : MonoBehaviour
         else
         {
             SaveParameter.current.canUseInputs = true;
+            UIslideForBars.transform.localPosition = new Vector3(0, 0, 0);
         }
 
         if(isDialogueOn && isWritingDialogue && lastCharacterWroteDate + writingCharacterDuration <= Time.time)

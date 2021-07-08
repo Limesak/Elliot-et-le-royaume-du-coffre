@@ -10,6 +10,8 @@ public class SoundManager_Magifolien : MonoBehaviour
     [Header("Banque de son")]
     public AudioClip VOCAL_Attaque1;
     public AudioClip VOCAL_Attaque2;
+    public AudioClip VOCAL_BlablaCalm;
+    public AudioClip VOCAL_BlablaAgro;
     public AudioClip[] VOCAL_Die;
     public AudioClip[] VOCAL_Hit;
     public AudioClip[] MOUVEMENT_Steps;

@@ -185,6 +185,7 @@ public class Magifolien : MonoBehaviour
                                             isAgressive = false;
                                             FindNewWanderingPoint();
                                         }
+                                        SM.PlaySound(SM.VOCAL_BlablaAgro, SM.Asource_Effects, 0.3f, false);
                                     }
                                     
                                 }
@@ -263,6 +264,11 @@ public class Magifolien : MonoBehaviour
                                 if (haveCheckXAngles >= CurrentAngleVerifiedOnSpot)//this point is done
                                 {
                                     //RESET & TROUVER UN NOUVEAU POINT
+                                    float rdm = Random.Range(0, 100);
+                                    if(rdm >= 70)
+                                    {
+                                        SM.PlaySound(SM.VOCAL_BlablaCalm, SM.Asource_Effects, 0.3f, false);
+                                    }
                                     FindNewWanderingPoint();
                                 }
                                 else// Angle to look at in stock
