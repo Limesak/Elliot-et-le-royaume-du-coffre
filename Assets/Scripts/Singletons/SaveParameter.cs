@@ -49,7 +49,7 @@ public class SaveParameter
         MMTMP = new MenuMemoryTMP();
 
         MixerVolume_Master = 1;
-        MixerVolume_Musique = 1;
+        MixerVolume_Musique = 0.3f;
         MixerVolume_Interface = 0.7f;
         MixerVolume_Effets = 1;
     }
